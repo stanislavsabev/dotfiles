@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+# NAVIGATION
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# SHORTHAND COMMANDS
+alias la="ls -lah"
+alias ll="ls -lh"
+
+# COMMON DIRECTORIES
+alias dl="cd ~/Downloads"
+alias dtop="cd ~/Desktop"
+alias doc="cd ~/Documents"
+alias home="cd ~"
+
+alias p="cd ~/Documents/projects"
+alias be="cd ~/Documents/projects/ggrc_be"
+alias fe="cd ~/Documents/projects/ggrc_fe"
+alias soa="cd ~/Documents/projects/soa"
+
+# LAUNCH SERVICE
+alias service="source ~/bin/launch_service.sh"
+
+# MY SCRIPTS
+alias kport="source ~/bin/kill_port.sh"
+
+# PYTHON
+alias va="source venv/bin/activate"
+alias makevenv="python -m venv venv && va"
+alias da="deactivate"
+alias rmvenv="da && rm -rf venv"
+
+# SHOW/HIDE HIDDEN FILES
+alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# EASIER DOTFILE EDITING
+alias aliases="code $DOTFILES_DIR/.aliases"
+alias functions="code $DOTFILES_DIR/.functions"
+alias exports="code $DOTFILES_DIR/.exports"
+alias paths="code $DOTFILES_DIR/.paths"
+alias dotfiles="code -n $DOTFILES_DIR/"
+alias openscripts="code $HOME/bin"
+alias services="code $HOME/bin/launch_service.sh"
+alias scripts="code $HOME/bin"
+alias bashprofile="code $DOTFILES_DIR/.bash_profile"
+alias bashrc="code $DOTFILES_DIR/.bashrc"
+alias gitconfig="code $HOME/.gitconfig"
+
+alias path="tr ':' '\n' <<< \"$PATH\""
+
+# Get week number
+alias week='date +%V'
+
+# Get UTC time
+alias utc="date -u +'%H:%M:%S UTC'"
+
+# Google Chrome
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
+alias cd='cdnvm'
