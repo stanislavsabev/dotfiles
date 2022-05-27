@@ -31,6 +31,8 @@ alias va="source venv/bin/activate"
 alias makevenv="python -m venv venv && va"
 alias da="deactivate"
 alias rmvenv="da && rm -rf venv"
+alias pir="pip install -r"
+alias uppip="python -m pip install --upgrade pip"
 
 # SHOW/HIDE HIDDEN FILES
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
