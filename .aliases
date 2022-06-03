@@ -8,6 +8,7 @@ alias ....="cd ../../.."
 # SHORTHAND COMMANDS
 alias la="ls -lah"
 alias ll="ls -lh"
+alias rf="rm -rf"
 
 # COMMON DIRECTORIES
 alias dl="cd ~/Downloads"
@@ -21,7 +22,7 @@ alias fe="cd ~/Documents/projects/ggrc_fe"
 alias soa="cd ~/Documents/projects/soa"
 
 # LAUNCH SERVICE
-alias service="source ~/bin/launch_service.sh"
+alias service="source $DOTFILES_DIR/.services"
 
 # MY SCRIPTS
 alias kport="source ~/bin/kill_port.sh"
@@ -45,7 +46,7 @@ alias exports="code $DOTFILES_DIR/.exports"
 alias paths="code $DOTFILES_DIR/.paths"
 alias dotfiles="code -n $DOTFILES_DIR/"
 alias openscripts="code $HOME/bin"
-alias services="code $HOME/bin/launch_service.sh"
+alias services="code $DOTFILES_DIR/.services"
 alias scripts="code $HOME/bin"
 alias bashprofile="code $DOTFILES_DIR/.bash_profile"
 alias bashrc="code $DOTFILES_DIR/.bashrc"
@@ -64,4 +65,4 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
-alias cd='cdnvm'
+alias cd="cdnvm"

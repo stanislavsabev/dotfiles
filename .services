@@ -1,0 +1,60 @@
+#!/bin/bash
+
+HOME_DIR=$(cd ~/ && pwd)
+PROJ_DIR="$HOME_DIR/Documents/projects"
+PS3="Select service to start: "
+
+select service in "be" "migration" "fe" "fe-ui-tests" "db_init" "q2c" "soa" \
+	"quit"
+do
+	if [[ $service == "be" ]]
+	then
+		echo "Starting '${service}'..."
+		cd "$PROJ_DIR/ggrc_be"
+		source $PROJ_DIR/ggrc_be/venv/bin/activate
+		set -o allexport && source ./configs/envs/local.env && set +o allexport
+		flask run --port=8082 --without-threads
+	elif [[ $service == "migration" ]]
+	then
+		echo "Starting '${service}'..."
+		cd $PROJ_DIR/ggrc_be/migrations
+		source ./venv/bin/activate
+		set -o allexport && source ./configs/envs/local.env && set +o allexport
+		flask run --port=8088
+	elif [[ $service == "fe" ]]
+	then
+		echo "Starting '${service}'..."
+		cdnvm "$PROJ_DIR/ggrc_fe"
+		npm run dev
+	elif [[ $service == "fe-ui-tests" ]]
+	then
+		echo "Starting '${service}'..."
+		cdnvm "$PROJ_DIR/ggrc_fe"
+		npm run build:production -- --config=e2e && npm run serve -- --port=8081
+	elif [[ $service == "db_init" ]]
+	then
+		echo "Starting '${service}'..."
+		cd $PROJ_DIR/ggrc_be/migrations
+		source ./venv/bin/activate
+		source ./scripts/db_init.sh
+	elif [[ $service == "q2c" ]]
+	then		
+		echo "Starting '${service}'..."
+		cd "$PROJ_DIR/q2c"
+		./bin/run_local.py
+	elif [[ $service == "soa" ]]
+	then		
+		echo "Starting '${service}'..."
+		cdnvm "$PROJ_DIR/soa"
+		source $PROJ_DIR/soa/venv/bin/activate
+		set -o allexport && source ./configs/envs/local.env && set +o allexport
+		cd src 
+		flask run --port=9090 --without-threads
+	elif [[ $service == "quit" ]]
+	then	
+		echo "Exiting..."
+	else
+		echo "No service chosen."
+	fi
+	break
+done
