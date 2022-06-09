@@ -16,11 +16,13 @@
 	sv = status -v
 	b = branch
 	co = !git checkout
+	undolast = !git reset HEAD~1
 	unstage = reset -- .
 	recommit = commit -c ORIG_HEAD
 	undo = reset HEAD~
 	resethard = reset HEAD --hard
 	rh = reset HEAD --hard
+	amend = !git commit --amend
 	commitnoedit = !git commit --amend --no-edit
 	cnoe = !git commit --amend --no-edit
 	pushrefs = !git push origin HEAD:refs/for/master 
