@@ -41,12 +41,13 @@ do
 	then		
 		echo "Starting '${service}'..."
 		cd "$PROJ_DIR/q2c"
+		source ./venv/bin/activate
 		./bin/run_local.py
 	elif [[ $service == "soa" ]]
 	then		
 		echo "Starting '${service}'..."
 		cdnvm "$PROJ_DIR/soa"
-		source $PROJ_DIR/soa/venv/bin/activate
+		source ./venv/bin/activate
 		set -o allexport && source ./configs/envs/local.env && set +o allexport
 		cd src 
 		flask run --port=9090 --without-threads
