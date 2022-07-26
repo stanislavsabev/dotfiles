@@ -8,6 +8,9 @@ for file in ~/.dotfiles/.{paths,envs,bash_prompt,functions,aliases}; do
 done;
 unset file;
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi

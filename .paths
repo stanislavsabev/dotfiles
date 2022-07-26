@@ -1,8 +1,3 @@
 export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:/usr/local/mysql/bin"
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-export PYTHONPATH="$PYTHONPATH:$(pwd)/src"
