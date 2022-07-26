@@ -66,3 +66,5 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
 alias cd="cdnvm"
+
+alias soapythonpath="export PYTHONPATH=\"$PYTHONPATH:$(pwd)/src\""
