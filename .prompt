@@ -4,7 +4,7 @@
 PS1="\[\e[0;93m\]\u\[\e[m\]" # username
 PS1+=" "
 PS1+="\[\e[0;95m\]\W\[\e[m\]" # current directory
-PS1+="\[\e[0;92m\]\$(git_branch)[\e[m\]" # current branch
+PS1+="\[\e[0;92m\]\$(git_branch)\[\e[m\]" # current branch
 PS1+=" "
 PS1+=">> " # end prompt
 export PS1;
