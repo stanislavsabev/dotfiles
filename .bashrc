@@ -36,7 +36,7 @@ fi
 
 export DOTFILES_DIR="$HOME/.dotfiles"
 
-for file in $DOTFILES_DIR/.{env,colors,aliases,paths}; do
+for file in $DOTFILES_DIR/.{env,colors,functions,aliases,paths,prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -56,3 +56,4 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
+
