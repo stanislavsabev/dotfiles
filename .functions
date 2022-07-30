@@ -6,20 +6,13 @@ ps0() {
 }
 
 ps1() {
-  source "$DOTFILES_DIR"/system/.prompt
+  source "$DOTFILES_DIR"/.prompt
 }
 
 # Get named var (usage: get "VAR_NAME")
 get() {
   echo "${!1}"
 }
-
-# Add to path
-
-prepend-path() {
-  [ -d $1 ] && PATH="$1:$PATH"
-}
-
 
 # git functions
 git_branch() {
