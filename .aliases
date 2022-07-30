@@ -17,7 +17,14 @@ alias home='cd'
 # Python venv aliases
 alias va='source ./venv/bin/activate'
 alias da='deactivate'
+alias makevenv='python -m venv venv && va'
+alias uppip='python -m pip install --upgrade pip'
+alias pir='pip install -r '
 
 # util aliases
 alias aliases="code $DOTFILES_DIR/.aliases"
+alias functions="code $DOTFILES_DIR/.functions"
+alias dotfiles="code -n $DOTFILES_DIR -g .bashrc"
 
+# other
+alias path="echo $PATH"
