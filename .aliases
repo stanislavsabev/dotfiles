@@ -51,6 +51,7 @@ alias scripts="code $HOME/bin"
 alias bashprofile="code $DOTFILES_DIR/.bash_profile"
 alias bashrc="code $DOTFILES_DIR/.bashrc"
 alias gitconfig="code $HOME/.gitconfig"
+alias gitconfig_local="code ./.git/config"
 
 alias path="tr ':' '\n' <<< \"$PATH\""
 
