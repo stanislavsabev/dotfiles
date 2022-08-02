@@ -16,10 +16,11 @@ alias dtop="cd ~/Desktop"
 alias doc="cd ~/Documents"
 alias home="cd ~"
 
-alias p="cd ~/Documents/projects"
-alias be="cd ~/Documents/projects/ggrc_be"
-alias fe="cd ~/Documents/projects/ggrc_fe"
-alias soa="cd ~/Documents/projects/soa"
+alias p="cd ~/projects"
+alias dev="cd ~/dev"
+alias be="cd ~/projects/ggrc_be"
+alias fe="cd ~/projects/ggrc_fe"
+alias soa="cd ~/projects/soa"
 
 # LAUNCH SERVICE
 alias service="source $DOTFILES_DIR/.services"

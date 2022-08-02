@@ -13,6 +13,10 @@ function findb() {
     git branch | grep -i "$1"
 }
 
+function findwb() {
+    git wb | grep -i "$1"
+}
+
 # nvm functions
 cdnvm() {
     command cd "$@";
