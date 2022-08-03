@@ -22,12 +22,6 @@ alias be="cd ~/projects/ggrc_be"
 alias fe="cd ~/projects/ggrc_fe"
 alias soa="cd ~/projects/soa"
 
-# LAUNCH SERVICE
-alias service="source $DOTFILES_DIR/.services"
-
-# MY SCRIPTS
-alias kport="source ~/bin/kill_port.sh"
-
 # PYTHON
 alias va="source venv/bin/activate"
 alias makevenv="python -m venv venv && va"
@@ -40,18 +34,22 @@ alias uppip="python -m pip install --upgrade pip"
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-# EASIER DOTFILE EDITING
+# MY SCRIPTS
+alias kport="source ~/bin/kill_port.sh"
+alias service="source ~/bin/start_service.sh"
+
+# EASIER SCRIPTS EDITING
+alias services="code ~/bin/start_service.sh"
 alias aliases="code $DOTFILES_DIR/.aliases"
 alias functions="code $DOTFILES_DIR/.functions"
 alias exports="code $DOTFILES_DIR/.exports"
 alias paths="code $DOTFILES_DIR/.paths"
 alias dotfiles="code -n $DOTFILES_DIR/"
-alias openscripts="code $HOME/bin"
-alias services="code $DOTFILES_DIR/.services"
-alias scripts="code $HOME/bin"
+alias openscripts="code ~/bin"
+alias scripts="code ~/bin"
 alias bashprofile="code $DOTFILES_DIR/.bash_profile"
 alias bashrc="code $DOTFILES_DIR/.bashrc"
-alias gitconfig="code $HOME/.gitconfig"
+alias gitconfig="code ~/.gitconfig"
 alias gitconfig_local="code ./.git/config"
 
 alias path="tr ':' '\n' <<< \"$PATH\""
