@@ -67,4 +67,4 @@ alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
 alias cd="cdnvm"
 
-alias soapythonpath="export PYTHONPATH=\"$PYTHONPATH:$(pwd)/src\""
+alias soapythonpath='export PYTHONPATH="$PYTHONPATH:$(pwd)/src"'
