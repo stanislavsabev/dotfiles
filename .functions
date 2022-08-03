@@ -60,3 +60,8 @@ cdnvm() {
         fi
     fi
 }
+
+function start-migrations-service() {
+    set -o allexport && source ./configs/envs/local.env && set +o allexport
+    flask run --port=8088
+}
