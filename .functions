@@ -89,3 +89,11 @@ function start-q2c-service() {
 		source ./venv/bin/activate
 		./bin/run_local.py
 }
+
+function expand-alias() {
+    if [ -z "$1" ]; then
+            echo "Missing alias name"
+            return
+    fi
+    alias "$@" | cut -d\' -f2
+}
