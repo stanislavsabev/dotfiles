@@ -72,32 +72,56 @@ function start-be-service() {
 }
 
 function start-fe-for-ui-tests() {
-	echo "Starting 'fe' for ui tests..."
+    echo "Starting 'fe' for ui tests..."
     cdnvm "$HOME_DIR/projects/ggrc_fe"
-	npm run build:production -- --config=e2e && npm run serve -- --port=8081
+    npm run build:production -- --config=e2e && npm run serve -- --port=8081
 }
 
 function start-fe-service() {
-		echo "Starting 'fe'..."
-    	cdnvm "$HOME_DIR/projects/ggrc_fe"
-		npm run dev
+    echo "Starting 'fe'..."
+    cdnvm "$HOME_DIR/projects/ggrc_fe"
+    npm run dev
 }
 
 function start-q2c-service() {
-		echo "Starting 'q2c'..."
-		cd "$HOME_DIR/projects/q2c"
-		source ./venv/bin/activate
-		./bin/run_local.py
+    echo "Starting 'q2c'..."
+    cd "$HOME_DIR/projects/q2c"
+    source ./venv/bin/activate
+    ./bin/run_local.py
 }
 
 function expand-alias() {
     if [ -z "$1" ]; then
-            echo "Missing alias name"
-            return
+        echo "Missing alias name"
+        return
     fi
     alias "$@" | cut -d\' -f2
 }
 
 function patchset() {
     grep 'patchset' .branch_info | cut -d\= -f2
+}
+
+function wt() {
+    git worktree "$@"
+}
+
+function va() {
+    if [ $# -eq 0 ]
+      then
+        source venv/bin/activate
+        return
+    fi
+
+    case "$1" in 
+        be)
+            source $BE_DIR/venv/bin/activate
+            ;;
+        migration | migrations)
+            source $BE_DIR/venv_migrations/bin/activate
+            ;;
+        *)
+            echo "Unknown venv!"
+            ;;
+    esac
 }
