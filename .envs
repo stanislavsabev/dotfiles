@@ -1,3 +1,8 @@
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export BE_DIR="$HOME/projects/ggrc_be"
+export MIGRATIONS_DIR="$BE_DIR/migrations"
+export FE_DIR="$HOME/projects/ggrc_fe"
+export SOA_DIR="$HOME/projects/soa"

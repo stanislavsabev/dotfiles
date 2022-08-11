@@ -18,12 +18,12 @@ alias home="cd ~"
 
 alias p="cd ~/projects"
 alias dev="cd ~/dev"
-alias be="cd ~/projects/ggrc_be"
-alias fe="cd ~/projects/ggrc_fe"
-alias soa="cd ~/projects/soa"
+alias be="cd $BE_DIR"
+alias cdtest="cd tests/integration/src"
+alias fe="cd $FE_DIR"
+alias soa="cd $FE_DIR"
 
 # PYTHON
-alias va="source venv/bin/activate"
 alias makevenv="python -m venv venv && va"
 alias da="deactivate"
 alias rmvenv="da && rm -rf venv"
@@ -49,14 +49,15 @@ alias openscripts="code ~/bin"
 alias scripts="code ~/bin"
 alias bashprofile="code $DOTFILES_DIR/.bash_profile"
 alias bashrc="code $DOTFILES_DIR/.bashrc"
-alias gitconfig="code ~/.gitconfig"
+
+# GIT
+alias gitconfig="code $DOTFILES_DIR/gitconfig"
 alias gitconfig_local="code ./.git/config"
 
-alias path="tr ':' '\n' <<< \"$PATH\""
+
 
 # Get week number
 alias week='date +%V'
-
 # Get UTC time
 alias utc="date -u +'%H:%M:%S UTC'"
 
@@ -66,5 +67,6 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
 alias cd="cdnvm"
+alias path="tr ':' '\n' <<< \"$PATH\""
 
 alias soapythonpath='export PYTHONPATH="$PYTHONPATH:$(pwd)/src"'
