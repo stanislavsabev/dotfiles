@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # NAVIGATION
 alias ..="cd .."
@@ -21,7 +21,7 @@ alias dev="cd ~/dev"
 alias be="cd $BE_DIR"
 alias cdtest="cd tests/integration/src"
 alias fe="cd $FE_DIR"
-alias soa="cd $FE_DIR"
+alias soa="cd $SOA_DIR"
 
 # PYTHON
 alias makevenv="python -m venv venv && va"

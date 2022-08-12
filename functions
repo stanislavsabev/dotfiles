@@ -115,13 +115,35 @@ function va() {
 
     case "$1" in 
         be)
-            source $BE_DIR/venv/bin/activate
+            va-be
             ;;
         migration | migrations)
-            source $BE_DIR/venv_migrations/bin/activate
+            va-migrations
             ;;
         *)
             echo "Unknown venv!"
             ;;
     esac
+}
+
+function va-migrations(){
+    source $BE_DIR/venv_migrations/bin/activate
+}
+
+function va-be(){
+    source $BE_DIR/venv/bin/activate
+}
+
+function wt() {
+    git worktree "$@"
+}
+
+function wt-add() {
+    if [ $# -eq 0 ]
+      then
+        echo "git worktree add -b <branch> <path> <commit-ish>"
+        return
+    fi
+
+    git worktree add "$@"
 }
