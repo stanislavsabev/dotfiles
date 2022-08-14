@@ -36,7 +36,7 @@ fi
 
 export DOTFILES_DIR="$HOME/.dotfiles"
 
-for file in $DOTFILES_DIR/.{env,colors,functions,aliases,paths,prompt}; do
+for file in $DOTFILES_DIR/{env,colors,functions,aliases,paths,prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
