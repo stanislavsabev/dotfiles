@@ -13,6 +13,7 @@ alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../..'
 alias home='cd'
+alias dev='cd ~/dev'
 
 # Python venv aliases
 alias va='source ./venv/bin/activate'
@@ -24,7 +25,9 @@ alias pir='pip install -r '
 # util aliases
 alias aliases="code $DOTFILES_DIR/.aliases"
 alias functions="code $DOTFILES_DIR/.functions"
-alias dotfiles="code -n $DOTFILES_DIR -g .bashrc"
+alias dotfiles="code -n $DOTFILES_DIR"
+alias gitconfig="code ~/.gitconfig"
+alias gitconfig_local="code .git/config"
 
 # other
 alias path="echo $PATH"
