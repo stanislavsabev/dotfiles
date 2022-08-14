@@ -31,3 +31,5 @@ alias gitconfig_local="code .git/config"
 
 # other
 alias path="echo $PATH"
+
+alias vba-parser="source ~/bin/open_vba_parser_proj.sh"
