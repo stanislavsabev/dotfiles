@@ -26,3 +26,11 @@ function cob () {
 function findb() {
     git branch | grep -i "$1"
 }
+
+ls-dotfiles() {
+  find . -maxdepth 1 -name ".*" -type l,f
+}
+
+ls-dotdirs() {
+  find . -maxdepth 1 -name ".*" -type d
+}
