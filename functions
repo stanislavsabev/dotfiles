@@ -73,19 +73,19 @@ function start-be-service() {
 
 function start-fe-for-ui-tests() {
     echo "Starting 'fe' for ui tests..."
-    cdnvm "$HOME_DIR/projects/ggrc_fe"
+    cdnvm "$HOME/projects/ggrc_fe"
     npm run build:production -- --config=e2e && npm run serve -- --port=8081
 }
 
 function start-fe-service() {
     echo "Starting 'fe'..."
-    cdnvm "$HOME_DIR/projects/ggrc_fe"
+    cdnvm "$HOME/projects/ggrc_fe"
     npm run dev
 }
 
 function start-q2c-service() {
     echo "Starting 'q2c'..."
-    cd "$HOME_DIR/projects/q2c"
+    cd "$HOME/projects/q2c"
     source ./venv/bin/activate
     ./bin/run_local.py
 }
