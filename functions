@@ -83,6 +83,23 @@ function start-fe-service() {
     npm run dev
 }
 
+function start-soa-service() {
+    echo "Starting 'soa service'..."
+    cdnvm "$HOME/projects/soa"
+    source ./venv/bin/activate
+    set -o allexport && source ./configs/envs/local.env && set +o allexport
+    cd src 
+    flask run --port=9090 --without-threads
+}
+
+function start-soa-db-reset() {
+    echo "Starting 'soa db reset'..."
+    cdnvm "$HOME/projects/soa"
+    source ./venv/bin/activate
+    export PYTHONPATH="$PYTHONPATH:$(pwd)/src"
+    ./bin/db_reset
+}
+
 function start-q2c-service() {
     echo "Starting 'q2c'..."
     cd "$HOME/projects/q2c"
