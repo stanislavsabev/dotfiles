@@ -5,15 +5,15 @@ git_branch() {
     git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-function cob() {
+cob() {
     git checkout $(git branch | grep -i "$1")
 }
 
-function findb() {
+findb() {
     git branch | grep -i "$1"
 }
 
-function findwb() {
+findwb() {
     git wb | grep -i "$1"
 }
 
@@ -61,29 +61,57 @@ cdnvm() {
     fi
 }
 
-function start-migrations-service() {
+start-migrations-service() {
+    echo "Starting 'migrations'..."
+    if [ "$1" ]; then
+        BRANCH_NAME="$1"
+    else
+        BRANCH_NAME=$(git branch --show-current)
+    fi
+    cd "$HOME/projects/ggrc_be/$BRANCH_NAME/migrations"
+    source $HOME/projects/ggrc_be/venv_migrations/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8088
 }
 
-function start-be-service() {
+start-be-db-init() {
+    echo "Starting 'be-db-init'..."
+    if [ "$1" ]; then
+        BRANCH_NAME="$1"
+    else
+        BRANCH_NAME=$(git branch --show-current)
+    fi
+    cd "$HOME/projects/ggrc_be/$BRANCH_NAME/migrations"
+    source $HOME/projects/ggrc_be/venv_migrations/bin/activate
+    source ./scripts/db_init.sh
+}
+
+start-be-service() {
+    echo "Starting 'be'..."
+    if [ "$1" ]; then
+        BRANCH_NAME="$1"
+    else
+        BRANCH_NAME=$(git branch --show-current)
+    fi
+    cd "$HOME/projects/ggrc_be/$BRANCH_NAME"
+    source $HOME/projects/ggrc_be/venv/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8082 --without-threads
 }
 
-function start-fe-for-ui-tests() {
+start-fe-for-ui-tests() {
     echo "Starting 'fe' for ui tests..."
     cdnvm "$HOME/projects/ggrc_fe"
     npm run build:production -- --config=e2e && npm run serve -- --port=8081
 }
 
-function start-fe-service() {
+start-fe-service() {
     echo "Starting 'fe'..."
     cdnvm "$HOME/projects/ggrc_fe"
     npm run dev
 }
 
-function start-soa-service() {
+start-soa-service() {
     echo "Starting 'soa service'..."
     cdnvm "$HOME/projects/soa"
     source ./venv/bin/activate
@@ -92,7 +120,7 @@ function start-soa-service() {
     flask run --port=9090 --without-threads
 }
 
-function start-soa-db-reset() {
+start-soa-db-reset() {
     echo "Starting 'soa db reset'..."
     cdnvm "$HOME/projects/soa"
     source ./venv/bin/activate
@@ -100,14 +128,14 @@ function start-soa-db-reset() {
     ./bin/db_reset
 }
 
-function start-q2c-service() {
+start-q2c-service() {
     echo "Starting 'q2c'..."
     cd "$HOME/projects/q2c"
     source ./venv/bin/activate
     ./bin/run_local.py
 }
 
-function expand-alias() {
+expand-alias() {
     if [ -z "$1" ]; then
         echo "Missing alias name"
         return
@@ -115,15 +143,15 @@ function expand-alias() {
     alias "$@" | cut -d\' -f2
 }
 
-function patchset() {
+patchset() {
     grep 'patchset' .branch_info | cut -d\= -f2
 }
 
-function wt() {
+wt() {
     git worktree "$@"
 }
 
-function va() {
+va() {
     if [ $# -eq 0 ]
       then
         source venv/bin/activate
@@ -143,19 +171,19 @@ function va() {
     esac
 }
 
-function va-migrations(){
+va-migrations(){
     source $BE_DIR/venv_migrations/bin/activate
 }
 
-function va-be(){
+va-be(){
     source $BE_DIR/venv/bin/activate
 }
 
-function wt() {
+wt() {
     git worktree "$@"
 }
 
-function wt-add() {
+wt-add() {
     if [ $# -eq 0 ]
       then
         echo "git worktree add -b <branch> <path> <commit-ish>"
