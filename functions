@@ -61,13 +61,13 @@ cdnvm() {
     fi
 }
 
-start-migrations-service() {
-    echo "Starting 'migrations'..."
+start-migrations() {
     if [ "$1" ]; then
         BRANCH_NAME="$1"
     else
         BRANCH_NAME=$(git branch --show-current)
     fi
+    echo "Starting 'migrations' at '$BRANCH_NAME'..."
     cd "$HOME/projects/ggrc_be/$BRANCH_NAME/migrations"
     source $HOME/projects/ggrc_be/venv_migrations/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
@@ -75,24 +75,24 @@ start-migrations-service() {
 }
 
 start-be-db-init() {
-    echo "Starting 'be-db-init'..."
     if [ "$1" ]; then
         BRANCH_NAME="$1"
     else
         BRANCH_NAME=$(git branch --show-current)
     fi
+    echo "Starting 'be-db-init' at '$BRANCH_NAME'..."
     cd "$HOME/projects/ggrc_be/$BRANCH_NAME/migrations"
     source $HOME/projects/ggrc_be/venv_migrations/bin/activate
-    source ./scripts/db_init.sh
+    ./scripts/db_init.sh
 }
 
-start-be-service() {
-    echo "Starting 'be'..."
+start-be() {
     if [ "$1" ]; then
         BRANCH_NAME="$1"
     else
         BRANCH_NAME=$(git branch --show-current)
     fi
+    echo "Starting 'be' at '$BRANCH_NAME'..."
     cd "$HOME/projects/ggrc_be/$BRANCH_NAME"
     source $HOME/projects/ggrc_be/venv/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
@@ -105,13 +105,13 @@ start-fe-for-ui-tests() {
     npm run build:production -- --config=e2e && npm run serve -- --port=8081
 }
 
-start-fe-service() {
+start-fe() {
     echo "Starting 'fe'..."
     cdnvm "$HOME/projects/ggrc_fe"
     npm run dev
 }
 
-start-soa-service() {
+start-soa() {
     echo "Starting 'soa service'..."
     cdnvm "$HOME/projects/soa"
     source ./venv/bin/activate
@@ -128,7 +128,7 @@ start-soa-db-reset() {
     ./bin/db_reset
 }
 
-start-q2c-service() {
+start-q2c() {
     echo "Starting 'q2c'..."
     cd "$HOME/projects/q2c"
     source ./venv/bin/activate

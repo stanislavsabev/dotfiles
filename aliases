@@ -19,7 +19,7 @@ alias home="cd ~"
 alias p="cd ~/projects"
 alias dev="cd ~/dev"
 alias be="cd $BE_DIR"
-alias cdtest="cd tests/integration/src"
+alias cd-tests="cd tests/integration/src"
 alias fe="cd $FE_DIR"
 alias soa="cd $SOA_DIR"
 
