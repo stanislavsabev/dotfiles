@@ -175,8 +175,7 @@ wt() {
 }
 
 va() {
-    if [ $# -eq 0 ]
-      then
+    if [ $# -eq 0 ]; then
         source venv/bin/activate
         return
     fi
@@ -216,25 +215,27 @@ wt-add() {
     git worktree add "$@"
 }
 
-# tmux attach
-function tat {
+wt-remove() {
+    if [ $# -eq 0 ]; then
+        echo "git worktree remove <worktree(==branch-name)> [--force]"
+        return
+    fi
 
-# When starting work on a project: open the terminal, cd into the folder, then `tat`.
-#
-# This function:
-#
-# - gets the name of the current directory and removes periods, which tmux doesn't like.
-# - if any session with the same name is open, it re-attaches to it.
-# - otherwise, it checks if an .envrc file is present and starts a new tmux session using direnv exec.
-# - otherwise, starts a new tmux session with that name.
- 
-  name=$(basename `pwd` | sed -e 's/\.//g')
+    BRANCH_NAME="$1"
+    if [[ $BRANCH_NAME == */ ]]; then
+        BRANCH_NAME=${BRANCH_NAME::-1}
+    fi
 
-  if tmux ls 2>&1 | grep "$name"; then
-    tmux attach -t "$name"
-  elif [ -f .envrc ]; then
-    direnv exec / tmux new-session -s "$name"
-  else
-    tmux new-session -s "$name"
-  fi
+    shift
+    
+    if [[ "$1" == "--force" ]]; then
+        f=" --force"
+    fi
+    git worktree remove$f $BRANCH_NAME && git branch -D $BRANCH_NAME
+}
+
+subs() {
+    BRANCH_NAME="$1"
+
+    echo $BRANCH_NAME
 }
