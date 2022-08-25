@@ -212,7 +212,8 @@ wt-add() {
         return
     fi
 
-    git worktree add "$@"
+    # -b <branch-name> <path-name> <commit-ish>
+    git worktree add -b "$1" "$1" "$2"
 }
 
 wt-remove() {
@@ -232,6 +233,21 @@ wt-remove() {
         f=" --force"
     fi
     git worktree remove$f $BRANCH_NAME && git branch -D $BRANCH_NAME
+}
+
+add-vscode-sett () {
+    cp -Ra ../.ignore/.vscode.bak .vscode
+}
+
+add-be-branch() {
+    if [ $# -eq 0 ]; then
+        echo "add-be-branch <branch-name> <commit-ish>"
+        return
+    fi
+    cd $BE_DIR
+    wt-add $@
+    cd $1
+    add-vscode-sett
 }
 
 subs() {
