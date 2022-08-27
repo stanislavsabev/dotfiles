@@ -24,7 +24,6 @@ alias fe="cd $FE_DIR"
 alias soa="cd $SOA_DIR"
 
 # PYTHON
-alias makevenv="python -m venv venv && va"
 alias da="deactivate"
 alias rmvenv="da && rm -rf venv"
 alias pir="pip install -r"

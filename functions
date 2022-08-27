@@ -250,8 +250,12 @@ add-be-branch() {
     add-vscode-sett
 }
 
-subs() {
-    BRANCH_NAME="$1"
-
-    echo $BRANCH_NAME
+makevenv(){
+    if [ "$1" ]; then
+        local venv_name=$1
+    else
+        local venv_name=venv
+    fi
+    python -m venv $venv_name;
+    source ./$venv_name/bin/activate;
 }
