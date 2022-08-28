@@ -259,3 +259,12 @@ makevenv(){
     python -m venv $venv_name;
     source ./$venv_name/bin/activate;
 }
+
+ps0() {
+    unset PROMPT_COMMAND
+    PS1='$ '
+}
+
+ps1() {
+    source $DOTFILES_DIR/bash_prompt
+}
