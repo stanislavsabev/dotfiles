@@ -3,7 +3,7 @@
 # * ~/.extra can be used for other settings you don’t want to commit.
 export DOTFILES_DIR="$HOME/.dotfiles"
 
-for file in ~/.dotfiles/{paths,envs,bash_prompt,functions,aliases}; do
+for file in ~/.dotfiles/{paths,envs,functions,aliases,bash_prompt}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
