@@ -85,38 +85,41 @@ function tat {
 }
 
 start-migrations() {
+    local WHERE=""
     if [ "$1" ]; then
-        BRANCH_NAME="$1"
+        WHERE="$1"
     else
-        BRANCH_NAME=$(git branch --show-current)
+        WHERE=$(git branch --show-current)
     fi
-    echo "Starting 'migrations' at '$BRANCH_NAME'..."
-    cd "$HOME/projects/ggrc_be/$BRANCH_NAME/migrations"
+    echo "Starting 'migrations' at '$WHERE'..."
+    cd "$HOME/projects/ggrc_be/$WHERE/migrations"
     source $HOME/projects/ggrc_be/venv_migrations/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8088
 }
 
 start-be-db-init() {
+    local WHERE=""
     if [ "$1" ]; then
-        BRANCH_NAME="$1"
+        WHERE="$1"
     else
-        BRANCH_NAME=$(git branch --show-current)
+        WHERE=$(git branch --show-current)
     fi
-    echo "Starting 'be-db-init' at '$BRANCH_NAME'..."
-    cd "$HOME/projects/ggrc_be/$BRANCH_NAME/migrations"
+    echo "Starting 'be-db-init' at '$WHERE'..."
+    cd "$HOME/projects/ggrc_be/$WHERE/migrations"
     source $HOME/projects/ggrc_be/venv_migrations/bin/activate
     ./scripts/db_init.sh
 }
 
 start-be() {
+    local WHERE=""
     if [ "$1" ]; then
-        BRANCH_NAME="$1"
+        WHERE="$1"
     else
-        BRANCH_NAME=$(git branch --show-current)
+        WHERE=$(git branch --show-current)
     fi
-    echo "Starting 'be' at '$BRANCH_NAME'..."
-    cd "$HOME/projects/ggrc_be/$BRANCH_NAME"
+    echo "Starting 'be' at '$WHERE'..."
+    cd "$HOME/projects/ggrc_be/$WHERE"
     source $HOME/projects/ggrc_be/venv/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8082 --without-threads
@@ -222,9 +225,9 @@ wt-remove() {
         return
     fi
 
-    BRANCH_NAME="$1"
-    if [[ $BRANCH_NAME == */ ]]; then
-        BRANCH_NAME=${BRANCH_NAME::-1}
+    local WHERE="$1"
+    if [[ $WHERE == */ ]]; then
+        WHERE=${WHERE::-1}
     fi
 
     shift
@@ -232,7 +235,7 @@ wt-remove() {
     if [[ "$1" == "--force" ]]; then
         f=" --force"
     fi
-    git worktree remove$f $BRANCH_NAME && git branch -D $BRANCH_NAME
+    git worktree remove$f $WHERE && git branch -D $WHERE
 }
 
 add-vscode-sett () {
