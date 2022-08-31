@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
 # TERMINAL PROMPT
-PS1="\[\e[0;93m\]\u\[\e[m\]"    # username
-PS1+=" "    # space
-PS1+="\[\e[0;95m\]\W\[\e[m\]"    # current directory
-PS1+="\[\e[0;92m\]\$(git_branch)\[\e[m\]"    # current branch
-PS1+=" "    # space
-PS1+=">> "    # end prompt
+# PS1="\[\e[0;93m\]\u\[\e[m\]"    # username
+# PS1+=" "    # space
+PS1="\[\e[0;95m\]\W\[\e[m\]"    # current directory
+PS1+="\[\e[0;92m\]\$(git-branch)\[\e[m\]"    # current branch
+PS1+="$ "   # end prompt
 export PS1;
 
 export CLICOLOR=1
