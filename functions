@@ -239,7 +239,7 @@ wt-remove() {
 }
 
 add-vscode-sett () {
-    cp -Ra ../.ignore/.vscode.bak .vscode/
+    cp -Rf ../.ignore/.vscode.bak/ .vscode/
 }
 
 add-be-branch() {
