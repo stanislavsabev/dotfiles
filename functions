@@ -271,3 +271,12 @@ ps0() {
 ps1() {
     source $DOTFILES_DIR/bash_prompt
 }
+
+vscode-clear-cache() {
+    rm -rf ~/Library/Application\ Support/Code/Cache/*
+    rm -rf ~/Library/Application\ Support/Code/CachedData/*
+}
+
+vscode-clear-pycache() {
+    find . -name "*.pyc" -delete
+}
