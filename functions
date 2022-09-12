@@ -208,9 +208,15 @@ wt() {
     git worktree "$@"
 }
 
-
 wt-list() {
     git worktree list "$@"
+}
+
+wt-move() {
+    git worktree move "$1" "$2"
+    cd "$2"
+    git branch -M "$2"
+    cd - 
 }
 
 wt-add() {
