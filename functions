@@ -280,3 +280,27 @@ vscode-clear-cache() {
 vscode-clear-pycache() {
     find . -name "*.pyc" -delete
 }
+
+function gcert() {
+  if [[ -n $TMUX ]]; then
+    eval $(tmux show-environment -s)
+  fi
+
+  command gcert "$@"
+}
+
+function glogin() {
+  if [[ -n $TMUX ]]; then
+    eval $(tmux show-environment -s)
+  fi
+
+  command glogin "$@"
+}
+
+function gcertstatus() {
+  if [[ -n $TMUX ]]; then
+    eval $(tmux show-environment -s)
+  fi
+
+  command gcertstatus "$@"
+}
