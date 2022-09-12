@@ -208,6 +208,11 @@ wt() {
     git worktree "$@"
 }
 
+
+wt-list() {
+    git worktree list "$@"
+}
+
 wt-add() {
     if [ $# -eq 0 ]
       then
