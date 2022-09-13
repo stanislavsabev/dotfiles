@@ -240,13 +240,14 @@ wt-remove() {
     if [[ $WHERE == */ ]]; then
         WHERE=${WHERE::-1}
     fi
-
+    echo $WHERE
     shift
     
     if [[ "$1" == "--force" ]]; then
-        f=" --force"
+        git worktree remove --force $WHERE && git branch -D $WHERE
+    else
+        git worktree remove $WHERE && git branch -D $WHERE
     fi
-    git worktree remove$f $WHERE && git branch -D $WHERE
 }
 
 add-vscode-sett () {
