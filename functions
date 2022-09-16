@@ -100,26 +100,42 @@ start-migrations() {
 
 start-be-db-init() {
     local WHERE=""
+    local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
     else
         WHERE=$(git branch --show-current)
     fi
+    if [ -z "$WHERE" ]; then
+        echo "Missing branch name!"
+        return
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$HOME/projects/ggrc_be/$WHERE/migrations"
+    fi
+
+
     echo "Starting 'be-db-init' at '$WHERE'..."
-    cd "$HOME/projects/ggrc_be/$WHERE/migrations"
+    cd $TARGET_DIR
     source $HOME/projects/ggrc_be/venv_migrations/bin/activate
     ./scripts/db_init.sh
 }
 
 start-be() {
     local WHERE=""
+    local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
     else
         WHERE=$(git branch --show-current)
     fi
+    if [ -z "$WHERE" ]; then
+        echo "Missing branch name!"
+        return
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$HOME/projects/ggrc_be/$WHERE"
+    fi
     echo "Starting 'be' at '$WHERE'..."
-    cd "$HOME/projects/ggrc_be/$WHERE"
+    cd $TARGET_DIR
     source $HOME/projects/ggrc_be/venv/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8082 --without-threads
@@ -163,7 +179,7 @@ start-q2c() {
 
 expand-alias() {
     if [ -z "$1" ]; then
-        echo "Missing alias name"
+        echo "Missing alias name!"
         return
     fi
     alias "$@" | cut -d\' -f2
