@@ -22,6 +22,7 @@ alias be="cd $BE_DIR"
 alias cd-tests="cd tests/integration/src"
 alias fe="cd $FE_DIR"
 alias soa="cd $SOA_DIR"
+alias myupdate="code -n ~/projects/my_update"
 
 # PYTHON
 alias da="deactivate"
@@ -52,7 +53,6 @@ alias bashrc="code $DOTFILES_DIR/.bashrc"
 # GIT
 alias gitconfig="code $DOTFILES_DIR/gitconfig"
 alias gitconfig_local="code ./.git/config"
-
 
 
 # Get week number
