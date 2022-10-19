@@ -86,14 +86,21 @@ function tat {
 
 start-migrations() {
     local WHERE=""
+    local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
     else
         WHERE=$(git branch --show-current)
     fi
-    echo "Starting 'migrations' at '$WHERE'..."
-    cd "$HOME/projects/ggrc_be/$WHERE/migrations"
-    source $HOME/projects/ggrc_be/venv_migrations/bin/activate
+    if [ -z "$WHERE" ]; then
+        echo "Missing branch name!"
+        return
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$MIGRATIONS_DIR/$WHERE"
+    fi
+    echo "Starting 'ggrc_migrations' at '$WHERE'..."
+    cd $TARGET_DIR
+    source $MIGRATIONS_DIR/venv_migrations/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8088
 }
@@ -110,13 +117,11 @@ start-be-db-init() {
         echo "Missing branch name!"
         return
     elif [[ $WHERE != "." ]]; then
-        TARGET_DIR="$HOME/projects/ggrc_be/$WHERE/migrations"
+        TARGET_DIR="$MIGRATIONS_DIR/$WHERE"
     fi
-
-
     echo "Starting 'be-db-init' at '$WHERE'..."
     cd $TARGET_DIR
-    source $HOME/projects/ggrc_be/venv_migrations/bin/activate
+    source $MIGRATIONS_DIR/venv_migrations/bin/activate
     ./scripts/db_init.sh
 }
 
@@ -132,30 +137,30 @@ start-be() {
         echo "Missing branch name!"
         return
     elif [[ $WHERE != "." ]]; then
-        TARGET_DIR="$HOME/projects/ggrc_be/$WHERE"
+        TARGET_DIR="$BE_DIR/$WHERE"
     fi
     echo "Starting 'be' at '$WHERE'..."
     cd $TARGET_DIR
-    source $HOME/projects/ggrc_be/venv/bin/activate
+    source $BE_DIR/venv/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8082 --without-threads
 }
 
 start-fe-for-ui-tests() {
     echo "Starting 'fe' for ui tests..."
-    cdnvm "$HOME/projects/ggrc_fe"
+    cdnvm "$FE_DIR"
     npm run build:production -- --config=e2e && npm run serve -- --port=8081
 }
 
 start-fe() {
     echo "Starting 'fe'..."
-    cdnvm "$HOME/projects/ggrc_fe"
+    cdnvm "$FE_DIR"
     npm run dev
 }
 
 start-soa() {
     echo "Starting 'soa service'..."
-    cdnvm "$HOME/projects/soa"
+    cdnvm "$SOA_DIR"
     source ./venv/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     cd src 
@@ -164,15 +169,15 @@ start-soa() {
 
 start-soa-db-reset() {
     echo "Starting 'soa db reset'..."
-    cdnvm "$HOME/projects/soa"
+    cdnvm "$SOA_DIR"
     source ./venv/bin/activate
-    export PYTHONPATH="$PYTHONPATH:$(pwd)/src"
+    export PYTHONPATH="$PYTHONPATH:$SOA_DIR/src"
     ./bin/db_reset
 }
 
 start-q2c() {
     echo "Starting 'q2c'..."
-    cd "$HOME/projects/q2c"
+    cd "$PROJECTS_DIR/q2c"
     source ./venv/bin/activate
     ./bin/run_local.py
 }
@@ -206,6 +211,9 @@ va() {
         migration | migrations)
             va-migrations
             ;;
+        soa)
+            va-soa  
+            ;;
         *)
             echo "Unknown venv!"
             ;;
@@ -213,11 +221,15 @@ va() {
 }
 
 va-migrations(){
-    source $BE_DIR/venv_migrations/bin/activate
+    source $MIGRATIONS_DIR/venv_migrations/bin/activate
 }
 
 va-be(){
     source $BE_DIR/venv/bin/activate
+}
+
+va-soa(){
+    source $SOA_DIR/venv/bin/activate
 }
 
 wt() {
