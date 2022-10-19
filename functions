@@ -256,6 +256,16 @@ wt-add() {
 
     # -b <branch-name> <path-name> <commit-ish>
     git worktree add -b "$1" "$1" "$2"
+    cd $1
+    add-vscode-sett
+    cd -
+}
+
+wt-add-ex() {
+    wt-add $@
+    cd $1
+    add-vscode-sett
+    cd -
 }
 
 wt-remove() {
@@ -280,17 +290,6 @@ wt-remove() {
 
 add-vscode-sett () {
     cp -Rf ../.ignore/.vscode.bak/ .vscode/
-}
-
-add-be-branch() {
-    if [ $# -eq 0 ]; then
-        echo "add-be-branch <branch-name> <commit-ish>"
-        return
-    fi
-    cd $BE_DIR
-    wt-add $@
-    cd $1
-    add-vscode-sett
 }
 
 makevenv(){
