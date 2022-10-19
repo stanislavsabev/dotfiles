@@ -5,6 +5,7 @@ export NVM_DIR="$HOME/.nvm"
 export PROJECTS_DIR="$HOME/projects"
 export BE_DIR="$PROJECTS_DIR/ggrc_be"
 export MIGRATIONS_DIR="$PROJECTS_DIR/ggrc_migrations"
+export Q2C_DIR="$PROJECTS_DIR/q2c"
 export FE_DIR="$PROJECTS_DIR/ggrc_fe"
 export SOA_DIR="$PROJECTS_DIR/soa"
 
