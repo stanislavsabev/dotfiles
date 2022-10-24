@@ -278,7 +278,6 @@ wt-remove() {
     if [[ $WHERE == */ ]]; then
         WHERE=${WHERE::-1}
     fi
-    echo $WHERE
     shift
     
     if [[ "$1" == "--force" ]]; then
