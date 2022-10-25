@@ -1,10 +1,24 @@
 #!/usr/bin/env bash
 
+PS1=""
 # TERMINAL PROMPT
 # PS1="\[\e[0;93m\]\u\[\e[m\]"    # username
 # PS1+=" "    # space
-PS1="\[\e[0;95m\]\W\[\e[m\]"    # current directory
-PS1+="\[\e[0;92m\]\$(git-branch)\[\e[m\]"    # current branch
+if [ $PS_STATE -eq 1 ]; then
+    PS1+="\[\e[0;95m\]\W\[\e[m\]"    # current directory
+    PS1+="\[\e[0;92m\]\$(git-branch)\[\e[m\]"    # current branch
+fi
+
+if [ $PS_STATE -eq 2 ]; then
+    PS1+="\[\e[0;95m\].\[\e[m\]"    # current directory
+    PS1+="\[\e[0;92m\]\$(git-branch)\[\e[m\]"    # current branch
+fi
+
+if [ $PS_STATE -eq 3 ]; then
+    PS1+="\[\e[0;95m\]$(projname)\[\e[m\]"    # current directory
+    PS1+="\[\e[0;92m\]\$(git-branch)\[\e[m\]"    # current branch
+fi
+
 PS1+="$ "   # end prompt
 export PS1;
 

@@ -11,3 +11,5 @@ export SOA_DIR="$PROJECTS_DIR/soa"
 
 # Ignore commands starting with space
 export HISTIGNORE=' *'
+
+export PS_STATE=1
