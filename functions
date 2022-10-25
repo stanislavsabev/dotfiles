@@ -288,7 +288,7 @@ wt-add-ex() {
     wt-add $@
     cd $1
     add-vscode-sett
-    cd -
+    ps3
 }
 
 wt-remove() {
@@ -329,11 +329,34 @@ makevenv(){
 
 ps0() {
     unset PROMPT_COMMAND
-    PS1='$ '
+    PS_STATE=0
+    source $DOTFILES_DIR/bash_prompt
 }
 
 ps1() {
+    unset PROMPT_COMMAND
+    PS_STATE=1
     source $DOTFILES_DIR/bash_prompt
+}
+
+ps2() {
+    unset PROMPT_COMMAND
+    PS_STATE=2
+    source $DOTFILES_DIR/bash_prompt
+}
+
+ps3() {
+    unset PROMPT_COMMAND
+    PS_STATE=3
+    source $DOTFILES_DIR/bash_prompt
+}
+
+parentname() {
+    echo "$(basename "$(dirname "$PWD")")"
+}
+
+projname() {
+    echo "[$(parentname)]"
 }
 
 vscode-clear-cache() {
