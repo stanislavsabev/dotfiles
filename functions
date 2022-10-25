@@ -159,19 +159,45 @@ start-fe() {
 }
 
 start-soa() {
-    echo "Starting 'soa service'..."
-    cdnvm "$SOA_DIR"
-    source ./venv/bin/activate
+    local WHERE=""
+    local TARGET_DIR="."
+    if [ "$1" ]; then
+        WHERE="$1"
+    else
+        WHERE=$(git branch --show-current)
+    fi
+    if [ -z "$WHERE" ]; then
+        echo "Missing branch name!"
+        return
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$SOA_DIR/$WHERE"
+    fi
+    echo "Starting 'soa' at '$WHERE'..."
+    cdnvm $TARGET_DIR
+    source $SOA_DIR/venv_soa/bin/activate
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     cd src 
     flask run --port=9090 --without-threads
 }
 
 start-soa-db-reset() {
-    echo "Starting 'soa db reset'..."
-    cdnvm "$SOA_DIR"
-    source ./venv/bin/activate
-    export PYTHONPATH="$PYTHONPATH:$SOA_DIR/src"
+    local WHERE=""
+    local TARGET_DIR="."
+    if [ "$1" ]; then
+        WHERE="$1"
+    else
+        WHERE=$(git branch --show-current)
+    fi
+    if [ -z "$WHERE" ]; then
+        echo "Missing branch name!"
+        return
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$SOA_DIR/$WHERE"
+    fi
+    echo "Starting 'soa db reset' at '$WHERE'..."
+    cdnvm $TARGET_DIR
+    source $SOA_DIR/venv_soa/bin/activate
+    export PYTHONPATH="$PYTHONPATH:$TARGET_DIR/src"
     ./bin/db_reset
 }
 
@@ -229,7 +255,7 @@ va-be(){
 }
 
 va-soa(){
-    source $SOA_DIR/venv/bin/activate
+    source $SOA_DIR/venv_soa/bin/activate
 }
 
 wt() {
@@ -256,9 +282,6 @@ wt-add() {
 
     # -b <branch-name> <path-name> <commit-ish>
     git worktree add -b "$1" "$1" "$2"
-    cd $1
-    add-vscode-sett
-    cd -
 }
 
 wt-add-ex() {
@@ -276,7 +299,7 @@ wt-remove() {
 
     local WHERE="$1"
     if [[ $WHERE == */ ]]; then
-        WHERE=${WHERE::-1}
+        WHERE=${WHERE%?};
     fi
     shift
     
@@ -288,7 +311,10 @@ wt-remove() {
 }
 
 add-vscode-sett () {
-    cp -Rf ../.ignore/.vscode.bak/ .vscode/
+    # if [ ! -d ".vscode" ]; then
+    #     mkdir .vscode
+    # fi
+    cp -Raf ../.ignore/.vscode.bak/ .vscode/
 }
 
 makevenv(){
