@@ -288,7 +288,6 @@ wt-add-ex() {
     wt-add $@
     cd $1
     add-vscode-sett
-    ps3
 }
 
 wt-remove() {
@@ -345,18 +344,28 @@ ps2() {
     source $DOTFILES_DIR/bash_prompt
 }
 
-ps3() {
-    unset PROMPT_COMMAND
-    PS_STATE=3
-    source $DOTFILES_DIR/bash_prompt
-}
-
 parentname() {
     echo "$(basename "$(dirname "$PWD")")"
 }
 
 projname() {
-    echo "[$(parentname)]"
+    local PARENT_NAME="$(parentname)"
+
+    case "$PARENT_NAME" in 
+        ggrc_be)
+            PARENT_NAME="be "
+            ;;
+        soa)
+            PARENT_NAME="$PARENT_NAME "
+            ;;
+        ggrc_migrations)
+            PARENT_NAME="mig "
+            ;;
+        *)
+            PARENT_NAME=""
+            ;;
+    esac
+    echo "$PARENT_NAME"
 }
 
 vscode-clear-cache() {
