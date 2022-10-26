@@ -342,8 +342,8 @@ ps2() {
     unset PROMPT_COMMAND
     PS_STATE=2
     source $DOTFILES_DIR/bash_prompt
-}
 
+}
 parentname() {
     echo "$(basename "$(dirname "$PWD")")"
 }
@@ -354,6 +354,9 @@ projname() {
     case "$PARENT_NAME" in 
         ggrc_be)
             PARENT_NAME="be "
+            ;;
+        ggrc_fe)
+            PARENT_NAME="fe "
             ;;
         soa)
             PARENT_NAME="$PARENT_NAME "
@@ -375,6 +378,10 @@ vscode-clear-cache() {
 
 vscode-clear-pycache() {
     find . -name "*.pyc" -delete
+}
+
+verify-commit-msg() {
+    python -m scripts.verify_commit_msg "$(git log -1 --pretty=%B)"
 }
 
 function gcert() {
