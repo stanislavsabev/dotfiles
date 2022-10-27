@@ -147,14 +147,40 @@ start-be() {
 }
 
 start-fe-for-ui-tests() {
-    echo "Starting 'fe' for ui tests..."
-    cdnvm "$FE_DIR"
+    local WHERE=""
+    local TARGET_DIR="."
+    if [ "$1" ]; then
+        WHERE="$1"
+    else
+        WHERE=$(git branch --show-current)
+    fi
+    if [ -z "$WHERE" ]; then
+        echo "Missing branch name!"
+        return
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$FE_DIR/$WHERE"
+    fi
+    echo "Starting 'fe-ui-tests' at '$WHERE'..."
+    cdnvm $TARGET_DIR
     npm run build:production -- --config=e2e && npm run serve -- --port=8081
 }
 
 start-fe() {
-    echo "Starting 'fe'..."
-    cdnvm "$FE_DIR"
+    local WHERE=""
+    local TARGET_DIR="."
+    if [ "$1" ]; then
+        WHERE="$1"
+    else
+        WHERE=$(git branch --show-current)
+    fi
+    if [ -z "$WHERE" ]; then
+        echo "Missing branch name!"
+        return
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$FE_DIR/$WHERE"
+    fi
+    echo "Starting 'fe' at '$WHERE'..."
+    cdnvm $TARGET_DIR
     npm run dev
 }
 
