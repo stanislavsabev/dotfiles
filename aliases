@@ -33,3 +33,4 @@ alias gitconfig_local="code .git/config"
 alias path="echo $PATH"
 
 alias vba-parser="source ~/bin/open_vba_parser_proj.sh"
+alias rm-keyrings="rm -rf ~/.local/share/keyrings/*.*"
