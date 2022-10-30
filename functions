@@ -16,15 +16,15 @@ get() {
 
 # git functions
 git_branch() {
-    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-function cob () {
-    git checkout $(git branch | grep -i "$1")
+cob () {
+  git checkout $(git branch | grep -i "$1")
 }
 
-function findb() {
-    git branch | grep -i "$1"
+findb() {
+  git branch | grep -i "$1"
 }
 
 ls-dotfiles() {
