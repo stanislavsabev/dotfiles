@@ -34,7 +34,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-export DOTFILES_DIR="$HOME/.dotfiles"
+export DOTFILES_DIR="$HOME/opt/dotfiles"
 
 for file in $DOTFILES_DIR/{env,colors,functions,aliases,paths,prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
@@ -51,9 +51,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-
