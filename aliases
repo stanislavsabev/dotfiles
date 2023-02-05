@@ -5,34 +5,35 @@
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # NAVIGATION
-alias ..='cd ..'
-alias ...='cd ../../'
-alias ....='cd ../../..'
+alias ..="cd .."
+alias ...="cd ../../"
+alias ....="cd ../../.."
 
 # SOME MORE LS ALIASES
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias home='cd'
-alias dow='cd ~/Downloads'
-alias doc='cd ~/Documents'
-alias dev='cd ~/dev'
+alias ll="ls -alF"
+alias la="ls -A"
+alias l="ls -CF"
+alias home="cd"
+alias dow="cd ~/Downloads"
+alias doc="cd ~/Documents"
+alias dev="cd ~/dev"
+alias p="cd $PROJ_DIR"
 
 # PYTHON VENV ALIASES
-alias va='source ./$VENV/bin/activate'
-alias da='deactivate'
-alias makevenv='python -m venv .venv && va'
-alias uppip='python -m pip install --upgrade pip'
-alias pir='pip install -r '
+alias va="source ./$VENV_DIR/bin/activate"
+alias da="deactivate"
+alias makevenv="python -m venv $VENV_DIR && va"
+alias uppip="python -m pip install --upgrade pip"
+alias pir="pip install -r "
 
 # UTIL ALIASES
-alias aliases="code $DOTFILES_DIR/aliases"
-alias functions="code $DOTFILES_DIR/functions"
-alias dotfiles="code -n $DOTFILES_DIR"
-alias sand="cd $HOME/dev/sandbox_projects"
-alias pysand="code -n $HOME/dev/sandbox_projects/pysandbox"
-alias gitconfig="code $DOTFILES_DIR/gitconfig"
-alias gitconfig_local="code .git/config"
+alias aliases="$EDITOR $DOTFILES_DIR/aliases"
+alias functions="$EDITOR $DOTFILES_DIR/functions"
+alias dotfiles="$EDITOR -n $DOTFILES_DIR"
+alias sand="cd $PROJ_DIR/sandbox_projects"
+alias pysand="$EDITOR -n $PROJ_DIR/sandbox_projects/pysandbox"
+alias gitconfig="$EDITOR $DOTFILES_DIR/gitconfig"
+alias gitconfig_local="$EDITOR .git/config"
 
 # OTHER
 alias path="tr ':' '\n' <<< \"$PATH\""

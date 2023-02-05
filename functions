@@ -118,7 +118,7 @@ wt() {
 
 va() {
     if [ $# -eq 0 ]; then
-        source $VENV/bin/activate
+        source $VENV_DIR/bin/activate
     fi
 }
 

@@ -6,7 +6,7 @@ PS1+=" "
 PS1+="\[\e[0;95m\]\W\[\e[m\]" # current directory
 PS1+="\[\e[0;92m\]\$(git_branch)\[\e[m\]" # current branch
 PS1+=" "
-PS1+=">> " # end prompt
+PS1+="> " # end prompt
 export PS1;
 
 export CLICOLOR=1

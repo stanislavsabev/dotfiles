@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-export VENV=".venv"
+export EDITOR=code
+export VENV_DIR=".venv"
+export PROJ_DIR="$HOME/projects"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
