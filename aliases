@@ -33,6 +33,7 @@ alias dotfiles="$EDITOR -n $DOTFILES_DIR"
 alias sand="cd $PROJ_DIR/sandbox_projects"
 alias pysand="$EDITOR -n $PROJ_DIR/sandbox_projects/pysandbox"
 alias gitconfig="$EDITOR $DOTFILES_DIR/gitconfig"
+alias gitignore_global="$EDITOR $DOTFILES_DIR/gitignore_global"
 alias gitconfig_local="$EDITOR .git/config"
 
 # OTHER
