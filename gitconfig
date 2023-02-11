@@ -9,6 +9,7 @@
 	sv = status -v
 	b = branch
 	co = !git checkout
+	cob = !git checkout -b
 	cam = !git commit -am
 	unstageall = !git reset -- .
 	recommit = commit -c ORIG_HEAD
