@@ -9,6 +9,7 @@
 	sv = status -v
 	b = branch
 	co = !git checkout
+	cam = !git commit -am
 	unstageall = !git reset -- .
 	recommit = commit -c ORIG_HEAD
 	comnoe = !git commit --amend --no-edit
@@ -16,7 +17,7 @@
 	commitnoedit = !git commit --amend --no-edit
 	undolast = reset HEAD~
 	resethard = reset HEAD --hard
-	amend = !git commit --amend --no-edit
+	amend = !git commit --amend
 	pushrefs = !git push origin HEAD:refs/for/master
 	lgo = !git log --oneline --decorate --all
 	lggo = !git log --graph --oneline --decorate --all
