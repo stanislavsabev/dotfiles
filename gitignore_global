@@ -1,9 +1,7 @@
-__pycache__/
-.vs/
 .vscode/
-venv/
-.venv/
-.idea/
 .ignore/
-~*.*
-*.log
+.python-version
+.DS_Store
+
+.pytest_cache/
+__pycache__/

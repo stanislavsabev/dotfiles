@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export PATH="$HOME/bin:$PATH"
+export PATH="$PATH:/usr/local/mysql/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"

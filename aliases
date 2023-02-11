@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# NAVIGATION
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# SHORTHAND COMMANDS
+alias la="ls -lah"
+alias ll="ls -lh"
+alias rf="rm -rf"
+
+# COMMON DIRECTORIES
+alias dow="cd ~/Downloads"
+alias dtop="cd ~/Desktop"
+alias doc="cd ~/Documents"
+alias home="cd"
+
+alias p="cd $PROJECTS_DIR"
+alias dev="cd ~/dev"
+alias be="cd $BE_DIR"
+alias mig="cd $MIGRATIONS_DIR"
+alias q2c="cd $Q2C_DIR"
+alias cd-tests="cd tests/integration/src"
+alias fe="cd $FE_DIR"
+alias soa="cd $SOA_DIR"
+alias myupdate="$EDITOR -n $PROJECTS_DIR/my_update"
+
+# PYTHON
+alias da="deactivate"
+alias rmvenv="da && rm -rf venv"
+alias pir="pip install -r"
+alias uppip="python -m pip install --upgrade pip"
+
+# SHOW/HIDE HIDDEN FILES
+alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# MY SCRIPTS
+alias kport="source ~/bin/kill_port.sh"
+alias service="source ~/bin/start_service.sh"
+alias wt-ls="wt-list"
+
+# EASIER SCRIPTS EDITING
+alias services="$EDITOR $DOTFILES_DIR/services"
+alias aliases="$EDITOR $DOTFILES_DIR/aliases"
+alias functions="$EDITOR $DOTFILES_DIR/functions"
+alias exports="$EDITOR $DOTFILES_DIR/exports"
+alias paths="$EDITOR $DOTFILES_DIR/paths"
+alias dotfiles="$EDITOR -n $DOTFILES_DIR/"
+alias openscripts="$EDITOR ~/bin"
+alias scripts="$EDITOR ~/bin"
+alias bashprofile="$EDITOR $DOTFILES_DIR/.bash_profile"
+alias bashrc="$EDITOR $DOTFILES_DIR/.bashrc"
+
+# GIT
+alias gitconfig="$EDITOR $DOTFILES_DIR/gitconfig"
+alias gitconfig_local="$EDITOR ./.git/config"
+
+
+# Get week number
+alias week='date +%V'
+# Get UTC time
+alias utc="date -u +'%H:%M:%S UTC'"
+alias short-date="date +%Y-%m-%d"
+# Google Chrome
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
+alias cd="cdnvm"
+alias path="tr ':' '\n' <<< \"$PATH\""
+
+alias soapythonpath='export PYTHONPATH="$PYTHONPATH:$(pwd)/src"'
+alias pysand="$EDITOR $PROJECTS_DIR/pysandbox"
