@@ -18,6 +18,7 @@ alias dow="cd ~/Downloads"
 alias doc="cd ~/Documents"
 alias dev="cd ~/dev"
 alias p="cd $PROJ_DIR"
+alias devsetup="cd $PROJ_DIR/devsetup"
 
 # PYTHON VENV ALIASES
 alias va="source ./$VENV_DIR/bin/activate"
