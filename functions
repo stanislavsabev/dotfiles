@@ -337,7 +337,11 @@ wt() {
 }
 
 wt-list() {
-    git worktree list "$@"
+    if [ $# -ne 0 ]; then
+        echo "$(git worktree list | grep -i $@)"
+    else
+        echo "$(git worktree list)"
+    fi
 }
 
 wt-move() {
