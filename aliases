@@ -8,6 +8,7 @@ alias ....="cd ../../.."
 # SHORTHAND COMMANDS
 alias la="ls -lah"
 alias ll="ls -lh"
+alias l.="ls -d .*"
 alias rf="rm -rf"
 
 # COMMON DIRECTORIES
@@ -28,7 +29,6 @@ alias myupdate="$EDITOR -n $PROJECTS_DIR/my_update"
 
 # PYTHON
 alias da="deactivate"
-alias rmvenv="da && rm -rf venv"
 alias pir="pip install -r"
 alias uppip="python -m pip install --upgrade pip"
 
