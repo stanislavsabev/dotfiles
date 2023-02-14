@@ -98,7 +98,7 @@ start-mig() {
     fi
     echo "Starting 'ggrc_migrations' at '$WHERE'..."
     cd $TARGET_DIR
-    source $MIGRATIONS_DIR/venv_migrations/bin/activate
+    source "$MIGRATIONS_DIR/$VENV_MIG_NAME/bin/activate"
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8088
 }
@@ -117,7 +117,7 @@ start-mig-db-init() {
     fi
     echo "Starting 'ggrc_migrations -> db_init' at '$WHERE'..."
     cd $TARGET_DIR
-    source $MIGRATIONS_DIR/venv_migrations/bin/activate
+    source "$MIGRATIONS_DIR/$VENV_MIG_NAME/bin/activate"
     ./scripts/db_init.sh
 }
 
@@ -137,7 +137,7 @@ start-be() {
     fi
     echo "Starting 'be' at '$WHERE'..."
     cd $TARGET_DIR
-    source $BE_DIR/venv/bin/activate
+    source "$BE_DIR/$VENV_NAME/bin/activate"
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8082 --without-threads
 }
@@ -215,7 +215,7 @@ start-soa() {
     echo "WHERE='$WHERE'"
     echo "CONFIG_FILE='$CONFIG_FILE'"
     cdnvm $TARGET_DIR
-    source $SOA_DIR/soa_py3_venv/bin/activate
+    source "$SOA_DIR/$VENV_SOA_NAME/bin/activate"
     set -o allexport && source $CONFIG_FILE && set +o allexport
     cd src
     flask run --port=9090 --without-threads
@@ -265,8 +265,8 @@ start-soa-db-reset() {
     echo "WHERE='$WHERE'"
     echo "CONFIG_FILE='$CONFIG_FILE'"
     echo "DB_NAME='$DB_NAME'"
-    cdnvm $TARGET_DIR
-    source $SOA_DIR/soa_py3_venv/bin/activate
+    cdnvm "$TARGET_DIR"
+    source "$SOA_DIR/$VENV_SOA_NAME/bin/activate"
     export PYTHONPATH="$PYTHONPATH:$TARGET_DIR/src"
     set -o allexport && source $CONFIG_FILE && set +o allexport
     ./bin/db_reset -d "$DB_NAME"
@@ -275,7 +275,7 @@ start-soa-db-reset() {
 start-q2c() {
     echo "Starting 'q2c'..."
     cd "$PROJECTS_DIR/q2c"
-    source ./venv/bin/activate
+    source "./$VENV_NAME/bin/activate"
     ./bin/run_local.py
 }
 
@@ -297,7 +297,7 @@ wt() {
 
 va() {
     if [ $# -eq 0 ]; then
-        source venv/bin/activate
+        source "$VENV_NAME/bin/activate"
         return
     fi
 
@@ -321,15 +321,15 @@ va() {
 }
 
 va-migrations(){
-    source $MIGRATIONS_DIR/venv_migrations/bin/activate
+    source "$MIGRATIONS_DIR/$VENV_MIG_NAME/bin/activate"
 }
 
 va-be(){
-    source $BE_DIR/venv/bin/activate
+    source "$BE_DIR/$VENV_BE_NAME/bin/activate"
 }
 
 va-soa(){
-    source $SOA_DIR/soa_py3_venv/bin/activate
+    source "$SOA_DIR/$VENV_SOA_NAME/bin/activate"
 }
 
 wt() {
@@ -400,12 +400,12 @@ vscode-add-dev () {
 
 makevenv(){
     if [ "$1" ]; then
-        local venv_name=$1
+        local venv_dst="$1"
     else
-        local venv_name=venv
+        local venv_dst="$VENV_NAME"
     fi
-    python -m venv $venv_name;
-    source ./$venv_name/bin/activate;
+    python -m venv $venv_dst;
+    source "./$venv_dst/bin/activate";
 }
 
 ps0() {
