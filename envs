@@ -9,6 +9,10 @@ export MIGRATIONS_DIR="$PROJECTS_DIR/ggrc_migrations"
 export Q2C_DIR="$PROJECTS_DIR/q2c"
 export FE_DIR="$PROJECTS_DIR/ggrc_fe"
 export SOA_DIR="$PROJECTS_DIR/soa"
+export VENV_NAME=".venv"
+export VENV_MIG_NAME=".venvmig"
+export VENV_BE_NAME="venv"
+export VENV_SOA_NAME="soa_py3_venv"
 
 # Ignore commands starting with space
 export HISTIGNORE=' *'
