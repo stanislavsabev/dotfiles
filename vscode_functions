@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# VSCODE FUNCTIONS
+
+vscode-add-sett () {
+    # if [ ! -d ".vscode" ]; then
+    #     mkdir .vscode
+    # fi
+    cp -Raf ../.ignore/.vscode.bak/ .vscode/
+}
+
+
+vscode-add-dev () {
+    # if [ ! -d ".vscode" ]; then
+    #     mkdir .vscode
+    # fi
+    cp -Raf ../.ignore/dev/ .vscode/dev/
+}
+
+vscode-clear-cache() {
+    rm -rf ~/Library/Application\ Support/Code/Cache/*
+    rm -rf ~/Library/Application\ Support/Code/CachedData/*
+}
+
+vscode-clear-pycache() {
+    find . -name "*.pyc" -delete
+    find . -name ".pytest_cache" -type d -exec rm -rf {} +
+}

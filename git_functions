@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+# GIT FUNCTIONS
+git-branch() {
+    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+cob() {
+    git checkout $(git branch | grep -i "$1")
+}
+
+findb() {
+    git branch | grep -i "$1"
+}
+
+findwb() {
+    git wb | grep -i "$1"
+}
+
+patchset() {
+    grep 'patchset' .branch_info | cut -d\= -f2
+}
+
+wt() {
+    git worktree "$@"
+}
+
+wt-list() {
+    if [ $# -ne 0 ]; then
+        echo "$(git worktree list | grep -i $@)"
+    else
+        echo "$(git worktree list)"
+    fi
+}
+
+wt-move() {
+    git worktree move "$1" "$2"
+    cd "$2"
+    git branch -M "$2"
+    cd -
+}
+
+wt-add() {
+    if [ $# -eq 0 ]
+      then
+        echo "git worktree add -b <branch> <path> <commit-ish>"
+        return
+    fi
+
+    # -b <branch-name> <path-name> <commit-ish>
+    git worktree add -b "$1" "$1" "$2"
+}
+
+wt-add-ex() {
+    wt-add $@
+    cd $1
+    vscode-add-sett
+}
+
+wt-remove() {
+    if [ $# -eq 0 ]; then
+        echo "git worktree remove <worktree(==branch-name)> [--force]"
+        return
+    fi
+
+    local WHERE="$1"
+    if [[ $WHERE == */ ]]; then
+        WHERE=${WHERE%?};
+    fi
+    shift
+
+    if [[ "$1" == "--force" ]]; then
+        git worktree remove --force $WHERE && git branch -D $WHERE
+    else
+        git worktree remove $WHERE && git branch -D $WHERE
+    fi
+}
+
+wt-checkout() {
+    eval $(echo "$1" | sed -E 's/-b change-[0-9]+/-B $(git curr-branch)/')
+}

@@ -1,22 +1,5 @@
 #!/usr/bin/env bash
 
-# GIT FUNCTIONS
-git-branch() {
-    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
-cob() {
-    git checkout $(git branch | grep -i "$1")
-}
-
-findb() {
-    git branch | grep -i "$1"
-}
-
-findwb() {
-    git wb | grep -i "$1"
-}
-
 # nvm functions
 cdnvm() {
     command cd "$@";
@@ -287,14 +270,6 @@ expand-alias() {
     alias "$@" | cut -d\' -f2
 }
 
-patchset() {
-    grep 'patchset' .branch_info | cut -d\= -f2
-}
-
-wt() {
-    git worktree "$@"
-}
-
 va() {
     if [ $# -eq 0 ]; then
         source "$VENV_NAME/bin/activate"
@@ -332,76 +307,6 @@ va-soa(){
     source "$SOA_DIR/$VENV_SOA_NAME/bin/activate"
 }
 
-wt() {
-    git worktree "$@"
-}
-
-wt-list() {
-    if [ $# -ne 0 ]; then
-        echo "$(git worktree list | grep -i $@)"
-    else
-        echo "$(git worktree list)"
-    fi
-}
-
-wt-move() {
-    git worktree move "$1" "$2"
-    cd "$2"
-    git branch -M "$2"
-    cd -
-}
-
-wt-add() {
-    if [ $# -eq 0 ]
-      then
-        echo "git worktree add -b <branch> <path> <commit-ish>"
-        return
-    fi
-
-    # -b <branch-name> <path-name> <commit-ish>
-    git worktree add -b "$1" "$1" "$2"
-}
-
-wt-add-ex() {
-    wt-add $@
-    cd $1
-    vscode-add-sett
-}
-
-wt-remove() {
-    if [ $# -eq 0 ]; then
-        echo "git worktree remove <worktree(==branch-name)> [--force]"
-        return
-    fi
-
-    local WHERE="$1"
-    if [[ $WHERE == */ ]]; then
-        WHERE=${WHERE%?};
-    fi
-    shift
-
-    if [[ "$1" == "--force" ]]; then
-        git worktree remove --force $WHERE && git branch -D $WHERE
-    else
-        git worktree remove $WHERE && git branch -D $WHERE
-    fi
-}
-
-vscode-add-sett () {
-    # if [ ! -d ".vscode" ]; then
-    #     mkdir .vscode
-    # fi
-    cp -Raf ../.ignore/.vscode.bak/ .vscode/
-}
-
-
-vscode-add-dev () {
-    # if [ ! -d ".vscode" ]; then
-    #     mkdir .vscode
-    # fi
-    cp -Raf ../.ignore/dev/ .vscode/dev/
-}
-
 makevenv(){
     if [ "$1" ]; then
         local venv_dst="$1"
@@ -412,30 +317,12 @@ makevenv(){
     source "./$venv_dst/bin/activate";
 }
 
-ps0() {
-    unset PROMPT_COMMAND
-    PS_STATE=0
-    source $DOTFILES_DIR/bash_prompt
-}
-
-ps1() {
-    unset PROMPT_COMMAND
-    PS_STATE=1
-    source $DOTFILES_DIR/bash_prompt
-}
-
-ps2() {
-    unset PROMPT_COMMAND
-    PS_STATE=2
-    source $DOTFILES_DIR/bash_prompt
-
-}
-parentname() {
+parentdirname() {
     echo "$(basename "$(dirname "$PWD")")"
 }
 
 projname() {
-    local PARENT_NAME="$(parentname)"
+    local PARENT_NAME="$(parentdirname)"
 
     case "$PARENT_NAME" in
         ggrc_be)
@@ -455,16 +342,6 @@ projname() {
             ;;
     esac
     echo "$PARENT_NAME"
-}
-
-vscode-clear-cache() {
-    rm -rf ~/Library/Application\ Support/Code/Cache/*
-    rm -rf ~/Library/Application\ Support/Code/CachedData/*
-}
-
-vscode-clear-pycache() {
-    find . -name "*.pyc" -delete
-    find . -name ".pytest_cache" -type d -exec rm -rf {} +
 }
 
 verify-commit-msg() {
@@ -499,10 +376,6 @@ gcertstatus() {
   fi
 
   command gcertstatus "$@"
-}
-
-wt-co() {
-    eval $(echo "$1" | sed -E 's/-b change-[0-9]+/-B $(git curr-branch)/')
 }
 
 init() {
