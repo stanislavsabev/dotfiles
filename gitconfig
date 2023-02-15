@@ -16,6 +16,7 @@
 	sv = status -v
 	b = branch
 	co = !git checkout
+	cam = !git commit -am
 	cb = !git rev-parse --abbrev-ref HEAD
 	curr-branch = !git rev-parse --abbrev-ref HEAD
 	undolast = !git reset HEAD~1
