@@ -39,7 +39,6 @@ alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false 
 # MY SCRIPTS
 alias kport="source ~/bin/kill_port.sh"
 alias service="source ~/bin/start_service.sh"
-alias wt-ls="wt-list"
 
 # EASIER SCRIPTS EDITING
 alias services="$EDITOR $DOTFILES_DIR/services"
@@ -56,16 +55,17 @@ alias bashrc="$EDITOR $DOTFILES_DIR/.bashrc"
 # GIT
 alias gitconfig="$EDITOR $DOTFILES_DIR/gitconfig"
 alias gitconfig_local="$EDITOR ./.git/config"
+alias wt-ls="wt-list"
+alias wt-co="wt-checkout"
 
 
-# Get week number
+# Chrono
 alias week='date +%V'
-# Get UTC time
 alias utc="date -u +'%H:%M:%S UTC'"
 alias short-date="date +%Y-%m-%d"
-# Google Chrome
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
+# Misc
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
 alias cd="cdnvm"
@@ -73,3 +73,42 @@ alias path="tr ':' '\n' <<< \"$PATH\""
 
 alias soapythonpath='export PYTHONPATH="$PYTHONPATH:$(pwd)/src"'
 alias pysand="$EDITOR $PROJECTS_DIR/pysandbox"
+
+alias expandalias="expand-alias"
+
+alias add="git add -- "
+alias addall="git add -all "
+alias commit="git commit"
+alias commitam="git commit -am "
+alias status="git status"
+alias statusv="git status -v"
+alias s="git status"
+alias sv="git status -v"
+alias b="git branch"
+alias co="git checkout"
+alias curr-branch="git rev-parse --abbrev-ref HEAD"
+alias undolast="git reset HEAD~1"
+alias unstageall="git reset -- ."
+alias recommit="commit -c ORIG_HEAD"
+alias undo="reset HEAD~"
+alias resethard="reset HEAD --hard"
+alias amend="git commit --amend"
+alias commit-"noedit=git commit --amend --no-edit"
+alias cnoe="git commit --amend --no-edit"
+alias acnoe="git add --all && git commit --amend --no-edit"
+alias pushrefs="git push origin HEAD:refs/for/master"
+alias logv="git log"
+alias lv="git log"
+alias lg="git log --graph --pretty=format:'%C(yellow)%h%Creset %<(65,trunc)%s - %C(bold blue)%<(7,trunc)%an%Creset %C(bold red)%d %Creset%C(green)(%cr)' --abbrev-commit"
+alias log="git log --graph --pretty=format:'%C(yellow)%h%Creset %<(65,trunc)%s - %C(bold blue)%<(7,trunc)%an%Creset %C(bold red)%d %Creset%C(green)(%cr)' --abbrev-commit"
+alias lgstat="git log --graph --pretty=format:'%C(yellow)%h%Creset %<(65,trunc)%s - %C(bold blue)%<(7,trunc)%an%Creset %C(bold red)%d %Creset%C(green)(%cr)' --abbrev-commit --stat"
+alias logstat="git log --graph --pretty=format:'%C(yellow)%h%Creset %<(65,trunc)%s - %C(bold blue)%<(7,trunc)%an%Creset %C(bold red)%d %Creset%C(green)(%cr)' --abbrev-commit --stat"
+alias logsha="git log --pretty=format:'%H'"
+alias lgsha="git log --pretty=format:'%H'"
+alias sha="git log -1 --pretty=format:'%H'"
+alias longsha="git log -1 --pretty=format:'%H'"
+alias shortsha="git log -1 --pretty=format:'%h'"
+alias wt="git worktree"
+alias stat="git diff HEAD~1 HEAD --stat"
+alias diff="git diff"
+alias diffhead="git diff HEAD"
