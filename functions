@@ -120,7 +120,7 @@ start-be() {
     fi
     echo "Starting 'be' at '$WHERE'..."
     cd $TARGET_DIR
-    source "$BE_DIR/$VENV_NAME/bin/activate"
+    source "$BE_DIR/$VENV_BE_NAME/bin/activate"
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     flask run --port=8082 --without-threads
 }
