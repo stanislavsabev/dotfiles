@@ -57,7 +57,8 @@ alias gitconfig="$EDITOR $DOTFILES_DIR/gitconfig"
 alias gitconfig_local="$EDITOR ./.git/config"
 alias wt-ls="wt-list"
 alias wt-co="wt-checkout"
-
+alias wt-mv="wt-move"
+alias wt-rm="wt-remove"
 
 # Chrono
 alias week='date +%V'
