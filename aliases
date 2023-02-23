@@ -73,6 +73,7 @@ alias cd="cdnvm"
 alias path="tr ':' '\n' <<< \"$PATH\""
 
 alias soapythonpath='export PYTHONPATH="$PYTHONPATH:$(pwd)/src"'
+alias soaconfigfile="set -o allexport && source ./configs/envs/local.env && set +o allexport"
 alias pysand="$EDITOR $PROJECTS_DIR/pysandbox"
 
 alias expandalias="expand-alias"
@@ -80,6 +81,7 @@ alias expandalias="expand-alias"
 alias add="git add --all"
 alias addfiles="git add --"
 alias push="git push"
+alias rebase="git rebase"
 alias pull="git pull"
 alias fetch="git fetch --all"
 alias addall="git add --all"
