@@ -123,3 +123,6 @@ alias wt="git worktree"
 alias stat="git diff HEAD~1 HEAD --stat"
 alias diff="git diff"
 alias diffhead="git diff HEAD"
+
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
