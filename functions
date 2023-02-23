@@ -258,7 +258,7 @@ start-soa-db-reset() {
 start-q2c() {
     echo "Starting 'q2c'..."
     cd "$PROJECTS_DIR/q2c"
-    source "./$VENV_NAME/bin/activate"
+    source "./$VENV_Q2C_NAME/bin/activate"
     ./bin/run_local.py
 }
 
@@ -287,7 +287,7 @@ va() {
             va-soa
             ;;
         q2c | nottifications)
-            va
+            source "$VENV_Q2C_NAME/bin/activate"
             ;;
         *)
             echo "Unknown venv!"

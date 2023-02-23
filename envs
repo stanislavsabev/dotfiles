@@ -13,6 +13,7 @@ export VENV_NAME=".venv"
 export VENV_MIG_NAME=".venvmig"
 export VENV_BE_NAME="venv"
 export VENV_SOA_NAME="soa_py3_venv"
+export VENV_Q2C_NAME=".vq2c"
 
 # Ignore commands starting with space
 export HISTIGNORE=' *'
