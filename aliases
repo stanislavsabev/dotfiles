@@ -21,14 +21,13 @@ alias doc="cd ~/Documents"
 alias home="cd"
 
 alias p="cd $PROJECTS_DIR"
-alias dev="cd ~/dev"
 alias be="cd $BE_DIR"
 alias mig="cd $MIGRATIONS_DIR"
 alias q2c="cd $Q2C_DIR"
-alias cd-tests="cd tests/integration/src"
+alias tests="cd $BE_DIR/tests/integration/src"
 alias fe="cd $FE_DIR"
 alias soa="cd $SOA_DIR"
-alias myupdate="$EDITOR -n $PROJECTS_DIR/my_update"
+alias sql="cd $PROJECTS_DIR/sql"
 
 # PYTHON
 alias da="deactivate"
