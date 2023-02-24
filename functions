@@ -68,13 +68,16 @@ function tat {
 }
 
 start-mig() {
-    local WHERE="$(git branch --show-current)"
+    start-mig-usage() { echo "Usage: start-mig [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
+    local WHERE="$(git branch --show-current >/dev/null 2>&1;)"
     local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
     fi
     if [ -z "$WHERE" ]; then
-        echo "Missing branch name!"
+        start-mig-usage;
         return
     elif [[ $WHERE != "." ]]; then
         TARGET_DIR="$MIGRATIONS_DIR/$WHERE"
@@ -87,14 +90,17 @@ start-mig() {
 }
 
 start-mig-db-init() {
-    local WHERE="$(git branch --show-current)"
+    start-mig-db-init-usage() { echo "Usage: start-mig-db-init [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
+    local WHERE="$(git branch --show-current >/dev/null 2>&1;)"
     local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
     fi
     if [ -z "$WHERE" ]; then
-        echo "Missing branch name!"
-        return
+        start-mig-db-init-usage
+        return;
     elif [[ $WHERE != "." ]]; then
         TARGET_DIR="$MIGRATIONS_DIR/$WHERE"
     fi
@@ -105,16 +111,19 @@ start-mig-db-init() {
 }
 
 start-be() {
+    start-be-usage() { echo "Usage: start-be [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
     local WHERE=""
     local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
     else
-        WHERE=$(git branch --show-current)
+        WHERE=$(git branch --show-current >/dev/null 2>&1;)
     fi
     if [ -z "$WHERE" ]; then
-        echo "Missing branch name!"
-        return
+        start-be-usage
+        return;
     elif [[ $WHERE != "." ]]; then
         TARGET_DIR="$BE_DIR/$WHERE"
     fi
@@ -126,16 +135,19 @@ start-be() {
 }
 
 start-fe-for-ui-tests() {
+    start-fe-for-ui-tests-usage() { echo "Usage: start-fe-for-ui-tests-usage [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
     local WHERE=""
     local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
     else
-        WHERE=$(git branch --show-current)
+        WHERE=$(git branch --show-current >/dev/null 2>&1;)
     fi
     if [ -z "$WHERE" ]; then
-        echo "Missing branch name!"
-        return
+        estart-fe-for-ui-tests-usage
+        return;
     elif [[ $WHERE != "." ]]; then
         TARGET_DIR="$FE_DIR/$WHERE"
     fi
@@ -145,16 +157,19 @@ start-fe-for-ui-tests() {
 }
 
 start-fe() {
+    start-fe-usage() { echo "Usage: start-fe [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
     local WHERE=""
     local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
     else
-        WHERE=$(git branch --show-current)
+        WHERE=$(git branch --show-current >/dev/null 2>&1;)
     fi
     if [ -z "$WHERE" ]; then
-        echo "Missing branch name!"
-        return
+        start-fe-usage
+        return;
     elif [[ $WHERE != "." ]]; then
         TARGET_DIR="$FE_DIR/$WHERE"
     fi
@@ -164,10 +179,12 @@ start-fe() {
 }
 
 start-soa() {
-    start-soa-usage() { echo "Usage: start-soa [-b <branch/worktree> -c <config-file>]" 1>&2;}
+    start-soa-usage() { echo "Usage: start-soa [-b <branch/worktree>] [-c <config-file>]
+    Branch is required, if not in project dirs." 1>&2;
+    }
     local OPTIND # (see https://stackoverflow.com/questions/16654607/using-getopts-inside-a-bash-function)
 
-    local WHERE=$(git branch --show-current)
+    local WHERE=$(git branch --show-current >/dev/null 2>&1;)
     local TARGET_DIR="."
     local CONFIG_FILE="./configs/envs/local.env"
 
@@ -188,8 +205,8 @@ start-soa() {
     shift $((OPTIND-1))
 
     if [ -z "$WHERE" ]; then
-        echo "Missing branch name!"
-        return
+        start-soa-usage
+        return;
     elif [[ $WHERE != "." ]]; then
         TARGET_DIR="$SOA_DIR/$WHERE"
     fi
@@ -205,10 +222,12 @@ start-soa() {
 }
 
 start-soa-db-reset() {
-    start-soa-db-reset-usage() { echo "Usage: start-soa-db-reset [-b <branch/worktree> -c <config-file>]" 1>&2;}
+    start-soa-db-reset-usage() { echo "Usage: start-soa-db-reset [-b <branch/worktree>] [-c <config-file>]
+    Branch is required, if not in project dirs." 1>&2;
+    }
     local OPTIND # (see https://stackoverflow.com/questions/16654607/using-getopts-inside-a-bash-function)
 
-    local WHERE=$(git branch --show-current)
+    local WHERE=$(git branch --show-current >/dev/null 2>&1;)
     local TARGET_DIR="."
     local CONFIG_FILE="./configs/envs/local.env"
     local DB_NAME="ggrcdev"
@@ -230,8 +249,8 @@ start-soa-db-reset() {
     shift $((OPTIND-1))
 
     if [ -z "$WHERE" ]; then
-        echo "Missing branch name!"
-        return
+        start-soa-db-reset-usage
+        return;
     elif [[ $WHERE != "." ]]; then
         TARGET_DIR="$SOA_DIR/$WHERE"
     fi
@@ -379,7 +398,6 @@ gcertstatus() {
 }
 
 init() {
-
     init-usage() { echo "Usage: init <service-name>" 1>&2;}
     if [ $# -eq 0 ]; then
         init-usage
