@@ -412,7 +412,7 @@ init() {
             init-fe
             ;;
         mig)
-            start-mig-db-init
+            start-mig-db-init "$2"
             ;;
         *)
             echo "Unknown service $1"
@@ -422,16 +422,18 @@ init() {
 }
 
 init-soa() {
+    cd "$SOA_DIR"
     nvm use 8
     rm -rf node_modules
     npm i --unsafe-perm
     ./bin/build_assets
-    va-soa
+    source "$SOA_DIR/$VENV_SOA_NAME/bin/activate"
     set -o allexport && source ./configs/envs/local.env && set +o allexport
     export PYTHONPATH="$PYTHONPATH:$(pwd)/src"
 }
 
 init-fe() {
+    cd "$FE_DIR"
     rm -rf node_modules
     npm i bower -g
     npm i
