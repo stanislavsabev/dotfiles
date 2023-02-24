@@ -71,7 +71,7 @@ start-mig() {
     start-mig-usage() { echo "Usage: start-mig [branch/worktree]
     Branch is required, if not in project dirs." 1>&2;
     }
-    local WHERE="$(git branch --show-current >/dev/null 2>&1;)"
+    local WHERE="$(git branch --show-current)"
     local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
@@ -93,7 +93,7 @@ start-mig-db-init() {
     start-mig-db-init-usage() { echo "Usage: start-mig-db-init [branch/worktree]
     Branch is required, if not in project dirs." 1>&2;
     }
-    local WHERE="$(git branch --show-current >/dev/null 2>&1;)"
+    local WHERE="$(git branch --show-current)"
     local TARGET_DIR="."
     if [ "$1" ]; then
         WHERE="$1"
@@ -119,7 +119,7 @@ start-be() {
     if [ "$1" ]; then
         WHERE="$1"
     else
-        WHERE=$(git branch --show-current >/dev/null 2>&1;)
+        WHERE=$(git branch --show-current)
     fi
     if [ -z "$WHERE" ]; then
         start-be-usage
@@ -143,7 +143,7 @@ start-fe-for-ui-tests() {
     if [ "$1" ]; then
         WHERE="$1"
     else
-        WHERE=$(git branch --show-current >/dev/null 2>&1;)
+        WHERE=$(git branch --show-current)
     fi
     if [ -z "$WHERE" ]; then
         estart-fe-for-ui-tests-usage
@@ -165,7 +165,7 @@ start-fe() {
     if [ "$1" ]; then
         WHERE="$1"
     else
-        WHERE=$(git branch --show-current >/dev/null 2>&1;)
+        WHERE=$(git branch --show-current)
     fi
     if [ -z "$WHERE" ]; then
         start-fe-usage
@@ -184,7 +184,7 @@ start-soa() {
     }
     local OPTIND # (see https://stackoverflow.com/questions/16654607/using-getopts-inside-a-bash-function)
 
-    local WHERE=$(git branch --show-current >/dev/null 2>&1;)
+    local WHERE=$(git branch --show-current)
     local TARGET_DIR="."
     local CONFIG_FILE="./configs/envs/local.env"
 
@@ -227,7 +227,7 @@ start-soa-db-reset() {
     }
     local OPTIND # (see https://stackoverflow.com/questions/16654607/using-getopts-inside-a-bash-function)
 
-    local WHERE=$(git branch --show-current >/dev/null 2>&1;)
+    local WHERE=$(git branch --show-current)
     local TARGET_DIR="."
     local CONFIG_FILE="./configs/envs/local.env"
     local DB_NAME="ggrcdev"
