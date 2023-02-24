@@ -436,3 +436,27 @@ init-fe() {
     npm i bower -g
     npm i
 }
+
+be-ls() {
+    cd "$BE_DIR"
+    wt-list "$@"
+    cd - >/dev/null;
+}
+
+soa-ls() {
+    cd "$SOA_DIR"
+    wt-list "$@"
+    cd - >/dev/null;
+}
+
+mig-ls() {
+    cd "$MIGRATIONS_DIR"
+    wt-list "$@"
+    cd - >/dev/null;
+}
+
+fe-ls() {
+    cd "$FE_DIR"
+    wt-list "$@"
+    cd - >/dev/null;
+}
