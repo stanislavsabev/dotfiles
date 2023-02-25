@@ -6,12 +6,13 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 
 # SHORTHAND COMMANDS
-alias la="ls -lah"
+alias l="ls -CF"
+alias la="ls -lAh"
 alias ll="ls -lh"
-alias lh="ls -lh"
+alias lh=ll
 alias l.="ls -d .*"
-alias la.="ls -lah | awk '\$NF ~ /^\./'"
-alias ll.="ls -lah | awk '\$NF ~ /^\./'"
+alias la.="ls -lAh | awk '\$NF ~ /^\./'"
+alias ll.=la.
 alias rf="rm -rf"
 
 # COMMON DIRECTORIES
