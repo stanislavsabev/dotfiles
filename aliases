@@ -56,9 +56,9 @@ alias ed-bashprofile="$EDITOR $DOTFILES_DIR/.bash_profile"
 alias ed-bashrc="$EDITOR $DOTFILES_DIR/.bashrc"
 
 # PROJECTS EDITING
-alias ed-be="$EDITOR -n $PROJECTS_DIR/be"
-alias ed-mig="$EDITOR -n $PROJECTS_DIR/mig"
-alias ed-soa="$EDITOR -n $PROJECTS_DIR/soa"
+alias ed-be="$EDITOR -n $BE_DIR"
+alias ed-mig="$EDITOR -n $MIGRATIONS_DIR"
+alias ed-soa="$EDITOR -n $SOA_DIR"
 alias ed-sql="$EDITOR -n $PROJECTS_DIR/sql"
 
 # GIT
