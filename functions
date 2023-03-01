@@ -422,7 +422,7 @@ init() {
 }
 
 init-soa() {
-    cd "$SOA_DIR"
+    # cd "$SOA_DIR"
     nvm use 8
     rm -rf node_modules
     npm i --unsafe-perm
@@ -433,7 +433,7 @@ init-soa() {
 }
 
 init-fe() {
-    cd "$FE_DIR"
+    # cd "$FE_DIR"
     rm -rf node_modules
     npm i bower -g
     npm i
