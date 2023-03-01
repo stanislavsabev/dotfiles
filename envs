@@ -1,14 +1,22 @@
+# Devel
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export EDITOR="code"
+
+# Util
+export SCRIPTS_DIR="$DOTFILES_DIR/scripts"
 export PROJECTS_DIR="$HOME/projects"
+
+# Projects
 export BE_DIR="$PROJECTS_DIR/ggrc_be"
 export MIGRATIONS_DIR="$PROJECTS_DIR/ggrc_migrations"
 export Q2C_DIR="$PROJECTS_DIR/q2c"
 export FE_DIR="$PROJECTS_DIR/ggrc_fe"
 export SOA_DIR="$PROJECTS_DIR/soa"
+
+# Python
 export VENV_NAME=".venv"
 export VENV_MIG_NAME=".vmig"
 export VENV_BE_NAME=".vbe"

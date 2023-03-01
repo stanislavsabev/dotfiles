@@ -4,7 +4,7 @@
 # * ~/.extra can be used for other settings you don’t want to commit.
 export DOTFILES_DIR="$HOME/.dotfiles"
 
-for file in ~/.dotfiles/{paths,envs,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
+for file in ~/.dotfiles/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

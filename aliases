@@ -134,3 +134,5 @@ alias diffhead="git diff HEAD"
 
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
+
+alias rebase-mig="python $SCRIPTS_DIR/rebase.py"
