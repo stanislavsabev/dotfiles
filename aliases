@@ -9,11 +9,13 @@ alias ....="cd ../../.."
 alias l="ls -CF"
 alias la="ls -lAh"
 alias ll="ls -lh"
-alias lh=ll
+alias lh="ls -lh"
 alias l.="ls -d .*"
 alias la.="ls -lAh | awk '\$NF ~ /^\./'"
-alias ll.=la.
+alias ll.="ls -lAh | awk '\$NF ~ /^\./'"
 alias rf="rm -rf"
+alias rm="rm -i"
+alias mv="mv -i"
 
 # COMMON DIRECTORIES
 alias dow="cd ~/Downloads"
