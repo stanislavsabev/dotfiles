@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+alias fish="export MYSHELL=fish; exec bash"
+
+
+# PARENT DIR NAVIGATION
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# LS ALIASES
+alias l="ls -CF"
+alias ll="ls -lAhF"
+alias la="ls -lAhF" # same as ll, more convinient
+alias lh="ls -lAhF"
+alias l.="ls -d .*"
+alias ll.="ls -lAh | awk '\$NF ~ /^\./'"
+alias la.="ls -lAh | awk '\$NF ~ /^\./'"
+alias rf="rm -rf"
+
+# PYTHON VENV ALIASES
+alias da="deactivate"
+alias makevenv="python -m venv $VENV_DIR && va"
+alias uppip="python -m pip install --upgrade pip"
+alias pir="pip install -r "
+
+# UTIL ALIASES
+alias path="tr ':' '\n' <<< \"$PATH\""
+alias kport="source ~/bin/kill_port.sh"
+alias expandalias="expand-alias"
+
+# DATETIME
+alias week='date +%V'
+alias utc="date -u +'%H:%M:%S UTC'"
+
+# NAVIGATE ALIASES
+alias home="cd"
+alias dow="cd ~/Downloads"
+alias doc="cd ~/Documents"
+alias vid="cd ~/Videos"
+alias p="cd $PROJ_DIR"
+alias opt="cd $OPT_DIR"
+alias dotfiles="cd $DOTFILES_DIR"
+alias devsetup="cd $OPT_DIR/devsetup"
+alias gitignore_global="cat $DEVSETU_DIR/gitignore_global"
+alias gitconfig_local="cat .git/config"
+alias gitconfig="cat $DOTFILES_DIR/gitconfig"
+alias sand="cd $PROJ_DIR/sandbox_projects"
+
+# OPEN WITH EDITOR
+alias ed-aliases="$EDITOR $DOTFILES_DIR/aliases"
+alias ed-history="$EDITOR $HOME/.bash_history"
+alias ed-env="$EDITOR $DOTFILES_DIR/env"
+alias ed-paths="$EDITOR $DOTFILES_DIR/paths"
+alias ed-functions="$EDITOR $DOTFILES_DIR/functions"
+alias ed-gitignore_global="$EDITOR $DEVSETU_DIR/gitignore_global"
+alias ed-gitconfig="$EDITOR $DOTFILES_DIR/gitconfig"
+alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR"
+alias ed-fish="$EDITOR -n $XDG_CONFIG_HOME/fish"
+alias pysand="$EDITOR -n $PROJ_DIR/sandbox_projects/pysandbox"
+alias vba-parser="$EDITOR -n $PROJ_DIR/vba_parser/main"
+
+# APT
+alias up="sudo apt update"
+alias upup="sudo apt upgrade -y"
+alias reboot="sudo reboot"
+
+# WORKTREE FUNCTIONS
+alias wt-ls="wt-list"
+alias wt-co="wt-checkout"
+alias wt-rm="wt-remove"
+alias wt-mv="wt-move"
+
+# GIT
+alias g="git"
