@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+# GIT FUNCTIONS
+git-branch() {
+    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+cob() {
+    git checkout $(git branch | grep -i "$1")
+}
+
+findb() {
+    git branch | grep -i "$1"
+}
+
+patchset() {
+    grep 'patchset' .branch_info | cut -d\= -f2
+}
+
+wt() {
+    git worktree "$@"
+}
+
+wt-list() {
+    if [ $# -ne 0 ]; then
+        echo "$( git worktree list | grep -i $@ | awk '{ print $2" - "$3 }' )"
+    else
+        echo "$( git worktree list | awk '{ print $2" - "$3 }' )"
+    fi
+}
+
+wt-move() {
+    git worktree move "$1" "$2"
+    cd "$2"
+    git branch -M "$2"
+    cd -
+}
+
+wt-add() {
+    if [ $# -eq 0 ]
+      then
+        echo "git worktree add -b <branch> <path> <commit-ish>"
+        return
+    fi
+
+    # -b <branch-name> <path-name> <commit-ish>
+    git worktree add -b "$1" "$1" "$2"
+}
+
+wt-add-ex() {
+    wt-add "$@"
+    cd "$1"
+    vscode-add-sett
+}
+
+wt-checkout() {
+    eval "$(echo $1 | sed -E 's/-b change-[0-9]+/-B $(git curr-branch)/')"
+}
+
+verify-commit-msg() {
+    local COMM_MSG=""
+    if [ "$1" ]; then
+        COMM_MSG="$1"
+    else
+        COMM_MSG="$(git log -1 --pretty=%B)"
+    fi
+    python $DOTFILES_DIR/bin/verify_commit_msg.py "$COMM_MSG"
+}
+
+push-refs-for(){
+    if [ $# -eq 0 ]
+      then
+        echo "usage: pushrefsfor <branch>"
+        return;
+    fi
+    git push origin "HEAD:refs/for/$1"
+}

@@ -1,0 +1,480 @@
+#!/usr/bin/env bash
+
+# nvm functions
+cdnvm() {
+    command cd "$@";
+    nvm_path=$(nvm_find_up .nvmrc | tr -d '\n')
+
+    # If there are no .nvmrc file, use the default nvm version
+    if [[ ! $nvm_path = *[^[:space:]]* ]]; then
+
+        declare default_version;
+        default_version=$(nvm version default);
+
+        # If there is no default version, set it to `node`
+        # This will use the latest version on your machine
+        if [[ $default_version == "N/A" ]]; then
+            nvm alias default node;
+            default_version=$(nvm version default);
+        fi
+
+        # If the current version is not the default version, set it to use the default version
+        if [[ $(nvm current) != "$default_version" ]]; then
+            nvm use default >/dev/null;
+        fi
+
+    elif [[ -s $nvm_path/.nvmrc && -r $nvm_path/.nvmrc ]]; then
+        declare nvm_version
+        nvm_version=$(<"$nvm_path"/.nvmrc)
+
+        declare locally_resolved_nvm_version
+        # `nvm ls` will check all locally-available versions
+        # If there are multiple matching versions, take the latest one
+        # Remove the `->` and `*` characters and spaces
+        # `locally_resolved_nvm_version` will be `N/A` if no local versions are found
+        locally_resolved_nvm_version=$(nvm ls --no-colors "$nvm_version" | tail -1 | tr -d '\->*' | tr -d '[:space:]')
+
+        # If it is not already installed, install it
+        # `nvm install` will implicitly use the newly-installed version
+        if [[ "$locally_resolved_nvm_version" == "N/A" ]]; then
+            nvm install "$nvm_version";
+        elif [[ $(nvm current) != "$locally_resolved_nvm_version" ]]; then
+            nvm use "$nvm_version" >/dev/null;
+        fi
+    fi
+}
+
+# tmux attach
+function tat {
+
+# When starting work on a project: open the terminal, cd into the folder, then `tat`.
+#
+# This function:
+#
+# - gets the name of the current directory and removes periods, which tmux doesn't like.
+# - if any session with the same name is open, it re-attaches to it.
+# - otherwise, it checks if an .envrc file is present and starts a new tmux session using direnv exec.
+# - otherwise, starts a new tmux session with that name.
+
+  name=$(basename `pwd` | sed -e 's/\.//g')
+
+  if tmux ls 2>&1 | grep "$name"; then
+    tmux attach -t "$name"
+  elif [ -f .envrc ]; then
+    direnv exec / tmux new-session -s "$name"
+  else
+    tmux new-session -s "$name"
+  fi
+}
+
+start-mig() {
+    start-mig-usage() { echo "usage: start-mig [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
+    local WHERE="$(git branch --show-current)"
+    local TARGET_DIR="."
+    if [ "$1" ]; then
+        WHERE="$1"
+    fi
+    if [ -z "$WHERE" ]; then
+        start-mig-usage;
+        return
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$MIGRATIONS_DIR/$WHERE"
+    fi
+    echo "Starting 'ggrc_migrations' at '$WHERE'..."
+    cd $TARGET_DIR
+    source "$MIGRATIONS_DIR/$VENV_MIG_NAME/bin/activate"
+    set -o allexport && source ./configs/envs/local.env && set +o allexport
+    flask run --port=8088
+}
+
+start-mig-db-init() {
+    start-mig-db-init-usage() { echo "usage: start-mig-db-init [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
+    local WHERE="$(git branch --show-current)"
+    local TARGET_DIR="."
+    if [ "$1" ]; then
+        WHERE="$1"
+    fi
+    if [ -z "$WHERE" ]; then
+        start-mig-db-init-usage
+        return;
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$MIGRATIONS_DIR/$WHERE"
+    fi
+    echo "Starting 'ggrc_migrations -> db_init' at '$WHERE'..."
+    cd $TARGET_DIR
+    source "$MIGRATIONS_DIR/$VENV_MIG_NAME/bin/activate"
+    ./scripts/db_init.sh
+}
+
+start-be() {
+    start-be-usage() { echo "usage: start-be [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
+    local WHERE=""
+    local TARGET_DIR="."
+    if [ "$1" ]; then
+        WHERE="$1"
+    else
+        WHERE=$(git branch --show-current)
+    fi
+    if [ -z "$WHERE" ]; then
+        start-be-usage
+        return;
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$BE_DIR/$WHERE"
+    fi
+    echo "Starting 'be' at '$WHERE'..."
+    cd $TARGET_DIR
+    source "$BE_DIR/$VENV_BE_NAME/bin/activate"
+    set -o allexport && source ./configs/envs/local.env && set +o allexport
+    flask run --port=8082 --without-threads
+}
+
+start-fe-for-ui-tests() {
+    start-fe-for-ui-tests-usage() { echo "usage: start-fe-for-ui-tests-usage [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
+    local WHERE=""
+    local TARGET_DIR="."
+    if [ "$1" ]; then
+        WHERE="$1"
+    else
+        WHERE=$(git branch --show-current)
+    fi
+    if [ -z "$WHERE" ]; then
+        estart-fe-for-ui-tests-usage
+        return;
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$FE_DIR/$WHERE"
+    fi
+    echo "Starting 'fe-ui-tests' at '$WHERE'..."
+    cdnvm $TARGET_DIR
+    npm run build:production -- --config=e2e && npm run serve -- --port=8081
+}
+
+start-fe() {
+    start-fe-usage() { echo "usage: start-fe [branch/worktree]
+    Branch is required, if not in project dirs." 1>&2;
+    }
+    local WHERE=""
+    local TARGET_DIR="."
+    if [ "$1" ]; then
+        WHERE="$1"
+    else
+        WHERE=$(git branch --show-current)
+    fi
+    if [ -z "$WHERE" ]; then
+        start-fe-usage
+        return;
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$FE_DIR/$WHERE"
+    fi
+    echo "Starting 'fe' at '$WHERE'..."
+    cdnvm $TARGET_DIR
+    npm run dev
+}
+
+start-soa() {
+    start-soa-usage() { echo "usage: start-soa [-b <branch/worktree>] [-c <config-file>]
+    Branch is required, if not in project dirs." 1>&2;
+    }
+    local OPTIND # (see https://stackoverflow.com/questions/16654607/using-getopts-inside-a-bash-function)
+
+    local WHERE=$(git branch --show-current)
+    local TARGET_DIR="."
+    local CONFIG_FILE="./configs/envs/local.env"
+
+    while getopts "b:c:" o; do
+        case "${o}" in
+            b)
+                WHERE="${OPTARG}"
+                ;;
+            c)
+                CONFIG_FILE="${OPTARG}"
+                ;;
+            h)
+                start-soa-usage
+                return;
+                ;;
+            *)
+                start-soa-usage
+                return;
+                ;;
+        esac
+    done
+    shift $((OPTIND-1))
+
+    if [ -z "$WHERE" ]; then
+        start-soa-usage
+        return;
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$SOA_DIR/$WHERE"
+    fi
+
+    echo "Starting 'soa'"
+    echo "WHERE='$WHERE'"
+    echo "CONFIG_FILE='$CONFIG_FILE'"
+    cdnvm $TARGET_DIR
+    source "$SOA_DIR/$VENV_SOA_NAME/bin/activate"
+    set -o allexport && source $CONFIG_FILE && set +o allexport
+    cd src
+    flask run --port=9090 --without-threads
+}
+
+start-soa-db-reset() {
+    start-soa-db-reset-usage() { echo "usage: start-soa-db-reset [-b <branch/worktree>] [-c <config-file>]
+    Branch is required, if not in project dirs." 1>&2;
+    }
+    local OPTIND # (see https://stackoverflow.com/questions/16654607/using-getopts-inside-a-bash-function)
+
+    local WHERE=$(git branch --show-current)
+    local TARGET_DIR="."
+    local CONFIG_FILE="./configs/envs/local.env"
+    local DB_NAME="ggrcdev"
+
+    while getopts "b:c:h" o; do
+        case "${o}" in
+            b)
+                WHERE="${OPTARG}"
+                ;;
+            c)
+                CONFIG_FILE="${OPTARG}"
+                ;;
+            h)
+                start-soa-db-reset-usage
+                return;
+                ;;
+            *)
+                start-soa-db-reset-usage
+                return;
+                ;;
+        esac
+    done
+    shift $((OPTIND-1))
+
+    if [ -z "$WHERE" ]; then
+        start-soa-db-reset-usage
+        return;
+    elif [[ $WHERE != "." ]]; then
+        TARGET_DIR="$SOA_DIR/$WHERE"
+    fi
+
+    while IFS='=' read -a line
+    do
+        if [[ "${line[0]}" == "GGRC_DB_NAME" ]]; then
+            DB_NAME="${line[1]}"
+            break
+        fi
+    done < "$CONFIG_FILE"
+
+    echo "Starting 'soa db reset'..."
+    echo "WHERE='$WHERE'"
+    echo "CONFIG_FILE='$CONFIG_FILE'"
+    echo "DB_NAME='$DB_NAME'"
+    cdnvm "$TARGET_DIR"
+    source "$SOA_DIR/$VENV_SOA_NAME/bin/activate"
+    export PYTHONPATH="$PYTHONPATH:$TARGET_DIR/src"
+    set -o allexport && source $CONFIG_FILE && set +o allexport
+    ./bin/db_reset -d "$DB_NAME"
+}
+
+start-q2c() {
+    echo "Starting 'q2c'..."
+    cd "$PROJECTS_DIR/q2c"
+    source "./$VENV_Q2C_NAME/bin/activate"
+    ./bin/run_local.py
+}
+
+expand-alias() {
+    if [ -z "$1" ]; then
+        echo "Missing alias name!"
+        return
+    fi
+    alias "$@" | cut -d\' -f2
+}
+
+va() {
+    if [ $# -eq 0 ]; then
+        source "$VENV_NAME/bin/activate"
+        return
+    fi
+
+    case "$1" in
+        be)
+            va-be
+            ;;
+        mig | migration | migrations)
+            va-migrations
+            ;;
+        soa)
+            va-soa
+            ;;
+        q2c | nottifications)
+            source "$VENV_Q2C_NAME/bin/activate"
+            ;;
+        *)
+            echo "Unknown venv!"
+            ;;
+    esac
+}
+
+va-migrations(){
+    source "$MIGRATIONS_DIR/$VENV_MIG_NAME/bin/activate"
+}
+
+va-be(){
+    source "$BE_DIR/$VENV_BE_NAME/bin/activate"
+}
+
+va-soa(){
+    source "$SOA_DIR/$VENV_SOA_NAME/bin/activate"
+}
+
+makevenv(){
+    if [ "$1" ]; then
+        local venv_dst="$1"
+    else
+        local venv_dst="$VENV_NAME"
+    fi
+    python -m venv $venv_dst;
+    source "./$venv_dst/bin/activate";
+}
+
+parentdirname() {
+    echo "$(basename "$(dirname "$PWD")")"
+}
+
+projname() {
+    local PARENT_NAME="$(parentdirname)"
+
+    case "$PARENT_NAME" in
+        ggrc_be)
+            PARENT_NAME="be "
+            ;;
+        ggrc_fe)
+            PARENT_NAME="fe "
+            ;;
+        soa)
+            PARENT_NAME="$PARENT_NAME "
+            ;;
+        ggrc_migrations)
+            PARENT_NAME="mig "
+            ;;
+        *)
+            PARENT_NAME=""
+            ;;
+    esac
+    echo "$PARENT_NAME"
+}
+
+gcert() {
+  if [[ -n $TMUX ]]; then
+    eval $(tmux show-environment -s)
+  fi
+
+  command gcert "$@"
+}
+
+glogin() {
+  if [[ -n $TMUX ]]; then
+    eval $(tmux show-environment -s)
+  fi
+
+  command glogin "$@"
+}
+
+gcertstatus() {
+  if [[ -n $TMUX ]]; then
+    eval $(tmux show-environment -s)
+  fi
+
+  command gcertstatus "$@"
+}
+
+init() {
+    init-usage() { echo "usage: init <service=<soa/fe/mig/>>" 1>&2;}
+    if [ $# -eq 0 ]; then
+        init-usage
+        return
+    fi
+
+    case "$1" in
+        soa)
+            init-soa
+            ;;
+        fe)
+            init-fe
+            ;;
+        mig)
+            start-mig-db-init "$2"
+            ;;
+        *)
+            echo "Unknown service $1"
+            init-usage
+            ;;
+    esac
+}
+
+init-soa() {
+    # cd "$SOA_DIR"
+    nvm use 8
+    rm -rf node_modules
+    npm i --unsafe-perm
+    ./bin/build_assets
+    source "$SOA_DIR/$VENV_SOA_NAME/bin/activate"
+    set -o allexport && source ./configs/envs/local.env && set +o allexport
+    export PYTHONPATH="$PYTHONPATH:$(pwd)/src"
+}
+
+init-fe() {
+    # cd "$FE_DIR"
+    rm -rf node_modules
+    npm i bower -g
+    npm i
+}
+
+be-ls() {
+    cd "$BE_DIR"
+    wt-list "$@"
+    cd - >/dev/null;
+}
+
+soa-ls() {
+    cd "$SOA_DIR"
+    wt-list "$@"
+    cd - >/dev/null;
+}
+
+mig-ls() {
+    cd "$MIGRATIONS_DIR"
+    wt-list "$@"
+    cd - >/dev/null;
+}
+
+fe-ls() {
+    cd "$FE_DIR"
+    wt-list "$@"
+    cd - >/dev/null;
+}
+
+aliases() {
+    if [ "$1" ]; then
+        echo "$(cat $DOTFILES_DIR/aliases |
+                awk '/alias/ { st = index($0," ");print substr($0,st+1) }' |
+                awk -F'=' '{ print $1" : "$2 }' |
+                grep $1 )"
+    else
+        echo "$(cat $DOTFILES_DIR/aliases |
+                awk '/alias/ { st = index($0," ");print substr($0,st+1) }' |
+                awk -F'=' '{ print $1" : "$2 }' )"
+        
+    fi
+}
+
+grep-history() {
+    history | grep "$@"
+}
