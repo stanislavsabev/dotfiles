@@ -43,6 +43,7 @@ export VENV_DIR=".venv"
 export PROJ_DIR="$HOME/projects"
 export OPT_DIR="$HOME/opt"
 export DEVSETUP_DIR="$HOME/$OPT_DIR/devsetup"
+export CONFIG_DIR="$HOME/.config"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # ::endenv
@@ -84,7 +85,7 @@ eval "$(pyenv init --path)"
 # ::fish shell
 
 if [[ -z ${MYSHELL+x} ]]; then
-  export MYSHELL="bash"
+  export MYSHELL="fish"
 fi
 
 if [[ $MYSHELL == "fish" ]]; then
