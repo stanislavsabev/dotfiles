@@ -1,0 +1,556 @@
+{
+	"fx Function" : {
+		"prefix": "fxFunc",
+		"body": [
+			"\t''' $4",
+			"\t'''  Params:",
+			"\t'''   $2:",
+			"\tPublic Function ${1:FuncName}($2) As ${3:Variant}",
+			"Attribute $1.VB_Description = \"${4:Doc string}  \\nParams:\\n $2\"",
+			"\t\tIf fx_ErrNum_ <> fxErrNone Or fx_ErrMsg_ <> vbNullString Then fx_ResetErr_",
+			"\t\tConst fx_PROC_ = \"$1\"",
+			"\t\t$0",
+			"\n\t\t$1 = ",
+			"\tEnd Function"
+		],
+		"description": "Creates fx Function with Attribute"
+	},
+	"fx Function with Error Handling" : {
+		"prefix": "fxFuncErr",
+		"body": [
+			"\t''' $4",
+			"\t'''  Params:",
+			"\t'''   $2:",
+			"\tPublic Function ${1:FuncName}($2) As ${3:Variant}",
+			"Attribute $1.VB_Description = \"${4:Doc string}  \\nParams:\\n $2\"",
+			"\t\tIf fx_ErrNum_ <> fxErrNone Or fx_ErrMsg_ <> vbNullString Then fx_ResetErr_",
+			"\t\tConst fx_PROC_ = \"$1\"",
+			"\t\t",
+			"\t\tOn Error GoTo failed",
+			"\t\t$0",
+			"\t\t$1 = ",
+			"\t\tOn Error GoTo 0",
+			"\n\tExit Function",
+			"failed:",
+		    "\t\tIf fx_ErrNum_ = fxErrNone Then Call fx_SetErr_(fxErrSystem, fx_PROC_, Err.Description)",
+			"\t\tOn Error GoTo 0",
+			"\n\tEnd Function"
+		],
+		"description": "Creates fx Function with Error Handling"
+	},
+	"fx Sub" : {
+		"prefix": "fxSub",
+		"body": [
+			"\t''' $3",
+			"\t'''  Params:",
+			"\t'''   $2:",			
+			"\tPublic Sub ${1:FuncName}($2)",
+			"Attribute $1.VB_Description = \"${3:Doc string}  \\nParams:\\n $2\"",
+			"\t\tIf fx_ErrNum_ <> fxErrNone Or fx_ErrMsg_ <> vbNullString Then fx_ResetErr_",
+			"\t\tConst fx_PROC_ = \"$1\"",
+			"\t\t$0",
+			"\n\tEnd Sub"
+		],
+		"description": "Creates fx Sub with Attribute"
+	},
+	"fx Sub with Error Handling" : {
+		"prefix": "fxSubErr",
+		"body": [
+			"\t''' $3",
+			"\t'''  Params:",
+			"\t'''   $2:",			
+			"\tPublic Sub ${1:FuncName}($2)",
+			"Attribute $1.VB_Description = \"${3:Doc string}  \\nParams:\\n $2\"",
+			"\t\tIf fx_ErrNum_ <> fxErrNone Or fx_ErrMsg_ <> vbNullString Then fx_ResetErr_",
+			"\t\tConst fx_PROC_ = \"$1\"",
+			"\t\tOn Error GoTo failed",
+			"\t\t$0",
+			"\t\tOn Error GoTo 0",
+			"\n\tExit Sub",
+			"failed:",
+            "\t\tIf fx_ErrNum_ = fxErrNone Then Call fx_SetErr_(fxErrSystem, fx_PROC_, Err.Description)",
+			"\t\tOn Error GoTo 0",
+			"\n\tEnd Sub"
+		],
+		"description": "Creates fx Sub with Error Handling"
+	},	
+	"On Error Resume Next" : {
+		"prefix": "OnErrorResume",
+		"body": [
+			"On Error Resume Next",
+			"$0",
+			"On Error GoTo 0"
+		]
+	},	
+	"On Error GoTo failed" : {
+		"prefix": "OnErrorGoToFail",
+		"body": [
+			"On Error GoTo Failed$0"
+		]
+	},	
+	"On Error GoTo failed, Exit Sub/Function" : {
+		"prefix": "OnErrorGoToFail_Exit_SubFunc",
+		"body": [
+			"On Error GoTo Failed",
+			"$0",
+			"Exit ${1|Sub,Function|Property}",
+			"Failed:\n",
+			"' Your code here...",
+			"End $1"
+		]
+	},
+	"For Loop" : {
+		"prefix": "fori",
+		"body": [
+			"For ${1:i} = ${2:0} To ${3:iCount}",
+			"\t$0",
+			"Next $1"
+		]
+	},
+	"Bounds For Loop" : {
+		"prefix": "for_LBound",
+		"body": [
+			"For ${1:i} = LBound(${2:Arr}) To UBound($2)",
+			"\t$0",
+			"Next $1"
+		]
+	},
+	"If / End If" : {
+		"prefix": "ifEnd",
+		"body": [
+			"If ${1:Expression} Then",
+			"\t$0",
+			"End If"
+		]
+	},
+	"If / Then" : {
+		"prefix": "IfThen",
+		"body": [
+			"If ${1:Expression} Then $0"
+		]
+	},
+	"If Then EndIf" : {
+		"prefix": "IfThen_EndIf",
+		"body": [
+			"If ${1:Expression} Then",
+			"\t$0",
+			"End If"
+		]
+	},
+	"Else - EndIf" : {
+		"prefix": "Else_EndIf",
+		"body": [
+			"Else",
+			"\t$0",
+			"End If"
+		]
+	},
+	"If Is Nothing Then End If" : {
+		"prefix": "if_IsNothing_Then_EndIf",
+		"body": [
+			"If ${1:Object} Is Nothing Then",
+			"\t$0",
+			"End If"	
+		]
+	},
+	"If Is Nothing Then Else" : {
+		"prefix": "if_IsNothing_Then_Else",
+		"body": [
+			"If ${1:Object} Is Nothing Then",
+			"\t$0",
+			"Else",
+			"\t",
+			"End If"	
+		]
+	},
+	"If Is Nothing Then" : {
+		"prefix": "if_IsNothing_Then",
+		"body": [
+			"If ${1:Object} Is Nothing Then"
+		]
+	},
+	"With / End With" : {
+		"prefix": "With_EndWith",
+		"body": [
+			"With ${1:Object}",
+			"\t$0",
+			"End With"
+		]
+	},
+	"End If" : {
+		"prefix": "EndIf",
+		"body": [
+			"End If$0"
+		]
+	},
+	"Else EndIf" : {
+		"prefix": "Else_EndIf",
+		"body": [
+			"Else",
+			"\t$0",
+			"End If"
+		]
+	},
+	"Then Else EndIf" : {
+		"prefix": "Then_Else_EndIf",
+		"body": [
+			"Then",
+			"Else",
+			"\t$0",
+			"End If"
+		]
+	},
+	"End Sub" : {
+		"prefix": "End_Sub",
+		"body": [
+			"End Sub$0"
+		]
+	},
+	"End Function" : {
+		"prefix": "End_Function",
+		"body": [
+			"End Function$0"
+		]
+	},
+	"Sub" : {
+		"prefix": "sub",
+		"body": [
+			"Sub ${2:SubName}($3)\n",
+			"\t$0\n",
+			"End Sub"
+		]
+	},
+	"Exit Sub" : {
+		"prefix": "Exit_Sub",
+		"body": "Exit Sub$0"
+	},
+	"Exit Function" : {
+		"prefix": "Exit_Function",
+		"body": "Exit Function$0"
+	},
+	"Is Nothing" : {
+		"prefix": "IsNothing",
+		"body": [
+			"Is Nothing $0"
+		]
+	},
+	"Set Nothing" : {
+		"prefix": "SetNothing",
+		"body": [
+			"Set ${1:Obj} = Nothing$0"
+		]
+	},
+	"If / Else" : {
+		"prefix": "IfElse",
+		"body": [
+			"If ${1:Expression} Then",
+			"\t$0",
+			"Else",
+			"\t",
+			"End If"
+		]
+	},
+	"Sub CleanExit":{
+		"prefix": "CleanExit_Sub",
+		"body":[
+			"Sub ${1:SubName}($2)",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo CleanExit",
+			"",
+			"\t$0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"End Sub"
+		]
+	},
+	"Function CleanExit":{
+		"prefix": "CleanExit_Func",
+		"body":[
+			"Function ${1:FunctionName}($2) As ${3:Variant}",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo CleanExit",
+			"",
+			"\t$1 = $0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"End Function"
+		]
+	},
+	"Function CleanExit Object":{
+		"prefix": "CleanExit_Func_Object",
+		"body":[
+			"Function ${1:FunctionName}($2) As ${3:Object}",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo CleanExit",
+			"\tDim ${4:Result} As $3",
+			"\tSet $4 = New $3",
+			"\t",
+			"\tSet $1 = $4$0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"End Function"
+		]
+	},
+	"Sub CleanFail":{
+		"prefix": "CleanFail_Sub",
+		"body":[
+			"Sub ${1:SubName}($2)",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo CleanFail",
+			"",
+			"\t$0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"Exit Sub",
+			"CleanFail:",
+			"\tFxCallStack.${9|ShowExcInfo,PrintExcInfo,PrintExcInfoAndClear,ShowExcInfoAndClear|} Err.Number, Err.Description",
+			"\tResume CleanExit",
+			"End Sub"
+		]
+	},
+	"Function CleanFail":{
+		"prefix": "CleanFail_Func",
+		"body":[
+			"Function ${1:FunctionName}($2) As ${3:Variant}",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo CleanFail",
+			"",
+			"\t$1 = $0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"Exit Function",
+			"CleanFail:",
+			"\tFxCallStack.${9|ShowExcInfo,PrintExcInfo,PrintExcInfoAndClear,ShowExcInfoAndClear|} Err.Number, Err.Description",
+			"\tResume CleanExit",
+			"End Function"
+		]
+	},
+	"Function CleanFail Object":{
+		"prefix": "CleanFail_Func_Object",
+		"body":[
+			"Function ${1:FunctionName}($2) As ${3:Object}",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo CleanFail",
+			"\tDim ${4:Result} As $3",
+			"\tSet $4 = New $3",
+			"\t",
+			"\tSet $1 = $4$0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"Exit Function",
+			"CleanFail:",
+			"\tFxCallStack.${9|ShowExcInfo,PrintExcInfo,PrintExcInfoAndClear,ShowExcInfoAndClear|} Err.Number, Err.Description",
+			"\tResume CleanExit",
+			"End Function"
+		]
+	},
+	"Sub UnhandledFail":{
+		"prefix": "UnhandledFail_Sub",
+		"body":[
+			"Sub ${1:SubName}($2)",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo UnhandledFail",
+			"",
+			"\t$0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"Exit Sub",
+			"UnhandledFail:",
+			"\tErr.Raise Err.Number, , Err.Description",
+			"End Sub"
+		]
+	},
+	"Function UnhandledFail":{
+		"prefix": "UnhandledFail_Func",
+		"body":[
+			"Function ${1:FunctionName}($2) As ${3:Variant}",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo UnhandledFail",
+			"",
+			"\t$1 = $0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"Exit Function",
+			"UnhandledFail:",
+			"\tErr.Raise Err.Number, , Err.Description",
+			"End Function"
+		]
+	},
+	"Function UnhandledFail Object":{
+		"prefix": "UnhandledFail_Func_Object",
+		"body":[
+			"Function ${1:FunctionName}($2) As ${3:Object}",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo UnhandledFail",
+			"\tDim ${4:Result} As $3",
+			"\tSet $4 = New $3",
+			"\t",
+			"CleanExit:",
+			"\tSet $1 = $4$0",
+			"\tFxCallStack.Pop",
+			"Exit Function",
+			"UnhandledFail:",
+			"\tErr.Raise Err.Number, , Err.Description",
+			"End Function"
+		]
+	},
+	"Sub HandledFail":{
+		"prefix": "HandledFail_Sub",
+		"body":[
+			"Sub ${1:SubName}($2)",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo HandledFail",
+			"",
+			"\t$0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"Exit Sub",
+			"HandledFail:",
+			"\tSelect Case Err.Number",
+			"\t\t'// Handle error locally, sync the call stack and resume",
+			"\t\tCase ${9:ErrNumber}",
+			"\t\t\tFxCallStack.Sync ModuleName, \"$1\"",
+			"\t\t\t'// Your error handling code here...\n",
+			"\t\t\tResume CleanExit",
+			"\t\tCase Else:'// Bubble-up every other error",
+			"\t\t\tErr.Raise Err.Number, , Err.Description",
+			"\tEnd Select",
+			"End Sub"
+		]
+	},
+	"Function HandledFail":{
+		"prefix": "HandledFail_Func",
+		"body":[
+			"Function ${1:FunctionName}($2) As ${3:Variant}",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo HandledFail",
+			"",
+			"\t$1 = $0",
+			"CleanExit:",
+			"\tFxCallStack.Pop",
+			"Exit Function",
+			"HandledFail:",
+			"\tSelect Case Err.Number",
+			"\t\t'// Handle error locally, sync the call stack and resume",
+			"\t\tCase ${9:ErrNumber}",
+			"\t\t\tFxCallStack.Sync ModuleName, \"$1\"",
+			"\t\t\t'// Your error handling code here...\n",
+			"\t\t\tResume CleanExit",
+			"\t\tCase Else:'// Bubble-up every other error",
+			"\t\t\tErr.Raise Err.Number, , Err.Description",
+			"\tEnd Select",
+			"End Function"
+		]
+	},
+	"Function HandledFail Object":{
+		"prefix": "HandledFail_Func_Object",
+		"body":[
+			"Function ${1:FunctionName}($2) As ${3:Object}",
+			"\tConst ProcName = \"$1\"",
+			"\tFxCallStack.Push ModuleName, ProcName",
+			"\tOn Error GoTo HandledFail",
+			"\tDim ${4:Result} As $3",
+			"\tSet $4 = New $3",
+			"\t",
+			"CleanExit:",
+			"\tSet $1 = $4$0",
+			"\tFxCallStack.Pop",
+			"Exit Function",
+			"HandledFail:",
+			"\tSelect Case Err.Number",
+			"\t\t'// Handle error locally, sync the call stack and resume",
+			"\t\tCase ${9:ErrNumber}",
+			"\t\t\tFxCallStack.Sync ModuleName, \"$1\"",
+			"\t\t\t'// Your error handling code here...\n",
+			"\t\t\tResume CleanExit",
+			"\t\tCase Else:'// Bubble-up every other error",
+			"\t\t\tErr.Raise Err.Number, , Err.Description",
+			"\tEnd Select",
+			"End Function"
+		]
+	},
+	"New_Module": {
+		"prefix": "New_Module",
+		"body": [
+			"Attribute VB_Name = \"${1:ModuleName}\"",
+			"Option Explicit",
+			"Private Const ModuleName = \"$1\"$0"
+		]
+	},
+	"New_Class": {
+		"prefix": "New_Class",
+		"body": [
+			"VERSION 1.0 CLASS",
+			"BEGIN",
+			"  MultiUse = -1 ' True",
+			"END",
+			"Attribute VB_Name = \"${1:ModuleName}\"",
+			"Attribute VB_GlobalNameSpace = False",
+			"Attribute VB_Creatable = False",
+			"Attribute VB_PredeclaredId = False",
+			"Attribute VB_Exposed = ${4|False,True|}",
+			"Option Explicit",
+			"Private Const ModuleName = \"$1\"$0"
+		]
+	},
+	"Err.Raise": {
+		"prefix": "Err.Raise",
+		"body" :[
+			"Err.Raise ${3:ErrNumber}, , ${5:ErrDescription}"
+		]
+	},
+	"CreateObject": {
+		"prefix": "CreateObject",
+		"body" :[
+			"CreateObject(${1|\"Scripting.Dictionary\",\"Scripting.FileSystemObject\"|})$0"
+		]
+	},
+	"ParamArray" : {
+		"prefix": "ParamArray",
+		"body" : "ParamArray ${1:Arg1_Arg2__ArgN}() As Variant$0"
+	},
+	"TThis" : {
+		"prefix": "TThis",
+		"body" : [
+			"Private Type TThis",
+			"",
+			"End Type",	
+			"Dim this As TThis$0"
+		]
+	},
+	"Dim Range" : {
+		"prefix": "DimRng",
+		"body" : "Dim ${1:Rng} As Range"
+	},
+	"Dim Worksheet" : {
+		"prefix": "DimWks",
+		"body" : "Dim ${1:Wks} As Worksheet"
+	},
+	"UBound" : {
+		"prefix": "UBound",
+		"body" : "UBound(${1:Arr})$0"
+	},
+	"LBound" : {
+		"prefix": "LBound",
+		"body" : "LBound(${1:Arr})$0"
+	},
+	"IsMissing" : {
+		"prefix": "IsMissing",
+		"body" : "IsMissing(${1:Val})$0"
+	},
+	"IsObject" : {
+		"prefix": "IsObject",
+		"body" : "IsObject(${1:Obj})$0"
+	}
+}
