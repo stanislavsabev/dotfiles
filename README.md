@@ -1,3 +1,3 @@
 # My dotfiles
 
-Checkout the branch for each os
+Checkout folders for each os
