@@ -33,7 +33,7 @@ function sync_config --description "sync_config NAMES.. [--back]"
 
             case fish
                 set SRC "$CONFIG_DIR/fish/"
-                set DEST "$DOTFILES_DIR/.config/fish"
+                set DEST "$DOTFILES_DIR/.config/fish/"
                 set FLAGS --exclude ".git*"
             case '*'
                 echo "sync_config: Unkown name: $name"
@@ -44,7 +44,10 @@ function sync_config --description "sync_config NAMES.. [--back]"
             set TMP $SRC
             set SRC $DEST
             set DEST $TMP
+        else
+            set FLAGS --delete $FLAGS
         end
     end
+    echo command rsync -rvh $FLAGS "$SRC" "$DEST"
     command rsync -rvh $FLAGS "$SRC" "$DEST"
 end
