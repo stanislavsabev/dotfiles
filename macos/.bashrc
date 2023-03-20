@@ -2,7 +2,7 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-export DOTFILES_DIR="$HOME/.dotfiles"
+export DOTFILES_DIR="$HOME/.dotfiles/macos"
 
 for file in $DOTFILES_DIR/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
