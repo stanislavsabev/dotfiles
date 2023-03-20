@@ -51,7 +51,7 @@ function sync_config --description "sync_config NAMES.. [--back]"
     end
 
     if set -ql _flag_echo
-        echo command rsync -avrh $FLAGS "$SRC/" "$DEST"
+        echo COMMAND: rsync -avrh $FLAGS "$SRC/" "$DEST"
     end
     command rsync -avrh $FLAGS "$SRC/" "$DEST"
 end
