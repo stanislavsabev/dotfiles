@@ -20,7 +20,7 @@
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.inheritEnv": false,
     "markdown.preview.fontSize": 14,
-    "workbench.colorTheme": "Dracula Soft",
+    "workbench.colorTheme": "Dracula",
     "editor.semanticTokenColorCustomizations": {
         "[azure]": {
             "enabled": true
