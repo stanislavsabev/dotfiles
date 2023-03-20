@@ -8,7 +8,7 @@ function sync_config --description "sync_config NAMES.. [--back]"
     -h --help   displays this message
     "
 
-    argparse 'h/help' 'b/back' -- $argv
+    argparse 'h/help' 'b/back' 'p/echo' -- $argv
     set -l last_status $status
     set -l argc (count $argv)
 
@@ -49,6 +49,9 @@ function sync_config --description "sync_config NAMES.. [--back]"
             set FLAGS --checksum --delete $FLAGS # delete files removed form SRC
         end
     end
-    echo command rsync -rvh $FLAGS "$SRC/" "$DEST"
-    command rsync -rh $FLAGS "$SRC/" "$DEST"
+
+    if set -ql _flag_echo
+        echo command rsync -avrh $FLAGS "$SRC/" "$DEST"
+    end
+    command rsync -avrh $FLAGS "$SRC/" "$DEST"
 end
