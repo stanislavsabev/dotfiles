@@ -1,5 +1,6 @@
 set -gx EDITOR code
 set -gx DOTFILES_DIR "$HOME/.dotfiles/macos"
+set -gx CONFIG_DIR "$HOME/.config"
 
 # Util
 set -gx SCRIPTS_DIR "$DOTFILES_DIR/scripts"

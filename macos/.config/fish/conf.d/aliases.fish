@@ -56,17 +56,8 @@ alias expandalias="expand-alias"
 alias validate-commit-msg="verify-commit-msg"
 
 # :SCRIPTS EDITING
-alias ed-services="$EDITOR $DOTFILES_DIR/services"
-alias ed-aliases="$EDITOR $DOTFILES_DIR/aliases"
-alias ed-functions="$EDITOR $DOTFILES_DIR/functions"
-alias ed-envs="$EDITOR $DOTFILES_DIR/envs"
-alias ed-paths="$EDITOR $DOTFILES_DIR/paths"
-alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR/"
-alias ed-openscripts="$EDITOR ~/bin"
-alias ed-scripts="$EDITOR ~/bin"
-alias ed-bashprofile="$EDITOR $DOTFILES_DIR/.bash_profile"
-alias ed-bashrc="$EDITOR $DOTFILES_DIR/.bashrc"
-alias ed-gitconfig="$EDITOR $DOTFILES_DIR/gitconfig"
+alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR/.."
+alias ed-fish="$EDITOR -n $CONFIG_DIR/fish"
 
 # :PROJECTS EDITING
 alias ed-be="$EDITOR -n $BE_DIR"

@@ -3,7 +3,13 @@ set -U fish_greeting
 # ::env
 set -gx HISTIGNORE " *"
 set -gx HISTCONTROL ignoreboth:erasedups
+set -gx COLORTERM truecolor
 
+# Title options
+set -g theme_title_display_process yes
+set -g theme_title_display_path yes
+set -g theme_title_display_user yes
+set -g theme_title_use_abbreviated_path yes
 
 
 if status is-interactive
