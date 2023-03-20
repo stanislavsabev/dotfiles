@@ -9,7 +9,7 @@ function sync_config --description "sync_config NAMES.. [--back]"
     "
 
     argparse 'h/help' 'b/back' -- $argv
-    set -l last_status $status    
+    set -l last_status $status
     set -l argc (count $argv)
 
     if set -ql _flag_help
@@ -27,13 +27,13 @@ function sync_config --description "sync_config NAMES.. [--back]"
     for name in $names
         switch $name
             case vscode
-                set SRC "$HOME/Library/Application Support/Code/User/"
-                set DEST "$DOTFILES_DIR/.config/Code/User/"
+                set SRC "$HOME/Library/Application Support/Code/User"
+                set DEST "$DOTFILES_DIR/.config/Code/User"
                 set FLAGS --include="snippets/" --include "*.json" --include "*.code-snippets" --exclude "*"
 
             case fish
-                set SRC "$CONFIG_DIR/fish/"
-                set DEST "$DOTFILES_DIR/.config/fish/"
+                set SRC "$CONFIG_DIR/fish"
+                set DEST "$DOTFILES_DIR/.config/fish"
                 set FLAGS --exclude ".git*"
             case '*'
                 echo "sync_config: Unkown name: $name"
@@ -44,10 +44,11 @@ function sync_config --description "sync_config NAMES.. [--back]"
             set TMP $SRC
             set SRC $DEST
             set DEST $TMP
+            set FLAGS --update $FLAGS # skip files that are newer on the reciever
         else
-            set FLAGS --delete $FLAGS
+            set FLAGS --checksum --delete $FLAGS # delete files removed form SRC
         end
     end
-    echo command rsync -rvh $FLAGS "$SRC" "$DEST"
-    command rsync -rvh $FLAGS "$SRC" "$DEST"
+    echo command rsync -rvh $FLAGS "$SRC/" "$DEST"
+    command rsync -rh $FLAGS "$SRC/" "$DEST"
 end
