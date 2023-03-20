@@ -83,10 +83,10 @@ alias soapythonpath='export PYTHONPATH="$PYTHONPATH:$(pwd)/src"'
 alias soaconfigfile="set -o allexport && source ./configs/envs/local.env && set +o allexport"
 
 # :GIT
-alias wt-ls="wt-list"
-alias wt-co="wt-checkout"
-alias wt-mv="wt-move"
-alias wt-rm="source $DOTFILES_DIR/bin/worktree_remove.sh"
+alias wt-ls="wtlist"
+alias wt-co="wtcheckout"
+alias wt-mv="wtmove"
+alias wt-rm="wtremove"
 
 alias add="git add --"
 alias addall="git add --all"
