@@ -27,3 +27,18 @@ if [ -f '~/google-cloud-sdk/completion.bash.inc' ]; then . '~/google-cloud-sdk/c
 
 
 cd "$PWD"
+
+# ::fish shell
+alias fish="export MYSHELL=fish; exec bash"
+
+if [[ -z ${MYSHELL+x} ]]; then
+  export MYSHELL="fish"
+fi
+
+if [[ $MYSHELL == "fish" ]]; then
+  if command -v fish &> /dev/null
+  then
+      exec fish
+  fi
+fi
+# ::endfish shell
