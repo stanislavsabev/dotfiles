@@ -1,0 +1,4 @@
+function sync_config -a what --back
+    
+    command rsync -rvh --exclude=".git*" "$CONFIG_DIR/fish/" "$DOTFILES_DIR/.config/fish/"
+end

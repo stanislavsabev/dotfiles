@@ -1,9 +1,12 @@
-# :NAVIGATION
 alias bash="set MYSHELL bash; exec bash"
 
+# :NAVIGATION
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias ..ls="cdup_ls"
+alias ..la="cdup_ls"
+alias cdla="cdls"
 
 # :SHORTHAND COMMANDS
 alias l="ls -CF"
@@ -50,7 +53,7 @@ alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false 
 # :MY SCRIPTS
 alias kport="source $DOTFILES_DIR/bin/kill_port.sh"
 alias service="source $DOTFILES_DIR/bin/start_service.sh"
-alias grephist="grep-history"
+alias grephist="grep_history"
 alias rebase-mig="python $SCRIPTS_DIR/rebase.py"
 alias expandalias="expand-alias"
 alias validate-commit-msg="verify-commit-msg"
