@@ -81,8 +81,8 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 # :Misc
 alias brew='env PATH="($PATH//$(pyenv root)\/shims:/)" brew'
 
-alias soapythonpath='export PYTHONPATH="$PYTHONPATH:$(pwd)/src"'
-alias soaconfigfile="set -o allexport && source ./configs/envs/local.env && set +o allexport"
+alias soapythonpath='set -gx PYTHONPATH $PYTHONPATH $(pwd)/src'
+alias sourcesoacfg="envsource ./configs/envs/local.env"
 
 # :GIT
 alias wt-ls="wtlist"

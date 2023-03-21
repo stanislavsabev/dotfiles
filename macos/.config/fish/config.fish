@@ -4,6 +4,7 @@ set -U fish_greeting
 set -gx HISTIGNORE " *"
 set -gx HISTCONTROL ignoreboth:erasedups
 set -gx COLORTERM truecolor
+# ::endenv
 
 # Title options
 set -g theme_title_display_process yes
@@ -24,3 +25,10 @@ if status is-interactive
     set -U file_not_executable 126
     set -U function_builtin_or_command_not_located 127
 end
+
+# ::path
+fish_add_path --global --prepend $HOME/bin:$PATH
+fish_add_path --global --prepend /usr/local/mysql/bin
+fish_add_path --global --prepend /usr/local/bin:/usr/local/sbin
+fish_add_path --global --prepend $DOTFILES_DIR/bin
+# ::endpath

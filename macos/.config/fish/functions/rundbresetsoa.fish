@@ -34,7 +34,7 @@ function rundbresetsoa -a BRANCH CONFIG --description "Reset SOA database"
     end
 
     va soa
-    set -gx PYTHONPATH $PYTHONPATH "$TARGET_DIR/src"
+    set -gx PYTHONPATH $PYTHONPATH $TARGET_DIR/src
     envsource $CONFIG_FILE
     set -gx DB_NAME $GGRC_DB_NAME
 
@@ -42,6 +42,7 @@ function rundbresetsoa -a BRANCH CONFIG --description "Reset SOA database"
     echo "at:  $TARGET_DIR"
     echo "DB: $DB_NAME"
     echo "CONFIG: $CONFIG_FILE"
-    echo bash -c './bin/db_reset.sh "$@"' dummy -d $DB_NAME
-    # bash -c './bin/db_reset.sh "$@"' dummy "-d" "$DB_NAME"
+
+    echo bash -c './bin/db_reset "$@"' dummy -d $DB_NAME
+    command bash -c './bin/db_reset "$@"' dummy -d $DB_NAME
 end

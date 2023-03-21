@@ -24,5 +24,5 @@ function rundbresetbe -a BRANCH --description "Reset BE database"
     echo "Reseting BE database..."
     echo "at:  $TARGET_DIR"
     #TODO: echo "DB: $DB_NAME"
-    bash -c './scripts/db_init.sh "$@"' dummy
+    command bash -c './scripts/db_init.sh "$@"' dummy
 end

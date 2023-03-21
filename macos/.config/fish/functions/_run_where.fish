@@ -11,15 +11,11 @@ function _run_where -a target --description "Helper for run[...] functions"
 
     if test "$WHERE" = "."
         set WHERE (git branch --show-current 2> /dev/null )
-    else
-        set WHERE "$SERVICE_DIR/$WHERE"
+        if test -z "$WHERE"
+            echo "error: failed to match branch/worktree"
+            return $no_matches_found
+        end
     end
-
-    if test -z "$WHERE"
-        echo "error: failed to match branch/worktree"
-        return $no_matches_found
-    end
-    
-    echo "$WHERE"
+    echo "$SERVICE_DIR/$WHERE"
     return 0
 end
