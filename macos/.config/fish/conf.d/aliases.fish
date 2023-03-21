@@ -28,6 +28,7 @@ alias egrep="egrep --color=auto"
 alias dow="cd ~/Downloads"
 alias dtop="cd ~/Desktop"
 alias doc="cd ~/Documents"
+alias cfg="cd ~/.config"
 alias home="cd"
 
 alias p="cd $PROJECTS_DIR"
@@ -44,7 +45,6 @@ alias dev="cd $PROJECTS_DIR/dev"
 alias da="deactivate"
 alias pir="pip install -r"
 alias uppip="python -m pip install --upgrade pip"
-alias va-mig="va-migrations"
 
 # :SHOW/HIDE HIDDEN FILES
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"

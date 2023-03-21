@@ -1,6 +1,6 @@
 
-function va -a NAME --description "va [NAME]"
-    set -l _usage "usage: va [NAME]"
+function va -a NAME --description "va [NAME=.venv]"
+    set -l _usage "usage: va [NAME=.venv]"
     argparse h/help -- $argv
     set -l last_status $status
 
@@ -11,12 +11,27 @@ function va -a NAME --description "va [NAME]"
     end
 
     set -l argc (count $argv)
-    set -l vaname $VENV_DIR
+    set -l arg
     if test $argc -eq 0
-        set -l vaname $VENV_DIR
+        set arg $VENV_NAME
     else
-        set vaname $argv[1]
+        set arg "$argv[1]"
     end
-
-    source "./$vaname/bin/activate"
+    
+    set -l vaname
+    switch $arg
+        case "mig" "migrations"
+            set vaname "$MIGRATIONS_DIR/$VENV_MIG_NAME"
+        case "be"
+            set vaname "$BE_DIR/$VENV_BE_NAME"
+        case "soa" "auditor"
+            set vaname "$SOA_DIR/$VENV_SOA_NAME"
+        case "q2c"
+            set vaname "$Q2C_DIR/$VENV_Q2C_NAME"
+        case $VENV_NAME
+            set vaname $VENV_NAME
+        case '*'
+            set vaname $arg
+    end
+    source "$vaname/bin/activate.fish"
 end
