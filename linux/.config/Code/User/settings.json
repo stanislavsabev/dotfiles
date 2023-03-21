@@ -208,4 +208,5 @@
         "editor.formatOnType": true
     },
     "security.workspace.trust.untrustedFiles": "open",
+    "window.title": "${rootPath} ${separator} ${activeEditorShort}",
 }
