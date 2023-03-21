@@ -2,6 +2,21 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
+# ::fish shell
+alias fish="export MYSHELL=fish; exec bash"
+
+if [[ -z ${MYSHELL+x} ]]; then
+  export MYSHELL="fish"
+fi
+
+if [[ $MYSHELL == "fish" ]]; then
+  if command -v fish &> /dev/null
+  then
+      exec fish
+  fi
+fi
+# ::endfish shell
+
 export DOTFILES_DIR="$HOME/.dotfiles/macos"
 
 for file in $DOTFILES_DIR/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
@@ -27,18 +42,3 @@ if [ -f '~/google-cloud-sdk/completion.bash.inc' ]; then . '~/google-cloud-sdk/c
 
 
 cd "$PWD"
-
-# ::fish shell
-alias fish="export MYSHELL=fish; exec bash"
-
-if [[ -z ${MYSHELL+x} ]]; then
-  export MYSHELL="fish"
-fi
-
-if [[ $MYSHELL == "fish" ]]; then
-  if command -v fish &> /dev/null
-  then
-      exec fish
-  fi
-fi
-# ::endfish shell
