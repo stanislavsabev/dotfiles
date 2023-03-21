@@ -27,8 +27,9 @@ if status is-interactive
 end
 
 # ::path
-fish_add_path --global --prepend $HOME/bin:$PATH
+fish_add_path --global --prepend $HOME/bin
 fish_add_path --global --prepend /usr/local/mysql/bin
-fish_add_path --global --prepend /usr/local/bin:/usr/local/sbin
+fish_add_path --global --prepend /usr/local/bin
+fish_add_path --global --prepend /usr/local/sbin
 fish_add_path --global --prepend $DOTFILES_DIR/bin
 # ::endpath

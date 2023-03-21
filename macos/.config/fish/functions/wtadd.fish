@@ -7,7 +7,7 @@ function wtadd
 
     if set -ql _flag_help
         or test $last_status -ne 0
-        echo "usage: wt-add"
+        echo $_usage
         return $last_status
     end
 

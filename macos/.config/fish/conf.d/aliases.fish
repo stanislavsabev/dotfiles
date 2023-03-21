@@ -89,6 +89,7 @@ alias wt-ls="wtlist"
 alias wt-co="wtcheckout"
 alias wt-mv="wtmove"
 alias wt-rm="wtremove"
+alias wt-add="wtadd"
 
 alias add="git add --"
 alias addall="git add --all"
