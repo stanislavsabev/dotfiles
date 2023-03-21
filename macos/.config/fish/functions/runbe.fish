@@ -12,23 +12,14 @@ function runbe -a BRANCH --description "usage: runbe [BRANCH|WORKTREE]"
         return
     end
 
-    set -l WHERE
-    set -l TARGET_DIR "."
-    set -l argc (count $argv)
-    if test $argc -ne 0
-        set WHERE $argv[1]
-    else
-        set WHERE (git branch --show-current)
-    end
-    if test -z "$WHERE"
-        echo _usage
+    set -l TARGET_DIR (_run_where  $argv -t $MIGRATIONS_DIR)
+    if test $status -ne 0
+        echo $_usage
         return $no_matches_found
     end
-    if test $WHERE != "."
-        set TARGET_DIR "$BE_DIR/$WHERE"
-    end
 
-    echo "Starting 'be' at '$WHERE'..."
+    echo "Starting 'be'..."
+    echo "at:  $TARGET_DIR"
     cd $TARGET_DIR
     va be
     envsource ./configs/envs/local.env
