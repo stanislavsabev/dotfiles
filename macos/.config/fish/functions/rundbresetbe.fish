@@ -1,7 +1,7 @@
 
-function runmig -a BRANCH --description "Run BE migrations"
-    set -l _usage "usage: runmig [BRANCH|WORKTREE]
-    Run BE migrations
+function rundbresetbe -a BRANCH --description "Reset BE database"
+    set -l _usage "usage: rundbresetbe [BRANCH|WORKTREE]
+    Reset BE database
 
     BRANCH|WORKTREE     to run specific revision"
     argparse h/help -- $argv
@@ -18,11 +18,11 @@ function runmig -a BRANCH --description "Run BE migrations"
         echo $_usage
         return $no_matches_found
     end
-
-    echo "Starting MIGRATIONS..."
-    echo "at:  $TARGET_DIR"
     cd $TARGET_DIR
     va migrations
-    envsource ./configs/envs/local.env
-    command flask run --port=8088
+
+    echo "Reseting BE database..."
+    echo "at:  $TARGET_DIR"
+    #TODO: echo "DB: $DB_NAME"
+    bash -c './scripts/db_init.sh "$@"' dummy
 end

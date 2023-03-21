@@ -1,3 +1,5 @@
+source ~/.config/fish/conf.d/envs.fish
+
 alias bash="set MYSHELL bash; exec bash"
 
 # :NAVIGATION

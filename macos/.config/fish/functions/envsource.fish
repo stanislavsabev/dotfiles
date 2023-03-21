@@ -1,11 +1,11 @@
 
 function envsource -a verbose
-    set -l _usage "envsource: [--verbose] ENV_FILE
+    set -l _usage "envsource: ENV_FILE [--verbose]
     
     Replacement for the below from bash:
-    'set -o allexport && source ./configs/envs/local.env && set +o allexport'.
+    'set -o allexport && source ./configs/envs/local.env && set +o allexport'
 
-    -v --verbose    verbose, prints all key=value pairs.
+    -v --verbose    verbose, prints all key=value pairs
     "
     argparse h/help v/verbose -- $argv
     set -l last_status $status
@@ -27,7 +27,7 @@ function envsource -a verbose
         echo $_usage
         return
     end
-
+    
     for line in (cat $argv | grep -v '^#' | grep -v '^\s*$')
         set item (string split -m 1 '=' $line)
         set -gx $item[1] (string trim --chars=\'\" $item[2])

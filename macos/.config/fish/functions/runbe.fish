@@ -1,8 +1,9 @@
 
-function runbe -a BRANCH --description "usage: runbe [BRANCH|WORKTREE]"
-    set -l _usage "usage: runbe [BRANCH|WORKTREE] - runs ggrc_be
+function runbe -a BRANCH --description "Run BE"
+    set -l _usage "usage: runbe [BRANCH|WORKTREE]
+    Run BE
 
-    BRANCH|WORKTREE     Use to run specific revision."
+    BRANCH|WORKTREE     to run specific revision"
     argparse h/help -- $argv
     set -l last_status $status
 
@@ -12,13 +13,13 @@ function runbe -a BRANCH --description "usage: runbe [BRANCH|WORKTREE]"
         return
     end
 
-    set -l TARGET_DIR (_run_where  $argv -t $MIGRATIONS_DIR)
+    set -l TARGET_DIR (_run_where  $argv -t $BE_DIR)
     if test $status -ne 0
         echo $_usage
         return $no_matches_found
     end
 
-    echo "Starting 'be'..."
+    echo "Starting BE..."
     echo "at:  $TARGET_DIR"
     cd $TARGET_DIR
     va be

@@ -1,8 +1,9 @@
 
-function runfe -a BRANCH --description "usage: runfe [BRANCH|WORKTREE]"
-    set -l _usage "usage: runfe [BRANCH|WORKTREE] - runs ggrc_fe
+function runfe -a BRANCH --description "Run FE"
+    set -l _usage "usage: runfe [BRANCH|WORKTREE]
+    Run FE
 
-    BRANCH|WORKTREE     Use to run specific revision."
+    BRANCH|WORKTREE     to run specific revision"
     argparse h/help -- $argv
     set -l last_status $status
 
@@ -18,7 +19,7 @@ function runfe -a BRANCH --description "usage: runfe [BRANCH|WORKTREE]"
         return $no_matches_found
     end
 
-    echo "Starting 'fe'..."
+    echo "Starting FE..."
     echo "at:  $TARGET_DIR"
     cd $TARGET_DIR
     npm run dev

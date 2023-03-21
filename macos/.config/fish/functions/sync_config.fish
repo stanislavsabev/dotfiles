@@ -1,10 +1,10 @@
 function sync_config --description "sync_config NAMES.. [--back]"
-    set -l _usage "usage: sync_config --names NAMES=<name_1[,name_n]> [--back]
+    set -l _usage "usage: sync_config NAMES.. [--back]
 
     Syncs app's config files (SRC) to user's `.dotfiles` (DEST)
 
-    NAMES       config names <NAME [..NAME_N]>, valid names: fish, vscode
-    -b --back   copy backwards - from DEST to SRC
+    NAMES       NAME_1 ..NAME_N, valid configs names: fish, vscode
+    -b --back   reverse copy - from DEST to SRC
     -h --help   displays this message
     "
 
