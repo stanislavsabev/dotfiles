@@ -1,7 +1,8 @@
 function _wtremove_usage --description wt-rm_usage
-    echo "usage: wt-rm [NAMES...] [--force] [--grep [GREP_FLAGS] PATTERNS]
+    echo "usage: wt-rm [NAMES...] [-fd] [--grep [GREP_FLAGS] PATTERNS]
     
     --force     force removal, even if worktree is dirty or locked
+    --dry-run   print commands that would be executed
     --grep      use to match and remove multiple worktrees, ignores all previous args
     -h --help   displays this message
     "
@@ -26,6 +27,11 @@ function wtremove --description "wt-rm [NAMES...] [--force] [--grep [GREP_FLAGS]
     set -l FORCE
     if set -ql _flag_force
         set FORCE --force
+    end
+
+    set -l git_cmd git
+    if set -ql _flag_dry_run
+        set git_cmd echo "dry run:" $git_cmd
     end
 
     set -l NAMES $argv
@@ -59,7 +65,7 @@ function wtremove --description "wt-rm [NAMES...] [--force] [--grep [GREP_FLAGS]
 
     for name in $NAMES
         set name (string trim -r -c / $name)
-        command git worktree remove $name
-        command git branch -D $name
+        command $git_cmd worktree remove $name
+        command $git_cmd branch -D $name
     end
 end
