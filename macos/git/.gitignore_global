@@ -1,0 +1,14 @@
+.vscode/
+.ignore/
+.python-version
+.DS_Store
+
+.pytest_cache/
+__pycache__/
+
+venv/
+.venv/
+.vsoa/
+.vbe/
+.vq2c/
+.vmig/
