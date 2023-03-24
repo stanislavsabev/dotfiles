@@ -62,17 +62,17 @@ alias expandalias="expand-alias"
 alias validate-commit-msg="verify-commit-msg"
 
 # :SCRIPTS EDITING
-alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR/.."
-alias ed-fish="$EDITOR -n $CONFIG_DIR/fish"
+alias ed-dotfiles="edproj -n ed-dotfiles -p $DOTFILES_DIR/.."
+alias ed-fish="edproj -n ed-fish -p $__fish_config_dir"
 
 # :PROJECTS EDITING
-alias ed-be="$EDITOR -n $BE_DIR"
-alias ed-mig="$EDITOR -n $MIGRATIONS_DIR"
-alias ed-soa="$EDITOR -n $SOA_DIR"
-alias ed-sql="$EDITOR -n $PROJECTS_DIR/sql"
-alias ed-dev="$EDITOR -n $PROJECTS_DIR/dev"
-alias ed-pysand="$EDITOR -n $PROJECTS_DIR/pysandbox"
-alias ed-howto="$EDITOR -n $PROJECTS_DIR/howto"
+alias ed-be="edproj -n ed-be -p $BE_DIR"
+alias ed-mig="edproj -n ed-mig -p $MIGRATIONS_DIR"
+alias ed-soa="edproj -n ed-soa -p $SOA_DIR"
+alias ed-sql="edproj -n ed-sql -p $PROJECTS_DIR/sql"
+alias ed-dev="edproj -n ed-dev -p $PROJECTS_DIR/dev"
+alias ed-pysand="edproj -n ed-pysand -p $PROJECTS_DIR/pysandbox"
+alias ed-howto="edproj -n ed-howto -p $PROJECTS_DIR/howto"
 
 # :Chrono
 alias week='date +%V'
@@ -81,7 +81,7 @@ alias short-date="date +%Y-%m-%d"
 alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
 # :Misc
-alias brew='env PATH="($PATH//$(pyenv root)\/shims:/)" brew'
+alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 
 alias soa-pythonpath='set -gx PYTHONPATH $PYTHONPATH $(pwd)/src'
 alias soa-source-cfg="envsource ./configs/envs/local.env"
@@ -94,7 +94,7 @@ alias wt-mv="wtmove"
 alias wt-rm="wtremove"
 alias wt-add="wtadd"
 
-alias add="git add --"
+alias add="git add"
 alias addall="git add --all"
 alias push="git push"
 alias rebase="git rebase"

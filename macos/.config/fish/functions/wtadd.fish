@@ -1,14 +1,13 @@
 
 function wtadd
-    set -f _name "wt-add"
+    set -f _name wt-add
     set -l _usage "usage: $_name [-ix] [NEW_BRANCH] [PATH] COMMIT-ISH
     Add worktree-branch to current project.
     
     -i --init       Init FE part (applicable to SOA and FE)
     -x --ex         Extend. Copies helper directories from parent dir.
                         (.vscode/, ...)"
-    argparse -n $_name 'h/help' 'i/init' 'x/ex' -- $argv
-    or return
+    argparse -n $_name h/help i/init x/ex -- $argv
     set -l last_status $status
 
     if set -ql _flag_help
@@ -30,7 +29,7 @@ function wtadd
             echo "$_name: invalid arguments"
             echo $_usage
             return $invalid_arguments
-        end
+    end
     command git worktree add $argstr
 
     if set -ql _flag_init
