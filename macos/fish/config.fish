@@ -33,6 +33,11 @@ fish_add_path --global --prepend /usr/local/sbin
 fish_add_path --global --prepend $DOTFILES_DIR/bin
 # ::endpath
 
+# ::vscode
+string match -q "$TERM_PROGRAM" "vscode"
+and . '/Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration.fish'
+# ::endvscode
+
 # ::pyenv
 set -gx PYENV_ROOT "$HOME/.pyenv"
 fish_add_path --global --prepend "$PYENV_ROOT/bin"
@@ -41,8 +46,3 @@ if command -v pyenv 1>/dev/null 2>&1
   eval "$(pyenv init -)"
 end
 # ::endpyenv
-
-# ::vscode
-string match -q "$TERM_PROGRAM" "vscode"
-and . '/Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration.fish'
-# ::endvscode
