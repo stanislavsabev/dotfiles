@@ -66,5 +66,5 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
     if set -ql _flag_dry_run
         set -p _cmd echo 'dry-run:'
     end
-    echo command $_cmd -avrh $FLAGS "$SRC/" "$DEST"
+    command $_cmd -avrh $FLAGS "$SRC/" "$DEST"
 end
