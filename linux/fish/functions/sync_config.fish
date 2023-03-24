@@ -1,14 +1,15 @@
-function sync_config --description "sync_config NAMES.. [--back]"
-    set -l _usage "usage: sync_config --names NAMES=<name_1[,name_n]> [--back]
+function sync_config --description "Sync config files between dotfiles repo (SRC) and their location (DEST)"
+    set -l _usage "usage: sync_config [-rd] CONFIG_NAMES..
+    Sync config files between dotfiles repo (SRC) and their location (DEST)
 
-    Syncs app's config files (SRC) to user's `.dotfiles` (DEST)
-
-    NAMES       config names <NAME [..NAME_N]>, valid names: fish, vscode
-    -b --back   copy backwards - from DEST to SRC
-    -h --help   displays this message
+    CONFIG_NAMES    NAME_1 ..NAME_N, config names 
+                    valid names are: fish, bash, tmux, vscode, git
+    -r --reverse    reverse copy - from DEST to SRC
+    -h --help       displays this message
+    --dry-run       print commands that would be executed
     "
 
-    argparse 'h/help' 'b/back' 'p/echo' -- $argv
+    argparse 'h/help' 'r/reverse' 'dry-run' -- $argv
     set -l last_status $status
     set -l argc (count $argv)
 
@@ -19,28 +20,39 @@ function sync_config --description "sync_config NAMES.. [--back]"
         return $last_status
     end
 
-    set -l SRC
-    set -l DEST
-    set -l FLAGS
+    set -f SRC
+    set -f DEST
+    set -f FLAGS
     set names $argv
     
     for name in $names
         switch $name
-            case vscode
-                set SRC "$HOME/.config/Code/User"
-                set DEST "$DOTFILES_DIR/.config/Code/User"
-                set FLAGS --include="snippets/" --include "*.json" --include "*.code-snippets" --exclude "*"
-
+            
             case fish
                 set SRC "$CONFIG_DIR/fish"
-                set DEST "$DOTFILES_DIR/.config/fish"
+                set DEST "$DOTFILES_DIR/fish"
                 set FLAGS --exclude ".git*"
+            case bash
+                set SRC "$HOME"
+                set SRC "$DOTFILES_DIR/bash"
+                set FLAGS --include ".bashrc" --exclude "*"
+            case vscode
+                set SRC "$CONFIG_DIR/Code/User"
+                set DEST "$DOTFILES_DIR/vscode"
+                set FLAGS --include="snippets/" --include "*.json" --include "*.code-snippets" --exclude "*"
+            case git
+                set SRC $HOME
+                set DEST "$DOTFILES_DIR/git"
+                set FLAGS --include ".git*" --exclude "*"
+            case tmux
+                set SRC "$HOME/.tmux.conf"
+                set DEST "$DOTFILES_DIR/.tmux.conf"
             case '*'
                 echo "sync_config: Unkown name: $name"
                 return $invalid_arguments
         end
 
-        if set -ql _flag_back
+        if set -ql _flag_reverse
             set TMP $SRC
             set SRC $DEST
             set DEST $TMP
@@ -50,8 +62,9 @@ function sync_config --description "sync_config NAMES.. [--back]"
         end
     end
 
-    if set -ql _flag_echo
-        echo COMMAND: rsync -avrh $FLAGS "$SRC/" "$DEST"
+    set -l _cmd rsync
+    if set -ql _flag_dry_run
+        set -p _cmd echo 'dry-run:'
     end
-    command rsync -avrh $FLAGS "$SRC/" "$DEST"
+    echo command $_cmd -avrh $FLAGS "$SRC/" "$DEST"
 end
