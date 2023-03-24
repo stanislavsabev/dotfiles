@@ -1,6 +1,6 @@
 
-function va -a NAME --description "va [NAME]"
-    set -l _usage "usage: va [NAME]"
+function va -a NAME --description "va [VENV_PATH]"
+    set -l _usage "usage: va [VENV_PATH]"
     argparse h/help -- $argv
     set -l last_status $status
 
@@ -18,5 +18,5 @@ function va -a NAME --description "va [NAME]"
         set vaname $argv[1]
     end
 
-    source "./$vaname/bin/activate"
+    source "./$vaname/bin/activate.fish"
 end
