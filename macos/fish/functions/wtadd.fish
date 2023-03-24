@@ -43,7 +43,7 @@ function wtadd
         end
     end
 
-    if set -ql _flag_init
+    if set -ql _flag_ex
         vscode_add_sett
     end
 
