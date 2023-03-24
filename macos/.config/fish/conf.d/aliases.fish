@@ -42,6 +42,7 @@ alias fe="cd $FE_DIR"
 alias soa="cd $SOA_DIR"
 alias sql="cd $PROJECTS_DIR/sql"
 alias dev="cd $PROJECTS_DIR/dev"
+alias howto="cd $PROJECTS_DIR/howto"
 
 # :PYTHON
 alias da="deactivate"
@@ -70,7 +71,8 @@ alias ed-mig="$EDITOR -n $MIGRATIONS_DIR"
 alias ed-soa="$EDITOR -n $SOA_DIR"
 alias ed-sql="$EDITOR -n $PROJECTS_DIR/sql"
 alias ed-dev="$EDITOR -n $PROJECTS_DIR/dev"
-alias ed-pysand="$EDITOR $PROJECTS_DIR/pysandbox"
+alias ed-pysand="$EDITOR -n $PROJECTS_DIR/pysandbox"
+alias ed-howto="$EDITOR -n $PROJECTS_DIR/howto"
 
 # :Chrono
 alias week='date +%V'
@@ -81,8 +83,9 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 # :Misc
 alias brew='env PATH="($PATH//$(pyenv root)\/shims:/)" brew'
 
-alias soapythonpath='set -gx PYTHONPATH $PYTHONPATH $(pwd)/src'
-alias sourcesoacfg="envsource ./configs/envs/local.env"
+alias soa-pythonpath='set -gx PYTHONPATH $PYTHONPATH $(pwd)/src'
+alias soa-source-cfg="envsource ./configs/envs/local.env"
+alias soa-source-all="soa-pythonpath; soa-source-cfg"
 
 # :GIT
 alias wt-ls="wtlist"
