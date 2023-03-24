@@ -1,13 +1,15 @@
 
 function wtadd
     set -f _name wt-add
-    set -l _usage "usage: $_name [-ix] [NEW_BRANCH] [PATH] COMMIT-ISH
+    set -l _usage "usage: $_name [-ix | -d] [NEW_BRANCH] [PATH] COMMIT-ISH
     Add worktree-branch to current project.
     
     -i --init       Init FE part (applicable to SOA and FE)
-    -x --ex         Extend. Copies helper directories from parent dir.
-                        (.vscode/, ...)"
-    argparse -n $_name h/help i/init x/ex -- $argv
+    -x --ex         Extend. Copies helper directories (like .vscode) from parent dir.
+    -d --dry-run    Print the command that would run.
+                    Cannot be used with `-i` or `-x`
+    "
+    argparse -n $_name -x x,d -x i,d 'h/help' 'i/init' 'x/ex' 'd/dry-run' -- $argv
     set -l last_status $status
 
     if set -ql _flag_help
@@ -30,7 +32,13 @@ function wtadd
             echo $_usage
             return $invalid_arguments
     end
-    command git worktree add $argstr
+
+    set -l _cmd git
+    if set -ql _flag_dry_run
+        set -p _cmd echo "dry-run:"
+    end
+
+    command $_cmd worktree add $argstr
 
     if set -ql _flag_init
         switch (pwd)
