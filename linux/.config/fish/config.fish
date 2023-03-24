@@ -28,6 +28,9 @@ if status is-interactive
     set -U function_builtin_or_command_not_located 127
 end
 
+# ::endenv
+
+# ::alias
 
 # PARENT DIR NAVIGATION
 alias ..="cd .."
@@ -48,8 +51,6 @@ alias l.="exa -aF | egrep '^\.'"
 alias ll.="exa -laF | awk '\$7 ~ /^\./'"
 alias rf="rm -rf"
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
-
-alias clear='echo -en "\x1b[2J\x1b[1;1H" ; echo; seq $(tput cols) | sort -R | spark | lolcat ; echo; echo'
 
 # PYTHON VENV ALIASES
 alias da="deactivate"
@@ -107,5 +108,10 @@ alias wt-rm="wtremove"
 alias wt-mv="wtmove"
 alias wt-add="wtadd"
 alias wt-add-ex="wtaddex"
+# ::endalias
 
-clear
+
+# Use spark to draw colorful line when running clear
+# alias clear='echo -en "\x1b[2J\x1b[1;1H" ; echo; seq $(tput cols) | sort -R | spark | lolcat ; echo; echo'
+# clear
+
