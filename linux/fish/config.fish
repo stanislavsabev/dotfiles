@@ -2,20 +2,6 @@
 set -U fish_greeting # Suppress fish's greeting
 
 # ::env
-set -gx HISTIGNORE " *"
-set -gx HISTCONTROL ignoreboth:erasedups
-set -gx COLORTERM truecolor
-
-# Projects
-set -gx CONFIG_DIR "$HOME/.config"
-set -gx DOTFILES_DIR "$HOME/.dotfiles/linux"
-set -gx EDITOR "code"
-set -gx VENV_DIR ".venv"
-set -gx PROJ_DIR "$HOME/projects"
-set -gx OPT_DIR "$HOME/opt"
-set -gx DEVSETUP_DIR "$HOME/$OPT_DIR/devsetup"
-
-
 if status is-interactive
     # Commands to run in interactive sessions can go here
     set -U status_ok 0

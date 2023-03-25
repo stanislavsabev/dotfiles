@@ -11,9 +11,9 @@ function va -a NAME --description "va [VENV_PATH]"
     end
 
     set -l argc (count $argv)
-    set -l vaname $VENV_DIR
+    set -l vaname
     if test $argc -eq 0
-        set -l vaname $VENV_DIR
+        set vaname $VENV_NAME
     else
         set vaname $argv[1]
     end
