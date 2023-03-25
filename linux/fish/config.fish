@@ -32,7 +32,7 @@ fish_add_path --global --prepend $DOTFILES_DIR/bin
 
 # ::vscode
 string match -q "$TERM_PROGRAM" "vscode"
-and . 'workbench/contrib/terminal/browser/media/shellIntegration.fish'
+and . '/usr/share/code/resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration.fish'
 # ::endvscode
 
 # ::pyenv
