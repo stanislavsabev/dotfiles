@@ -54,8 +54,8 @@ alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true &
 alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # :MY SCRIPTS
-alias kport="source $DOTFILES_DIR/bin/kill_port.sh"
-alias service="source $DOTFILES_DIR/bin/start_service.sh"
+alias kport="source $SCRIPTS_DIR/kill_port.sh"
+alias service="source $SCRIPTS_DIR/start_service.sh"
 alias grephist="grep_history"
 alias rebase-mig="python $SCRIPTS_DIR/rebase.py"
 alias expandalias="expand-alias"

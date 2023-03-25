@@ -47,7 +47,7 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
                 set FLAGS --include ".git*" --exclude "*"
             case tmux
                 set SRC "$HOME/.tmux.conf"
-                set DEST "$DOTFILES_DIR/.tmux.conf"
+                set DEST "$DOTFILES_DIR/bash/.tmux.conf"
                 set FLAGS -b --suffix=$_suffix
             case '*'
                 echo "sync_config: Unkown name: $name"

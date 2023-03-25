@@ -30,7 +30,7 @@ fish_add_path --global --prepend $HOME/bin
 fish_add_path --global --prepend /usr/local/mysql/bin
 fish_add_path --global --prepend /usr/local/bin
 fish_add_path --global --prepend /usr/local/sbin
-fish_add_path --global --prepend $DOTFILES_DIR/bin
+fish_add_path --global --prepend $SCRIPTS_DIR
 # ::endpath
 
 # ::vscode
