@@ -7,7 +7,7 @@ export EDITOR="code"
 
 # Util
 export CONFIG_DIR="$HOME/.config"
-export SCRIPTS_DIR="$DOTFILES_DIR/scripts"
+export SCRIPTS_DIR="$DOTFILES_DIR/bin"
 export PROJECTS_DIR="$HOME/projects"
 
 # Projects

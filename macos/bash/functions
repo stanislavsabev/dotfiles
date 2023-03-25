@@ -463,12 +463,12 @@ fe-ls() {
 
 aliases() {
     if [ "$1" ]; then
-        echo "$(cat $DOTFILES_DIR/aliases |
+        echo "$(cat $DOTFILES_DIR/bash/aliases |
                 awk '/alias/ { st = index($0," ");print substr($0,st+1) }' |
                 awk -F'=' '{ print $1" : "$2 }' |
                 grep $1 )"
     else
-        echo "$(cat $DOTFILES_DIR/aliases |
+        echo "$(cat $DOTFILES_DIR/bash/aliases |
                 awk '/alias/ { st = index($0," ");print substr($0,st+1) }' |
                 awk -F'=' '{ print $1" : "$2 }' )"
         

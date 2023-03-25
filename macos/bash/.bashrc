@@ -19,7 +19,7 @@ fi
 
 export DOTFILES_DIR="$HOME/.dotfiles/macos"
 
-for file in $DOTFILES_DIR/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
+for file in $DOTFILES_DIR/bash/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -31,8 +31,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-if [ -f "$DOTFILES_DIR/.git-completion.bash" ]; then
-  . "$DOTFILES_DIR/.git-completion.bash"
+if [ -f "$DOTFILES_DIR/bash/.git-completion.bash" ]; then
+  . "$DOTFILES_DIR/bash/.git-completion.bash"
 fi
 
 # The next line updates PATH for the Google Cloud SDK.

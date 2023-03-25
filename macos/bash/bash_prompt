@@ -25,19 +25,19 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 ps0() {
     unset PROMPT_COMMAND
     PS_STATE=0
-    source $DOTFILES_DIR/bash_prompt
+    source $DOTFILES_DIR/bash/bash_prompt
 }
 
 ps1() {
     unset PROMPT_COMMAND
     PS_STATE=1
-    source $DOTFILES_DIR/bash_prompt
+    source $DOTFILES_DIR/bash/bash_prompt
 }
 
 ps2() {
     unset PROMPT_COMMAND
     PS_STATE=2
-    source $DOTFILES_DIR/bash_prompt
+    source $DOTFILES_DIR/bash/bash_prompt
 
 }
 
