@@ -3,7 +3,7 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
     Sync config files between dotfiles repo (SRC) and their location (DEST)
 
     CONFIG_NAMES    NAME_1 ..NAME_N, config names 
-                    valid names are: fish, bash, tmux, vscode, git
+                    valid names are: fish, bashrc, tmux, vscode, git
     -r --reverse    reverse copy - from DEST to SRC
     -h --help       displays this message
     --dry-run       print commands that would be executed
@@ -23,6 +23,7 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
     set -f SRC
     set -f DEST
     set -f FLAGS
+    set -f _suffix '.bak'
     set names $argv
     
     for name in $names
@@ -32,14 +33,14 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
                 set SRC "$CONFIG_DIR/fish"
                 set DEST "$DOTFILES_DIR/fish"
                 set FLAGS --exclude ".git*"
-            case bash
-                set SRC "$HOME"
-                set SRC "$DOTFILES_DIR/bash"
-                set FLAGS --include ".bashrc" --exclude "*"
+            case bashrc
+                set SRC "$HOME/.bashrc"
+                set DEST "$DOTFILES_DIR/bash/.bashrc"
+                set FLAGS -b --suffix=$_suffix
             case vscode
                 set SRC "$HOME/Library/Application Support/Code/User"
                 set DEST "$DOTFILES_DIR/vscode"
-                set FLAGS --include="snippets/" --include "*.json" --include "*.code-snippets" --exclude "*"
+                set FLAGS --include="snippets/" --include "*.json" --include "*.code-snippets" --exclude "*" -b --suffix=$_suffix
             case git
                 set SRC $HOME
                 set DEST "$DOTFILES_DIR/git"
@@ -47,6 +48,7 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
             case tmux
                 set SRC "$HOME/.tmux.conf"
                 set DEST "$DOTFILES_DIR/.tmux.conf"
+                set FLAGS -b --suffix=$_suffix
             case '*'
                 echo "sync_config: Unkown name: $name"
                 return $invalid_arguments
@@ -66,5 +68,10 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
     if set -ql _flag_dry_run
         set -p _cmd echo 'dry-run:'
     end
-    command $_cmd -avrh $FLAGS "$SRC/" "$DEST"
+
+    # Append / to SRC if it is directory
+    if test -d $SRC
+        set SRC "$SRC/"
+    end
+    command $_cmd -avrh $FLAGS "$SRC" "$DEST"
 end
