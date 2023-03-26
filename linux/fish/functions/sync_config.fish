@@ -36,11 +36,12 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
             case bashrc
                 set SRC "$HOME/.bashrc"
                 set DEST "$DOTFILES_DIR/bash/.bashrc"
-                set FLAGS -b --suffix=$_suffix
+                set FLAGS -b --suffix $_suffix
             case vscode
                 set SRC "$CONFIG_DIR/Code/User"
                 set DEST "$DOTFILES_DIR/vscode"
-                set FLAGS --include="snippets/" --include "*.json" --include "*.code-snippets" --exclude "*" -b --suffix=$_suffix
+                set FLAGS --include "snippets/" --include "*.json" --include "*.code-snippets" \
+                          --exclude "*" -b --suffix $_suffix
             case git
                 set SRC $HOME
                 set DEST "$DOTFILES_DIR/git"
@@ -48,7 +49,7 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
             case tmux
                 set SRC "$HOME/.tmux.conf"
                 set DEST "$DOTFILES_DIR/.tmux.conf"
-                set FLAGS -b --suffix=$_suffix
+                set FLAGS -b --suffix $_suffix
             case '*'
                 echo "sync_config: Unkown name: $name"
                 return $invalid_arguments
