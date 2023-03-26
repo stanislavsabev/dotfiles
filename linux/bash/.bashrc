@@ -1,3 +1,20 @@
+# ::fish shell
+
+alias fish="export MYSHELL=fish; exec bash"
+
+if [[ -z ${MYSHELL+x} ]]; then
+  export MYSHELL="fish"
+fi
+
+if [[ $MYSHELL == "fish" ]]; then
+  if command -v fish &> /dev/null
+  then
+      exec fish
+  fi
+fi
+# ::endfish shell
+
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -38,6 +55,7 @@ fi
 
 # ::env
 export DOTFILES_DIR="$HOME/.dotfiles/linux"
+export SCRIPTS_DIR="$DOTFILES_DIR/bin"
 export EDITOR=code
 export VENV_DIR=".venv"
 export PROJ_DIR="$HOME/projects"
@@ -50,14 +68,14 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # ::path
 
-export PATH="$PATH:$DOTFILES_DIR/bin"         # my scripts
+export PATH="$PATH:$SCRIPTS_DIR"              # my scripts
 export PATH="$PATH:$HOME/.dotnet/tools"       # Add .NET Core SDK tools
 
 # ::endpath
 
 
 # ::soruce files
-for file in $DOTFILES_DIR/{colors,functions,aliases,prompt}; do
+for file in $DOTFILES_DIR/bash/{colors,functions,aliases,prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -81,17 +99,3 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 # ::endpyenv
-
-# ::fish shell
-
-if [[ -z ${MYSHELL+x} ]]; then
-  export MYSHELL="fish"
-fi
-
-if [[ $MYSHELL == "fish" ]]; then
-  if command -v fish &> /dev/null
-  then
-      exec fish
-  fi
-fi
-# ::endfish shell
