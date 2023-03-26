@@ -1,4 +1,4 @@
-source ~/.config/fish/conf.d/envs.fish
+source "$HOME/.config/fish/conf.d/envs.fish"
 
 alias bash="set MYSHELL bash; exec bash"
 
@@ -11,9 +11,6 @@ alias ..la="cdup_ls"
 alias cdla="cdls"
 
 # LS ALIASES
-
-alias bash="set MYSHELL bash; exec bash"
-
 # alias ls="exa -GF"
 alias ls='exa -a --color=always'
 alias la='exa -lag --color=always'
@@ -41,8 +38,8 @@ alias pir="pip install -r"
 
 # :MY SCRIPTS
 alias grephist="grep_history"
-alias kport="source $DOTFILES_DIR/bin/kill_port.sh"
-alias service="source $DOTFILES_DIR/bin/start_service.sh"
+alias kport="source $SCRIPTS_DIR/kill_port.sh"
+alias service="source $SCRIPTS_DIR/start_service.sh"
 alias rebase-mig="python $SCRIPTS_DIR/rebase.py"
 alias expandalias="expand-alias"
 alias validate-commit-msg="verify-commit-msg"
