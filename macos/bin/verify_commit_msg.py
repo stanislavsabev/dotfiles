@@ -105,12 +105,7 @@ def main():
     else:
         print(f"{RED_BG}Failed. Please enter commit message.{DEFAULT}")
         return 0
-    msg = """Add options to Kind Type attribute for Policy
 
-Add options to Kind Type attribute for Policy objects
-
-Issue: http://b/273681641
-Change-Id: I053494576218e041b1f65d365ff0f2e16c4479a5"""
     print("Commit message: " + "\n" + msg)
     violations = verify(msg)
     if not violations:
