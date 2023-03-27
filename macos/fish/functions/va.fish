@@ -7,7 +7,7 @@ function va -a NAME --description "va [NAME=.venv]"
     if set -ql _flag_help
         or test $last_status -ne 0
         echo $_usage
-        return
+        return $last_status
     end
 
     set -l argc (count $argv)

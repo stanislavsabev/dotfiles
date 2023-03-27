@@ -59,9 +59,10 @@ alias service="source $SCRIPTS_DIR/start_service.sh"
 alias grephist="grep_history"
 alias rebase-mig="python $SCRIPTS_DIR/rebase.py"
 alias expandalias="expand-alias"
-alias validate-commit-msg="verify-commit-msg"
+alias validate-commit-msg="verify_commit_message"
 
 # :SCRIPTS EDITING
+alias ed=$EDITOR
 alias ed-dotfiles="edproj -n ed-dotfiles -p $DOTFILES_DIR/.."
 alias ed-fish="edproj -n ed-fish -p $__fish_config_dir"
 

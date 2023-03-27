@@ -34,30 +34,6 @@ _ISSUE_LINES_REGEX = re.compile(r"Issue: http://b/\d+")
 _CHANGE_ID_LINE_REGEX = re.compile(r"Change-Id: \S+")
 
 
-def main():
-    if len(sys.argv) > 1:
-        msg = sys.argv[1]
-    else:
-        print(f"{RED}Failed. Please enter commit message.{DEFAULT}")
-        return 0
-    print("Commit message: " + "\n" + msg)
-    violations = verify(msg)
-    if not violations:
-        print(f"{GREEN}Done. Commit message is valid!{DEFAULT}")
-        return 0
-    print(
-        f"{RED_BG}Failed.{DEFAULT}"
-        + f"{RED_FG} Commit message is incorrect.\n"
-        + f"Violations: {violations}\n"
-        + f"{DEFAULT}"
-        + "Please refer to the message guide."
-        + "\n"
-        + f"{BOLD}"
-        "go/commitmsg" + f"{DEFAULT}"
-    )
-    return 1
-
-
 def verify(msg: str) -> List[str]:
     """
     Commit message requirements:
@@ -66,9 +42,9 @@ def verify(msg: str) -> List[str]:
     2. Limit the subject line to 50 characters
     3. Capitalize the subject line
     4. Do not end the subject line with a period
-    5. Use the imperative mood in the subject line (spoken or written as if giving
-     a command or instruction)
-    6. Don’t prefix subject line with the application name (e.g. [Auditor],
+    5. Use the imperative mood in the subject line (spoken or written
+        as if giving a command or instruction)
+    6. Don't prefix subject line with the application name (e.g. [Auditor],
     [Manager], etc.)
     7. There should be at most 20 lines
     8. Wrap each line in 72 characters
@@ -119,6 +95,38 @@ def verify(msg: str) -> List[str]:
     if not re.fullmatch(_CHANGE_ID_LINE_REGEX, change_id_line):
         violations.append("Wrong Change-Id format")
     return violations
+
+
+def main():
+    """Entry point for this script"""
+
+    if len(sys.argv) > 1:
+        msg = sys.argv[1]
+    else:
+        print(f"{RED_BG}Failed. Please enter commit message.{DEFAULT}")
+        return 0
+    msg = """Add options to Kind Type attribute for Policy
+
+Add options to Kind Type attribute for Policy objects
+
+Issue: http://b/273681641
+Change-Id: I053494576218e041b1f65d365ff0f2e16c4479a5"""
+    print("Commit message: " + "\n" + msg)
+    violations = verify(msg)
+    if not violations:
+        print(f"{GREEN}Done. Commit message is valid!{DEFAULT}")
+        return 0
+    print(
+        f"{RED_BG}Failed.{DEFAULT}"
+        + f"{RED_FG} Commit message is incorrect.\n"
+        + f"Violations: {violations}\n"
+        + f"{DEFAULT}"
+        + "Please refer to the message guide."
+        + "\n"
+        + f"{BOLD}"
+        "go/commitmsg" + f"{DEFAULT}"
+    )
+    return 1
 
 
 if __name__ == "__main__":
