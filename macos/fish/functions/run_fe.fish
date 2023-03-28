@@ -1,9 +1,10 @@
 
-function runfe -a BRANCH --description "Run FE"
-    set -l _usage "usage: runfe [BRANCH|WORKTREE]
+function run_fe -a BRANCH --description "Run FE"
+    set -l _usage "usage: run_fe [WORKTREE]
     Run FE
 
-    BRANCH|WORKTREE     to run specific revision"
+    WORKTREE     to run specific revision
+    "
     argparse h/help -- $argv
     set -l last_status $status
 

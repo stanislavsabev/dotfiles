@@ -1,6 +1,6 @@
 
-function makevenv -a NAME --description "makevenv [NAME=.venv]"
-    set -l _usage "usage: makevenv [NAME=.venv]"
+function make_venv -a NAME --description "make_venv [NAME=.venv]"
+    set -l _usage "usage: make_venv [NAME=.venv]"
     argparse h/help -- $argv
     set -l last_status $status
 

@@ -6,7 +6,7 @@ function edproj
     set -f _proj $_flag_proj
 
     set -l _usage "usage: $_name [WORKTREE]
-    Open VSCode in current project [and worktreee]"
+    Open VSCode in current project and worktreee"
 
     if set -ql _flag_help
         or test $last_status -ne 0

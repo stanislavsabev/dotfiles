@@ -1,6 +1,8 @@
 
-function va -a NAME --description "va [NAME=.venv]"
-    set -l _usage "usage: va [NAME=.venv]"
+function va -a NAME --description "Activate python virtual environment"
+    set -l _usage "usage: va [NAME=.venv]
+    Activate python virtual environment
+    "
     argparse h/help -- $argv
     set -l last_status $status
 

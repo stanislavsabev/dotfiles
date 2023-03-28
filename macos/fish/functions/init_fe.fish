@@ -1,5 +1,5 @@
-function _argparse_initfe
-    set -l _usage "usage: initfe
+function _argparse_init_fe
+    set -l _usage "usage: init_fe
     Build FE for Manager
     "
     argparse h/help -- $argv
@@ -12,8 +12,8 @@ function _argparse_initfe
     end
 end
 
-function initfe --description "Build FE for Manager"
-    _argparse_initfe $argv; or return
+function init_fe --description "Build FE for Manager"
+    _argparse_init_fe $argv; or return
     nvm use 12
     rm -rf node_modules
     npm i bower -g

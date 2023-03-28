@@ -1,9 +1,10 @@
 
-function runbe -a BRANCH --description "Run BE"
-    set -l _usage "usage: runbe [BRANCH|WORKTREE]
-    Run BE
+function run_mig -a BRANCH --description "Run BE migrations"
+    set -l _usage "usage: run_mig [WORKTREE]
+    Run BE migrations
 
-    BRANCH|WORKTREE     to run specific revision"
+    WORKTREE     to run specific revision
+    "
     argparse h/help -- $argv
     set -l last_status $status
 
@@ -13,16 +14,16 @@ function runbe -a BRANCH --description "Run BE"
         return
     end
 
-    set -l TARGET_DIR (_run_where  $argv -t $BE_DIR)
+    set -l TARGET_DIR (_run_where  $argv -t $MIGRATIONS_DIR)
     if test $status -ne 0
         echo $_usage
         return $no_matches_found
     end
 
-    echo "Starting BE..."
+    echo "Starting MIGRATIONS..."
     echo "at:  $TARGET_DIR"
     cd $TARGET_DIR
-    va be
+    va migrations
     envsource ./configs/envs/local.env
-    command flask run --port=8082 --without-threads
+    command flask run --port=8088
 end

@@ -1,6 +1,6 @@
 
-function rundbresetbe -a BRANCH --description "Reset BE database"
-    set -l _usage "usage: rundbresetbe [BRANCH|WORKTREE]
+function run_dbreset_be -a BRANCH --description "Reset BE database"
+    set -l _usage "usage: run_dbreset_be [BRANCH|WORKTREE]
     Reset BE database
 
     BRANCH|WORKTREE     to run specific revision"

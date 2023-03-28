@@ -1,8 +1,8 @@
 
-function wtadd
-    set -f _name wt-add
+function wt_add
+    set -l _name "wt-add"
     set -l _usage "usage: $_name [-ix | -d] [NEW_BRANCH] [PATH] COMMIT-ISH
-    Add worktree-branch to current project.
+    Add worktree to current project.
     
     -i --init       Init FE part (applicable to SOA and FE)
     -x --ex         Extend. Copies helper directories (like .vscode) from parent dir.

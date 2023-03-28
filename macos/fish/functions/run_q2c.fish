@@ -1,6 +1,6 @@
 
-function runq2c -a BRANCH --description "Run Q2C"
-    set -l _usage "usage: runq2c
+function run_q2c -a BRANCH --description "Run Q2C"
+    set -l _usage "usage: run_q2c
     Run Q2C
     "
     argparse h/help -- $argv

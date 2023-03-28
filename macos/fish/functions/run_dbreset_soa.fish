@@ -1,10 +1,10 @@
 
-function rundbresetsoa -a BRANCH CONFIG --description "Reset SOA database"
-    set -l _usage "usage: rundbresetsoa [BRANCH|WORKTREE] --config CONFIG_FILE
+function run_dbreset_soa -a BRANCH CONFIG --description "Reset SOA database"
+    set -l _usage "usage: run_dbreset_soa [WORKTREE] [--config ENV_FILE]
     Reset SOA database
 
-    BRANCH|WORKTREE     to run specific revision
-    -c --config         CONFIG_FILE
+    WORKTREE     to run specific revision
+    -c --config         ENV_FILE
     "
     argparse h/help 'c/config=' -- $argv
     set -l last_status $status
@@ -17,7 +17,7 @@ function rundbresetsoa -a BRANCH CONFIG --description "Reset SOA database"
 
     set -l TARGET_DIR (_run_where  $argv -t $SOA_DIR)
     if test $status -ne 0
-        echo "rundbresetsoa: missing BRANCH|WORKTREE value"
+        echo "run_dbreset_soa: missing BRANCH|WORKTREE value"
         echo $_usage
         return $no_matches_found
     end
@@ -29,7 +29,7 @@ function rundbresetsoa -a BRANCH CONFIG --description "Reset SOA database"
         echo "config file" $CONFIG_FILE
     end
     if not test -e $CONFIG_FILE
-        echo "rundbresetsoa: file not found: $CONFIG_FILE"
+        echo "run_dbreset_soa: file not found: $CONFIG_FILE"
         return $invalid_arguments
     end
 

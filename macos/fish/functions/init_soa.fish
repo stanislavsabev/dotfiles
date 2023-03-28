@@ -1,5 +1,6 @@
-function _argparse_initsoa
-    set -l _usage "usage: initsoa
+function _argparse_init_soa
+    soa
+    set -l _usage "usage: init_soa
     Build FE for Auditor
     "
     argparse h/help -- $argv
@@ -12,8 +13,9 @@ function _argparse_initsoa
     end
 end
 
-function initsoa --description "Build FE for Auditor"
-    _argparse_initsoa $argv; or return
+function init_soa --description "Build FE for Auditor"
+    _argparse_init_soa
+    soa $argv; or return
     nvm use 8
     rm -rf node_modules
     npm i --unsafe-perm

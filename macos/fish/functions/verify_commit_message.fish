@@ -4,9 +4,9 @@ function verify_commit_message
 
     if set -ql _flag_help
         or test $last_status -ne 0
-        echo "usage: verify_commit_message [COMMIT_MESSAGE]
-    Validate commit message.
-    If called without arguments, last commit message in current dir will be evaluated"
+        echo "usage: verify_commit_message [MESSAGE]
+    Validates provided commit message or the last commit message in current dir
+    "
         return $last_status
     end
 

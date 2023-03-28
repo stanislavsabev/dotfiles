@@ -1,10 +1,10 @@
 
-function runsoa -a BRANCH CONFIG --description "Run SOA"
-    set -l _usage "usage: runsoa [BRANCH|WORKTREE] --config CONFIG_FILE
+function run_soa -a WORKTREE CONFIG --description "Run SOA"
+    set -l _usage "usage: run_soa [WORKTREE] [--config ENV_FILE]
     Run SOA
 
-    BRANCH|WORKTREE     to run specific revision
-    -c --config         CONFIG_FILE
+    WORKTREE     to run specific revision
+    -c --config  ENV_FILE
     "
     argparse h/help 'c/config=' -- $argv
     set -l last_status $status
@@ -17,7 +17,7 @@ function runsoa -a BRANCH CONFIG --description "Run SOA"
 
     set -l TARGET_DIR (_run_where  $argv -t $SOA_DIR)
     if test $status -ne 0
-        echo "runsoa: missing BRANCH|WORKTREE value"
+        echo "run_soa: missing WORKTREE value"
         echo $_usage
         return $no_matches_found
     end
@@ -29,7 +29,7 @@ function runsoa -a BRANCH CONFIG --description "Run SOA"
         echo "config file" $CONFIG_FILE
     end
     if not test -e $CONFIG_FILE
-        echo "runsoa: file not found: $CONFIG_FILE"
+        echo "run_soa: file not found: $CONFIG_FILE"
         return $invalid_arguments
     end
 

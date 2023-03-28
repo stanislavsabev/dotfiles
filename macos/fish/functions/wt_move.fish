@@ -1,4 +1,4 @@
-function wtmove --description "Rename worktree"
+function wt_move --description "Rename worktree"
     set -l options (fish_opt -s h -l help)
     set options $options (fish_opt -s d -l dry-run --long-only)
     argparse $options -- $argv
@@ -6,7 +6,8 @@ function wtmove --description "Rename worktree"
     if set -ql _flag_help
         or test (count $argv) -ne 2
         echo "usage: wt-mv [--dry-run] WORKTREE NEW_WORKTREE
-        
+    Rename worktree
+
     --dry-run   print commands that would be executed
     "
         return $invalid_arguments

@@ -87,9 +87,9 @@ alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 alias soa-pythonpath='set -gx PYTHONPATH $PYTHONPATH $(pwd)/src'
 alias soa-source-cfg="envsource ./configs/envs/local.env"
 alias soa-source-all="soa-pythonpath; soa-source-cfg"
-alias dbreset-mig="rundbresetbe"
-alias dbreset-be="rundbresetbe"
-alias dbreset-soa="rundbresetsoa"
+alias dbreset-mig="run_dbreset_be"
+alias dbreset-be="run_dbreset_be"
+alias dbreset-soa="run_dbreset_soa"
 
 # :GIT
 alias wt-ls="wtlist"
