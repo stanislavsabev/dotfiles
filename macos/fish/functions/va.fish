@@ -33,5 +33,11 @@ function va -a NAME --description "va [NAME=.venv]"
         case '*'
             set vaname $arg
     end
-    source "$vaname/bin/activate.fish"
+
+    set f "$vaname/bin/activate.fish"
+    if test -e $f
+        source $f
+    else
+        echo "va: File not found $f"
+    end
 end
