@@ -12,9 +12,9 @@ function verify_commit_message
 
     set -l COMM_MSG
     if test (count $argv) -eq 0
-        set COMM_MSG "(git log -1 --pretty=%B)"
+        set COMM_MSG (git log -1 --pretty=%B | string split0)
     else
-        set COMM_MSG "$argv[1]"
+        set COMM_MSG $argv[1]
     end
     python $SCRIPTS_DIR/verify_commit_msg.py "$COMM_MSG"
 end

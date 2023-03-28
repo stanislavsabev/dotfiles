@@ -30,6 +30,15 @@ function envsource -a verbose
     
     for line in (cat $argv | grep -v '^#' | grep -v '^\s*$')
         set item (string split -m 1 '=' $line)
+
+        set -l vars (string match --all -g -r '\${([a-zA-Z_]+)}' "$item[2]")
+        if set -q vars[1]
+            for var in $vars
+                set val (env | grep -e "^$var" | string split -m 1 '=')[2]
+                set item[2] (string replace -a -r "{$var}" "$val" "$item[2]" | string replace '$' '')
+            end
+        end
+        set -e val
         set -gx $item[1] (string trim --chars=\'\" $item[2])
         if test $_verbose -eq 1
             echo "$item[1]: $item[2]"
