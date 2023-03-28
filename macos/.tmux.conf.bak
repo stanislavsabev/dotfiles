@@ -18,12 +18,12 @@ bind -n M-Right select-pane -R
 bind -n M-Up select-pane -U
 bind -n M-Down select-pane -D
 
+# vi mode key bindings
+set-window-option -g mode-keys vi
+
 # Customize the status line
 set -g status-fg  black
 set -g status-bg  green
-
-# vi mode
-set-window-option -g mode-keys vi
 
 # Window management
 set -g base-index 1
@@ -61,8 +61,6 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 
 # Set theme
 set -g @themepack 'powerline/default/green'
-
-setw -g automatic-rename-format "#{b:pane_current_path}"
 
 # Other plugin examples:
 # set -g @plugin 'github_username/plugin_name'
