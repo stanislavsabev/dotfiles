@@ -5,5 +5,5 @@ function grep_history --description "grep_history: grep history"
         echo "usage: grephist GREP_ARGS"
         return 0
     end
-    history | grep $argv
+    history | grep -n $argv
 end

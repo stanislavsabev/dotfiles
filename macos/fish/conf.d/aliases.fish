@@ -54,7 +54,7 @@ alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true &
 alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # :MY SCRIPTS
-alias kport="source $SCRIPTS_DIR/kill_port.sh"
+alias kport="kill_port"
 alias service="source $SCRIPTS_DIR/start_service.sh"
 alias grephist="grep_history"
 alias rebase-mig="python $SCRIPTS_DIR/rebase.py"
@@ -87,6 +87,9 @@ alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 alias soa-pythonpath='set -gx PYTHONPATH $PYTHONPATH $(pwd)/src'
 alias soa-source-cfg="envsource ./configs/envs/local.env"
 alias soa-source-all="soa-pythonpath; soa-source-cfg"
+alias dbreset-mig="rundbresetbe"
+alias dbreset-be="rundbresetbe"
+alias dbreset-soa="rundbresetsoa"
 
 # :GIT
 alias wt-ls="wtlist"
