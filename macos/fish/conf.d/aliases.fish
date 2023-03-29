@@ -43,6 +43,7 @@ alias soa="cd $SOA_DIR"
 alias sql="cd $PROJECTS_DIR/sql"
 alias dev="cd $PROJECTS_DIR/dev"
 alias howto="cd $PROJECTS_DIR/howto"
+alias dotfiles="cd $DOTFILES_DIR/.."
 
 # :PYTHON
 alias da="deactivate"
@@ -84,7 +85,7 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 # :Misc
 alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 
-alias soa-pythonpath='set -gx PYTHONPATH $PYTHONPATH $(pwd)/src'
+alias soa-pythonpath='set -gx PYTHONPATH $PYTHONPATH (pwd)/src'
 alias soa-source-cfg="envsource ./configs/envs/local.env"
 alias soa-source-all="soa-pythonpath; soa-source-cfg"
 alias dbreset-mig="run_dbreset_be"
@@ -92,11 +93,11 @@ alias dbreset-be="run_dbreset_be"
 alias dbreset-soa="run_dbreset_soa"
 
 # :GIT
-alias wt-ls="wtlist"
-alias wt-co="wtcheckout"
-alias wt-mv="wtmove"
-alias wt-rm="wtremove"
-alias wt-add="wtadd"
+alias wt-ls="wt_list"
+alias wt-co="wt_checkout"
+alias wt-mv="wt_move"
+alias wt-rm="wt_remove"
+alias wt-add="wt_add"
 
 alias add="git add"
 alias addall="git add --all"
@@ -145,5 +146,8 @@ alias sha="git log -1 --pretty=format:'%H'"
 alias longsha="git log -1 --pretty=format:'%H'"
 alias shortsha="git log -1 --pretty=format:'%h'"
 alias stat="git diff HEAD~1 HEAD --stat"
-alias diff="git diff"
-alias diffhead="git diff HEAD"
+
+abbr -a gdiff -- git diff
+abbr -a gdiffhead -- git diff HEAD
+abbr cdiff -a -- code --diff
+abbr -a gwt -- git worktree

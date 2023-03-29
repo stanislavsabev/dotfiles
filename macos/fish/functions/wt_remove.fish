@@ -32,7 +32,7 @@ function wt_remove --description "Remove worktree"
 
     set -l git_cmd git
     if set -ql _flag_dry_run
-        set git_cmd echo "would run:" $git_cmd
+        set git_cmd echo "dry-run:" $git_cmd
     end
 
     set -l NAMES $argv

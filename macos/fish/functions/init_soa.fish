@@ -14,13 +14,12 @@ function _argparse_init_soa
 end
 
 function init_soa --description "Build FE for Auditor"
-    _argparse_init_soa
-    soa $argv; or return
+    _argparse_init_soa $argv; or return
     nvm use 8
     rm -rf node_modules
     npm i --unsafe-perm
     command bash -c './bin/build_assets' dummy
     va soa
     envsource './configs/envs/local.env'
-    set -gxa PYTHONPATH "(pwd)/src"
+    set -gxa PYTHONPATH (pwd)/src
 end

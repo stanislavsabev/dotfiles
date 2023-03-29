@@ -34,7 +34,7 @@ function run_soa -a WORKTREE CONFIG --description "Run SOA"
     end
 
     va soa
-    set -gx PYTHONPATH $PYTHONPATH "./src"
+    set -gx PYTHONPATH $PYTHONPATH ./src
     envsource $CONFIG_FILE
     cd "src"
 

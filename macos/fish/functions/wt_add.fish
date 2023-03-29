@@ -19,13 +19,16 @@ function wt_add
     end
 
     set -l argstr
+    set -l TARGET_DIR
     switch (count $argv)
         case 1
             set argstr $argv[1]
-            # do nothing
+            set TARGET_DIR $argv[1]
         case 2
+            set TARGET_DIR $argv[1]
             set argstr -b $argv[1] $argv[1] $argv[2]
         case 3
+            set TARGET_DIR $argv[2]
             set argstr -b $argv[1] $argv[2] $argv[3]
         case '*'
             echo "$_name: invalid arguments"
@@ -43,16 +46,24 @@ function wt_add
     if set -ql _flag_init
         switch (pwd)
             case $SOA_DIR
-                echo initsoa
+                set argv
+                cd $TARGET_DIR
+                init_soa
+                cd -
             case $FE_DIR
-                echo initfe
+                set argv
+                cd $TARGET_DIR
+                init_fe
+                cd -
             case '*'
                 echo "$_name: unknown dir for init:" (pwd)
         end
     end
 
     if set -ql _flag_ex
+        cd $TARGET_DIR
         vscode_add_sett
+        cd -
     end
 
 end

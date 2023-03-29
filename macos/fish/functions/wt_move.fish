@@ -16,8 +16,8 @@ function wt_move --description "Rename worktree"
     set -l git_cmd git
     set -l cd_cmd cd
     if set -ql _flag_dry_run
-        set git_cmd echo "would run:" $git_cmd
-        set cd_cmd echo "would run:" $cd_cmd
+        set git_cmd echo "dry-run:" $git_cmd
+        set cd_cmd echo "dry-run:" $cd_cmd
     end
     
     command $git_cmd worktree move $argv[1] $argv[2]

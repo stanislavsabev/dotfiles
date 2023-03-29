@@ -1,14 +1,17 @@
+#!/usr/bin/env python3
 import os
 import re
 import subprocess
 import argparse
 import collections
 import logging
-import sys
+from typing import Dict
+
 
 logging.basicConfig(level=logging.DEBUG)
 
 LATEST_MIGRATION = "LATEST_MIGRATION"
+_USAGE = "rebase_mig.py [-h] [-d DEST=curr-branch] [-b BASE=master]"
 
 Mig = collections.namedtuple("Mig", "ndx,name")
 
@@ -27,7 +30,7 @@ def cmd(command, cwd=None):
 
 
 def parse_args():
-    p = argparse.ArgumentParser()
+    p = argparse.ArgumentParser(usage=_USAGE)
     p.add_argument("-d", "--dest", action="store", type=str)
     p.add_argument("-b", "--base", action="store", type=str, default="master")
     args = p.parse_args()
@@ -40,7 +43,7 @@ def main():
     if not dest:
         dest = cmd("git curr-branch", cwd=os.getcwd())
     if not dest:
-        msg = f"Invalid branch destination name."
+        msg = "Invalid branch destination name."
         logging.error(msg)
         return msg
 
@@ -56,7 +59,7 @@ def main():
 
     cmd("git pull", cwd=base_path)
 
-    latest: dict[str, Mig] = {}
+    latest: Dict[str, Mig] = {}
     for branch in [base, dest]:
         with open(
             os.path.join(proj_dir, branch, "migrations", LATEST_MIGRATION),
