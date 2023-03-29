@@ -37,13 +37,18 @@ alias p="cd $PROJECTS_DIR"
 alias be="cd $BE_DIR"
 alias mig="cd $MIGRATIONS_DIR"
 alias q2c="cd $Q2C_DIR"
-alias be-cd-tests="cd ./tests/integration/src"
 alias fe="cd $FE_DIR"
 alias soa="cd $SOA_DIR"
 alias sql="cd $PROJECTS_DIR/sql"
 alias dev="cd $PROJECTS_DIR/dev"
 alias howto="cd $PROJECTS_DIR/howto"
 alias dotfiles="cd $DOTFILES_DIR/.."
+
+alias bels="cd $BE_DIR; wt ls"
+alias migls="cd $MIGRATIONS_DIR; wt ls"
+alias q2cls="cd $Q2C_DIR; wt ls"
+alias fels="cd $FE_DIR; wt ls"
+alias soals="cd $SOA_DIR; wt ls"
 
 # :PYTHON
 alias da="deactivate"
@@ -85,9 +90,6 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 # :Misc
 alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 
-alias soa-pythonpath='set -gx PYTHONPATH $PYTHONPATH (pwd)/src'
-alias soa-source-cfg="envsource ./configs/envs/local.env"
-alias soa-source-all="soa-pythonpath; soa-source-cfg"
 alias dbreset-mig="run_dbreset_be"
 alias dbreset-be="run_dbreset_be"
 alias dbreset-soa="run_dbreset_soa"
@@ -128,8 +130,6 @@ alias resetall="git reset HEAD --hard && git clean -f"
 alias amend="git commit --amend"
 alias cnoe="git commit --amend --no-edit"
 alias acnoe="git add --all && git commit --amend --no-edit"
-alias pushmaster="git push origin HEAD:refs/for/master"
-alias pushrefsfor="push-refs-for"
 alias logv="git log"
 alias lv="git log"
 set __fmt "format:'%C(yellow)%h%Creset %<(65,trunc)%s - %C(bold blue)%<(7,trunc)%an%Creset %C(bold red)%d %Creset%C(green)(%cr)'"
@@ -151,3 +151,12 @@ abbr -a gdiff -- git diff
 abbr -a gdiffhead -- git diff HEAD
 abbr cdiff -a -- code --diff
 abbr -a gwt -- git worktree
+
+abbr -a pushmaster -- 'git push origin HEAD:refs/for/master'
+abbr -a --set-cursor pushrefs -- 'git push origin HEAD:refs/for/%'
+
+abbr -a cdtests -- 'cd ./tests/integration/src'
+
+abbr -a soa-pythonpath -- 'set -gx PYTHONPATH $PYTHONPATH (pwd)/src'
+abbr -a soa-source-cfg -- 'envsource ./configs/envs/local.env'
+abbr -a soa-source-all -- 'set -gx PYTHONPATH $PYTHONPATH (pwd)/src && envsource ./configs/envs/local.env'

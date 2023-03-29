@@ -28,16 +28,15 @@ function wt
             set _cmd wt_add 
         case checkout co
             set _cmd wt_checkout
-        case list ls 
+        case list ls
             set _cmd wt_list
         case move mv
             set _cmd wt_move
-        case remove rm        
+        case remove rm
             set _cmd wt_remove
         case '*'
             echo "wt: unknown command $argv[1]"
             return $invalid_arguments
     end
-
-    $_cmd $orig_argv
+    $_cmd $orig_argv[2..]
 end

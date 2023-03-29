@@ -3,7 +3,7 @@ function wt_list --description "List worktrees in current project"
     set -l _usage "usage: $_name [[GREP_FLAGS] PATTERNS..]
     List worktrees in current project
     "
-    argparse -n $_name 'h/help' -- $argv
+    argparse -n $_name -i 'h/help' -- $argv
     set -l last_status $status
 
     if set -ql _flag_help
@@ -13,8 +13,8 @@ function wt_list --description "List worktrees in current project"
     end
 
     if test (count $argv) -ne 0
-        echo "$( git worktree list | grep $argv | awk '{ print $2" - "$3 }')"
+        git worktree list | awk '{ print $2" - "$3 }' | grep $argv
     else
-        echo "$( git worktree list | awk '{ print $2" - "$3 }' )"
+        git worktree list | awk '{ print $2" - "$3 }'
     end
 end
