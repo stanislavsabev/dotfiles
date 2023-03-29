@@ -63,7 +63,7 @@ alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false 
 alias kport="kill_port"
 alias service="source $SCRIPTS_DIR/start_service.sh"
 alias grephist="grep_history"
-alias rebase-mig="python $SCRIPTS_DIR/rebase.py"
+alias autorebase-mig="python $SCRIPTS_DIR/autorebase_migrations_be.py"
 alias expandalias="expand-alias"
 abbr -a validate-commit-msg -- 'verify_commit_message'
 
