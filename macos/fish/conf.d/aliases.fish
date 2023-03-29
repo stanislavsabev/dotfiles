@@ -51,9 +51,9 @@ alias fels="cd $FE_DIR; wt ls"
 alias soals="cd $SOA_DIR; wt ls"
 
 # :PYTHON
-alias da="deactivate"
-alias pir="pip install -r"
-alias uppip="python -m pip install --upgrade pip"
+abbr -a da -- 'deactivate'
+abbr -a pir -- 'pip install -r'
+abbr -a uppip -- 'python -m pip install --upgrade pip'
 
 # :SHOW/HIDE HIDDEN FILES
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
@@ -65,7 +65,7 @@ alias service="source $SCRIPTS_DIR/start_service.sh"
 alias grephist="grep_history"
 alias rebase-mig="python $SCRIPTS_DIR/rebase.py"
 alias expandalias="expand-alias"
-alias validate-commit-msg="verify_commit_message"
+abbr -a validate-commit-msg -- 'verify_commit_message'
 
 # :SCRIPTS EDITING
 alias ed=$EDITOR
