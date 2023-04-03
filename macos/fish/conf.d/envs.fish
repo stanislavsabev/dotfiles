@@ -12,6 +12,7 @@ set -gx MIGRATIONS_DIR "$PROJECTS_DIR/ggrc_migrations"
 set -gx Q2C_DIR "$PROJECTS_DIR/q2c"
 set -gx FE_DIR "$PROJECTS_DIR/ggrc_fe"
 set -gx SOA_DIR "$PROJECTS_DIR/soa"
+set -gx SQL_DIR "$PROJECTS_DIR/sql"
 
 # Python
 set -gx VENV_NAME ".venv"

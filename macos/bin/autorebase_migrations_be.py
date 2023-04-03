@@ -37,7 +37,11 @@ class Branch:
         new_ndx_str = self.ndx_str.replace(str(self.ndx), str(new_ndx))
         new_name = new_ndx_str + self._name[len(new_ndx_str) :]
 
-        cmd(f"mv migrations/{self._name} migrations/{new_name}", cwd=self.path)
+        src = os.path.join(self.path, "migrations", self._name)
+        dst = os.path.join(self.path, "migrations", new_name)
+
+        cmd(f"mv {src} {dst}",
+            cwd=self.path)
 
         self.ndx = new_ndx
         self.ndx_str = new_ndx_str
@@ -58,7 +62,7 @@ class Branch:
             mode="r",
             encoding="utf-8",
         ) as fp:
-            self._name = fp.readline()
+            self._name = fp.readline().rstrip('\n')
         m = re.match(r"^\d+", self._name)
         if not m:
             raise ValueError(
