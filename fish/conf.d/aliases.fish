@@ -23,8 +23,14 @@ abbr -a dow -- 'cd $HOME/Downloads'
 abbr -a dtop -- 'cd $HOME/Desktop'
 abbr -a doc -- 'cd $HOME/Documents'
 abbr -a vid -- 'cd $HOME/Videos'
-abbr -a config -- 'cd $HOME/.config'
 abbr -a home -- cd
+
+abbr -a p -- 'cd $PROJECTS_DIR'
+abbr -a dotfiles 'cd $DOTFILES_DIR'
+abbr -a config -- 'cd $HOME/.config'
+
+abbr -a pls -- 'cd $PROJECTS_DIR && la'
+
 
 # :PYTHON
 abbr -a da -- deactivate
@@ -40,9 +46,6 @@ abbr -a validate-commit-msg -- verify_commit_message
 alias ed=$EDITOR
 alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR"
 alias ed-fish="$EDITOR -n $__fish_config_dir"
-
-abbr -a p -- 'cd $PROJECTS_DIR'
-abbr -a dotfiles 'cd $DOTFILES_DIR'
 
 abbr -a reboot -- 'sudo reboot'
 
@@ -86,7 +89,7 @@ abbr -a logv -- 'git log'
 set -gx __git_log_format "format:'%C(yellow)%h%Creset %<(65,trunc)%s - %C(bold blue)%<(7,trunc)%an%Creset %C(bold red)%d %Creset%C(green)(%cr)'"
 
 alias lv='git log'
-alias lg='git log --graph --pretty=$__git_log_format --abbrev-commit'
+alias lg="git log --graph --pretty=$__git_log_format --abbrev-commit"
 
 abbr -a lgmy -- 'git log --graph --pretty=$__git_log_format --abbrev-commit --author=\'ssabev\''
 abbr -a --set-cursor lgauth -- 'git log --graph --pretty=$__git_log_format --abbrev-commit --author=%'
