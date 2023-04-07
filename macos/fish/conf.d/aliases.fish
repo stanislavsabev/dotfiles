@@ -152,7 +152,7 @@ abbr -a stat -- "git diff HEAD~1 HEAD --stat"
 
 abbr -a gdiff -- git diff
 abbr -a gdiffhead -- git diff HEAD
-abbr cdiff -a -- code --diff
+abbr -a cdiff -- code --diff
 abbr -a gwt -- git worktree
 
 abbr -a pushmaster -- 'git push origin HEAD:refs/for/master'
