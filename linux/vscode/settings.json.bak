@@ -9,10 +9,15 @@
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
     "gitlens.statusBar.enabled": false,
+    // "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
+    // "C_Cpp.intelliSenseEngine": "Default",
     "gitlens.views.repositories.autoRefresh": false,
     "gitlens.views.fileHistory.avatars": false,
     "gitlens.views.lineHistory.avatars": false,
+    "gitlens.views.compare.avatars": false,
     "gitlens.views.repositories.avatars": false,
+    "gitlens.views.search.avatars": false,
+    "gitlens.views.repositories.location": "scm",
     "scm.diffDecorationsGutterWidth": 1,
     "gitlens.keymap": "none",
     "editor.minimap.enabled": false,
@@ -22,6 +27,8 @@
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": false,
     "diffEditor.ignoreTrimWhitespace": false,
+    // "workbench.iconTheme": "Monokai Pro (Filter Octagon) Icons",
+    // "editor.fontFamily" : "Fira Code",
     "editor.fontFamily": "Source Code Pro",
     "workbench.colorTheme": "Dracula",
     "editor.semanticTokenColorCustomizations": {
@@ -164,16 +171,35 @@
     "python.dataScience.sendSelectionToInteractiveWindow": true,
     "python.dataScience.enableCellCodeLens": true,
     "workbench.iconTheme": "material-icon-theme",
+    // "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+    // "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
     "python.formatting.provider": "black",
     "workbench.settings.useSplitJSON": false,
+    "code-runner.runInTerminal": true,
+    "todo-tree.general.tags": [
+        "BUGFIX",
+        "TODO",
+        "FIXME",
+        "BUG",
+        "NOTE"
+    ],
+    "todo-tree.highlights.customHighlight": {
+        "BUGFIX": {
+            "icon": "alert",
+            "foreground": "#EE3A6A",
+            "type": "tag"
+        }
+    },
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "python.linting.pylintArgs": [
         "--extension-pkg-whitelist=os,PySide2,win32api",
         "--errors-only"
     ],
+    "pyside2-vsc.designer-creator.path": "C:\\anaconda3\\Lib\\site-package\\PySide2\\designer.exe",
     "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 75, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly}",
     "explorer.confirmDragAndDrop": false,
     "python.languageServer": "Pylance",
@@ -183,5 +209,4 @@
     },
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
-    "git.confirmSync": false,
 }
