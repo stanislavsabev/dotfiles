@@ -1,4 +1,4 @@
-source "$HOME/.config/fish/conf.d/envs.fish"
+source "$__fish_config_dir/conf.d/envs.fish"
 
 alias bash="set MYSHELL bash; exec bash"
 
@@ -38,11 +38,11 @@ abbr -a validate-commit-msg -- verify_commit_message
 
 # :PROJ EDITING
 alias ed=$EDITOR
-alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR/.."
+alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR"
 alias ed-fish="$EDITOR -n $__fish_config_dir"
 
 abbr -a p -- 'cd $PROJECTS_DIR'
-abbr -a dotfiles 'cd $DOTFILES_DIR/..'
+abbr -a dotfiles 'cd $DOTFILES_DIR'
 
 abbr -a reboot -- 'sudo reboot'
 

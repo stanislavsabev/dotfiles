@@ -31,29 +31,25 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
 
             case fish
                 set SRC $__fish_config_dir
-                set DEST "$DOTFILES_DIR/../fish"
+                set DEST "$DOTFILES_DIR/fish"
                 set FLAGS --exclude ".git*"
             case bashrc
                 set SRC "$HOME/.bashrc"
-                set DEST "$DOTFILES_DIR/bash/.bashrc"
+                set DEST "$DOTFILES_DIR_OS/bash/.bashrc"
                 set FLAGS -b --suffix=$_suffix
             case vscode
                 switch (uname)
                     case Linux
                         set SRC "$CONFIG_DIR/Code/User"
-                        set DEST "$DOTFILES_DIR/vscode"
-                        set FLAGS --include snippets/ --include "*.json" --include "*.code-snippets" \
-                            --exclude "*" -b --suffix=$_suffix
                     case Darwin
                         set SRC "$HOME/Library/Application Support/Code/User"
-                        set DEST "$DOTFILES_DIR/vscode"
-                        set FLAGS --include="snippets/" --include "*.json" --include "*.code-snippets" \
-                            --exclude "*" -b --suffix=$_suffix
                     case '*'
                         echo "sync_config: $(uname) not supported"
                         return 1
                 end
-
+                set DEST "$DOTFILES_DIR_OS/vscode"
+                set FLAGS --include snippets/ --include "*.json" --include "*.code-snippets" \
+                    --exclude "*" -b --suffix=$_suffix
             case git
                 set SRC $HOME
                 set DEST "$DOTFILES_DIR/git"

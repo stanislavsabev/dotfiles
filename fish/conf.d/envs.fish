@@ -4,6 +4,7 @@ set -gx HISTCONTROL ignoreboth:erasedups
 set -gx COLORTERM truecolor
 
 set -gx EDITOR code
+set -gx DOTFILES_DIR "$HOME/.dotfiles"
 set -gx CONFIG_DIR "$HOME/.config"
 
 # Util
@@ -15,12 +16,12 @@ set -gx VENV_NAME ".venv"
 switch (uname)
     case Linux
 
-        set -gx DOTFILES_DIR "$HOME/.dotfiles/linux"
+        set -gx DOTFILES_DIR_OS "$DOTFILES_DIR/linux"
         set -gx VBA_PARSER_DIR "$PROJECTS_DIR/vba_parser"
 
     case Darwin
 
-        set -gx DOTFILES_DIR "$HOME/.dotfiles/macos"
+        set -gx DOTFILES_DIR_OS "$DOTFILES_DIR/macos"
 
         # Projects
         set -gx BE_DIR "$PROJECTS_DIR/ggrc_be"
@@ -36,7 +37,7 @@ switch (uname)
         set -gx VENV_Q2C_NAME ".vq2c"
 end
 
-set -gx SCRIPTS_DIR "$DOTFILES_DIR/bin"
+set -gx SCRIPTS_DIR "$DOTFILES_DIR_OS/bin"
 
 
 # Devel
