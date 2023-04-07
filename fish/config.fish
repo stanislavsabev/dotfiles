@@ -1,11 +1,5 @@
 set -U fish_greeting
 
-# ::env
-set -gx HISTIGNORE " *"
-set -gx HISTCONTROL ignoreboth:erasedups
-set -gx COLORTERM truecolor
-# ::endenv
-
 # Title options
 set -g theme_title_display_process yes
 set -g theme_title_display_path yes

@@ -4,9 +4,13 @@ set -gx HISTCONTROL ignoreboth:erasedups
 set -gx COLORTERM truecolor
 
 set -gx EDITOR code
+set -gx CONFIG_DIR "$HOME/.config"
 
 # Util
 set -gx PROJECTS_DIR "$HOME/projects"
+
+# Python
+set -gx VENV_NAME ".venv"
 
 switch (uname)
     case Linux
@@ -32,11 +36,8 @@ switch (uname)
         set -gx VENV_Q2C_NAME ".vq2c"
 end
 
-set -gx CONFIG_DIR "$HOME/.config"
 set -gx SCRIPTS_DIR "$DOTFILES_DIR/bin"
 
-# Python
-set -gx VENV_NAME ".venv"
 
 # Devel
 set -gx NVM_DIR "$HOME/.nvm"
