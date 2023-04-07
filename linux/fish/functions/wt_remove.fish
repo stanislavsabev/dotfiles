@@ -1,5 +1,6 @@
-function _wtremove_usage --description wt-rm_usage
-    echo "usage: wt-rm [NAMES...] [-fd] [--grep [GREP_FLAGS] PATTERNS]
+function _wt_remove_usage --description "_wt-remove_usage"
+    echo "usage: wt-rm [NAMES...] [--force] [--dry-run] [--grep [GREP_FLAGS] PATTERNS]
+    Remove worktree
     
     --force     force removal, even if worktree is dirty or locked
     --dry-run   print commands that would be executed
@@ -9,7 +10,7 @@ function _wtremove_usage --description wt-rm_usage
 end
 
 
-function wtremove --description "wt-rm [NAMES...] [--force] [--grep [GREP_FLAGS] PATTERNS]"
+function wt_remove --description "Remove worktree"
 
     set -l options (fish_opt -s h -l help)
     set options $options (fish_opt -s f -l force --long-only)
@@ -20,7 +21,7 @@ function wtremove --description "wt-rm [NAMES...] [--force] [--grep [GREP_FLAGS]
     if set -ql _flag_help
         or test $last_status -ne 0
         or test (count $argv) -eq 0
-        _wtremove_usage
+        _wt_remove_usage
         return $last_status
     end
 
@@ -31,7 +32,7 @@ function wtremove --description "wt-rm [NAMES...] [--force] [--grep [GREP_FLAGS]
 
     set -l git_cmd git
     if set -ql _flag_dry_run
-        set git_cmd echo "dry run:" $git_cmd
+        set git_cmd echo "dry-run:" $git_cmd
     end
 
     set -l NAMES $argv
@@ -48,7 +49,7 @@ function wtremove --description "wt-rm [NAMES...] [--force] [--grep [GREP_FLAGS]
 
         if test (count $argv) -eq 0
             echo "grep: missing arguments"
-            _wtremove_usage
+            _wt_remove_usage
             return $invalid_arguments
         end
 
