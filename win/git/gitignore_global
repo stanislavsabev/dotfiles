@@ -1,8 +1,0 @@
-.vs/
-.vscode/
-.venv/
-.idea/
-.ignore/
-~*.*
-*.log
-__pycache__/
