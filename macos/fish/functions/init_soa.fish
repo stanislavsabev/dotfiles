@@ -1,5 +1,4 @@
 function _argparse_init_soa
-    soa
     set -l _usage "usage: init_soa
     Build FE for Auditor
     "
@@ -15,6 +14,7 @@ end
 
 function init_soa --description "Build FE for Auditor"
     _argparse_init_soa $argv; or return
+    cd cd $SOA_DIR
     nvm use 8
     rm -rf node_modules
     npm i --unsafe-perm
