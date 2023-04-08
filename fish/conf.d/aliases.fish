@@ -46,6 +46,7 @@ abbr -a validate-commit-msg -- verify_commit_message
 alias ed=$EDITOR
 alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR"
 alias ed-fish="$EDITOR -n $__fish_config_dir"
+abbr -a cd-fish -- 'cd $__fish_config_dir'
 
 abbr -a reboot -- 'sudo reboot'
 
@@ -62,7 +63,8 @@ abbr -a push -- 'git push'
 abbr -a pull -- 'git pull'
 abbr -a fetch -- 'git fetch --all'
 abbr -a rebase -- 'git rebase'
-abbr -a --set-cursor cam -- 'git commit -am "%"'
+abbr -a --set-cursor cam -- 'git add --all && git commit -am "%"'
+abbr -a --set-cursor ca -- 'git add --all && git commit -a'
 abbr -a --set-cursor cm -- 'git commit -m "%"'
 abbr -a commit -- 'git commit'
 abbr -a stash -- 'git stash'
