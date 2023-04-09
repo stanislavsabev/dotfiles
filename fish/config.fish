@@ -25,6 +25,7 @@ fish_add_path --global --prepend /usr/local/mysql/bin
 fish_add_path --global --prepend /usr/local/bin
 fish_add_path --global --prepend /usr/local/sbin
 fish_add_path --global --prepend $SCRIPTS_DIR
+fish_add_path --global --prepend $HOME/.cargo/bin
 # ::endpath
 
 # ::vscode
