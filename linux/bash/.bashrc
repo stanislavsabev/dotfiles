@@ -31,9 +31,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # ::endenv
 
 # ::path
-
 export PATH="$PATH:$SCRIPTS_DIR"              # my scripts
 export PATH="$PATH:$HOME/.dotnet/tools"       # Add .NET Core SDK tools
+export PATH="$PATH:$HOME/.cargo/bin"          # Add Rust tools
 
 # ::endpath
 
