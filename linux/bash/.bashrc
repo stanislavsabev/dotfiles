@@ -39,7 +39,7 @@ export PATH="$PATH:$HOME/.dotnet/tools"       # Add .NET Core SDK tools
 
 
 # ::soruce files
-for file in $DOTFILES_DIR/bash/{colors,functions,aliases,prompt}; do
+for file in $DOTFILES_DIR/bash/{functions,aliases,prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
