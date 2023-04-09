@@ -10,9 +10,9 @@ alias ..ls="cdup_ls"
 alias ..la="cdup_ls"
 alias cdla="cdls"
 
-alias rf="rm -rf"
-alias rm="rm -i"
-alias mv="mv -i"
+abbr -a rf -- "rm -rf"
+abbr -a rm -- "rm -i"
+abbr -a mv -- "mv -i"
 
 # alias cd="cdnvm"
 alias grep="grep --color=auto"
@@ -25,11 +25,11 @@ abbr -a doc -- 'cd $HOME/Documents'
 abbr -a vid -- 'cd $HOME/Videos'
 abbr -a home -- cd
 
-abbr -a p -- 'cd $PROJECTS_DIR'
+abbr -a p -- 'cd $PROJECTS_DIR && ls'
 abbr -a dotfiles 'cd $DOTFILES_DIR'
 abbr -a config -- 'cd $HOME/.config'
 
-abbr -a pls -- 'cd $PROJECTS_DIR && la'
+abbr -a pls -- 'cd $PROJECTS_DIR && ls'
 
 
 # :PYTHON
@@ -38,24 +38,23 @@ abbr -a uppip -- 'python -m pip install --upgrade pip'
 abbr -a pir -- 'pip install -r'
 
 # :MY SCRIPTS
-alias grephist='grep_history'
-alias expandalias='expand-alias'
+abbr -a grephist -- 'grep_history'
 abbr -a validate-commit-msg -- verify_commit_message
 
 # :PROJ EDITING
-alias ed=$EDITOR
-alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR"
-alias ed-fish="$EDITOR -n $__fish_config_dir"
+abbr -a e -- $EDITOR
+abbr -a ed-dotfiles -- '$EDITOR -n $DOTFILES_DIR'
+abbr -a ed-fish -- '$EDITOR -n $__fish_config_dir'
 abbr -a cd-fish -- 'cd $__fish_config_dir'
 
 abbr -a reboot -- 'sudo reboot'
 
 # :GIT
-alias wt-ls='wt_list'
-alias wt-co='wt_checkout'
-alias wt-mv='wt_move'
-alias wt-rm='wt_remove'
-alias wt-add='wt_add'
+# alias wt-ls='wt_list'
+# alias wt-co='wt_checkout'
+# alias wt-mv='wt_move'
+# alias wt-rm='wt_remove'
+# alias wt-add='wt_add'
 
 abbr -a add -- 'git add'
 abbr -a addall -- 'git add --all'
@@ -119,52 +118,60 @@ switch (uname)
 
         # LS ALIASES
         # alias ls="exa -GF"
-        alias ls='exa -a --color=always'
-        alias la='exa -lag --color=always'
-        alias ll="exa -lg --color=always"
-        alias ldir="exa -lgD"
-        alias lsdir="exa -lgD"
-        alias l.="exa -aF | egrep '^\.'"
-        alias ll.="exa -laF | awk '\$7 ~ /^\./'"
-        alias rf="rm -rf"
-        alias lt='exa -aT --color=always --group-directories-first' # tree listing
+        alias exa='exa --color=always'
+        abbr -a l -- 'exa -a'
+        abbr -a ls -- 'exa -lag'
+        abbr -a ll -- "exa -lg"
+        abbr -a ldir -- "exa -lgD"
+        abbr -a lsdir -- "exa -lgD"
+        abbr -a l. -- "exa -aF | egrep '^\.'"
+        abbr -a ll. -- "exa -laF | awk '\$7 ~ /^\./'"
+        abbr -a rf -- "rm -rf"
+        # tree listing
+        abbr lt -- 'exa -aT --group-directories-first'
+        
+        abbr -a sand -- "cd $PROJECTS_DIR/sandbox && la"
 
-        # OPEN WITH EDITOR
-        abbr -a ed-history -- "$EDITOR $HOME/.bash_history"
-        abbr -a ed-pysand -- "$EDITOR -n $PROJ_DIR/sandbox/pysandbox"
-        abbr -a ed-vba-parser -- "$EDITOR -n $PROJ_DIR/vba_parser/main"
 
         # APT
         abbr -a up -- "sudo apt update"
         abbr -a upup -- "sudo apt upgrade -y"
+        abbr -a api -- "sudo apt install"
+
+        # OPEN WITH EDITOR
+        abbr -a ed-history -- "$EDITOR $HOME/.bash_history"
+        abbr -a ed-pysand -- "$EDITOR -n $PROJECTS_DIR/sandbox/pysandbox"
+        abbr -a ed-vba-parser -- "$EDITOR -n $PROJECTS_DIR/vba_parser/main"
+
+
 
     case Darwin
 
         # :SHORTHAND COMMANDS
-        alias l="ls -CF"
-        alias la="ls -lAh"
-        alias ll="ls -lh"
-        alias lh="ls -lh"
-        alias l.="ls -d .*"
-        alias la.="ls -lAh | awk '\$NF ~ /^\./'"
-        alias ll.="ls -lAh | awk '\$NF ~ /^\./'"
+        abbr -a l -- "ls -CF"
+        abbr -a la -- "ls -lAh"
+        abbr -a ll -- "ls -lh"
+        abbr -a lh -- "ls -lh"
+        abbr -a l. -- "ls -d .*"
+        abbr -a la. -- "ls -lAh | awk '\$NF ~ /^\./'"
+        abbr -a ll. -- "ls -lAh | awk '\$NF ~ /^\./'"
 
 
         alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 
-        alias be="cd $BE_DIR"
-        alias mig="cd $MIGRATIONS_DIR"
-        alias q2c="cd $Q2C_DIR"
-        alias fe="cd $FE_DIR"
-        alias soa="cd $SOA_DIR"
-        alias sql="cd $PROJECTS_DIR/sql"
-        alias dev="cd $PROJECTS_DIR/dev"
-        alias howto="cd $PROJECTS_DIR/howto"
-        alias bels="cd $BE_DIR; wt ls"
-        alias migls="cd $MIGRATIONS_DIR; wt ls"
-        alias q2cls="cd $Q2C_DIR; wt ls"
-        alias fels="cd $FE_DIR; wt ls"
-        alias soals="cd $SOA_DIR; wt ls"
+        abbr -a be -- "cd $BE_DIR"
+        abbr -a mig -- "cd $MIGRATIONS_DIR"
+        abbr -a q2c -- "cd $Q2C_DIR"
+        abbr -a fe -- "cd $FE_DIR"
+        abbr -a soa -- "cd $SOA_DIR"
+        abbr -a sql -- "cd $PROJECTS_DIR/sql"
+        abbr -a dev -- "cd $PROJECTS_DIR/dev"
+        abbr -a howto -- "cd $PROJECTS_DIR/howto"
+        abbr -a bels -- "cd $BE_DIR; wt ls"
+        abbr -a migls -- "cd $MIGRATIONS_DIR; wt ls"
+        abbr -a q2cls -- "cd $Q2C_DIR; wt ls"
+        abbr -a fels -- "cd $FE_DIR; wt ls"
+        abbr -a soals -- "cd $SOA_DIR; wt ls"
 
         alias ed-be="edproj -n ed-be -p $BE_DIR"
         alias ed-mig="edproj -n ed-mig -p $MIGRATIONS_DIR"
@@ -174,9 +181,9 @@ switch (uname)
         alias ed-pysand="edproj -n ed-pysand -p $PROJECTS_DIR/pysandbox"
         alias ed-howto="edproj -n ed-howto -p $PROJECTS_DIR/howto"
 
-        alias dbreset-mig="run_dbreset_be"
-        alias dbreset-be="run_dbreset_be"
-        alias dbreset-soa="run_dbreset_soa"
+        abbr -a dbreset-mig -- 'run_dbreset_be'
+        abbr -a dbreset-be -- 'run_dbreset_be'
+        abbr -a dbreset-soa -- 'run_dbreset_soa'
 
         abbr -a cdtests -- 'cd ./tests/integration/src'
 
@@ -187,14 +194,14 @@ switch (uname)
         # :MY SCRIPTS
         alias kport="kill_port"
         alias service="source $SCRIPTS_DIR/start_service.sh"
-        alias autorebase-mig="python $SCRIPTS_DIR/autorebase_migrations_be.py"
+        abbr -a autorebase-mig -- 'python $SCRIPTS_DIR/autorebase_migrations_be.py'
 
 
         # :Chrono
-        alias week='date +%V'
-        alias utc="date -u +'%H:%M:%S UTC'"
-        alias short-date="date +%Y-%m-%d"
-        alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+        abbr -a week -- 'date +%V'
+        abbr -a utc -- "date -u +'%H:%M:%S UTC'"
+        abbr -a short-date -- "date +%Y-%m-%d"
+        abbr -a chrome -- '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 
         # :SHOW/HIDE HIDDEN FILES
         alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
