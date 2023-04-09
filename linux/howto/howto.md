@@ -24,23 +24,13 @@ code ~/.ssh/id_ed25519.pub
 
 # Dotfiles
 
-- dotfiles dir - `~/opt/dotfiles/`
+- dotfiles dir - `~/.dotfiles`
 
 ```bash
-cd ~/opt
 
-git clone git@github.com:stanislavsabev/devsetup.git
-git checkout ubuntu
-```
+git clone git@github.com:stanislavsabev/dotfiles.git
+git clone https://github.com/stanislavsabev/dotfiles.git
 
-
-# Symbolic links
-
-```bash
-ln -s opt/dotfiles/bashrc .bashrc
-ln -s opt/dotfiles/tmux.conf .tmux.conf
-ln -s opt/dotfiles/gitignore_global .gitignore_global
-ln -s opt/dotfiles/gitconfig .gitconfig
 ```
 
 ## Pyenv
@@ -61,7 +51,7 @@ src/configure && make -C src
 ```bash
 # install Python
 pyenv install --list | grep " 3\."
-pyenv install 3.7 3.8 3.9 3.11
+pyenv install 3.7 3.8 3.9 3.10 3.11
 pyenv versions
 pyenv global 3.11
 pyenv which python
