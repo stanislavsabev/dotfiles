@@ -111,6 +111,7 @@ abbr -a cdiff -- 'code --diff'
 abbr -a gwt -- 'git worktree'
 
 abbr -a pushmaster -- 'git push origin HEAD:refs/for/master'
+abbr -a pushmain -- 'git push origin HEAD:refs/for/main'
 abbr -a --set-cursor pushrefs -- 'git push origin HEAD:refs/for/%'
 
 switch (uname)
@@ -119,9 +120,10 @@ switch (uname)
         # LS ALIASES
         # alias ls="exa -GF"
         alias exa='exa --color=always'
-        abbr -a l -- 'exa -a'
-        abbr -a ls -- 'exa -lag'
-        abbr -a ll -- "exa -lg"
+        alias l='exa -a'
+        alias ls='exa -lag'
+        alias la='exa -lag'
+        alias ll='exa -lg'
         abbr -a ldir -- "exa -lgD"
         abbr -a lsdir -- "exa -lgD"
         abbr -a l. -- "exa -aF | egrep '^\.'"
