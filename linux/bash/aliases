@@ -54,7 +54,7 @@ alias ed-history="$EDITOR $HOME/.bash_history"
 alias ed-gitignore_global="$EDITOR $DEVSETU_DIR/gitignore_global"
 alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR/.."
 alias ed-fish="$EDITOR -n $CONFIG_DIR/fish"
-alias pysand="$EDITOR -n $PROJ_DIR/sandbox_projects/pysandbox"
+alias pysand="$EDITOR -n $PROJ_DIR/sandbox_projects/pysand"
 alias vba-parser="$EDITOR -n $PROJ_DIR/vba_parser/main"
 
 # APT
