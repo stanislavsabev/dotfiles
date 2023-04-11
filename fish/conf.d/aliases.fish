@@ -150,7 +150,8 @@ switch (uname)
     case Darwin
 
         # :SHORTHAND COMMANDS
-        abbr -a l -- "ls -CF"
+        abbr -a l -- "ls -F"
+        abbr -a ls -- "ls -lAh"
         abbr -a la -- "ls -lAh"
         abbr -a ll -- "ls -lh"
         abbr -a lh -- "ls -lh"
