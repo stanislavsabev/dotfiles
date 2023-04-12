@@ -1,5 +1,4 @@
-function kill_ports
-    set -l _usage "usage: kill_ports [PORTS..]
+function ls_ports    set -l _usage "usage: ls_port [PORTS..]
     Stop service by port
 
     Default ports 8080 8082 9090 8083 8085
@@ -22,9 +21,6 @@ function kill_ports
 
     for port in $ports
         set -l pids (lsof -t -i:$port)
-        for pid in $pids
-            kill -9 $pid
-        end
         echo "port: $port, pids: $pids"
     end
 end

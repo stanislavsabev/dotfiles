@@ -14,10 +14,10 @@ end
 
 function init_soa --description "Build FE for Auditor"
     _argparse_init_soa $argv; or return
-    cd cd $SOA_DIR
-    nvm use 8
-    rm -rf node_modules
-    npm i --unsafe-perm
+    cd $SOA_DIR
+    command nvm use 8
+    command rm -rf node_modules
+    command npm i --unsafe-perm
     command bash -c './bin/build_assets' dummy
     va soa
     envsource './configs/envs/local.env'
