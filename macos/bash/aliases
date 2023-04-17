@@ -28,21 +28,10 @@ alias doc="cd ~/Documents"
 alias home="cd"
 alias dotfiles="cd $DOTFILES_DIR/.."
 
-alias p="cd $PROJECTS_DIR"
-alias be="cd $BE_DIR"
-alias mig="cd $MIGRATIONS_DIR"
-alias q2c="cd $Q2C_DIR"
-alias be-cd-tests="cd ./tests/integration/src"
-alias fe="cd $FE_DIR"
-alias soa="cd $SOA_DIR"
-alias sql="cd $PROJECTS_DIR/sql"
-alias dev="cd $PROJECTS_DIR/dev"
-
 # :PYTHON
 alias da="deactivate"
 alias pir="pip install -r"
 alias uppip="python -m pip install --upgrade pip"
-alias va-mig="va-migrations"
 
 # :SHOW/HIDE HIDDEN FILES
 alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
@@ -60,14 +49,6 @@ alias validate-commit-msg="verify-commit-msg"
 alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR/.."
 alias ed-fish="$EDITOR -n $CONFIG_DIR/fish"
 
-# :PROJECTS EDITING
-alias ed-be="$EDITOR -n $BE_DIR"
-alias ed-mig="$EDITOR -n $MIGRATIONS_DIR"
-alias ed-soa="$EDITOR -n $SOA_DIR"
-alias ed-sql="$EDITOR -n $PROJECTS_DIR/sql"
-alias ed-dev="$EDITOR -n $PROJECTS_DIR/dev"
-alias ed-pysand="$EDITOR $PROJECTS_DIR/pysandbox"
-
 # :Chrono
 alias week='date +%V'
 alias utc="date -u +'%H:%M:%S UTC'"
@@ -77,9 +58,6 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
 # :Misc
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 alias path="tr ':' '\n' <<< \"$PATH\""
-
-alias soapythonpath='export PYTHONPATH="$PYTHONPATH:$(pwd)/src"'
-alias soaconfigfile="set -o allexport && source ./configs/envs/local.env && set +o allexport"
 
 # :GIT
 alias wt-ls="wt-list"
