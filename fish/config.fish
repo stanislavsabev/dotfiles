@@ -42,6 +42,13 @@ switch (uname)
 end
 # ::endvscode
 
+# ::private
+if test -d $__fish_config_dir/priv.conf
+    source $__fish_config_dir/priv.conf.d/priv_config.fish
+end
+
+# ::endprivate
+
 # ::pyenv
 set -gx PYENV_ROOT "$HOME/.pyenv"
 fish_add_path --global --prepend "$PYENV_ROOT/bin"

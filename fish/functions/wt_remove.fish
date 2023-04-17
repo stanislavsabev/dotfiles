@@ -25,9 +25,9 @@ function wt_remove --description "Remove worktree"
         return $last_status
     end
 
-    set -l FLAGS
+    set -l FORCE
     if set -ql _flag_force
-        set FLAGS --force
+        set FORCE --force
     end
 
     set -l git_cmd git
@@ -66,7 +66,7 @@ function wt_remove --description "Remove worktree"
 
     for name in $NAMES
         set name (string trim -r -c / $name)
-        command $git_cmd worktree remove $FLAGS $name
+        command $git_cmd worktree remove $name
         command $git_cmd branch -D $name
     end
 end

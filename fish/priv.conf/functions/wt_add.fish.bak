@@ -1,14 +1,15 @@
 
 function wt_add
     set -l _name "wt-add"
-    set -l _usage "usage: $_name [-ex | -dry-run] [NEW_BRANCH] [PATH] COMMIT-ISH
+    set -l _usage "usage: $_name [-ix | -d] [NEW_BRANCH] [PATH] COMMIT-ISH
     Add worktree to current project.
     
+    -i --init       Init FE part (applicable to SOA and FE)
     -x --ex         Extend. Copies helper directories (like .vscode) from parent dir.
     -d --dry-run    Print the command that would run.
-                    Cannot be used with `-x`
+                    Cannot be used with `-i` or `-x`
     "
-    argparse -n $_name -x x,d -x i,d 'h/help' 'x/ex' 'd/dry-run' -- $argv
+    argparse -n $_name -x x,d -x i,d 'h/help' 'i/init' 'x/ex' 'd/dry-run' -- $argv
     set -l last_status $status
 
     if set -ql _flag_help
@@ -41,6 +42,23 @@ function wt_add
     end
 
     command $_cmd worktree add $argstr
+
+    if set -ql _flag_init
+        switch (pwd)
+            case $SOA_DIR
+                set argv
+                cd $TARGET_DIR
+                init_soa
+                cd -
+            case $FE_DIR
+                set argv
+                cd $TARGET_DIR
+                init_fe
+                cd -
+            case '*'
+                echo "$_name: unknown dir for init:" (pwd)
+        end
+    end
 
     if set -ql _flag_ex
         cd $TARGET_DIR
