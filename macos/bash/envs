@@ -10,19 +10,8 @@ export CONFIG_DIR="$HOME/.config"
 export SCRIPTS_DIR="$DOTFILES_DIR/bin"
 export PROJECTS_DIR="$HOME/projects"
 
-# Projects
-export BE_DIR="$PROJECTS_DIR/ggrc_be"
-export MIGRATIONS_DIR="$PROJECTS_DIR/ggrc_migrations"
-export Q2C_DIR="$PROJECTS_DIR/q2c"
-export FE_DIR="$PROJECTS_DIR/ggrc_fe"
-export SOA_DIR="$PROJECTS_DIR/soa"
-
 # Python
 export VENV_NAME=".venv"
-export VENV_MIG_NAME=".vmig"
-export VENV_BE_NAME=".vbe"
-export VENV_SOA_NAME=".vsoa"
-export VENV_Q2C_NAME=".vq2c"
 
 # Ignore commands starting with space
 export HISTIGNORE=' *'

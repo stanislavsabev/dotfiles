@@ -22,6 +22,13 @@ export DOTFILES_DIR="$HOME/.dotfiles/macos"
 for file in $DOTFILES_DIR/bash/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
+
+# source private files
+if [ -d "$DOTFILES_DIR/bash/priv" ]; then
+  for file in $DOTFILES_DIR/bash/priv/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+  done;
+fi
 unset file;
 
 export PYENV_ROOT="$HOME/.pyenv"
