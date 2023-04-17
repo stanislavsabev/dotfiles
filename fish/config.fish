@@ -44,7 +44,7 @@ end
 
 # ::private
 if test -d $__fish_config_dir/priv.conf
-    source $__fish_config_dir/priv.conf.d/priv_config.fish
+    source $__fish_config_dir/priv.conf/priv_config.fish
 end
 
 # ::endprivate
