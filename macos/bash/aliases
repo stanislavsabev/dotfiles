@@ -39,9 +39,7 @@ alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false 
 
 # :MY SCRIPTS
 alias kport="source $SCRIPTS_DIR/kill_port.sh"
-alias service="source $SCRIPTS_DIR/start_service.sh"
 alias grephist="grep-history"
-alias autorebase-mig="python $SCRIPTS_DIR/autorebase_migrations_be.py"
 alias expandalias="expand-alias"
 alias validate-commit-msg="verify-commit-msg"
 
