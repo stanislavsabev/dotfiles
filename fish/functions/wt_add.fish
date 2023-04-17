@@ -8,7 +8,7 @@ function wt_add
     -d --dry-run    Print the command that would run.
                     Cannot be used with `-x`
     "
-    argparse -n $_name -x x,d -x i,d 'h/help' 'x/ex' 'd/dry-run' -- $argv
+    argparse -n $_name -x x,d 'h/help' 'x/ex' 'd/dry-run' -- $argv
     set -l last_status $status
 
     if set -ql _flag_help

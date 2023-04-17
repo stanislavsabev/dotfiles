@@ -1,4 +1,5 @@
-function ls_ports    set -l _usage "usage: ls_port [PORTS..]
+function ls_ports    
+    set -l _usage "usage: ls_port [PORTS..]
     Stop service by port
 
     Default ports 8080 8082 9090 8083 8085
