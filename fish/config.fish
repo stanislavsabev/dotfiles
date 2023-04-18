@@ -43,8 +43,8 @@ end
 # ::endvscode
 
 # ::private
-if test -d $__fish_config_dir/priv.conf
-    source $__fish_config_dir/priv.conf/priv_config.fish
+if test -d $__fish_config_dir/priv
+    source $__fish_config_dir/priv/priv_config.fish
 end
 
 # ::endprivate

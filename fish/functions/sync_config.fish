@@ -32,7 +32,7 @@ function sync_config --description "Sync config files between dotfiles repo (SRC
             case fish
                 set SRC $__fish_config_dir
                 set DEST "$DOTFILES_DIR/fish"
-                set FLAGS --exclude ".git*" --exclude "priv.conf"
+                set FLAGS --exclude ".git*" --exclude "priv"
             case bashrc
                 set SRC "$HOME/.bashrc"
                 set DEST "$DOTFILES_DIR_OS/bash/.bashrc"
