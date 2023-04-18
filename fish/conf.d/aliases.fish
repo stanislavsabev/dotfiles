@@ -116,6 +116,7 @@ switch (uname)
         alias exa='exa --color=always'
         alias l='exa -a'
         alias ls='exa -lag'
+        abbr -a lsgrep -- 'ls | grep'
         alias la='exa -lag'
         alias ll='exa -lg'
         abbr -a ldir -- "exa -lgD"
