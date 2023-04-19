@@ -103,7 +103,7 @@ abbr -a gdiff -- 'git diff'
 abbr -a gdiffhead -- 'git diff HEAD'
 abbr -a cdiff -- 'code --diff'
 abbr -a gwt -- 'git worktree'
-abbr -a changed -- (git diff HEAD HEAD^ --name-only | grep '.py')
+abbr -a changed -- "git diff HEAD HEAD^ --name-only"
 
 abbr -a pushmaster -- 'git push origin HEAD:refs/for/master'
 abbr -a pushmain -- 'git push origin HEAD:refs/for/main'
