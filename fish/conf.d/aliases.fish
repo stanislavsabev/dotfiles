@@ -159,7 +159,8 @@ switch (uname)
         alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 
         # :MY SCRIPTS
-        alias kport="kill_port"
+        alias kport="kill_ports"
+        alias lsport="ls_ports"
         alias service="source $SCRIPTS_DIR/start_service.sh"
 
         # :Chrono
