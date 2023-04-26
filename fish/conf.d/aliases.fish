@@ -109,6 +109,8 @@ abbr -a pushmaster -- 'git push origin HEAD:refs/for/master'
 abbr -a pushmain -- 'git push origin HEAD:refs/for/main'
 abbr -a --set-cursor pushrefs -- 'git push origin HEAD:refs/for/%'
 
+abbr -a ef -- 'exec fish'
+
 switch (uname)
     case Linux
 
@@ -159,8 +161,8 @@ switch (uname)
         alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 
         # :MY SCRIPTS
-        alias kport="kill_ports"
-        alias lsport="ls_ports"
+        alias kports="kill_ports"
+        alias lsports="ls_ports"
         alias service="source $SCRIPTS_DIR/start_service.sh"
 
         # :Chrono
