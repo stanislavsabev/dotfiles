@@ -158,9 +158,6 @@ switch (uname)
         abbr -a la. -- "ls -lAh | awk '\$NF ~ /^\./'"
         abbr -a ll. -- "ls -lAh | awk '\$NF ~ /^\./'"
 
-
-        alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
-
         # :MY SCRIPTS
         alias kports="kill_ports"
         alias lsports="ls_ports"

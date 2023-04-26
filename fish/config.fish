@@ -58,6 +58,12 @@ if command -v pyenv 1>/dev/null 2>&1
 end
 # ::endpyenv
 
+# ::brew
+if command -v brew 1>/dev/null 2>&1
+    alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
+end
+# ::endbrew
+
 # fish_config theme choose "Dracula Official"
 # Use spark to draw colorful line when running clear
 # alias clear='echo -en "\x1b[2J\x1b[1;1H" ; echo; seq $(tput cols) | sort -R | spark | lolcat ; echo; echo'
