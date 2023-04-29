@@ -2,6 +2,40 @@
 
 Ideas for Ubuntu setup and install commands
 
+## Tthings to do after installing Ubuntu 22.04
+https://www.omgubuntu.co.uk/2022/04/installed-ubuntu-22-04-do-these-things-next
+
+## Install Firefox (no snap)
+
+Step 1: Remove the Firefox Snap by running the following command in a new Terminal window:
+```bash
+sudo snap remove firefox
+```
+
+Step 2: Add the (Ubuntu) Mozilla team PPA to your list of software sources by running the following command in the same Terminal window:
+```bash
+sudo add-apt-repository ppa:mozillateam/ppa
+```
+
+Step 3: Next, alter the Firefox package priority to ensure the PPA/deb/apt version of Firefox is preferred. This can be done using a slither of code from [FosTips](https://fostips.com/ubuntu-21-10-two-firefox-remove-snap/) (copy and paste it whole, not line by line):
+```bash
+echo '
+Package: *
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+' | sudo tee /etc/apt/preferences.d/mozilla-firefox
+```
+
+Step 4: Since you’ll (hopefully) want future Firefox upgrades to be installed automatically, Balint Reczey shares a concise command on his blog that ensures it happens:
+```bash
+echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+```
+
+Step 5: Finally, install Firefox via apt by running this command:
+```bash
+sudo apt install firefox
+```
+
 ## Install additional libs ?
 
 ```bash
