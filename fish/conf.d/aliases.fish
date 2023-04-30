@@ -125,7 +125,7 @@ switch (uname)
         abbr -a ldir -- "exa -lgD"
         abbr -a lsdir -- "exa -lgD"
         abbr -a l. -- "exa -aF | egrep '^\.'"
-        abbr -a ll. -- "exa -laF | awk '\$7 ~ /^\./'"
+        abbr -a la. -- "exa -lagF | awk '\$8 ~ /^\./'"
         abbr -a rf -- "rm -rf"
         # tree listing
         abbr lt -- 'exa -aT --group-directories-first'
