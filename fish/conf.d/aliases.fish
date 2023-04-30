@@ -117,8 +117,8 @@ switch (uname)
         # LS ALIASES
         # alias ls="exa -GF"
         alias exa='exa --color=always'
-        alias l='exa -a'
-        alias ls='exa -lag'
+        alias l='exa'
+        alias ls='exa -a'
         abbr -a lsgrep -- 'ls | grep'
         alias la='exa -lag'
         alias ll='exa -lg'
