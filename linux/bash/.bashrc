@@ -94,7 +94,7 @@ eval "$(pyenv init --path)"
 
 # ::fish shell
 
-alias fish="export MYSHELL=fish; exec bash"
+alias chfish="export MYSHELL=fish; exec bash"
 
 if [[ -z ${MYSHELL+x} ]]; then
   export MYSHELL="bash"
