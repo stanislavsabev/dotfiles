@@ -1,6 +1,6 @@
-function sync_config --description "Sync config files between dotfiles repo (SRC) and their location (DEST)"
+function sync_config
     set -l _usage "usage: sync_config [-rd] CONFIG_NAMES..
-    Sync config files between dotfiles repo (SRC) and their location (DEST)
+    Sync config files between their location (SRC) and dotfiles repo (DEST)
 
     CONFIG_NAMES    NAME_1 ..NAME_N, config names 
                     valid names are: fish, bashrc, tmux, vscode, git
