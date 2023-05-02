@@ -159,7 +159,7 @@ sudo apt install code
 ```bash
 # setup
 sudo apt update && sudo apt upgrade -y
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl libdvd-pkg -y
+sudo apt-get install -y build-essential make cmake libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl libdvd-pkg -y
 sudo dpkg-reconfigure libdvd-pkg
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 cd .pyenv/
@@ -336,3 +336,111 @@ free -h
 swapoff -v /swapfile
 rm -f /swapfile
 ```
+
+## Install Alacritty
+
+```bash
+sudo apt update -y && sudo apt upgrade -y
+sudo add-apt-repository ppa:aslatter/ppa -y
+sudo apt install -y alacritty
+sudo apt install -y cmake pkg-config libfreetype6-dev \
+    libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+```
+
+### Configure Rust on Ubuntu
+
+```bash
+sudo curl https://sh.rustup.rs -sSf | sh
+```
+
+### Download Alacritty Source code
+
+```bash
+git clone https://github.com/jwilm/alacritty.git
+```
+
+```bash
+cd alacritty
+cargo build --release
+sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+infocmp alacritty
+```
+### Create a Desktop shortcut
+
+Once the installation process of building Alacritty source code is done, it will save the compiled binary under a directory, here is the path to that: /target/release/alacritty present under your Alacritty’s git cloned directory.
+
+Without leaving Alacritty directory, run the given commands.
+
+```bash
+sudo cp target/release/alacritty /usr/local/bin
+
+sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+
+sudo desktop-file-install extra/linux/Alacritty.desktop
+
+sudo update-desktop-database
+```
+
+### Shell completions
+
+To get automatic completions for Alacritty’s flags and arguments you can install the provided shell completions.
+
+```bash
+echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc
+```
+### For Customization
+
+To customize the look and feel of the Terminal, we can create Alacritty YML Configuration. You can get the default one here on Github.
+
+or for the current one while doing the article use the given commands:
+```bash
+
+mkdir $HOME/.config/alacritty
+
+cd $HOME/.config/alacritty
+
+wget https://github.com/alacritty/alacritty/releases/download/v0.11.0-rc3/alacritty.yml
+```
+
+Now you have the file. Edit the same to configure the Terminal as per your choice.
+
+```bash
+$EDITOR $HOME/.config/alacritty/alacritty.yml
+```
+
+### Pre-built Terminal Themes
+
+You can also, use the pre-built themes. For that you can use the NPM:
+
+sudo apt install npm
+
+Install Themes:
+
+```bash
+sudo npm i -g alacritty-themes
+
+alacritty-themes
+```
+### Uninstall Alacritty from Ubuntu 22.04
+
+Well, if you didn’t like this Terminal application then to remove Alacritty completely from your Ubuntu 22.04 system by following the given commands:
+
+For PPA users:
+
+```bash
+sudo apt autoremove --purge alacritty
+```
+
+For source compiled users:
+
+```bash
+sudo rm /usr/local/bin/alacritty
+
+sudo rm /usr/share/pixmaps/Alacritty.svg
+
+sudo rm /usr/share/applications/Alacritty.desktop
+
+sudo update-desktop-database
+```
+
+Also, delete the source code directory which you have cloned from GitHub.
