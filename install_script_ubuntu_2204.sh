@@ -11,8 +11,10 @@ sudo apt-get install -y \
      libbz2-dev libdvd-pk libffi-dev liblzma-dev libncurses5-dev \
      libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev \
      zlib1g-dev xz-utils llvm python3-openssl \
-     exa git curl wget make build-essential \
-    tk-dev tmux vim
+     build-essential make cmake
+
+sudo apt-get install -y \
+     curl wget tk-dev git tmux vim exa
 sudo apt-get update -y
 
 ## qbittorrent, vlc
