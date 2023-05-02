@@ -6,31 +6,19 @@ Ideas for Ubuntu setup and install commands
 
 https://www.omgubuntu.co.uk/2022/04/installed-ubuntu-22-04-do-these-things-next
 
-## Install additional libs ?
 
 ```bash
-sudo apt install libbz2-dev libffi-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev tk-dev zlib1g-dev -y
+sudo apt-get update -y
+sudo apt-get upgrade -y
 ```
 
-## vim
+## Install additional libs + git, vim, tmux, exa
 
 ```bash
-sudo apt install vim -y
+sudo apt install libbz2-dev libffi-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev tk-dev zlib1g-dev git vim tmux exa -y
 ```
 
-## tmux
-
-```bash
-sudo apt install tmux -y
-```
-
-## Git
-
-```bash
-sudo apt install git -y
-```
-
-- setup git keys ??
+## Setup git keys (not finished)
 
 ```bash
 ssh-keygen -t ed25519 -C "stanislav.sabev@gmail.com"
@@ -312,7 +300,7 @@ sudo apt remove virtualbox
 sudo apt purge virtualbox
 ```
 
-## Bitwarden
+## Bitwarden (not finished)
 
 ```bash
 sudo apt update -y && sudo apt upgrade -y
