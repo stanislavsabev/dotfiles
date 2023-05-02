@@ -51,6 +51,12 @@ if [ -d "$DOTFILES_DIR/bash/priv" ]; then
   done;
 fi
 unset file;
+
+# source alacrity files
+if [ -d "$HOME/alacritty" ]; then
+  [ -f "$HOME/alacritty/extra/complitions/alacritty.bash" ] && \
+    source "$HOME/alacritty/extra/complitions/alacritty.bash";
+fi
 # ::endsoruce files
 
 # ::shopt
