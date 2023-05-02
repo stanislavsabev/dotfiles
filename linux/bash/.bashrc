@@ -59,6 +59,21 @@ if [ -d "$HOME/alacritty" ]; then
 fi
 # ::endsoruce files
 
+
+# source dircolors
+if [ -x /usr/bin/dircolors ] && [ -d "$HOME/.dir_colors" ]; then
+      # eval "dircolors ~/.dir_colors/dircolors"
+      test -r ~/.dir_colors/dircolors && eval "$(dircolors -b ~/.dir_colors/dircolors)" || eval "$(dircolors -b)"
+fi
+
+# if [ -d "$HOME/.dir_colors" ]; then
+
+#   [ -f "$HOME/.dir_colors/dircolors" ] && \
+#     eval `$HOME/.dir_colors/dircolors`;
+# fi
+# ::endsoruce files
+
+
 # ::shopt
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
