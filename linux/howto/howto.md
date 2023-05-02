@@ -244,11 +244,11 @@ sudo apt install vlc-plugin-bittorrent -y
 ## Drakula theme for gnome-terminal and qbittorrent
 
 ```bash
-cd ~/opt
-mkdir dracula
-cd dracula/
+mkdir -p ~/opt/dracula/
+cd ~/opt/dracula/
 git clone https://github.com/dracula/qbittorrent.git
 git clone https://github.com/dracula/gnome-terminal
+
 chmod -R 777 qbittorrent
 mod qbittorrent qbittorrent
 cd qbittorrent/webui
