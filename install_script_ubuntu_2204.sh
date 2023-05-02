@@ -17,7 +17,6 @@ sudo apt-get update -y
 
 ## qbittorrent, vlc
 echo "Install qbittorrent, vlc"
-sudo apt-get update -y
 sudo apt-get install -y qbittorrent 
 sudo sudo apt-get install vlc -y
 sudo apt install -y vlc-plugin-access-extra libbluray-bdj libdvd-pkg 
@@ -37,11 +36,11 @@ cd ~
 ## Pyenv
 echo ">> Install Pyenv"
 
-sudo apt update -y
 sudo apt-get install -y make build-essential libssl-dev \
     zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget \
     curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev \
     libffi-dev liblzma-dev python3-openssl libdvd-pkg
+sudo apt-get update -y
 
 cd ~
 sudo dpkg-reconfigure libdvd-pkg
@@ -55,7 +54,6 @@ pyenv global 3.11
 
 echo ">> Install fish shell"
 cd ~
-sudo apt-get update -y
 sudo apt-add-repository -y ppa:fish-shell/release-3
 sudo apt-get update -y
 sudo apt-get install fish
@@ -74,8 +72,8 @@ wget -qO- https://packages.microsoft.com/keys/microsoft.asc | \
 sudo apt-get install software-properties-common apt-transport-https wget gpg -y
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt update -y
-sudo apt install code
+sudo apt-get update -y
+sudo apt-get install code
 
 ## Firefox
 echo ">> Install Forefox (no snap)"
@@ -95,8 +93,16 @@ Pin-Priority: -1
 echo \
     'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | \
     sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
-sudo apt update -y
+sudo apt-get update -y
 sudo apt-get -y install firefox
 
+## Swap file
+echo ">> Setup swap file"
+sudo fallocate -l 16G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo swapon --show
+free -h
 
 echo ">> Success. Installation script finished without errors!"

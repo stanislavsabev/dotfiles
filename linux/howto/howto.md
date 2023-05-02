@@ -15,7 +15,8 @@ sudo apt-get upgrade -y
 ## Install additional libs + git, vim, tmux, exa
 
 ```bash
-sudo apt install libbz2-dev libffi-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev tk-dev zlib1g-dev git vim tmux exa -y
+sudo apt install -y libbz2-dev libffi-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev tk-dev zlib1g-dev
+sudo apt install -y git vim tmux exa
 ```
 
 ## Setup git keys (not finished)
@@ -76,7 +77,7 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 flatpak install flathub com.slack.Slack -y
 ```
 
-- remove Slack
+### remove Slack
 
 ```bash
 flatpak uninstall --delete-data flathub com.slack.Slack
@@ -312,4 +313,26 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 
 ```bash
 sudo apt-get update && sudo apt-get install spotify-client -y
+```
+
+
+## Swap file
+
+```bash
+sudo fallocate -l 16G /swapfile
+sudo chmod 600 /swapfile
+ls -lh /swapfile
+
+sudo mkswap /swapfile
+sudo swapon /swapfile
+
+sudo swapon --show
+free -h
+```
+
+### Remove a swap file
+
+```bash
+swapoff -v /swapfile
+rm -f /swapfile
 ```
