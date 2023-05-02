@@ -6,7 +6,7 @@
 alias fish="export MYSHELL=fish; exec bash"
 
 if [[ -z ${MYSHELL+x} ]]; then
-  export MYSHELL="fish"
+  export MYSHELL="bash"
 fi
 
 if [[ $MYSHELL == "fish" ]]; then

@@ -2,9 +2,9 @@
 
 Ideas for Ubuntu setup and install commands
 
-## Tthings to do after installing Ubuntu 22.04
-https://www.omgubuntu.co.uk/2022/04/installed-ubuntu-22-04-do-these-things-next
+## Things to do after installing Ubuntu 22.04
 
+https://www.omgubuntu.co.uk/2022/04/installed-ubuntu-22-04-do-these-things-next
 
 ## Install additional libs ?
 
@@ -12,43 +12,20 @@ https://www.omgubuntu.co.uk/2022/04/installed-ubuntu-22-04-do-these-things-next
 sudo apt install libbz2-dev libffi-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev tk-dev zlib1g-dev -y
 ```
 
+## vim
 
-## Install Firefox (no snap)
-
-Step 1: Remove the Firefox Snap by running the following command in a new Terminal window:
 ```bash
-sudo snap remove firefox
+sudo apt install vim -y
 ```
 
-Step 2: Add the (Ubuntu) Mozilla team PPA to your list of software sources by running the following command in the same Terminal window:
-```bash
-sudo add-apt-repository ppa:mozillateam/ppa
-```
+## tmux
 
-Step 3: Next, alter the Firefox package priority to ensure the PPA/deb/apt version of Firefox is preferred. This can be done using a slither of code from [FosTips](https://fostips.com/ubuntu-21-10-two-firefox-remove-snap/) (copy and paste it whole, not line by line):
 ```bash
-echo '
-Package: firefox*
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 1001
-
-Package: firefox*
-Pin: release o=Ubuntu*
-Pin-Priority: -1
-' | sudo tee /etc/apt/preferences.d/mozilla-firefox
-```
-
-Step 4: Since you’ll (hopefully) want future Firefox upgrades to be installed automatically, Balint Reczey shares a concise command on his blog that ensures it happens:
-```bash
-echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
-```
-
-Step 5: Finally, install Firefox via apt by running this command:
-```bash
-sudo apt install firefox -y
+sudo apt install tmux -y
 ```
 
 ## Git
+
 ```bash
 sudo apt install git -y
 ```
@@ -65,37 +42,129 @@ ssh -T git@github.com
 code ~/.ssh/id_ed25519.pub
 ```
 
-# VSCode
+## Dotfiles
+
+```bash
+cd ~
+# git clone git@github.com:stanislavsabev/dotfiles.git .dotfiles
+git clone https://github.com/stanislavsabev/dotfiles.git .dotfiles
+```
+
+## install fish shell
+
+```bash
+sudo apt-get update
+sudo apt-get install fish
+```
+
+### Or install fish via ppa
+  
+```bash
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt update
+sudo apt install fish
+```
+  
+### Install oh-my-fish
+  
+```bash
+sudo apt-get update
+curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
+fish install
+```
+
+## Flatpack
+
+```bash
+sudo apt install flatpak -y
+sudo reboot now
+```
+
+- enable Flatpack
+
+```bash
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+```
+
+## Install Slack
+
+```bash
+flatpak install flathub com.slack.Slack -y
+```
+
+- remove Slack
+
+```bash
+flatpak uninstall --delete-data flathub com.slack.Slack
+flatpak remove --unused
+```
+
+## Install Firefox (no snap)
+
+Step 1: Remove the Firefox Snap by running the following command in a new Terminal window:
+
+```bash
+sudo snap remove firefox
+```
+
+Step 2: Add the (Ubuntu) Mozilla team PPA to your list of software sources by running the following command in the same Terminal window:
+
+```bash
+sudo add-apt-repository ppa:mozillateam/ppa
+```
+
+Step 3: Next, alter the Firefox package priority to ensure the PPA/deb/apt version of Firefox is preferred. This can be done using a slither of code from [FosTips](https://fostips.com/ubuntu-21-10-two-firefox-remove-snap/) (copy and paste it whole, not line by line):
+
+```bash
+echo '
+Package: firefox*
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+
+Package: firefox*
+Pin: release o=Ubuntu*
+Pin-Priority: -1
+' | sudo tee /etc/apt/preferences.d/mozilla-firefox
+```
+
+Step 4: Since you’ll (hopefully) want future Firefox upgrades to be installed automatically, Balint Reczey shares a concise command on his blog that ensures it happens:
+
+```bash
+echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+```
+
+Step 5: Finally, install Firefox via apt by running this command:
+
+```bash
+sudo apt install firefox -y
+```
+
+## VSCode
 
 - import GPG Key
+
 ```bash
-sudo apt install software-properties-common apt-transport-https wget gpg -y
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo apt install software-properties-common apt-transport-https wget gpg -y
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 ```
+
 - add Microsoft's VSCode repository
+
 ```bash
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 ```
+
 - run system update
+
 ```bash
 sudo apt update
 ```
 
 - install VSCode
+
 ```bash
 sudo apt install code
-```
-
-# Dotfiles
-
-- dotfiles dir - `~/.dotfiles`
-
-```bash
-
-git clone git@github.com:stanislavsabev/dotfiles.git
-git clone https://github.com/stanislavsabev/dotfiles.git
-
 ```
 
 ## Pyenv
@@ -105,12 +174,13 @@ git clone https://github.com/stanislavsabev/dotfiles.git
 ```bash
 # setup
 sudo apt update && sudo apt upgrade -y
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl libdvd-pkg
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl libdvd-pkg -y
 sudo dpkg-reconfigure libdvd-pkg
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 cd .pyenv/
 src/configure && make -C src
 ```
+
 - install Python
 
 ```bash
@@ -129,15 +199,9 @@ xinput list-props 13 | grep -i scrolling
 xinput -set-prop 13 "libinput Scrolling Pixel Distance" 35
 ```
 
-
-## tmux
-
-```bash
-sudo apt install tmux -y
-```
-
 ## Dotnet tools install commands
 
+todo
 
 ## Vulkan
 
@@ -166,18 +230,20 @@ api
 ```
 
 ## GLFW
+
 ```bash
 sudo apt install libglfw3-dev libglm-dev -y
 ```
 
-## Popular theme for qbittorrent 
+## Popular theme for qbittorrent
 
-``` bash
+```bash
 cd ~/opt
 git clone https://github.com/jagannatharjun/qbt-theme.git
 ```
 
 ## Install qbittorrent
+
 ```bash
 sudo apt install qbittorrent -y
 ```
@@ -201,8 +267,8 @@ git clone https://github.com/dracula/gnome-terminal
 chmod -R 777 qbittorrent
 mod qbittorrent qbittorrent
 cd qbittorrent/webui
-make
 cd ~/opt/dracula/qbittorrent/
+make
 code dracula.qbtheme 
 
 ```
@@ -228,6 +294,7 @@ sudo apt install virtualbox -y
 ```
 
 - Extension pack
+
 ```bash
 sudo apt install virtualbox-ext-pack -y
 ```
@@ -235,6 +302,7 @@ sudo apt install virtualbox-ext-pack -y
 - remove
 
 - Uninstall extension package ?
+
 ```bash
 sudo apt ins virtualbox-ext-pack -y
 ```
@@ -245,7 +313,19 @@ sudo apt purge virtualbox
 ```
 
 ## Bitwarden
+
 ```bash
 sudo apt update -y && sudo apt upgrade -y
 apt install apt-transport-https ca-certificates curl software-properties-common -y
+```
 
+## Spofiry
+
+```bash
+curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+```
+
+```bash
+sudo apt-get update && sudo apt-get install spotify-client -y
+```

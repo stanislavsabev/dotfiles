@@ -44,6 +44,13 @@ for file in $DOTFILES_DIR/bash/{functions,aliases,prompt}; do
 done;
 unset file;
 
+# source private files
+if [ -d "$DOTFILES_DIR/bash/priv" ]; then
+  for file in $DOTFILES_DIR/bash/priv/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file";
+  done;
+fi
+unset file;
 # ::endsoruce files
 
 # ::shopt
@@ -90,7 +97,7 @@ eval "$(pyenv init --path)"
 alias fish="export MYSHELL=fish; exec bash"
 
 if [[ -z ${MYSHELL+x} ]]; then
-  export MYSHELL="fish"
+  export MYSHELL="bash"
 fi
 
 if [[ $MYSHELL == "fish" ]]; then
