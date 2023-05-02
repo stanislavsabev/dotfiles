@@ -60,10 +60,11 @@ sudo apt-add-repository -y ppa:fish-shell/release-3
 sudo apt-get update -y
 sudo apt-get install fish
 
+cd ~/.config
 sudo apt-get update
 curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
-command fish install
-
+fish install
+cd ~
 
 ## VSCode
 echo ">> Install VSCode (no snap)"
@@ -78,7 +79,7 @@ sudo apt install code
 
 ## Firefox
 echo ">> Install Forefox (no snap)"
-sudo snap remove firefox
+sudo snap remove firefox --purge
 sudo add-apt-repository -y ppa:mozillateam/ppa
 
 echo '
