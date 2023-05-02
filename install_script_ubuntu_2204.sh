@@ -24,15 +24,43 @@ sudo sudo apt-get install vlc -y
 sudo apt install -y vlc-plugin-access-extra libbluray-bdj libdvd-pkg 
 sudo apt install -y vlc-plugin-bittorrent
 
-cd ~
-mkdir ~/opt
-cd ~/opt
-git clone https://github.com/jagannatharjun/qbt-theme.git
 
+## Dracula themes
+echo ">> Add Dracula terminal profile"
+
+# Create Dracula profile
+dconfdir=/org/gnome/terminal/legacy/profiles:
+create_gnome_term_profile() {
+    local profile_ids=($(dconf list $dconfdir/ | grep ^: |\
+                        sed 's/\///g' | sed 's/://g'))
+    local profile_name="$1"
+    local profile_ids_old="$(dconf read "$dconfdir"/list | tr -d "]")"
+    local profile_id="$(uuidgen)"
+
+    [ -z "$profile_ids_old" ] && local profile_ids_old="["  # if there's no `list` key
+    [ ${#profile_ids[@]} -gt 0 ] && local delimiter=,  # if the list is empty
+    dconf write $dconfdir/list \
+        "${profile_ids_old}${delimiter} '$profile_id']"
+    dconf write "$dconfdir/:$profile_id"/visible-name "'$profile_name'"
+    echo $profile_id
+}
+UUID=$(create_gnome_term_profile Dracula)
+dconf write $dconfdir/default "'$UUID'"
+
+# Add Dracula themes
+echo ">> Install Dracula themes"
 mkdir -p ~/opt/dracula
 cd ~/opt/dracula/
 git clone https://github.com/dracula/qbittorrent.git
+# TODO: install qbittorrent theme
+
 git clone https://github.com/dracula/gnome-terminal
+cd gnome-terminal
+./install.sh -s Dracula -p Dracula --install-dircolors
+
+cd ~/opt
+git clone https://github.com/jagannatharjun/qbt-theme.git
+# TODO: install qbt-theme
 cd ~
 
 ## Pyenv
