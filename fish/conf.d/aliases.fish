@@ -1,6 +1,6 @@
 source "$__fish_config_dir/conf.d/envs.fish"
 
-alias bash="set MYSHELL bash; exec bash"
+alias chbash="set MYSHELL bash; exec bash"
 
 # :NAVIGATION
 alias ..="cd .."
@@ -117,15 +117,15 @@ switch (uname)
         # LS ALIASES
         # alias ls="exa -GF"
         alias exa='exa --color=always'
-        alias l='exa'
-        alias ls='exa -a'
+        alias l='exa -a'
+        alias ls='exa -lag'
         abbr -a lsgrep -- 'ls | grep'
         alias la='exa -lag'
         alias ll='exa -lg'
         abbr -a ldir -- "exa -lgD"
         abbr -a lsdir -- "exa -lgD"
         abbr -a l. -- "exa -aF | egrep '^\.'"
-        abbr -a la. -- "exa -lagF | awk '\$8 ~ /^\./'"
+        abbr -a ll. -- "exa -laF | awk '\$7 ~ /^\./'"
         abbr -a rf -- "rm -rf"
         # tree listing
         abbr lt -- 'exa -aT --group-directories-first'
