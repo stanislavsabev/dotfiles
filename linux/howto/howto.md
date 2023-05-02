@@ -38,27 +38,23 @@ cd ~
 git clone https://github.com/stanislavsabev/dotfiles.git .dotfiles
 ```
 
-## install fish shell
-
-```bash
-sudo apt-get update
-sudo apt-get install fish
-```
-
-### Or install fish via ppa
+## install fish shell via ppa
   
 ```bash
-sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt-add-repository -y ppa:fish-shell/release-3
 sudo apt update
-sudo apt install fish
+sudo apt install -y fish
 ```
   
 ### Install oh-my-fish
   
 ```bash
+cd ~/.config
 sudo apt-get update
 curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
 fish install
+rm -rf install
+cd ~
 ```
 
 ## Flatpack
@@ -92,7 +88,7 @@ flatpak remove --unused
 Step 1: Remove the Firefox Snap by running the following command in a new Terminal window:
 
 ```bash
-sudo snap remove firefox
+sudo snap remove firefox --purge
 ```
 
 Step 2: Add the (Ubuntu) Mozilla team PPA to your list of software sources by running the following command in the same Terminal window:
