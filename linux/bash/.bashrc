@@ -119,7 +119,7 @@ fi
 alias chfish="export MYSHELL=fish; exec bash"
 
 if [[ -z ${MYSHELL+x} ]]; then
-  export MYSHELL="bash"
+  export MYSHELL="fish"
 fi
 
 if [[ $MYSHELL == "fish" ]]; then
