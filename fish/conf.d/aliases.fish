@@ -117,16 +117,17 @@ switch (uname)
         # LS ALIASES
         # alias ls="exa -GF"
         alias exa='exa --color=always'
-        alias l='exa -a'
-        alias ls='exa -lag'
+        alias l='exa -g'
+        alias ls='exa -ag'
         abbr -a lsgrep -- 'ls | grep'
         alias la='exa -lag'
         alias ll='exa -lg'
         abbr -a ldir -- "exa -lgD"
         abbr -a lsdir -- "exa -lgD"
-        abbr -a l. -- "exa -aF | egrep '^\.'"
-        abbr -a ll. -- "exa -laF | awk '\$7 ~ /^\./'"
-        abbr -a rf -- "rm -rf"
+        alias l.="exa -d (exa -a --color=never | egrep '^\.') "
+        alias ls.="exa -dF (exa -a --color=never | egrep '^\.')"
+        alias la.="exa -ldgF (exa -a --color=never | egrep '^\.')"
+        alias rf="rm -rf"
         # tree listing
         abbr lt -- 'exa -aT --group-directories-first'
         
