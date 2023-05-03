@@ -3,7 +3,8 @@ function sync_config
     Sync config files between their location (SRC) and dotfiles repo (DEST)
 
     CONFIG_NAMES    NAME_1 ..NAME_N, config names 
-                    valid names are: fish, bashrc, tmux, vscode, git
+                    valid names are: fish, bashrc, tmux,
+                    vscode, git, alacritty
     -r --reverse    reverse copy - from DEST to SRC
     -h --help       displays this message
     --dry-run       print commands that would be executed
@@ -57,6 +58,10 @@ function sync_config
             case tmux
                 set SRC "$HOME/.tmux.conf"
                 set DEST "$DOTFILES_DIR/.tmux.conf"
+                set FLAGS -b --suffix=$_suffix
+            case alacritty
+                set SRC "$CONFIG_DIR/alacritty/alacritty.yaml"
+                set DEST "$DOTFILES_DIR/alacritty/alacritty.yaml"
                 set FLAGS -b --suffix=$_suffix
             case '*'
                 echo "sync_config: Unkown name: $name"
