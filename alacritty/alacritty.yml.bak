@@ -1,0 +1,19 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# All imports must either be absolute paths starting with `/`, or paths relative
+# to the user's home directory starting with `~/`.
+import:
+  - ~/opt/dracula/alacritty-master/dracula.yml
+
+# Font configuration
+font:
+  # Normal (roman) font face
+  normal:
+    family: Hack Nerd Font Mono
+    style: Regular
+  bold:
+    family: Hack Nerd Font Mono
+    style: Bold
+  italic:
+    family: Hack Nerd Font Mono
+    style: Italic
