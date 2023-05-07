@@ -14,7 +14,7 @@ sudo apt-get install -y \
      build-essential make cmake
 
 sudo apt-get install -y \
-     curl wget tk-dev git tmux vim exa
+     curl wget htop tk-dev git tmux vim exa wine
 sudo apt-get update -y
 
 ## qbittorrent, vlc
