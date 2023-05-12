@@ -1,0 +1,197 @@
+{
+    "gitlens.codeLens.enabled": false,
+    "gitlens.currentLine.enabled": true,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.hovers.enabled": false,
+    "gitlens.statusBar.enabled": false,
+    "gitlens.views.repositories.autoRefresh": false,
+    "gitlens.views.fileHistory.avatars": false,
+    "gitlens.views.lineHistory.avatars": false,
+    "gitlens.views.repositories.avatars": false,
+    "scm.diffDecorationsGutterWidth": 1,
+    "gitlens.keymap": "none",
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": false,
+    "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": true,
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "Source Code Pro",
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.profiles.osx": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "fish": {
+            "path": "/usr/local/bin/fish"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        },
+        "python3-repl": {
+            "path": "python3",
+            "args": [
+                "-q"
+            ]
+        }
+    },
+    "markdown.preview.fontSize": 14,
+    "workbench.colorTheme": "Dracula",
+    "editor.semanticTokenColorCustomizations": {
+        "[azure]": {
+            "enabled": true
+        }
+    },
+    "editor.tokenColorCustomizations": {
+        "[Flatland Monokai]": {
+            "variables": "#AE81FF",
+            "strings": "#F9D43E",
+            "textMateRules": [
+                {
+                    "scope": [
+                        "comment",
+                        "variable",
+                        "entity.other.attribute-name"
+                    ],
+                    "settings": {
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": "keyword",
+                    "settings": {
+                        "fontStyle": "italic bold"
+                    }
+                },
+            ]
+        },
+        "[azure]": {
+            "variables": "#b46274",
+            "textMateRules": [
+                {
+                    "scope": [
+                        "keyword",
+                        "entity.name.function"
+                    ],
+                    "settings": {
+                        "foreground": "#508aaa",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": "meta",
+                    "settings": {
+                        "foreground": "#f8f8f0"
+                    }
+                },
+                {
+                    "scope": [
+                        "variable.parameter",
+                    ],
+                    "settings": {
+                        "foreground": "#b46274",
+                        "fontStyle": ""
+                    }
+                },
+                {
+                    "scope": [
+                        "entity.other.attribute-name"
+                    ],
+                    "settings": {
+                        "foreground": "#b46274",
+                        "fontStyle": "bold"
+                    }
+                },
+                {
+                    "scope": [
+                        "comment"
+                    ],
+                    "settings": {
+                        "foreground": "#838383",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": [
+                        "support.function.builtin.python",
+                        "support.function.magic.python",
+                        "storage.type.function.lambda.python",
+                    ],
+                    "settings": {
+                        "foreground": "#4ec9aa",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": [
+                        "storage.type.class.python",
+                        "storage.type.function.python",
+                    ],
+                    "settings": {
+                        "foreground": "#4ec9aa",
+                        "fontStyle": ""
+                    }
+                }
+            ]
+        }
+    },
+    "workbench.colorCustomizations": {
+        "[azure]": {
+            "sideBar.background": "#181D26",
+            "tab.activeBorder": "#b46274",
+            "sideBar.border": "#81818188",
+            "tab.inactiveBackground": "#181D26",
+            "tab.inactiveForeground": "#f8f8f0",
+            "tab.activeForeground": "#f8f8f0",
+            "menu.background": "#282b35",
+            "editor.selectionBackground": "#414d628f",
+            "editor.lineHighlightBackground": "#414d623a",
+            "activityBar.background": "#25272e",
+            "titleBar.activeBackground": "#414d628f",
+            "editorGroupHeader.tabsBackground": "#25272e",
+            "breadcrumb.foreground": "#97999c",
+            "input.background": "#25272e",
+            "input.foreground": "#f8f8f0",
+            "input.placeholderForeground": "#97999c",
+            "tab.unfocusedHoverBorder": "#508aaa",
+            "editorIndentGuide.activeBackground": "#b46274a9",
+            "editorIndentGuide.background": "#92546156",
+            "editorCodeLens.foreground": "#97999c"
+        }
+    },
+    "workbench.editor.showTabs": true,
+    "cSpell.diagnosticLevel": "Hint",
+    "cSpell.userWords": [
+        "functools",
+        "gitlens",
+        "jupyter",
+        "Monokai",
+        "numpy",
+        "sqlalchemy",
+        "pytest",
+        "alembic",
+    ],
+    "window.title": "${rootPath} ${separator} ${activeEditorShort}",
+    "gitlens.views.commitDetails.files.layout": "list",
+    "security.workspace.trust.untrustedFiles": "open",
+    "python.formatting.provider": "black",
+    "black-formatter.args": [
+        "--line-length", "80"
+    ],
+    "[python]": {
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "application.shellEnvironmentResolutionTimeout": 15,
+    "database-client.showFilter": true,
+    "[sql]": {
+        "editor.defaultFormatter": "mtxr.sqltools"
+    },
+    "notebook.output.textLineLimit": 50,
+    "python.defaultInterpreterPath": "/Users/ssabev/projects/q2c/.vq2c",
+    "workbench.iconTheme": "vscode-icons",
+    "git.openRepositoryInParentFolders": "always",
+}
