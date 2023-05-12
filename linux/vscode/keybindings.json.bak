@@ -79,7 +79,7 @@
     {
         "key": "alt+left",
         "command": "workbench.action.navigateBack",
-        "when": "canNavigateBack && editorTextFocus && !terminalFocus"
+        "when": "canNavigateBack && editorTextFocus"
     },
     {
         "key": "ctrl+alt+-",

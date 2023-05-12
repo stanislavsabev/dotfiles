@@ -148,14 +148,16 @@
     },
     "terminal.integrated.fontSize": 15,
     "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.defaultProfile.linux": "fish",
     "markdown.preview.fontSize": 15,
     "workbench.editor.showTabs": true,
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.userWords": [
-        "Monokai",
+        "endregion",
         "functools",
         "gitlens",
         "jupyter",
+        "Monokai",
         "numpy"
     ],
     "python.jediEnabled": false,
@@ -179,9 +181,11 @@
     "python.languageServer": "Pylance",
     "explorer.confirmDelete": false,
     "[python]": {
-        "editor.formatOnType": true
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
     },
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
     "git.confirmSync": false,
+    "redhat.telemetry.enabled": false,
 }
