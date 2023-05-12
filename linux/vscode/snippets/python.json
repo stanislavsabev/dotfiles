@@ -15,14 +15,14 @@
 	"Jupyter Cella": {
 		"prefix": "cell",
 		"body": [
-			"#In[0]$0"
+			"# %%$0"
 		],
 		"description": "Jupyter Cell"
 	},
 	"Jupyter Cell + Clipboard": {
 		"prefix": "cell_clipboard",
 		"body": [
-			"# In[1]\n${CLIPBOARD}"
+			"# %%\n${CLIPBOARD}"
 		],
 		"description": "Jupyter Cell"
 	},
@@ -180,5 +180,12 @@
     "unused argument" : {
 		"prefix" : "unused",
 		"body" : "del $0 # unused"
-	}
+	},
+    "with open": {
+        "prefix": "with_open",
+        "body": [
+            "with open(${1:file_name}, ${2|\"r\",\"w\",\"a\",\"r+\",\"w+\",\"a+\",\"x\",\"b\",\"t\"|}, encoding=${3:\"utf-8\"}) as fd:",
+            "\tpass$0"
+        ],
+    }
 }
