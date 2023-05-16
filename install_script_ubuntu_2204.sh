@@ -136,3 +136,39 @@ sudo swapon --show
 free -h
 
 echo ">> Success. Installation script finished without errors!"
+
+
+## Gnome extensions
+sudo apt-get install -y gnome-tweaks \
+    gnome-shell-extensions chrome-gnome-shell 
+
+## Minimize app window on dock click
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+
+## Install flatpack
+sudo apt-get install -y flatpak
+sudo flatpak remote-add --if-not-exists \
+    flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo apt-get install gnome-software-plugin-flatpak
+
+## TODO: setup before / after reboot
+sudo reboot now
+
+flatpak install -y flathub org.gimp.GIMP
+flatpak install -y flathub com.slack.Slack
+flatpak install -y flathub com.spotify.Client
+flatpak install -y flathub com.discordapp.Discord
+
+sudo snap install -y bitwarden
+sudo snap install -y zoom-client
+
+## App preload predictor
+sudo apt-get install -y preload
+
+## Batery saver
+sudo apt-get install -y tlp tlp-rdw
+sudo systemctl enable tlp
+sudo systemctl start tlp
+
+## Manage free space and clear files
+sudo apt-get install -y bleachbit

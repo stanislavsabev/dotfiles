@@ -62,16 +62,26 @@ cd ~
 
 ```bash
 sudo apt install flatpak -y
-sudo reboot now
 ```
 
-- enable Flatpack
+### enable Flatpack
 
 ```bash
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
+### integrate with default app store
 
-## Install Slack
+```bash
+sudo apt-get install gnome-software-plugin-flatpak
+```
+
+### restart
+
+```bash
+sudo reboot now
+```
+
+### Install Slack
 
 ```bash
 flatpak install flathub com.slack.Slack -y
@@ -83,6 +93,13 @@ flatpak install flathub com.slack.Slack -y
 flatpak uninstall --delete-data flathub com.slack.Slack
 flatpak remove --unused
 ```
+
+### also see
+
+    flatpak install -y flathub org.gimp.GIMP
+    flatpak install -y flathub com.spotify.Client
+    flatpak install -y flathub com.discordapp.Discord
+
 
 ## Install Firefox (no snap)
 
@@ -444,3 +461,26 @@ sudo update-desktop-database
 ```
 
 Also, delete the source code directory which you have cloned from GitHub.
+
+## Gnome extensions
+sudo apt-get install -y gnome-tweaks \
+    gnome-shell-extensions chrome-gnome-shell
+
+
+## Minimize app window on dock click
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+
+## Bitwarden and Zoom
+sudo snap install -y bitwarden
+sudo snap install -y zoom-client
+
+## App preload predictor
+sudo apt-get install -y preload
+
+## Batery saver
+sudo apt-get install -y tlp tlp-rdw
+sudo systemctl enable tlp
+sudo systemctl start tlp
+
+## Manage free space and clear files
+sudo apt-get install -y bleachbit
