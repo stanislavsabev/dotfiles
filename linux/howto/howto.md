@@ -237,6 +237,15 @@ api
 sudo apt install libglfw3-dev libglm-dev -y
 ```
 
+## GLM, GLEW, SDL2
+```bash
+sudo apt-get update
+sudo apt-get install libglm-dev
+sudo apt-get install libglew-dev
+sudo apt-get install libsdl2-dev
+```
+
+
 ## Popular theme for qbittorrent
 
 ```bash

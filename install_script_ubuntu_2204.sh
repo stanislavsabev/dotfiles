@@ -11,19 +11,19 @@ sudo apt-get install -y \
      libbz2-dev libdvd-pk libffi-dev liblzma-dev libncurses5-dev \
      libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev \
      zlib1g-dev xz-utils llvm python3-openssl \
-     build-essential make cmake
+     build-essential make cmake ninja-build \
+     ubuntu-restricted-extras
 
+echo ">> Install common applications"
 sudo apt-get install -y \
-     curl wget htop tk-dev git tmux vim exa wine
-sudo apt-get update -y
+     curl wget htop tk-dev git tmux vim exa wine unzip tldr
+     
 
 ## qbittorrent, vlc
 echo "Install qbittorrent, vlc"
-sudo apt-get install -y qbittorrent 
-sudo sudo apt-get install vlc -y
-sudo apt install -y vlc-plugin-access-extra libbluray-bdj libdvd-pkg 
-sudo apt install -y vlc-plugin-bittorrent
-
+sudo apt-get install -y qbittorrent vlc vlc-plugin-access-extra \
+    vlc-plugin-bittorrent libbluray-bdj libdvd-pkg
+sudo apt-get update -y
 
 ## Dracula themes
 echo ">> Add Dracula terminal profile"
@@ -58,10 +58,33 @@ git clone https://github.com/dracula/gnome-terminal
 cd gnome-terminal
 ./install.sh -s Dracula -p Dracula --install-dircolors
 
+# Add Dracula themes
+cd ~/opt/dracula/
+wget https://raw.githubusercontent.com/dracula/gedit/master/dracula.xml
+mkdir -p $HOME/.local/share/gedit/styles/
+mv dracula.xml $HOME/.local/share/gedit/styles/
+
+
+mkdir -p $HOME/.themes
+wget https://github.com/dracula/gtk/archive/master.zip \
+    -P $HOME/.themes
+unzip $HOME/.themes/master.zip -d $HOME/.themes
+rm -rf $HOME/.themes/master.zip
+wget https://github.com/dracula/gtk/files/5214870/Dracula.zip \
+    -P $HOME/.icons
+unzip $HOME/.icons/Dracula.zip -d $HOME/.icons
+rm -rf $HOME/.icons/Dracula.zip
+
+# gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
+# gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
+# gsettings set org.gnome.desktop.interface icon-theme "Dracula"
+
+
 cd ~/opt
 git clone https://github.com/jagannatharjun/qbt-theme.git
 # TODO: install qbt-theme
 cd ~
+
 
 ## Pyenv
 echo ">> Install Pyenv"
@@ -140,7 +163,7 @@ echo ">> Success. Installation script finished without errors!"
 
 ## Gnome extensions
 sudo apt-get install -y gnome-tweaks \
-    gnome-shell-extensions chrome-gnome-shell 
+    gnome-shell-extensions chrome-gnome-shell
 
 ## Minimize app window on dock click
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
@@ -170,5 +193,11 @@ sudo apt-get install -y tlp tlp-rdw
 sudo systemctl enable tlp
 sudo systemctl start tlp
 
+sudo reboot now
+
 ## Manage free space and clear files
 sudo apt-get install -y bleachbit
+
+## OpenGL, SDL, SDL mixer, SDL ttf, GLM, GLEW
+sudo apt-get install -y libglm-dev libglew-dev \
+    libsdl2-dev libsdl2_mixer-dev libsdl2-ttf-dev
