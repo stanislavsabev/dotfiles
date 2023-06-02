@@ -1,7 +1,7 @@
 Dim objResult
 
 Set objShell = WScript.CreateObject("WScript.Shell")
-i = 30 * 6 ' 30 x 2min x 6hours
+i = 30 * 8 ' 30 x 2min x 8hours
 
 Do While i > 0
 	objResult = objShell.SendKeys("{NUMLOCK}{NUMLOCK}")

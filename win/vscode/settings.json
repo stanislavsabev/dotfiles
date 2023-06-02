@@ -1,15 +1,12 @@
 {
     "workbench.sideBar.location": "right",
     "[cpp]": {},
-    "gitlens.advanced.messages": {
-        "suppressShowKeyBindingsNotice": true
-    },
     "gitlens.codeLens.enabled": false,
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
     "gitlens.statusBar.enabled": false,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": -0.5,
     // "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
     // "C_Cpp.intelliSenseEngine": "Default",
     "gitlens.views.repositories.autoRefresh": false,
@@ -98,7 +95,7 @@
                     }
                 },
                 {
-                    "scope":[
+                    "scope": [
                         "comment"
                     ],
                     "settings": {
@@ -107,11 +104,10 @@
                     }
                 },
                 {
-                    "scope" : [
+                    "scope": [
                         "support.function.builtin.python",
                         "support.function.magic.python",
                         "storage.type.function.lambda.python",
-
                     ],
                     "settings": {
                         "foreground": "#4ec9aa",
@@ -119,10 +115,9 @@
                     }
                 },
                 {
-                    "scope" : [
+                    "scope": [
                         "storage.type.class.python",
                         "storage.type.function.python",
-
                     ],
                     "settings": {
                         "foreground": "#4ec9aa",
@@ -175,11 +170,28 @@
     "python.dataScience.enableCellCodeLens": true,
     "workbench.iconTheme": "vscode-icons",
     // "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+    // "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
     // "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
-    "python.formatting.provider": "autopep8",
+    "python.formatting.provider": "none",
     "workbench.settings.useSplitJSON": false,
     "code-runner.runInTerminal": true,
     "todo-tree.general.tags": [
@@ -206,5 +218,5 @@
     "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 75, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly}",
     "explorer.confirmDragAndDrop": false,
     "python.languageServer": "Pylance",
-
+    "git.openRepositoryInParentFolders": "never",
 }
