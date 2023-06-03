@@ -64,30 +64,30 @@ cd ~
 sudo apt install flatpak -y
 ```
 
-### enable Flatpack
+### Enable Flatpack
 
 ```bash
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
-### integrate with default app store
+#### integrate with default app store
 
 ```bash
 sudo apt-get install gnome-software-plugin-flatpak
 ```
 
-### restart
+#### restart
 
 ```bash
 sudo reboot now
 ```
 
-### Install Slack
+#### Install Slack
 
 ```bash
 flatpak install flathub com.slack.Slack -y
 ```
 
-### remove Slack
+#### remove Slack
 
 ```bash
 flatpak uninstall --delete-data flathub com.slack.Slack
@@ -103,19 +103,19 @@ flatpak remove --unused
 
 ## Install Firefox (no snap)
 
-Step 1: Remove the Firefox Snap by running the following command in a new Terminal window:
+#### Step 1: Remove the Firefox Snap by running the following command in a new Terminal window:
 
 ```bash
 sudo snap remove firefox --purge
 ```
 
-Step 2: Add the (Ubuntu) Mozilla team PPA to your list of software sources by running the following command in the same Terminal window:
+#### Step 2: Add the (Ubuntu) Mozilla team PPA to your list of software sources by running the following command in the same Terminal window:
 
 ```bash
 sudo add-apt-repository ppa:mozillateam/ppa
 ```
 
-Step 3: Next, alter the Firefox package priority to ensure the PPA/deb/apt version of Firefox is preferred. This can be done using a slither of code from [FosTips](https://fostips.com/ubuntu-21-10-two-firefox-remove-snap/) (copy and paste it whole, not line by line):
+#### Step 3: Next, alter the Firefox package priority to ensure the PPA/deb/apt version of Firefox is preferred. This can be done using a slither of code from [FosTips](https://fostips.com/ubuntu-21-10-two-firefox-remove-snap/) (copy and paste it whole, not line by line):
 
 ```bash
 echo '
@@ -129,13 +129,13 @@ Pin-Priority: -1
 ' | sudo tee /etc/apt/preferences.d/mozilla-firefox
 ```
 
-Step 4: Since you’ll (hopefully) want future Firefox upgrades to be installed automatically, Balint Reczey shares a concise command on his blog that ensures it happens:
+#### Step 4: Since you’ll (hopefully) want future Firefox upgrades to be installed automatically, Balint Reczey shares a concise command on his blog that ensures it happens:
 
 ```bash
 echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 ```
 
-Step 5: Finally, install Firefox via apt by running this command:
+#### Step 5: Finally, install Firefox via apt by running this command:
 
 ```bash
 sudo apt install firefox -y
@@ -143,7 +143,7 @@ sudo apt install firefox -y
 
 ## VSCode
 
-- import GPG Key
+#### import GPG Key
 
 ```bash
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -151,27 +151,32 @@ sudo apt install software-properties-common apt-transport-https wget gpg -y
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 ```
 
-- add Microsoft's VSCode repository
+#### add Microsoft's VSCode repository
 
 ```bash
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 ```
 
-- run system update
+#### run system update
 
 ```bash
 sudo apt update
 ```
 
-- install VSCode
+#### install VSCode
 
 ```bash
 sudo apt install code
 ```
 
+### Add 'Open in Code' to the context menu
+```bash
+wget -qO- https://raw.githubusercontent.com/cra0zy/code-nautilus/master/install.sh | bash
+```
+
 ## Pyenv
 
-- setup pyenv
+#### setup pyenv
 
 ```bash
 # setup
@@ -183,7 +188,7 @@ cd .pyenv/
 src/configure && make -C src
 ```
 
-- install Python
+#### install Python
 
 ```bash
 # install Python
@@ -214,13 +219,13 @@ sudo apt install build-essential -y
 sudo apt install vulkan-tools -y 
 ```
 
-- test with vkcube
+#### test with vkcube
 
 ```bash
 echo "test with 'vkcube"
 ```
 
-- vulkan dev tools
+#### vulkan dev tools
 
 ```bash
 sudo apt install libvulkan-dev 
@@ -297,22 +302,22 @@ sudo reboot
 
 ## VirtualBox
 
-- install
+#### install
 
 ```bash
 sudo add-apt-repository multiverse && sudo apt-get update
 sudo apt install virtualbox -y
 ```
 
-- Extension pack
+#### Extension pack
 
 ```bash
 sudo apt install virtualbox-ext-pack -y
 ```
 
-- remove
+#### remove
 
-- Uninstall extension package ?
+#### Uninstall extension package ?
 
 ```bash
 sudo apt ins virtualbox-ext-pack -y
@@ -472,12 +477,14 @@ sudo update-desktop-database
 Also, delete the source code directory which you have cloned from GitHub.
 
 ## Gnome extensions
-sudo apt-get install -y gnome-tweaks \
-    gnome-shell-extensions chrome-gnome-shell
+
+    sudo apt-get install -y gnome-tweaks \
+        gnome-shell-extensions chrome-gnome-shell
 
 
 ## Minimize app window on dock click
-gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+
+    gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
 ## Bitwarden and Zoom
 sudo snap install -y bitwarden
@@ -493,3 +500,9 @@ sudo systemctl start tlp
 
 ## Manage free space and clear files
 sudo apt-get install -y bleachbit
+
+## Telegram
+sudo apt-get install -y telegram-desktop
+
+### Optional packages related to the Telegram Desktop messaging application
+sudo apt install -y telegram-cli telegram-purple

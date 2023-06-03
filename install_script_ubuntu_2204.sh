@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+PACK_CMD="sudo apt-get install -y"
+SNAP_CMD="sudo snap install -y"
+FLATPACK_CMD="flatpak install -y "
+
 echo ">> Run install script for Ubuntu 22.04 LTS"
 
 sudo apt-get update -y
@@ -16,7 +20,7 @@ sudo apt-get install -y \
 
 echo ">> Install common applications"
 sudo apt-get install -y \
-     curl wget htop tk-dev git tmux vim exa wine unzip tldr
+     curl wget htop tk-dev git tmux vim exa wine unzip tldr gparted
      
 
 ## qbittorrent, vlc
@@ -128,6 +132,9 @@ sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packag
 sudo apt-get update -y
 sudo apt-get install code
 
+### Add 'Open in Code' to the context menu
+wget -qO- https://raw.githubusercontent.com/cra0zy/code-nautilus/master/install.sh | bash
+
 ## Firefox
 echo ">> Install Forefox (no snap)"
 sudo snap remove firefox --purge
@@ -201,3 +208,6 @@ sudo apt-get install -y bleachbit
 ## OpenGL, SDL, SDL mixer, SDL ttf, GLM, GLEW
 sudo apt-get install -y libglm-dev libglew-dev \
     libsdl2-dev libsdl2_mixer-dev libsdl2-ttf-dev
+
+sudo apt-get install -y telegram-desktop
+sudo apt install telegram-cli telegram-purple
