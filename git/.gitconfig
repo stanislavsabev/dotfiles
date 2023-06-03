@@ -30,3 +30,5 @@
 	defaultBranch = main
 [credential]
 	credentialStore = gpg
+[pull]
+	rebase = true
