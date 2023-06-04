@@ -4,7 +4,7 @@ SETLOCAL enableDelayedExpansion
 set XS=%DEVSETUP_DIR%\vscode
 set XD=%AppData%\Code\User
 
-if "%1"=="/b" ( 
+if "%1"=="/r" ( 
     set XS=%AppData%\Code\User
     set XD=%DEVSETUP_DIR%\vscode
     shift
@@ -22,18 +22,18 @@ if "%flag%"=="snip" ( GOTO:proc_snip )
 
 :Syntax
     echo Usage:
-    echo    %~n0 ^<flags^> ^<option^> [^<sub_option^>] [^<xcopy_flags^>]
+    echo    %~n0 [/r] ^<option^> [^<sub_option^>] [^<xcopy_flags^>]
     echo.
     echo    Copies files from this repo to VSCode install dir, based on
     echo    the option value
     echo.
     echo    FLAGS:
     echo.
-    echo      /b    Copy backwards. From VSCode install dir to this repo. 
+    echo      /r    Reverse copy. From VSCode install dir to this repo. 
     echo.
     echo    OPTIONS:
     echo.
-    echo      Specify what to copy
+    echo      What to copy
     echo.
     echo      sett  Copy 'settings.json'
     echo      kb    Copy 'keybindings.json'

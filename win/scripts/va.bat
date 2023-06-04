@@ -2,7 +2,7 @@
 
 set VA=
 if "%1"=="" (
-    set VA=.\venv
+    set VA=.\.venv
  ) else (
     set VA="%1%"
 )
