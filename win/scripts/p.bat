@@ -1,2 +1,2 @@
 @echo off
-cd %USERPROFILE%\projects
+pushd %USERPROFILE%\projects

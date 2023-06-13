@@ -8,4 +8,4 @@ if "%1"=="" (
 )
 
 python -m venv %VA%
-.\%VA%\Scripts\activate.bat
+%VA%\Scripts\activate.bat
