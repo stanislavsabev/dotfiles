@@ -34,7 +34,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$PATH:$SCRIPTS_DIR"              # my scripts
 export PATH="$PATH:$HOME/.dotnet/tools"       # Add .NET Core SDK tools
 export PATH="$PATH:$HOME/.cargo/bin"          # Add Rust tools
-
+export PATH="$PATH:$HOME/third_party/zig-linux-x86_64-0.11.0-dev.4008+a0b35249a"
 # ::endpath
 
 
