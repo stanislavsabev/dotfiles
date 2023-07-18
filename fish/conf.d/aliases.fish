@@ -25,12 +25,10 @@ abbr -a doc -- 'cd $HOME/Documents'
 abbr -a vid -- 'cd $HOME/Videos'
 abbr -a home -- cd
 
-abbr -a p -- 'cd $PROJECTS_DIR && ls'
+abbr -a p -- 'cd $PROJECTS_DIR'
+abbr -a pls -- 'cd $PROJECTS_DIR && ls'
 abbr -a dotfiles 'cd $DOTFILES_DIR'
 abbr -a config -- 'cd $HOME/.config'
-
-abbr -a pls -- 'cd $PROJECTS_DIR && ls'
-
 
 # :PYTHON
 abbr -a da -- deactivate
@@ -47,7 +45,9 @@ abbr -a ed-dotfiles -- '$EDITOR -n $DOTFILES_DIR'
 abbr -a ed-fish -- '$EDITOR -n $__fish_config_dir'
 abbr -a cd-fish -- 'cd $__fish_config_dir'
 
-abbr -a reboot -- 'sudo reboot'
+# :COMMANDS
+abbr -a  reboot -- 'sudo reboot'
+abbr -a  c -- 'clear'
 
 # :GIT
 abbr -a add -- 'git add'
@@ -135,7 +135,7 @@ switch (uname)
 
 
         # APT
-        abbr -a up -- "sudo apt update"
+        abbr -a up -- "sudo apt update -y"
         abbr -a upup -- "sudo apt upgrade -y"
         abbr -a api -- "sudo apt install"
 
@@ -157,6 +157,9 @@ switch (uname)
         abbr -a l. -- "ls -d .*"
         abbr -a la. -- "ls -lAh | awk '\$NF ~ /^\./'"
         abbr -a ll. -- "ls -lAh | awk '\$NF ~ /^\./'"
+
+
+        alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 
         # :MY SCRIPTS
         alias kports="kill_ports"

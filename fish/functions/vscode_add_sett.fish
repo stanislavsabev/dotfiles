@@ -26,7 +26,7 @@ function vscode_add_sett --description "Copy .vscode/ from SRC (../.ignore/) to 
         set DEST $TMP
     end
     if test -d $SRC
-        set SRC "$SRC/"
+        set SRC $SRC/*
     end
 
     set -l _cmd cp
@@ -34,5 +34,5 @@ function vscode_add_sett --description "Copy .vscode/ from SRC (../.ignore/) to 
         set -p _cmd echo 'dry-run:'
     end
 
-    command $_cmd -Raf  "$SRC" "$DEST"
+    command $_cmd -Ra $SRC $DEST
 end
