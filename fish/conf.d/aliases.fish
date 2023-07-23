@@ -46,8 +46,9 @@ abbr -a ed-fish -- '$EDITOR -n $__fish_config_dir'
 abbr -a cd-fish -- 'cd $__fish_config_dir'
 
 # :COMMANDS
-abbr -a  reboot -- 'sudo reboot'
-abbr -a  c -- 'clear'
+abbr -a reboot -- 'sudo reboot'
+abbr -a c -- 'clear'
+abbr -a o -- 'open .'
 
 # :GIT
 abbr -a add -- 'git add'
