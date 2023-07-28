@@ -199,6 +199,11 @@ pyenv global 3.11
 pyenv which python
 ```
 
+#### install clang
+```bash
+sudo apt-get install -y clang
+```
+
 ## Fix scrolling
 
 ```bash
