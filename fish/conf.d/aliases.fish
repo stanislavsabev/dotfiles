@@ -26,7 +26,7 @@ abbr -a vid -- 'cd $HOME/Videos'
 abbr -a home -- cd
 
 abbr -a p -- 'cd $PROJECTS_DIR'
-abbr -a pls -- 'cd $PROJECTS_DIR && ls'
+abbr -a pls -- 'cd $PROJECTS_DIR && la'
 abbr -a dotfiles 'cd $DOTFILES_DIR'
 abbr -a config -- 'cd $HOME/.config'
 
@@ -49,9 +49,11 @@ abbr -a cd-fish -- 'cd $__fish_config_dir'
 abbr -a reboot -- 'sudo reboot'
 abbr -a c -- 'clear'
 abbr -a o -- 'open .'
+abbr -a --set-cursor ffile -- 'find . -type f -name "%" 2> /dev/null'
+abbr -a --set-cursor fdir -- 'find . -type d -name "%" 2> /dev/null'
 
 # :GIT
-abbr -a add -- 'git add'
+abbr -a add -- 'git add -- '
 abbr -a addall -- 'git add --all'
 abbr -a push -- 'git push'
 abbr -a pull -- 'git pull'
@@ -74,6 +76,7 @@ abbr -a curr-branch -- 'git rev-parse --abbrev-ref HEAD'
 
 abbr -a undolast -- 'git reset HEAD~1'
 abbr -a unstageall -- 'git reset -- .'
+abbr -a unstage -- 'git reset -- '
 abbr -a recommit -- 'commit -c ORIG_HEAD'
 abbr -a resethard -- 'git reset HEAD --hard'
 abbr -a resetall -- 'git reset HEAD --hard && git clean -f'
@@ -132,8 +135,8 @@ switch (uname)
         # tree listing
         abbr lt -- 'exa -aT --group-directories-first'
         
-        abbr -a sand -- "cd $PROJECTS_DIR/sandbox && la"
-
+        abbr -a sand -- "cd $PROJECTS_DIR/sandbox"
+        abbr -a sandls -- "cd $PROJECTS_DIR/sandbox && la"
 
         # APT
         abbr -a up -- "sudo apt update -y"
