@@ -27,8 +27,9 @@ abbr -a home -- cd
 
 abbr -a p -- 'cd $PROJECTS_DIR'
 abbr -a pls -- 'cd $PROJECTS_DIR && la'
-abbr -a dotfiles 'cd $DOTFILES_DIR'
-abbr -a config -- 'cd $HOME/.config'
+abbr -a dotdir 'cd $DOTFILES_DIR'
+abbr -a fishdir -- 'cd $__fish_config_dir'
+abbr -a configdir -- 'cd $HOME/.config'
 
 # :PYTHON
 abbr -a da -- deactivate
@@ -43,7 +44,6 @@ abbr -a validate-commit-msg -- verify_commit_message
 abbr -a e -- $EDITOR
 abbr -a ed-dotfiles -- '$EDITOR -n $DOTFILES_DIR'
 abbr -a ed-fish -- '$EDITOR -n $__fish_config_dir'
-abbr -a cd-fish -- 'cd $__fish_config_dir'
 
 # :COMMANDS
 abbr -a reboot -- 'sudo reboot'
