@@ -1,9 +1,5 @@
 {
     "workbench.sideBar.location": "left",
-    "[cpp]": {},
-    "gitlens.advanced.messages": {
-        "suppressShowKeyBindingsNotice": true
-    },
     "gitlens.codeLens.enabled": false,
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
@@ -148,25 +144,21 @@
     },
     "terminal.integrated.fontSize": 15,
     "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.defaultProfile.linux": "bash",
     "markdown.preview.fontSize": 15,
     "workbench.editor.showTabs": true,
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.userWords": [
-        "Monokai",
+        "endregion",
         "functools",
         "gitlens",
         "jupyter",
+        "Monokai",
         "numpy"
     ],
-    "python.jediEnabled": false,
-    "python.dataScience.askForKernelRestart": false,
-    "python.dataScience.runStartupCommands": "%load_ext autoreload\n%autoreload 2",
-    "python.dataScience.sendSelectionToInteractiveWindow": true,
-    "python.dataScience.enableCellCodeLens": true,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
-    "python.formatting.provider": "black",
     "workbench.settings.useSplitJSON": false,
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
@@ -174,14 +166,30 @@
         "--extension-pkg-whitelist=os,PySide2,win32api",
         "--errors-only"
     ],
-    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 75, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly}",
+    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 75, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4}",
+    "[c]": {
+        "editor.wordBasedSuggestions": true,
+        "editor.suggest.insertMode": "replace",
+        "editor.semanticHighlighting.enabled": true
+    },
     "explorer.confirmDragAndDrop": false,
     "python.languageServer": "Pylance",
     "explorer.confirmDelete": false,
+    "python.formatting.provider": "none",
     "[python]": {
-        "editor.formatOnType": true
+        "editor.formatOnType": false,
+        "editor.defaultFormatter": "ms-python.black-formatter"
     },
+    "isort.args":[
+        "--profile", "black",
+        "--group_by_package", "false"
+    ],
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
     "git.confirmSync": false,
+    "redhat.telemetry.enabled": false,
+    "tabnine.experimentalAutoImports": true,
+    "editor.dragAndDrop": false,
+    "jake.autoDetect": "on",
+    "grunt.autoDetect": "on",
 }
