@@ -28,6 +28,7 @@ abbr -a home -- cd
 abbr -a p -- 'cd $PROJECTS_DIR'
 abbr -a pls -- 'cd $PROJECTS_DIR && la'
 abbr -a dotdir 'cd $DOTFILES_DIR'
+abbr -a dotfilesdir 'cd $DOTFILES_DIR'
 abbr -a fishdir -- 'cd $__fish_config_dir'
 abbr -a configdir -- 'cd $HOME/.config'
 
@@ -106,6 +107,7 @@ abbr -a stat -- "git diff HEAD~1 HEAD --stat"
 abbr -a gdiff -- 'git diff'
 abbr -a gdiffhead -- 'git diff HEAD'
 abbr -a cdiff -- 'code --diff'
+abbr -a codei -- 'code-insiders'
 abbr -a gwt -- 'git worktree'
 abbr -a changed -- "git diff HEAD HEAD^ --name-only"
 

@@ -3,8 +3,15 @@ function sync_config
     Sync config files between their location (SRC) and dotfiles repo (DEST)
 
     CONFIG_NAMES    NAME_1 ..NAME_N, config names 
-                    valid names are: fish, bashrc, tmux,
-                    vscode, git, alacritty
+                    Valid names are: 
+                        fish
+                        bashrc
+                        tmux
+                        code
+                        code-insiders
+                        git
+                        alacritty
+
     -r --reverse    reverse copy - from DEST to SRC
     -h --help       displays this message
     --dry-run       print commands that would be executed
@@ -21,6 +28,18 @@ function sync_config
         return $last_status
     end
 
+    set -f CONF_D
+    
+    switch (uname)
+    case Linux
+        set CONF_D $CONFIG_DIR
+    case Darwin
+        set CONF_D "$HOME/Library/Application Support"
+    case '*'
+        echo "sync_config: $(uname) not supported"
+        return 1
+    end
+
     set -f SRC
     set -f DEST
     set -f FLAGS
@@ -29,7 +48,6 @@ function sync_config
 
     for name in $names
         switch $name
-
             case fish
                 set SRC $__fish_config_dir
                 set DEST "$DOTFILES_DIR/fish"
@@ -38,17 +56,14 @@ function sync_config
                 set SRC "$HOME/.bashrc"
                 set DEST "$DOTFILES_DIR_OS/bash/.bashrc"
                 set FLAGS -b --suffix=$_suffix
-            case vscode
-                switch (uname)
-                    case Linux
-                        set SRC "$CONFIG_DIR/Code/User"
-                    case Darwin
-                        set SRC "$HOME/Library/Application Support/Code/User"
-                    case '*'
-                        echo "sync_config: $(uname) not supported"
-                        return 1
-                end
-                set DEST "$DOTFILES_DIR_OS/vscode"
+            case code
+                set SRC "$CONF_D/Code/User"
+                set DEST "$DOTFILES_DIR_OS/code"
+                set FLAGS --include snippets/ --include "*.json" --include "*.code-snippets" \
+                    --exclude "*" -b --suffix=$_suffix
+            case code-insiders
+                set SRC "$CONF_D/Code - Insiders/User"
+                set DEST "$DOTFILES_DIR_OS/code-insiders"
                 set FLAGS --include snippets/ --include "*.json" --include "*.code-snippets" \
                     --exclude "*" -b --suffix=$_suffix
             case git
@@ -60,7 +75,7 @@ function sync_config
                 set DEST "$DOTFILES_DIR/.tmux.conf"
                 set FLAGS -b --suffix=$_suffix
             case alacritty
-                set SRC "$CONFIG_DIR/alacritty/alacritty.yml"
+                set SRC "$CONF_D/alacritty/alacritty.yml"
                 set DEST "$DOTFILES_DIR/alacritty/alacritty.yml"
                 set FLAGS -b --suffix=$_suffix
             case '*'
