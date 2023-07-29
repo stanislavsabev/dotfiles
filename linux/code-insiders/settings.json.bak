@@ -19,7 +19,7 @@
     "editor.renderControlCharacters": false,
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.fontFamily": "Source Code Pro",
-    "workbench.colorTheme": "Dracula",
+    "workbench.colorTheme": "GitHub Dark",
     "editor.semanticTokenColorCustomizations": {
         "[azure]": {
             "enabled": true
@@ -185,7 +185,4 @@
     "jake.autoDetect": "on",
     "grunt.autoDetect": "on",
     "workbench.iconTheme": "material-icon-theme",
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
 }
