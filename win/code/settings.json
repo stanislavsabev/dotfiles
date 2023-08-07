@@ -6,7 +6,7 @@
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
     "gitlens.statusBar.enabled": false,
-    "window.zoomLevel": -0.5,
+    "window.zoomLevel": -1,
     // "C_Cpp.clang_format_path": "C:\\Program Files (x86)\\LLVM\\bin\\clang-format.exe",
     // "C_Cpp.intelliSenseEngine": "Default",
     "gitlens.views.repositories.autoRefresh": false,
@@ -28,7 +28,7 @@
     // "workbench.iconTheme": "Monokai Pro (Filter Octagon) Icons",
     // "editor.fontFamily" : "Fira Code",
     "editor.fontFamily": "Source Code Pro",
-    "workbench.colorTheme": "azure",
+    "workbench.colorTheme": "Dracula",
     "editor.semanticTokenColorCustomizations": {
         "[azure]": {
             "enabled": true
@@ -168,7 +168,7 @@
     "python.dataScience.runStartupCommands": "%load_ext autoreload\n%autoreload 2",
     "python.dataScience.sendSelectionToInteractiveWindow": true,
     "python.dataScience.enableCellCodeLens": true,
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "material-icon-theme",
     // "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     // "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
     // "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
@@ -188,10 +188,9 @@
             "source": "Git Bash"
         }
     },
-    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
-    "python.formatting.provider": "none",
     "workbench.settings.useSplitJSON": false,
     "code-runner.runInTerminal": true,
     "todo-tree.general.tags": [
@@ -208,12 +207,6 @@
             "type": "tag"
         }
     },
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.pylintArgs": [
-        "--extension-pkg-whitelist=os,PySide2,win32api",
-        "--errors-only"
-    ],
     "pyside2-vsc.designer-creator.path": "C:\\anaconda3\\Lib\\site-package\\PySide2\\designer.exe",
     "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 75, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly}",
     "explorer.confirmDragAndDrop": false,
