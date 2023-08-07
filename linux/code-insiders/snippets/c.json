@@ -46,5 +46,14 @@
             "#include \"${TM_FILENAME/(\\.cpp|\\.c)/.h/}\"",
             "$0",
         ]
+    },
+    "typedef struct": {
+        "prefix": "typedef_struct",
+        "description": "typedef struct",
+        "body": [
+            "typedef struct ${1:TypeName} {",
+            "\t$0",
+            "} $1;",
+        ],
     }
 }

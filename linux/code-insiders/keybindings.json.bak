@@ -181,25 +181,5 @@
         "key": "ctrl+alt+]",
         "command": "editor.action.selectToBracket",
         "when": "!jupyter.hascodecells"
-    },
-    {
-        "key": "ctrl+shift+up",
-        "command": "-editor.action.insertCursorAbove",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+shift+down",
-        "command": "-editor.action.insertCursorBelow",
-        "when": "editorTextFocus"
-    },
-    {
-        "key": "ctrl+shift+up",
-        "command": "cursorTop",
-        "when": "textInputFocus"
-    },
-    {
-        "key": "ctrl+shift+down",
-        "command": "cursorBottom",
-        "when": "textInputFocus"
     }
 ]

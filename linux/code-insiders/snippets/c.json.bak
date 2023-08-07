@@ -12,22 +12,22 @@
     // 	],
     // 	"description": "Log output to console"
     // }
-    "include_local": {
-        "prefix": "include_local",
+    "include_local_h": {
+        "prefix": "include_local_h",
         "body": [
             "#include \"$0\""
         ],
         "description": "Include local header \"name.h\""
     },
-    "include_system": {
-        "prefix": "include_system",
+    "include_system_h": {
+        "prefix": "include_system_h",
         "body": [
             "#include <$0>"
         ],
         "description": "Include system header <name>"
     },
     "Add include guard": {
-        "prefix": "guard",
+        "prefix": "header_guard",
         "description": "Adds an ifndef include guard to a C/C++ header",
         "body": [
             "#ifndef __${TM_FILENAME/^([^\\.]*)\\..*$/${1:/upcase}/}_${TM_FILENAME/^.*\\.([^\\.]*)$/${1:/upcase}/}__",
@@ -40,7 +40,7 @@
         ]
     },
     "Auto include header file": {
-        "prefix": "includeh",
+        "prefix": "include_h",
         "description": "Auto include C/C++ header file",
         "body": [
             "#include \"${TM_FILENAME/(\\.cpp|\\.c)/.h/}\"",
