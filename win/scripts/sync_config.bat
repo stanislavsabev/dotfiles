@@ -1,7 +1,7 @@
 @echo off
 SETLOCAL enableDelayedExpansion
 
-set DEST=%DOTFILES_DIR%\win\vscode
+set DEST=%DOTFILES_DIR%\win\code
 set SRC=%AppData%\Code\User
 if "%1"=="/r" (
     set TMP_VAR=%DEST%
