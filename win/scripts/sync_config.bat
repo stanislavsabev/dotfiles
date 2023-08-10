@@ -1,49 +1,75 @@
 @echo off
 SETLOCAL enableDelayedExpansion
 
-set DEST=%DOTFILES_DIR%\win\code
-set SRC=%AppData%\Code\User
-if "%1"=="/r" (
-    set TMP_VAR=%DEST%
-    set DEST=%SRC%
-    set SRC=!TMP_VAR!
-    shift
- )
-
+set REV=
 set COMND=xcopy
-if "%1"=="/D" (
-    set COMND=echo dry-run: !COMND!
-    shift
- )
 
-set option=%1
+:GETOPTS
+    set curArg=%1
+    set  curArg1stChar=!curArg:~0,1!
 
-if "%option%"=="/?" ( GOTO:Usage )
-if "%option%"=="sett" ( GOTO:proc_sett )
-if "%option%"=="kb" ( GOTO:proc_kb )
-@REM if "%option%"=="ext" ( GOTO:proc_ext )
-if "%option%"=="snip" ( GOTO:proc_snip )
+    rem The argument starts with a /.
+    if [!curArg1stChar!] == [/] (
+
+        if /i [!curArg!] == [/r] (
+            set REV="1"
+            shift
+        ) else if /i [!curArg!] == [/D] (
+            set COMND=echo dry-run: !COMND!
+            shift
+        ) else if /i [!curArg!] == [/?] (
+            GOTO:Usage
+        ) else (
+            echo Unexpected option or flag !curArg!
+            exit /b
+        )
+        goto :GETOPTS
+    )
+
+if [%1] == [] (
+
+  echo Config name/s expected
+  exit /b
+
+)
+
+echo "rev:" %REV% 
+echo "cmd:" %COMND% 
+echo "%1"
+exit 0
+
+@REM set DEST=%DOTFILES_DIR%\win\code
+@REM set SRC=%AppData%\Code\User
+@REM if "%1"=="/r" (
+@REM     set TMP_VAR=%DEST%
+@REM     set DEST=%SRC%
+@REM     set SRC=!TMP_VAR!
+@REM     shift
+@REM  )
+
+
+@REM set option=%1
+
+@REM if "%option%"=="/?" ( GOTO:Usage )
+@REM if "%option%"=="sett" ( GOTO:proc_sett )
+@REM if "%option%"=="kb" ( GOTO:proc_kb )
+@REM @REM if "%option%"=="ext" ( GOTO:proc_ext )
+@REM if "%option%"=="snip" ( GOTO:proc_snip )
 
 :Usage
-    echo Usage:
-    echo    %~n0 [/r] [/D] ^<option^> [^<sub_option^>] [^<xcopy-flags^>] 
+    echo usage: sync_config [/?] [/r/d] CONFIG_NAMES..
+    echo    Sync config files between their location (SRC) and dotfiles repo (DEST)
     echo.
-    echo    Copies files from this repo to VSCode install dir, based on
-    echo    the option value
+    echo    CONFIG_NAMES    NAME_1 ..NAME_N, config names 
+    echo                    Valid names are: 
+    echo                        code
+    echo                        code-insiders
+    echo                        git
     echo.
-    echo      /r    Reverse copy. From VSCode install dir to this repo. 
-    echo      /D    Dry-run. Print the command, that would be executed.
-    echo.
-    echo    option What to copy
-    echo.
-    echo      sett  Copy 'settings.json'
-    echo      kb    Copy 'keybindings.json'
-    echo      ext   Copy extentions from 'G:' to %%AppData%% (slow^)
-    echo      snip [sub_option ^<py/vba/my^>] ...
-    echo            Copy snippets. ^If no sub option is provided, all snippets are copied
-    echo.
-    echo    xcopy-flags Additional flags to pass to 'xcopy'. See xcopy /?
-    
+    echo    /r              reverse copy - from DEST to SRC
+    echo    /D              dry-run, print commands that would be executed
+    echo    /?              help, displays this message
+
 GOTO:EOF
 
 :proc_sett

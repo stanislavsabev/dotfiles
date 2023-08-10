@@ -34,11 +34,11 @@ rem
 
     if [!curArg1stChar!] == [-] (
 
-rem
-rem    The argument starts with a hyphen. Now check
-rem    for options or flags and assign them to their
-rem    respective variables
-rem
+      rem
+      rem    The argument starts with a hyphen. Now check
+      rem    for options or flags and assign them to their
+      rem    respective variables
+      rem
 
        if /i [!curArg!] == [-opt_one]  (
 
@@ -88,10 +88,10 @@ rem
 
        )
 
-rem
-rem    We still might have more flags or options to process.
-rem    So jump back to the loop and check again
-rem
+      rem
+      rem    We still might have more flags or options to process.
+      rem    So jump back to the loop and check again
+      rem
        goto :GETOPTS
     )
 
