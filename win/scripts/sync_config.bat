@@ -87,16 +87,13 @@ GOTO:EOF
      GOTO:!PROC_NAME!
 
 :proc_code
-    echo %PROC_NAME%
-    
-    @REM echo F|%COMND% /y %SRC%\settings.json %DEST%\settings.json
+    echo F|%COMND% /y %SRC%\settings.json %DEST%\settings.json
     echo F|%COMND% /y %SRC%\keybindings.json %DEST%\keybindings.json 
-    @REM echo D|%COMND% /s/y "%SRC%\snippets\*" "%DEST%\snippets\*"
+    echo D|%COMND% /s/y "%SRC%\snippets\*" "%DEST%\snippets\*"
     GOTO:NEXTNANE
 
 :proc_git
-    echo %PROC_NAME%
-    @REM echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig
+    echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig
     echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global
     GOTO:NEXTNANE
 
