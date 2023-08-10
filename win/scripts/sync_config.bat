@@ -27,18 +27,12 @@ set COMND=xcopy
     )
 
 if [%1] == [] (
-
-  echo Missing config name/s
-  exit /b
-
+    echo Missing config name/s
+    exit /b
 )
 
-echo "rev:" %REV% 
-echo "cmd:" %COMND%
-
-
-@REM set DEST=%DOTFILES_DIR%\win\code
-@REM set SRC=%AppData%\Code\User
+set DEST=
+set SRC=
 set PROC_NAME=
 
 :NEXTNANE
@@ -46,15 +40,21 @@ set PROC_NAME=
     set NAME=%1
     if /I [!NAME!] == [code] (
         shift
-        set PROC_NAME=code
+        set DEST=%DOTFILES_DIR%\win\code
+        set SRC=%AppData%\Code\User
+        set PROC_NAME=proc_code
         GOTO:PROC
     ) else if /I [!NAME!] == [code-insiders] (
         shift
-        set PROC_NAME=code
+        set DEST=%DOTFILES_DIR%\win\code
+        set SRC=%AppData%\Code\User
+        set PROC_NAME=proc_code
         GOTO:PROC
     ) else if /I [!NAME!] == [git] (
         shift
-        set PROC_NAME=git
+        set DEST=%DOTFILES_DIR%\git
+        set SRC=%USERPROFILE%
+        set PROC_NAME=proc_git
         GOTO:PROC
     ) else if [!NAME!] == [] (
     exit /b
@@ -90,14 +90,14 @@ GOTO:EOF
     echo %PROC_NAME%
     
     @REM echo F|%COMND% /y %SRC%\settings.json %DEST%\settings.json
-    @REM echo F|%COMND% /y %SRC%\keybindings.json %DEST%\keybindings.json 
+    echo F|%COMND% /y %SRC%\keybindings.json %DEST%\keybindings.json 
     @REM echo D|%COMND% /s/y "%SRC%\snippets\*" "%DEST%\snippets\*"
     GOTO:NEXTNANE
 
 :proc_git
     echo %PROC_NAME%
     @REM echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig
-    @REM echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global
+    echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global
     GOTO:NEXTNANE
 
 :End
