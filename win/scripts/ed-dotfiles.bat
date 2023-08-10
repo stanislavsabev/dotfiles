@@ -1,2 +1,2 @@
 @echo off
-code %USERPROFILE%\.dotfiles
+code %DOTFILES_DIR%
