@@ -5,56 +5,62 @@ set REV=
 set COMND=xcopy
 
 :GETOPTS
-    set curArg=%1
-    set  curArg1stChar=!curArg:~0,1!
+    set curOpt=%1
+    set  curOpt1stChar=!curOpt:~0,1!
 
     rem The argument starts with a /.
-    if [!curArg1stChar!] == [/] (
+    if [!curOpt1stChar!] == [/] (
 
-        if /i [!curArg!] == [/r] (
-            set REV="1"
+        if /i [!curOpt!] == [/r] (
+            set REV="r"
             shift
-        ) else if /i [!curArg!] == [/D] (
+        ) else if /i [!curOpt!] == [/D] (
             set COMND=echo dry-run: !COMND!
             shift
-        ) else if /i [!curArg!] == [/?] (
+        ) else if /i [!curOpt!] == [/?] (
             GOTO:Usage
         ) else (
-            echo Unexpected option or flag !curArg!
-            exit /b
+            echo Unexpected option or flag !curOpt!
+            GOTO:Usage
         )
         goto :GETOPTS
     )
 
 if [%1] == [] (
 
-  echo Config name/s expected
+  echo Missing config name/s
   exit /b
 
 )
 
 echo "rev:" %REV% 
-echo "cmd:" %COMND% 
-echo "%1"
-exit 0
+echo "cmd:" %COMND%
+
 
 @REM set DEST=%DOTFILES_DIR%\win\code
 @REM set SRC=%AppData%\Code\User
-@REM if "%1"=="/r" (
-@REM     set TMP_VAR=%DEST%
-@REM     set DEST=%SRC%
-@REM     set SRC=!TMP_VAR!
-@REM     shift
-@REM  )
+set PROC_NAME=
 
+:NEXTNANE
 
-@REM set option=%1
-
-@REM if "%option%"=="/?" ( GOTO:Usage )
-@REM if "%option%"=="sett" ( GOTO:proc_sett )
-@REM if "%option%"=="kb" ( GOTO:proc_kb )
-@REM @REM if "%option%"=="ext" ( GOTO:proc_ext )
-@REM if "%option%"=="snip" ( GOTO:proc_snip )
+    set NAME=%1
+    if /I [!NAME!] == [code] (
+        shift
+        set PROC_NAME=code
+        GOTO:PROC
+    ) else if /I [!NAME!] == [code-insiders] (
+        shift
+        set PROC_NAME=code
+        GOTO:PROC
+    ) else if /I [!NAME!] == [git] (
+        shift
+        set PROC_NAME=git
+        GOTO:PROC
+    ) else if [!NAME!] == [] (
+    exit /b
+    ) else (
+        echo Unknown config name "%1"
+    )
 
 :Usage
     echo usage: sync_config [/?] [/r/d] CONFIG_NAMES..
@@ -72,36 +78,26 @@ exit 0
 
 GOTO:EOF
 
-:proc_sett
-    echo F|%COMND% %2/y %SRC%\settings.json %DEST%\settings.json
-    GOTO:EOF
+:PROC
+    if DEFINED REV (
+        set TMP_VAR=%DEST%
+        set DEST=%SRC%
+        set SRC=!TMP_VAR!
+     )
+     GOTO:!PROC_NAME!
 
-:proc_kb
-    echo F|%COMND% %SRC%\keybindings.json %DEST%\keybindings.json %2/y
-    GOTO:EOF
+:proc_code
+    echo %PROC_NAME%
+    
+    @REM echo F|%COMND% /y %SRC%\settings.json %DEST%\settings.json
+    @REM echo F|%COMND% /y %SRC%\keybindings.json %DEST%\keybindings.json 
+    @REM echo D|%COMND% /s/y "%SRC%\snippets\*" "%DEST%\snippets\*"
+    GOTO:NEXTNANE
 
-:proc_ext
-    set /P sure=This might take a long time, are you sure (y/n)?
-
-    if /I "%sure%" NEQ "y" (
-        echo Operation cancelled...
-    ) else (
-        echo Copying...
-        %COMND% %SRC%\extensions %USERPROFILE%\.vscode\extensions %2/s/y/j
-    )
-    GOTO:EOF
-
-:proc_snip
-    set op=
-    for %%G in ("py" "vba" "my") do (
-        if /I "%~2"=="%%~G" (
-            set "op=%~2"
-            shift /2
-            GOTO:match
-        )
-    )
-    :match
-    %COMND% "%SRC%\snippets\%op%*" "%DEST%\snippets\%op%*" %2/s/y
-    GOTO:EOF
+:proc_git
+    echo %PROC_NAME%
+    @REM echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig
+    @REM echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global
+    GOTO:NEXTNANE
 
 :End
