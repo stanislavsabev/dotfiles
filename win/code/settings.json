@@ -28,6 +28,7 @@
     // "workbench.iconTheme": "Monokai Pro (Filter Octagon) Icons",
     // "editor.fontFamily" : "Fira Code",
     "editor.fontFamily": "Source Code Pro",
+    "terminal.integrated.fontFamily": "Roboto Mono",
     "workbench.colorTheme": "Dracula",
     "editor.semanticTokenColorCustomizations": {
         "[azure]": {
