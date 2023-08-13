@@ -148,10 +148,6 @@ switch (uname)
 
         # OPEN WITH EDITOR
         abbr -a ed-history -- "$EDITOR $HOME/.bash_history"
-        abbr -a ed-pysand -- "$EDITOR -n $PROJECTS_DIR/sandbox/pysand"
-        abbr -a ed-vba-parser -- "$EDITOR -n $PROJECTS_DIR/vba_parser/main"
-
-
 
     case Darwin
 
