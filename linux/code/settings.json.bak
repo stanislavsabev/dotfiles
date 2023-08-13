@@ -160,13 +160,7 @@
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
     "workbench.settings.useSplitJSON": false,
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.pylintArgs": [
-        "--extension-pkg-whitelist=os,PySide2,win32api",
-        "--errors-only"
-    ],
-    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 75, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4}",
+    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4}",
     "[c]": {
         "editor.wordBasedSuggestions": true,
         "editor.suggest.insertMode": "replace",
@@ -175,7 +169,6 @@
     "explorer.confirmDragAndDrop": false,
     "python.languageServer": "Pylance",
     "explorer.confirmDelete": false,
-    "python.formatting.provider": "none",
     "[python]": {
         "editor.formatOnType": false,
         "editor.defaultFormatter": "ms-python.black-formatter"

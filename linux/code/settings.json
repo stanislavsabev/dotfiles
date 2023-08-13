@@ -161,6 +161,10 @@
     "editor.formatOnSave": false,
     "workbench.settings.useSplitJSON": false,
     "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4}",
+    "files.associations": {
+        "*.h": "c",
+        "*.hpp": "cpp"
+    },
     "[c]": {
         "editor.wordBasedSuggestions": true,
         "editor.suggest.insertMode": "replace",
