@@ -38,6 +38,7 @@ abbr -a uppip -- 'python -m pip install --upgrade pip'
 abbr -a pir -- 'pip install -r'
 
 # :MY SCRIPTS
+abbr -a --set-cursor nhistory -- "history % | nl"
 abbr -a grephist -- 'grep_history'
 abbr -a validate-commit-msg -- verify_commit_message
 
@@ -137,7 +138,6 @@ switch (uname)
         alias rf="rm -rf"
         # tree listing
         abbr lt -- 'exa -aT --group-directories-first'
-        
         abbr -a sand -- "cd $PROJECTS_DIR/sandbox"
         abbr -a sandls -- "cd $PROJECTS_DIR/sandbox && la"
 

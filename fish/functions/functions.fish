@@ -10,7 +10,7 @@ end
 
 
 function grephistory --description "grep history ...!"
-    history | grep "$argv"
+    history | nl | grep "$argv"
 end
 
 
