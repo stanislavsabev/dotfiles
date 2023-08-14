@@ -46,5 +46,50 @@
             "#include \"${TM_FILENAME/(\\.cpp|\\.c)/.h/}\"",
             "$0",
         ]
-    }
+    },
+    "#define": {
+        "prefix": "define",
+        "description": "#define",
+        "body": [
+            "#define ${1:TOKEN}$2 ${3:value}$0",
+        ]
+    },
+    "assert not implemented": {
+        "prefix": "not_implemented",
+        "description": "assert not implemented",
+        "body": [
+            "assert(0 && \"Not implemented!\");$0",
+        ]
+    },
+    "simple main, no args": {
+        "prefix": "main_simple",
+        "description": "Simple main() without args",
+        "body": [
+            "${2:#include <stdlib.h>\n\n}",
+            "int main() {",
+            "\t$0",
+            "\treturn EXIT_SUCCESS;",
+            "}"
+        ]
+    },
+    "main w argc argv": {
+        "prefix": "main_argc_argv",
+        "description": "`main(argc, argv[]`)",
+        "body": [
+            "${2:#include <stdlib.h>\n\n}",
+            "int main(int argc, char const *argv[static argc - 1]) {",
+            "\t(void)argc;",
+            "\t(void)argv;",
+            "\t$0",
+            "\treturn EXIT_SUCCESS;",
+            "}"
+        ]
+    },
+    "import Did you mean...": {
+        "prefix": "import_Did_you_mean_include",
+        "body": [
+            "#include \"$0\""
+        ],
+        "description": "Include local header \"name.h\""
+    },    
 }
