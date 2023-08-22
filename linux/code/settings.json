@@ -160,7 +160,8 @@
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
     "workbench.settings.useSplitJSON": false,
-    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4}",
+    // replaced by .clang-format file in each project
+    // "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4, AlignConsecutiveMacros: Consecutive}",
     "files.associations": {
         "*.h": "c",
         "*.hpp": "cpp"

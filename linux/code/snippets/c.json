@@ -15,7 +15,7 @@
     "include_\"name.h\"": {
         "prefix": "include \"name.h\"",
         "body": [
-            "#include \"$0\""
+            "#include \"${1:name.h}\"$0"
         ],
         "description": "Include project header \"name.h\""
     },
@@ -33,6 +33,13 @@
             "#include \"${TM_FILENAME/(\\.cpp|\\.c)/.h/}\"",
             "$0",
         ]
+    },
+    "Did you mean include?": {
+        "prefix": "import_Did_u_mean_include?",
+        "body": [
+            "#include \"${1:name.h}\"$0"
+        ],
+        "description": "Include header \"name.h\""
     },
     "Add include guard": {
         "prefix": "header_guard",
@@ -82,13 +89,6 @@
             "\treturn EXIT_SUCCESS;",
             "}"
         ]
-    },
-    "Did you mean include?": {
-        "prefix": "import_Did_u_mean_include?",
-        "body": [
-            "#include \"$0\""
-        ],
-        "description": "Include local header \"name.h\""
     },
     "typedef struct": {
         "prefix": "typedef_struct",
