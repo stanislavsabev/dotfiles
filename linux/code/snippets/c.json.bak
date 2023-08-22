@@ -93,29 +93,38 @@
     "typedef struct": {
         "prefix": "typedef_struct",
         "body": [
-            "typedef struct {",
+            "typedef struct ${1:name} {",
             "\t${2:member_t} ${3:member_name};$0",
-            "} ${1:name};"
+            "} $1;"
+        ],
+        "description": "Include local header \"name.h\""
+    },
+    "typedef struct_t": {
+        "prefix": "typedef_struct_t",
+        "body": [
+            "typedef struct ${1:name} {",
+            "\t${2:member_t} ${3:member_name};$0",
+            "} $1_t;"
         ],
         "description": "Include local header \"name.h\""
     },
     "typedef union": {
         "prefix": "typedef_union",
         "body": [
-            "typedef union {",
+            "typedef union ${1:name} {",
             "\t${2:member_t} ${3:member_name};$0",
-            "} ${1:name};"
+            "} $1;"
         ],
         "description": "Include local header \"name.h\""
     },
     "typedef enum { } t_name;": {
         "prefix": "typedef_enum",
         "body": [
-            "typedef enum {",
+            "typedef enum ${1:name} {",
             "\t${1/(.*)/${1:/upcase}/}_VALUE_1$0,",
             "\t${1/(.*)/${1:/upcase}/}_VALUE_2,",
             "\t${1/(.*)/${1:/upcase}/}_ENUM_COUNT",
-            "} ${1:name};"
+            "} $1;"
         ],
         "description": "Include local header \"name.h\""
     },
@@ -124,8 +133,8 @@
         "body": [
             "#if defined(DEBUG)",
             "\t$0",
-            "#endif   // DEBUG"
+            "#endif   // DEBUG",
         ],
         "description": "Include local header \"name.h\""
-    }
+    },
 }

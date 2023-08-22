@@ -12,19 +12,27 @@
     // 	],
     // 	"description": "Log output to console"
     // }
-    "include_local_h": {
-        "prefix": "include_local_h",
+    "include_\"name.h\"": {
+        "prefix": "include \"name.h\"",
         "body": [
             "#include \"$0\""
         ],
-        "description": "Include local header \"name.h\""
+        "description": "Include project header \"name.h\""
     },
-    "include_system_h": {
-        "prefix": "include_system_h",
+    "include_<name.h>": {
+        "prefix": "include_<name.h>",
         "body": [
             "#include <$0>"
         ],
-        "description": "Include system header <name>"
+        "description": "Include system header <name.h>"
+    },
+    "include header for current.c file": {
+        "prefix": "include_\"this.h\"",
+        "description": "Include header for current C/C++ file",
+        "body": [
+            "#include \"${TM_FILENAME/(\\.cpp|\\.c)/.h/}\"",
+            "$0",
+        ]
     },
     "Add include guard": {
         "prefix": "header_guard",
@@ -37,14 +45,6 @@
             "",
             "#endif // __${TM_FILENAME/^([^\\.]*)\\..*$/${1:/upcase}/}_${TM_FILENAME/^.*\\.([^\\.]*)$/${1:/upcase}/}__",
             "",
-        ]
-    },
-    "Auto include header file": {
-        "prefix": "include_h",
-        "description": "Auto include C/C++ header file",
-        "body": [
-            "#include \"${TM_FILENAME/(\\.cpp|\\.c)/.h/}\"",
-            "$0",
         ]
     },
     "#define": {
