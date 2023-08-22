@@ -124,8 +124,8 @@
         "body": [
             "#if defined(DEBUG)",
             "\t$0",
-            "#endif   // DEBUG"
+            "#endif   // DEBUG",
         ],
         "description": "Include local header \"name.h\""
-    }
+    },
 }
