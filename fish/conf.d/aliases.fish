@@ -51,8 +51,8 @@ abbr -a ed-fish -- '$EDITOR -n $__fish_config_dir'
 abbr -a reboot -- 'sudo reboot'
 abbr -a c -- 'clear'
 abbr -a o -- 'open .'
-abbr -a --set-cursor ffile -- 'find . -type f -name "%" 2> /dev/null'
-abbr -a --set-cursor fdir -- 'find . -type d -name "%" 2> /dev/null'
+abbr -a --set-cursor ffind -- 'find . -type f -name "%" 2> /dev/null'
+abbr -a --set-cursor dfind -- 'find . -type d -name "%" 2> /dev/null'
 
 # :GIT
 abbr -a add -- 'git add -- '
