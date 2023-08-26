@@ -181,7 +181,12 @@ wget -qO- https://raw.githubusercontent.com/cra0zy/code-nautilus/master/install.
 ```bash
 # setup
 sudo apt update && sudo apt upgrade -y
-sudo apt-get install -y build-essential make cmake libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl libdvd-pkg -y
+sudo apt-get install -y \
+     libbz2-dev libdvd-pkg libffi-dev liblzma-dev libncurses5-dev \
+     libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev \
+     zlib1g-dev xz-utils llvm python3-openssl \
+     build-essential make cmake ninja-build \
+     libcriterion-dev ubuntu-restricted-extras
 sudo dpkg-reconfigure libdvd-pkg
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 cd .pyenv/

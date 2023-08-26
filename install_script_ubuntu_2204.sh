@@ -12,11 +12,11 @@ sudo apt-get upgrade -y
 echo ">> Install additional dev libs"
 
 sudo apt-get install -y \
-     libbz2-dev libdvd-pk libffi-dev liblzma-dev libncurses5-dev \
+     libbz2-dev libffi-dev liblzma-dev libncurses5-dev \
      libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev \
      zlib1g-dev xz-utils llvm python3-openssl \
      build-essential make cmake ninja-build \
-     ubuntu-restricted-extras
+     libcriterion-dev ubuntu-restricted-extras
 
 echo ">> Install common applications"
 sudo apt-get install -y \
