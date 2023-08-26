@@ -56,6 +56,7 @@ abbr -a --set-cursor dfind -- 'find . -type d -name "%" 2> /dev/null'
 
 # :GIT
 abbr -a add -- 'git add -- '
+abbr -a adda -- 'git add --all'
 abbr -a addall -- 'git add --all'
 abbr -a push -- 'git push'
 abbr -a pushp -- 'git pull && git push'
