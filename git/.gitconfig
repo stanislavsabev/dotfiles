@@ -11,6 +11,7 @@
 	co = !git checkout
 	cb = !git rev-parse --abbrev-ref HEAD
 	cob = !git checkout -b
+	cm = !git commit -m
 	cam = !git commit -am
 	unstageall = !git reset -- .
 	recommit = commit -c ORIG_HEAD
