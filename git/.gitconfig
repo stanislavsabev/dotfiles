@@ -20,10 +20,9 @@
 	resethard = reset HEAD --hard
 	amend = !git commit --amend
 	pushrefs = !git push origin HEAD:refs/for/master
-	lgo = !git log --oneline --decorate --all
-	lggo = !git log --graph --oneline --decorate --all
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	lgs = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --stat
+	lv = log --color --graph
+	lgstat = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --stat
 [core]
 	editor = code --wait
 	excludesFile = ~/.gitignore_global
