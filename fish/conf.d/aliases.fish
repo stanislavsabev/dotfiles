@@ -49,75 +49,10 @@ abbr -a ed-fish -- '$EDITOR -n $__fish_config_dir'
 
 # :COMMANDS
 abbr -a reboot -- 'sudo reboot'
-abbr -a c -- 'clear'
-abbr -a o -- 'open .'
 abbr -a --set-cursor ffind -- 'find . -type f -name "%" 2> /dev/null'
 abbr -a --set-cursor dfind -- 'find . -type d -name "%" 2> /dev/null'
-
-# :GIT
-abbr -a add -- 'git add -- '
-abbr -a adda -- 'git add --all'
-abbr -a addall -- 'git add --all'
-abbr -a push -- 'git push'
-abbr -a pushp -- 'git pull && git push'
-abbr -a pull -- 'git pull'
-abbr -a fetch -- 'git fetch --all'
-abbr -a rebase -- 'git rebase'
-abbr -a --set-cursor cam -- 'git add --all && git commit -am "%"'
-abbr -a --set-cursor ca -- 'git add --all && git commit -a'
-abbr -a --set-cursor cm -- 'git commit -m "%"'
-abbr -a commit -- 'git commit'
-abbr -a stash -- 'git stash'
-abbr -a remote -- 'git remote'
-
-abbr -a s -- 'git status'
-abbr -a sv -- 'git status -v'
-abbr -a b -- 'git branch'
-abbr -a cleanf -- 'git clean -f'
-abbr -a checkout -- 'git checkout'
-abbr -a co -- 'git checkout'
-abbr -a curr-branch -- 'git rev-parse --abbrev-ref HEAD'
-
-abbr -a undolast -- 'git reset HEAD~1'
-abbr -a unstageall -- 'git reset -- .'
-abbr -a unstage -- 'git reset -- '
-abbr -a recommit -- 'commit -c ORIG_HEAD'
-abbr -a resethard -- 'git reset HEAD --hard'
-abbr -a resetall -- 'git reset HEAD --hard && git clean -f'
-abbr -a amend -- 'git commit --amend'
-abbr -a cnoe -- 'git commit --amend --no-edit'
-abbr -a acnoe -- 'git add --all && git commit --amend --no-edit'
-abbr -a logv -- 'git log'
-
-set -gx __git_log_format "format:'%C(yellow)%h%Creset %<(65,trunc)%s - %C(bold blue)%<(7,trunc)%an%Creset %C(bold red)%d %Creset%C(green)(%cr)'"
-
-alias lv='git log'
-alias lg="git log --graph --pretty=$__git_log_format --abbrev-commit"
-
-abbr -a lgmy -- 'git log --graph --pretty=$__git_log_format --abbrev-commit --author=\'ssabev\''
-abbr -a --set-cursor lgauth -- 'git log --graph --pretty=$__git_log_format --abbrev-commit --author=%'
-abbr -a log -- 'git log --graph --pretty=$__git_log_format --abbrev-commit'
-abbr -a lgstat -- 'git log --graph --pretty=$__git_log_format --abbrev-commit --stat'
-abbr -a lgst -- 'git log --graph --pretty=$__git_log_format --abbrev-commit --stat'
-abbr -a logstat -- 'git log --graph --pretty=$__git_log_format --abbrev-commit --stat'
-abbr -a logsha -- "git log --pretty=format:'%H'"
-abbr -a lgsha -- "git log --pretty=format:'%H'"
-abbr -a sha -- "git log -1 --pretty=format:'%H'"
-abbr -a longsha -- "git log -1 --pretty=format:'%H'"
-abbr -a shortsha -- "git log -1 --pretty=format:'%h'"
-abbr -a stat -- "git diff HEAD~1 HEAD --stat"
-
-abbr -a gdiff -- 'git diff'
-abbr -a gdiffhead -- 'git diff HEAD'
-abbr -a cdiff -- 'code --diff'
+abbr -a codediff -- 'code --diff'
 abbr -a codei -- 'code-insiders'
-abbr -a gwt -- 'git worktree'
-abbr -a changed -- "git diff HEAD HEAD^ --name-only"
-
-abbr -a pushmaster -- 'git push origin HEAD:refs/for/master'
-abbr -a pushmain -- 'git push origin HEAD:refs/for/main'
-abbr -a --set-cursor pushrefs -- 'git push origin HEAD:refs/for/%'
-
 abbr -a ef -- 'exec fish'
 
 switch (uname)
