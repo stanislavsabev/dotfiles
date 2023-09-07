@@ -5,6 +5,8 @@
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
 [alias]
+	a = add
+	aa = add --all
 	s = status
 	sv = status -v
 	b = branch
@@ -12,10 +14,11 @@
 	cb = !git rev-parse --abbrev-ref HEAD
 	cob = !git checkout -b
 	cm = !git commit -m
-	cam = !git commit -am
+	cam = !git add --all && git commit -am
 	unstageall = !git reset -- .
 	recommit = commit -c ORIG_HEAD
 	cnoe = !git commit --amend --no-edit
+	acnoe = !git add --all && git commit --amend --no-edit
 	undolast = reset HEAD~
 	resethard = reset HEAD --hard
 	amend = !git commit --amend
