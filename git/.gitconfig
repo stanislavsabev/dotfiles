@@ -5,27 +5,46 @@
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
 [alias]
-	a = add
-	aa = add --all
-	s = status
-	sv = status -v
-	b = branch
+	a = !git add
+	aa = !git add --all
+	s = !git status
+	sv = !git status -v
+	b = !git branch
 	co = !git checkout
 	cb = !git rev-parse --abbrev-ref HEAD
+	curr-branch = !git rev-parse --abbrev-ref HEAD
 	cob = !git checkout -b
 	cm = !git commit -m
 	cam = !git add --all && git commit -am
 	unstageall = !git reset -- .
-	recommit = commit -c ORIG_HEAD
+	unstage = !git reset --
+	recommit = !git commit -c ORIG_HEAD
 	cnoe = !git commit --amend --no-edit
 	acnoe = !git add --all && git commit --amend --no-edit
-	undolast = reset HEAD~
-	resethard = reset HEAD --hard
+	recommit = !git commit -c ORIG_HEAD
+	undolast = !git reset HEAD~
+	resethard = !git reset HEAD --hard
+	resetall = !git reset HEAD --hard && git clean -f
 	amend = !git commit --amend
 	pushrefs = !git push origin HEAD:refs/for/master
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	lv = log --color --graph
-	lgstat = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --stat
+	lg = !git log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lv = !git log --color --graph
+	lgstat = !git log --color --graph  --abbrev-commit --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lgmy = !git log --graph  --abbrev-commit --author='stanislavsabev' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lgauth = !git log --graph  --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --author
+	lgsha = !git log --pretty=format:'%H'
+	sha = !git log -1 --pretty=format:'%H'
+	longsha = !git log -1 --pretty=format:'%H'
+	shortsha = !git log -1 --pretty=format:'%h'
+	stat = !git diff HEAD~1 HEAD --stat
+	gdiff = !git diff
+	gdiffhead = !git diff HEAD
+	changed = !git diff HEAD HEAD^ --name-only
+	pushrefs = "!git push origin HEAD:refs/for/\"$1\" #"
+	wt = !git worktree
+	fetcha = !git fetch --all
+	pushp = !git pull && git push
+	cleanf = !git clean -f
 [core]
 	editor = code --wait
 	excludesFile = ~/.gitignore_global
