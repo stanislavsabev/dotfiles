@@ -149,6 +149,7 @@
     "workbench.editor.showTabs": true,
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.userWords": [
+        "alacritty",
         "endregion",
         "functools",
         "gitlens",
@@ -161,7 +162,7 @@
     "editor.formatOnSave": false,
     "workbench.settings.useSplitJSON": false,
     // replaced by .clang-format file in each project
-    // "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4, AlignConsecutiveMacros: Consecutive}",
+    // "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Left, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4, AlignConsecutiveMacros: Consecutive}",
     "files.associations": {
         "*.h": "c",
         "*.hpp": "cpp"
@@ -178,9 +179,11 @@
         "editor.formatOnType": false,
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "isort.args":[
-        "--profile", "black",
-        "--group_by_package", "false"
+    "isort.args": [
+        "--profile",
+        "black",
+        "--group_by_package",
+        "false"
     ],
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
@@ -190,4 +193,5 @@
     "editor.dragAndDrop": false,
     "jake.autoDetect": "on",
     "grunt.autoDetect": "on",
+    "workbench.productIconTheme": "material-product-icons",
 }
