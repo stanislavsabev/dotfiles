@@ -3,21 +3,25 @@ SETLOCAL enableDelayedExpansion
 
 set REV=
 set COMND=xcopy
+IF defined CODE_USER_DIR (
+    set CODE_USER_DIR=%AppData%\Code\User
+)
+
 
 :GETOPTS
     set curOpt=%1
     set  curOpt1stChar=!curOpt:~0,1!
 
     rem The argument starts with a /.
-    if [!curOpt1stChar!] == [/] (
+    if [!curOpt1stChar!] == [-] (
 
-        if /i [!curOpt!] == [/r] (
+        if /i [!curOpt!] == [-r] (
             set REV="r"
             shift
-        ) else if /i [!curOpt!] == [/D] (
+        ) else if /i [!curOpt!] == [-d] (
             set COMND=echo dry-run: !COMND!
             shift
-        ) else if /i [!curOpt!] == [/?] (
+        ) else if /i [!curOpt!] == [-h] (
             GOTO:Usage
         ) else (
             echo Unexpected option or flag !curOpt!
@@ -41,13 +45,13 @@ set PROC_NAME=
     if /I [!NAME!] == [code] (
         shift
         set DEST=%DOTFILES_DIR%\win\code
-        set SRC=%AppData%\Code\User
+        set SRC=%CODE_USER_DIR%
         set PROC_NAME=proc_code
         GOTO:PROC
     ) else if /I [!NAME!] == [code-insiders] (
         shift
-        set DEST=%DOTFILES_DIR%\win\code
-        set SRC=%AppData%\Code\User
+        set DEST=%DOTFILES_DIR%\win\code-insiders
+        set SRC=%CODE_USER_DIR%
         set PROC_NAME=proc_code
         GOTO:PROC
     ) else if /I [!NAME!] == [git] (
@@ -63,7 +67,7 @@ set PROC_NAME=
     )
 
 :Usage
-    echo usage: sync_config [/?] [/r/d] CONFIG_NAMES..
+    echo usage: sync_config [-h] [-rd] CONFIG_NAMES..
     echo    Sync config files between their location (SRC) and dotfiles repo (DEST)
     echo.
     echo    CONFIG_NAMES    NAME_1 ..NAME_N, config names 
@@ -72,9 +76,9 @@ set PROC_NAME=
     echo                        code-insiders
     echo                        git
     echo.
-    echo    /r              reverse copy - from DEST to SRC
-    echo    /D              dry-run, print commands that would be executed
-    echo    /?              help, displays this message
+    echo    -h              help, displays this message
+    echo    -r              reverse copy - from DEST to SRC
+    echo    -d              dry-run, print commands that would be executed
 
 GOTO:EOF
 
