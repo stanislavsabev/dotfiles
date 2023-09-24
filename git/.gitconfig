@@ -7,6 +7,7 @@
 [alias]
 	a = !git add
 	aa = !git add --all
+	fa = !git fetch --all
 	s = !git status
 	sv = !git status -v
 	b = !git branch
