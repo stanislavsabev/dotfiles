@@ -1,7 +1,7 @@
 function wt_list --description "List worktrees in current project"
     set -l _name "wt-ls"
     set -l _usage "usage: $_name [[GREP_FLAGS] PATTERNS..]
-    List worktrees in current project
+    List worktrees in current repo
     "
     argparse -n $_name -i 'h/help' -- $argv
     set -l last_status $status
