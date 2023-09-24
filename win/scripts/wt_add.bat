@@ -8,6 +8,10 @@ SET ARGV=
 SET DRY=
 SET EX=
 
+if [%1] == [] (
+   goto:invalid_args
+)
+
 :GETOPTS
     SET curOpt=%1
     SET curOpt1stChar=!curOpt:~0,1!
@@ -45,7 +49,6 @@ if !ARGC! EQU 1 (
 if !ARGC! EQU 2 (
     set ARGSTR=-b !ARGV[1]! !ARGV[1]! !ARGV[2]!
 )
-
 
 if !ARGC! EQU 3 (
     set ARGSTR=-b !ARGV[1]! !ARGV[2]! !ARGV[3]!
