@@ -1,3 +1,4 @@
 @echo off
+set SCRIPTPATH=%~dp0
 
-cscript vbs_keepmeawake.vbs %*
+cscript %SCRIPTPATH%\vbs_keepmeawake.vbs %*
