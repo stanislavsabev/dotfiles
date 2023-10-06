@@ -13,6 +13,7 @@ if [%1] == [] (
 )
 
 :GETOPTS
+    if [%1] == [] goto :ENDGETOPTS
     SET curOpt=%1
     SET curOpt1stChar=!curOpt:~0,1!
 
@@ -43,6 +44,7 @@ if [%1] == [] (
         shift
         goto :GETOPTS
     )
+:ENDGETOPTS
 
 if !ARGC! EQU 0 GOTO:invalid_args
 if !ARGC! GTR 3 GOTO:invalid_args
