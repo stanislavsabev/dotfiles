@@ -60,5 +60,5 @@ goto:EOF
     echo usage: %SELF% [-h] [-d] WORKTREE NEW_WORKTREE
     echo  Rename worktree
     echo.
-    echo    -h --help       Print this message
+    echo    -h --help       PrintS this message
     echo    -d --dry-run    Print the command that would run
