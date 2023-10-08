@@ -51,7 +51,7 @@ IF DEFINED _CMD (
     echo.
     echo    COMMAND         Supported commands:
     echo        add      ^| a  - Add worktree
-    echo        checkout ^| co - Not implemented
+    echo        checkout ^| co - ^Not implemented
     echo        list     ^| ls - List worktrees
     echo        move     ^| mv - ^Rename worktree
     echo        remove   ^| rm - Remove worktree
