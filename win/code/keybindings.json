@@ -151,12 +151,7 @@
     {
         "key": "shift+enter",
         "command": "jupyter.execSelectionInteractive",
-        "when": "editorHasSelection && editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !findInputFocussed && !replaceInputFocussed && editorLangId == 'python'"
-    },
-    {
-        "key": "shift+enter",
-        "command": "-python.execSelectionInTerminal",
-        "when": "editorTextFocus && !findInputFocussed && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'"
+        "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && editorHasSelection && !findInputFocussed && editorLangId == 'python'"
     },
     {
         "key": "ctrl+shift+down",
@@ -167,5 +162,35 @@
         "key": "ctrl+shift+up",
         "command": "workbench.action.terminal.resizePaneUp",
         "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "-jupyter.runByLineStop",
+        "when": "notebookCellResource in 'jupyter.notebookeditor.runByLineCells'"
+    },
+    {
+        "key": "ctrl+shift+alt+enter",
+        "command": "-jupyter.runAndDebugCell",
+        "when": "isWorkspaceTrusted && jupyter.ispythonnotebook && !notebookKernel && notebookCellType == 'code' || isWorkspaceTrusted && jupyter.ispythonnotebook && notebookCellType == 'code' && notebookKernel =~ /^ms-toolsai.jupyter\\// && resource not in 'jupyter.notebookeditor.debugDocuments'"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "-jupyter.runcurrentcell",
+        "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !jupyter.havenativecells && !notebookEditorFocused"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "-jupyter.runByLineStop",
+        "when": "notebookCellResource in 'jupyter.notebookeditor.runByLineCells'"
+    },
+    {
+        "key": "ctrl+shift+alt+enter",
+        "command": "-jupyter.runAndDebugCell",
+        "when": "isWorkspaceTrusted && jupyter.ispythonnotebook && !notebookKernel && notebookCellType == 'code' || isWorkspaceTrusted && jupyter.ispythonnotebook && notebookCellType == 'code' && notebookKernel =~ /^ms-toolsai.jupyter\\// && resource not in 'jupyter.notebookeditor.debugDocuments'"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "-jupyter.runcurrentcell",
+        "when": "editorTextFocus && isWorkspaceTrusted && jupyter.hascodecells && !editorHasSelection && !jupyter.havenativecells && !notebookEditorFocused"
     }
 ]

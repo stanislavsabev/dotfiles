@@ -180,5 +180,9 @@
     "unused argument" : {
 		"prefix" : "unused",
 		"body" : "del $0 # unused"
+	},
+    "NotImplementedError" : {
+		"prefix" : "raise_NotImplementedError",
+		"body" : "raise NotImplementedError$0"
 	}
 }
