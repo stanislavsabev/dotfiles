@@ -75,7 +75,7 @@ call :dry
 
 if not defined DRY (
     @rem Create gitfile
-    echo gitdir ./.bare^> .git
+    echo gitdir ./.bare> .git
 
     @rem Update git config
     git config remote.origitn.fetch "+refs/heads/*:refs/remotes/origin/*"
@@ -107,7 +107,7 @@ goto:EOF
     echo usage: %SELF% [-h] [-d] REMOTE_URL LOCAL_DIR
     echo  Clone remote and setup local bare repository
     echo.
-    echo    REMOTE          Remote url
+    echo    REMOTE_URL      Remote url
     echo    LOCAL_DIR       Destination folder to clone into
     echo.
     echo    -h --help       Prints this message
