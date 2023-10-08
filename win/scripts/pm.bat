@@ -120,7 +120,7 @@ goto:proc_open_proj
     echo usage: %SELF% [-h] [-d] [-l [-lr -la]] [-cd] PROJ [BRANCH]
     echo  Open project
     echo.
-    echo    -h --help       PrintS this message
+    echo    -h --help       Prints this message
     echo    -d --dry-run    Print the command that would run
     echo    -l -lr -la      List branches: local, remote, all
     echo                    If no PROJ is provided, list all projects

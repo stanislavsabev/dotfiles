@@ -110,7 +110,7 @@ goto:EOF
     echo    REMOTE          Remote url
     echo    LOCAL_DIR       Destination folder to clone into
     echo.
-    echo    -h --help       PrintS this message
+    echo    -h --help       Prints this message
     echo    -z --extended   Extended options
     echo                    Copy helper directories (like .vscode) from parent ^dir
     echo    -d --dry-run    Print the command that would run

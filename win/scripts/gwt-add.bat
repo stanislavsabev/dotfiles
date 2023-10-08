@@ -102,7 +102,7 @@ goto:EOF
     echo usage: %SELF% [-h] [-x] [-d] [NEW_WORKTREE] [[PATH] COMMIT-ISH]
     echo  Add worktree to current repository
     echo.
-    echo    -h --help       PrintS this message
+    echo    -h --help       Prints this message
     echo    -z --extended   Extended options
     echo                    Copy helper directories (like .vscode) from parent ^dir
     echo    -d --dry-run    Print the command that would run

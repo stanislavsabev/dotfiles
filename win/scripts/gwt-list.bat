@@ -52,6 +52,6 @@ goto:EOF
     echo usage: %SELF% [-h] [[FLAGS] PATTERNS]
     echo  List worktrees in current repo
     echo.
-    echo    -h --help       PrintS this message
+    echo    -h --help       Prints this message
     echo    FLAGS           FINDSTR flags
     echo    PATTERNS        PATTERNS to match
