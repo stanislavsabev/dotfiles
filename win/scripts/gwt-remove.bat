@@ -27,10 +27,14 @@ if [%1] == [] (
             set DRY=1
         ) else if [!curOpt!] == [--dry-run] (
             set DRY=1
-        ) else if [!curOpt!] == [-x] (
-            set EX=1
-        ) else if [!curOpt!] == [--extended] (
-            set EX=1
+        ) else if [!curOpt!] == [-f] (
+            set FORCE=1
+        ) else if [!curOpt!] == [--force] (
+            set FORCE=1
+        ) else if [!curOpt!] == [-p] (
+            set PAT=1
+        ) else if [!curOpt!] == [--pattern] (
+            set PAT=1
         ) else (
             goto :invalid_opt
         ) 
@@ -47,40 +51,26 @@ if [%1] == [] (
 :ENDGETOPTS
 
 if !ARGC! EQU 0 GOTO:invalid_args
-if !ARGC! GTR 3 GOTO:invalid_args
 
 @rem Worktree command
-set _CMD=git worktree add
+set _CMD=git worktree remove
 call :dry
+set RM_WT_CMD=!_CMD!
 
-set ARGSTR=
-if !ARGC! EQU 1 (
-    set ARGSTR=!ARGV[1]!
-)
+@REM Delete branch command
+SET _CMD=^git branch -d
+call :dry
+set RM_BRANCH_CMD=!_CMD!
 
-if !ARGC! EQU 2 (
-    set ARGSTR=-b !ARGV[1]! !ARGV[1]! !ARGV[2]!
-)
-
-if !ARGC! EQU 3 (
-    set ARGSTR=-b !ARGV[1]! !ARGV[2]! !ARGV[3]!
-)
-
-@rem Run git worktree command
-!_CMD! !ARGSTR!
-
-@rem Extend command
-IF DEFINED EX (
-    SET TARGET_PATH=
-    IF %ARGC% EQU 3 (
-        SET TARGET_PATH=!ARGV[2]!
+for /L %%i in ( 1,1,!ARGC! ) do (
+    @rem Extend command
+    IF DEFINED PAT (
+        echo %SELF%: Pattern not implemented yet
+        exit /b 1
     ) else (
-        SET TARGET_PATH=!ARGV[1]!
+        !RM_WT_CMD! %FORCE% !NAMES[%%i]!
+        !RM_BRANCH_CMD! !NAMES[%%i]!
     )
-    SET _CMD=xcopy /I /Y /E .vscode !TARGET_PATH!\.vscode
-    call :dry
-    @rem Run extended commands 
-    !_CMD!
 )
 
 goto:EOF

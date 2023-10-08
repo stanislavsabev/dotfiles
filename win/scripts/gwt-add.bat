@@ -97,6 +97,7 @@ goto:EOF
 
 :invalid_opt
     echo %SELF%: Invalid flag !curOpt!, see -h for usage
+    exit /b 1
 
 :usage
     echo usage: %SELF% [-h] [-x] [-d] [NEW_WORKTREE] [[PATH] COMMIT-ISH]

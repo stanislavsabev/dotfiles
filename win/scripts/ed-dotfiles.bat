@@ -1,2 +1,2 @@
 @echo off
-code %DOTFILES_DIR%
+%EDITOR% %DOTFILES_DIR%
