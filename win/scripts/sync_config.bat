@@ -15,7 +15,11 @@ IF not defined CODE_USER_DIR (
 
     rem The argument starts with a /.
     if [!curOpt1stChar!] == [-] (
-        if /i [!curOpt!] == [-r] (
+        if /i [!curOpt!] == [-h] (
+            GOTO:Usage
+        ) else if /i [!curOpt!] == [--help] (
+            GOTO:Usage
+        ) else if /i [!curOpt!] == [-r] (
             set REV=1
         ) else if /i [!curOpt!] == [--reverse] (
             set REV=1
@@ -23,10 +27,6 @@ IF not defined CODE_USER_DIR (
             SET DRY=1
         ) else if /i [!curOpt!] == [--dry-run] (
             SET DRY=1
-        ) else if /i [!curOpt!] == [-h] (
-            GOTO:Usage
-        ) else if /i [!curOpt!] == [--help] (
-            GOTO:Usage
         ) else (
             echo Unexpected option or flag !curOpt!, see -h for help
         )
