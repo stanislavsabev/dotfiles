@@ -1,12 +1,13 @@
 @echo off
 SETLOCAL enableDelayedExpansion
+set SELF=%~n0
 
 set REV=
+set DRY=
 set COMND=xcopy
-IF defined CODE_USER_DIR (
+IF not defined CODE_USER_DIR (
     set CODE_USER_DIR=%AppData%\Code\User
 )
-
 
 :GETOPTS
     set curOpt=%1
@@ -14,19 +15,22 @@ IF defined CODE_USER_DIR (
 
     rem The argument starts with a /.
     if [!curOpt1stChar!] == [-] (
-
         if /i [!curOpt!] == [-r] (
-            set REV="r"
-            shift
+            set REV=1
+        ) else if /i [!curOpt!] == [--reverse] (
+            set REV=1
         ) else if /i [!curOpt!] == [-d] (
-            set COMND=echo dry-run: !COMND!
-            shift
+            SET DRY=1
+        ) else if /i [!curOpt!] == [--dry-run] (
+            SET DRY=1
         ) else if /i [!curOpt!] == [-h] (
             GOTO:Usage
-        ) else (
-            echo Unexpected option or flag !curOpt!
+        ) else if /i [!curOpt!] == [--help] (
             GOTO:Usage
+        ) else (
+            echo Unexpected option or flag !curOpt!, see -h for help
         )
+        shift
         goto :GETOPTS
     )
 
@@ -64,21 +68,9 @@ set PROC_NAME=
     exit /b
     ) else (
         echo Unknown config name "%1"
+        goto :EOF
     )
-
-:Usage
-    echo usage: sync_config [-h] [-rd] CONFIG_NAMES..
-    echo    Sync config files between their location (SRC) and dotfiles repo (DEST)
-    echo.
-    echo    CONFIG_NAMES    NAME_1 ..NAME_N, config names 
-    echo                    Valid names are: 
-    echo                        code
-    echo                        code-insiders
-    echo                        git
-    echo.
-    echo    -h              help, displays this message
-    echo    -r              reverse copy - from DEST to SRC
-    echo    -d              dry-run, print commands that would be executed
+    exit /b 0
 
 GOTO:EOF
 
@@ -91,14 +83,36 @@ GOTO:EOF
      GOTO:!PROC_NAME!
 
 :proc_code
-    echo F|%COMND% /y %SRC%\settings.json %DEST%\settings.json
-    echo F|%COMND% /y %SRC%\keybindings.json %DEST%\keybindings.json 
-    echo D|%COMND% /s/y "%SRC%\snippets\*" "%DEST%\snippets\*"
+    if defined DRY (
+        echo dry-run: "echo F|%COMND% /Y %SRC%\settings.json %DEST%\settings.json"
+        echo dry-run: "echo F|%COMND% /Y %SRC%\keybindings.json %DEST%\keybindings.json "
+        echo dry-run: "echo D|%COMND% /I /Y /E "%SRC%\snippets\*" "%DEST%\snippets\*""
+    ) else (
+        echo F|%COMND% /Y %SRC%\settings.json %DEST%\settings.json
+        echo F|%COMND% /Y %SRC%\keybindings.json %DEST%\keybindings.json 
+        echo D|%COMND% /I /Y /E "%SRC%\snippets\*" "%DEST%\snippets\*"
+    )
     GOTO:NEXTNANE
 
 :proc_git
-    echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig
-    echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global
+    if defined DRY (
+        echo dry-run: "echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig"
+        echo dry-run: "echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global"
+    ) else (
+        echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig
+        echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global
+    )
     GOTO:NEXTNANE
 
-:End
+:Usage
+    echo usage: sync_config [-h] [-r] [-d] CONFIG_NAMES..
+    echo    Sync config files between their location (SRC) and dotfiles repo (DEST)
+    echo.
+    echo    CONFIG_NAMES    Config names: NAME_1 ..NAME_N, 
+    echo            code
+    echo   code-insiders
+    echo             git
+    echo.
+    echo    -h    --help    Display this message
+    echo    -r --reverse    Reverse copy, DEST to SRC
+    echo    -d --dry-run    Print commands that would be executed
