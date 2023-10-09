@@ -9,7 +9,7 @@ SET DRY=
 SET LS=
 SET CD_PROJ=
 
-if [%1] == [] goto :invalid_argc
+if [%1] == [] goto :invalid_args
 
 :GETOPTS
     if [%1] == [] goto :ENDGETOPTS
@@ -27,8 +27,6 @@ if [%1] == [] goto :invalid_argc
             set DRY=1
         ) else if [!curOpt!] == [--dry-run] (
             set DRY=1
-        ) else if [!curOpt!] == [-cd] (
-            set CD_PROJ=1
         ) else if [!curOpt!] == [-l] (
             set LS=l
         ) else if [!curOpt!] == [-lr] (
@@ -45,8 +43,12 @@ if [%1] == [] goto :invalid_argc
     )
     @rem Positional arguments
     if not [!curOpt!] == [] (
-        if !ARGC! EQU 0 (
-            if [!curOpt!] == [dot] (
+        if not DEFINED PROJ (
+            if [!curOpt!] == [ls] (
+                goto :proc_ls_projects
+            ) else if [!curOpt!] == [cd] (
+                set CD_PROJ=1
+            ) else if [!curOpt!] == [dot] (
                 set PROJ=%DOTFILES_DIR%
             ) else if exist %PROJECTS_DIR%\!curOpt!\ (
                 set PROJ=%PROJECTS_DIR%\!curOpt!
@@ -54,10 +56,10 @@ if [%1] == [] goto :invalid_argc
                 echo %SELF%: Unknown project name !curOpt!, see -h for help
                 exit /b 1
             )
-        ) else if !ARGC! EQU 1 (
+        ) else if DEFINED PROJ (
             set BRANCH=!curOpt!
         ) else (
-            goto :invalid_argc
+            goto :invalid_args
         )
         set /A ARGC+=1
         shift
@@ -66,25 +68,23 @@ if [%1] == [] goto :invalid_argc
 
 :ENDGETOPTS
 
-if not DEFINED PROJ (
-    @rem List all projects
-    if "%LS%" EQU "-l" (
-        dir /a %PROJECTS_DIR%
-        goto :EOF
-    )
-    goto:missing_proj_arg
-)
+if not DEFINED PROJ goto :missing_proj_arg
+if DEFINED CD_PROJ goto :proc_cd_proj
+if defined LS goto :proc_ls_branch
+goto:proc_open_proj
 
-@rem ls-remote command
-if DEFINED LS (
+:proc_ls_branch @rem ls-remote command
     set _CMD="pushd %PROJ% && GIT BRANCH !LS! %% popd"
     call :dry
     cmd /C !_CMD!
     goto :EOF
-)
 
-IF DEFINED CD_PROJ goto:proc_cd_proj
-goto:proc_open_proj
+
+:proc_open_proj @rem Open project with editor
+    set _CMD=%EDITOR%
+    call :dry
+    !_CMD! %PROJ%\%BRANCH%
+    goto :EOF
 
 :proc_cd_proj @rem Navigate to project
     set _CMD=pushd
@@ -95,10 +95,11 @@ goto:proc_open_proj
     popd
     goto :EOF
 
-:proc_open_proj @rem Open project with editor
-    set _CMD=%EDITOR%
+:proc_ls_projects
+    @rem List all projects
+    set _CMD=dir /a %PROJECTS_DIR%
     call :dry
-    !_CMD! %PROJ%\%BRANCH%
+    !_CMD!
     goto :EOF
 
 @rem Prepend command with echo if DRY is defined
@@ -108,8 +109,8 @@ goto:proc_open_proj
     )
     exit /b 0
 
-:invalid_argc
-    echo %SELF%: Invalid number of arguments %ARGC%, see -h for usage
+:invalid_args
+    echo %SELF%: Invalid or missing arguments, see -h for usage
     exit /b 1
 
 :missing_proj_arg
@@ -117,16 +118,19 @@ goto:proc_open_proj
     exit /b 1
 
 :usage
-    echo usage: %SELF% [-h] [-d] [-l [-lr -la]] [-cd] PROJ [BRANCH]
-    echo  Open project
+    echo usage: %SELF% [-h] [-d] [-l [-lr -la]] COMMAND PROJ [WORKTREE | PATH]
+    echo  Project manager
     echo.
-    echo    -h --help       Prints this message
-    echo    -d --dry-run    Print the command that would run
+    echo         FLAGS
+    echo     -h --help      Prints this message
+    echo  -d --dry-run      Print the command that would run
     echo    -l -lr -la      List branches: local, remote, all
-    echo                    If no PROJ is provided, list all projects
-    echo    -cd             Navigate to project instead of opening it with editor
     echo.
-    echo    PROJ            Full project name or short name. Supported short names:
-    echo                    dot
+    echo       COMMAND      Commands are matched before proj name
+    echo            ls      List projects
+    echo            cd      With PROJ. Navigate to project
     echo.
-    echo    BRANCH          Branch name, optional
+    echo          PROJ      Full project name or short name. Supported short names:
+    echo           dot ^| dotfiles
+    echo.
+    echo      WORKTREE      Worktree name or path, optional
