@@ -62,40 +62,29 @@ cd ~
 
 ```bash
 sudo apt install flatpak -y
-```
-
-### Enable Flatpack
-
-```bash
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-```
-#### integrate with default app store
-
-```bash
 sudo apt-get install gnome-software-plugin-flatpak
-```
-
-#### restart
-
-```bash
 sudo reboot now
 ```
 
-#### Install Slack
+
+### Install Slack
 
 ```bash
 flatpak install flathub com.slack.Slack -y
 ```
 
-#### remove Slack
+### remove Slack
 
 ```bash
 flatpak uninstall --delete-data flathub com.slack.Slack
 flatpak remove --unused
 ```
 
-### also see
+### manage packages
+https://ubuntuhandbook.org/index.php/2021/06/manage-flatpak-apps-ubuntu/
 
+### also see
     flatpak install -y flathub org.gimp.GIMP
     flatpak install -y flathub com.spotify.Client
     flatpak install -y flathub com.discordapp.Discord
