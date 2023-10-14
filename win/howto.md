@@ -44,7 +44,3 @@ If you are using PowerShell or Git Bash use `$HOME` instead of `%USERPROFILE%`
    ```pwsh
    [System.Environment]::SetEnvironmentVariable('path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
    ```
-
-## Free up space
-https://askubuntu.com/questions/5980/how-do-i-free-up-disk-space
-https://itsfoss.com/free-up-space-ubuntu-linux/

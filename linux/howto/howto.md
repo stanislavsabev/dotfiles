@@ -505,3 +505,10 @@ sudo apt-get install -y telegram-desktop
 
 ### Optional packages related to the Telegram Desktop messaging application
 sudo apt install -y telegram-cli telegram-purple
+
+## Free up space
+https://askubuntu.com/questions/5980/how-do-i-free-up-disk-space
+https://itsfoss.com/free-up-space-ubuntu-linux/
+
+## How to Install Windows After Ubuntu Linux in Dual Boot
+https://itsfoss.com/install-windows-after-ubuntu-dual-boot/
