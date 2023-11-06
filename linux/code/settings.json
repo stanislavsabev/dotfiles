@@ -145,8 +145,14 @@
     "terminal.integrated.fontSize": 15,
     "terminal.integrated.inheritEnv": false,
     "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.commandsToSkipShell": [
+        // Ensure the toggle sidebar visibility keybinding skips the shell
+        "workbench.action.toggleSidebarVisibility",
+        // Send quick open's keybinding to the shell
+        "-workbench.action.quickOpen",
+      ],
     "markdown.preview.fontSize": 15,
-    "workbench.editor.showTabs": true,
+    "workbench.editor.showTabs": "multiple",
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.userWords": [
         "alacritty",
