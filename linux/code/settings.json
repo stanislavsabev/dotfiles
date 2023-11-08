@@ -140,6 +140,15 @@
             "editorIndentGuide.activeBackground1": "#b46274a9",
             "editorIndentGuide.background1": "#92546156",
             "editorCodeLens.foreground": "#97999c"
+        },
+        "[Cold Horizon, No Italics]": {
+            "editor.wordHighlightBackground": "#25375d", // orig: "#1b2947"
+            "editor.wordHighlightStrongBackground": "#25375d",
+            "editor.findMatchBackground": "#25375d",
+            "editor.findMatchHighlightBackground": "#25375d",
+            "editor.findRangeHighlightBackground": "#25375d",
+            "editor.selectionBackground": "#25375d",
+            "editor.lineHighlightBackground": "#25375d",
         }
     },
     "terminal.integrated.fontSize": 15,
