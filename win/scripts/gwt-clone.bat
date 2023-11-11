@@ -75,10 +75,10 @@ call :dry
 
 if not defined DRY (
     @rem Create gitfile
-    echo gitdir ./.bare> .git
+    echo gitdir: ./.bare> .git
 
     @rem Update git config
-    git config remote.origitn.fetch "+refs/heads/*:refs/remotes/origin/*"
+    git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 ) else (
     echo dry-run: gitdir .bare^> .git
     echo dry-run: git config remote.origitn.fetch "+refs/heads/*:refs/remotes/origin/*"
