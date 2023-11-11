@@ -1,9 +1,9 @@
-function wt_list --description "List worktrees in current project"
-    set -l _name "wt-ls"
-    set -l _usage "usage: $_name [[GREP_FLAGS] PATTERNS..]
-    List worktrees in current repo
+function gwt_list --description "List worktrees in current project"
+    set -l _self "gwt-ls"
+    set -l _usage "usage: $_self [[GREP_FLAGS] PATTERNS..]
+    List worktrees in current project
     "
-    argparse -n $_name -i 'h/help' -- $argv
+    argparse -n $_self -i 'h/help' -- $argv
     set -l last_status $status
 
     if set -ql _flag_help

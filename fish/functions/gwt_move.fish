@@ -1,14 +1,16 @@
-function wt_move --description "Rename worktree"
+function gwt_move --description "Rename worktree"
+    set -l _self "gwt-mv"
     set -l options (fish_opt -s h -l help)
-    set options $options (fish_opt -s d -l dry-run --long-only)
+    set options $options (fish_opt -s n -l dry-run --long-only)
     argparse $options -- $argv
 
     if set -ql _flag_help
         or test (count $argv) -ne 2
-        echo "usage: wt-mv [--dry-run] WORKTREE NEW_WORKTREE
+        echo "usage: $_self [-h] [-n] WORKTREE NEW_WORKTREE
     Rename worktree
 
-    --dry-run   print commands that would be executed
+    -n --dry-run   print commands that would be executed
+    -h --help      print this message
     "
         return $invalid_arguments
     end

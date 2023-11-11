@@ -1,14 +1,13 @@
-
-function wt_add
-    set -l _name "wt-add"
-    set -l _usage "usage: $_name [-ex | -dry-run] [NEW_BRANCH] [PATH] COMMIT-ISH
+function gwt_add
+    set -l _self "gwt-add"
+    set -l _usage "usage: $_self [-x] [-n] NEW_BRANCH [PATH] COMMIT-ISH
     Add worktree to current project.
     
-    -x --ex         Extend. Copies helper directories (like .vscode) from parent dir.
-    -d --dry-run    Print the command that would run.
+    -x --extend     Extend. Copies helper directories (like .vscode) from parent dir.
+    -n --dry-run    Print the command that would run.
                     Cannot be used with `-x`
     "
-    argparse -n $_name -x x,d 'h/help' 'x/ex' 'd/dry-run' -- $argv
+    argparse -n $_self -x x,n 'h/help' 'x/extend' 'n/dry-run' -- $argv
     set -l last_status $status
 
     if set -ql _flag_help
@@ -30,22 +29,22 @@ function wt_add
             set TARGET_DIR $argv[2]
             set argstr -b $argv[1] $argv[2] $argv[3]
         case '*'
-            echo "$_name: invalid arguments"
+            echo "$_self: invalid arguments"
             echo $_usage
             return $invalid_arguments
     end
 
-    set -l _cmd git
+    set -l _popd_cmd popd
     if set -ql _flag_dry_run
-        set -p _cmd echo "dry-run:"
+        set -p _git_pushd echo "dry-run:"
     end
 
-    command $_cmd worktree add $argstr
+    command $_git_cmd worktree add $argstr
 
-    if set -ql _flag_ex
-        cd $TARGET_DIR
+    if set -ql _flag_extend
+        pushd $TARGET_DIR
         vscode_add_sett
-        cd -
+        popd
     end
 
 end

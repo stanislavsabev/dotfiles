@@ -1,4 +1,4 @@
-function vscode_clear_pycache
+function clear_pycache
     find . -name "*.pyc" -delete
     find . -name "__pycache__" -type d -exec rm -rf {} +
     find . -name ".pytest_cache" -type d -exec rm -rf {} +

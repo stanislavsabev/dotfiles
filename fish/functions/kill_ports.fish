@@ -1,8 +1,9 @@
 function kill_ports
-    set -l _usage "usage: kill_ports [PORTS..]
+    set -l _usage "usage: kill_ports [-h] [PORTS..]
     Stop service by port
-
     Default ports 8080 8082 9090 8083 8085
+
+    -h --help   Print this message
     "
     argparse h/help a/all -- $argv
     set -l last_status $status

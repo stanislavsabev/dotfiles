@@ -1,5 +1,6 @@
 function sync_config
-    set -l _usage "usage: sync_config [-rd] CONFIG_NAMES..
+    set -l _self "sync_config"
+    set -l _usage "usage: $_self [-h] [-r] [-n] CONFIG_NAMES..
     Sync config files between their location (SRC) and dotfiles repo (DEST)
 
     CONFIG_NAMES    NAME_1 ..NAME_N, config names 
@@ -13,11 +14,11 @@ function sync_config
                         alacritty
 
     -r --reverse    reverse copy - from DEST to SRC
+    -n --dry-run    print commands that would be executed
     -h --help       displays this message
-    --dry-run       print commands that would be executed
     "
 
-    argparse h/help r/reverse dry-run -- $argv
+    argparse h/help r/reverse n/dry-run -- $argv
     set -l last_status $status
     set -l argc (count $argv)
 
@@ -36,7 +37,7 @@ function sync_config
     case Darwin
         set CONF_D "$HOME/Library/Application Support"
     case '*'
-        echo "sync_config: $(uname) not supported"
+        echo "$_self: $(uname) not supported"
         return 1
     end
 
@@ -79,7 +80,7 @@ function sync_config
                 set DEST "$DOTFILES_DIR/alacritty/alacritty.yml"
                 set FLAGS -b --suffix=$_suffix
             case '*'
-                echo "sync_config: Unkown name: $name"
+                echo "$_self: Unkown name: $name"
                 return $invalid_arguments
         end
 

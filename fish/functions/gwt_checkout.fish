@@ -1,10 +1,10 @@
-function wt_checkout
-    set -l _name "wt-co"
-    set -l _usage "usage: $_name \"CHANGE_ID\"
+function gwt_checkout
+    set -l _self "gwt-co"
+    set -l _usage "usage: $_self \"CHANGE_ID\"
     Checkout CHANGE_ID from Gerrit.
     Note: surround it with quotes
     "
-    argparse -n $_name 'h/help' -- $argv
+    argparse -n $_self 'h/help' -- $argv
     set -l last_status $status
 
     if set -ql _flag_help

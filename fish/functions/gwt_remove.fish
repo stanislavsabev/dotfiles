@@ -1,27 +1,25 @@
-function _wt_remove_usage --description "_wt-remove_usage"
-    echo "usage: wt-rm [NAMES...] [--force] [--dry-run] [--grep [GREP_FLAGS] PATTERNS]
+function gwt_remove --description "Remove worktree"
+    set -l _self "gwt-rm"
+    set -l _usage "usage: $_self [-h] [-n] [NAMES...] [--force] [--grep [GREP_FLAGS] PATTERNS]
     Remove worktree
     
-    --force     force removal, even if worktree is dirty or locked
-    --dry-run   print commands that would be executed
-    --grep      use to match and remove multiple worktrees, ignores all previous args
     -h --help   displays this message
+    -n --dry-run   print commands that would be executed
+    --force     force removal, even if worktree is dirty or locked
+    --grep      use to match and remove multiple worktrees, ignores all previous args
     "
-end
-
-
-function wt_remove --description "Remove worktree"
 
     set -l options (fish_opt -s h -l help)
+    set -l options (fish_opt -s n -l dry-run)
     set options $options (fish_opt -s f -l force --long-only)
-    # set options $options (fish_opt -s g -l grep --long-only --required-val --multiple-vals)
-    argparse -n wt-rm -i $options -- $argv
+    set options $options (fish_opt -s g -l grep --long-only --required-val --multiple-vals)
+    argparse -n $_self -i $options -- $argv
     set -l last_status $status
 
     if set -ql _flag_help
         or test $last_status -ne 0
         or test (count $argv) -eq 0
-        _wt_remove_usage
+        echo $_usage
         return $last_status
     end
 
@@ -49,7 +47,7 @@ function wt_remove --description "Remove worktree"
 
         if test (count $argv) -eq 0
             echo "grep: missing arguments"
-            _wt_remove_usage
+            echo $_usage
             return $invalid_arguments
         end
 
@@ -59,7 +57,7 @@ function wt_remove --description "Remove worktree"
                     sed -e 's/\[//g' -e 's/\]//g'
             )
         if test (count $NAMES) -eq 0
-            echo "wt-rm: Cannot find worktrees with pattern '$argv'"
+            echo "$_self: Cannot find worktrees with pattern '$argv'"
             return $no_matches_found
         end
     end

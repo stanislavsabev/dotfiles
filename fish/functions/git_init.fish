@@ -1,16 +1,18 @@
 function git_init
-    set -l _usage "usage: git_init [name] [email] [dry-run]
-    Init git repository
-    
-    -n --name    local config user.name
-    -e --email   local config user.email
-    
+    set -f _name "stanislavsabev"
+    set -f _email "bezraboten.34@gmail.com"
+
+    set -l _usage "usage: git_init [--name] [--email] [-n]
+    Init git repository with optional local user name and email.
+
+    --name          local user.name='$_name'
+    --email         local user.email='$_email'    
     -h --help       displays this message
-    --dry-run       print commands that would be executed
+    -n --dry-run    print commands that would be executed
     "
     set -g orig_argv $argv
 
-    argparse 'n/name' 'e/email' 'h/help' 'dry-run' -- $argv
+    argparse 'name' 'email' 'h/help' 'n/dry-run' -- $argv
     set -l last_status $status
     set -l argc (count $argv)
 
@@ -20,15 +22,13 @@ function git_init
         return $last_status
     end
 
-    set -f _name "stanislavsabev"
-    set -f _email "bezraboten.34@gmail.com"
     
     if set -ql _flag_name
-        set -f _name $_flag_name
+        set _name $_flag_name
     end
 
     if set -ql _flag_email
-        set -f _email $_flag_email
+        set _email $_flag_email
     end
 
     set -l _cmd_init git init

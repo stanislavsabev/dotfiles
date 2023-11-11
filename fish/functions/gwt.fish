@@ -1,13 +1,17 @@
-function wt
-    set -l _usage "usage: wt [COMMAND]
+function gwt
+    set -l _self "gwt"
+    set -l _usage "usage: $_self [-h] [COMMAND]
     Call worktree command
     
-    COMMAND
-    add      | a
-    checkout | co
-    list     | ls 
-    move     | mv
-    remove   | rm
+    -h --help   Print this message
+
+    COMMANDS
+        a | add 
+       co | checkout 
+       ls | list  
+       mv | move 
+       rm | remove 
+    clone | 
     "
     set -g orig_argv $argv
 
@@ -25,17 +29,19 @@ function wt
     set -l _cmd
     switch $argv[1]
         case add a
-            set _cmd wt_add 
+            set _cmd gwt_add 
         case checkout co
-            set _cmd wt_checkout
+            set _cmd gwt_checkout
         case list ls
-            set _cmd wt_list
+            set _cmd gwt_list
         case move mv
-            set _cmd wt_move
+            set _cmd gwt_move
         case remove rm
-            set _cmd wt_remove
+            set _cmd gwt_remove
+        case clone
+            set _cmd gwt_clone
         case '*'
-            echo "wt: unknown command $argv[1]"
+            echo "$_self: unknown command $argv[1]"
             return $invalid_arguments
     end
     $_cmd $orig_argv[2..]

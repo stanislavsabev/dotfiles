@@ -28,6 +28,7 @@ abbr -a home -- cd
 abbr -a p -- 'cd $PROJECTS_DIR'
 abbr -a pls -- 'cd $PROJECTS_DIR && la'
 abbr -a dotdir 'cd $DOTFILES_DIR'
+abbr -a dot 'cd $DOTFILES_DIR'
 abbr -a dotfilesdir 'cd $DOTFILES_DIR'
 abbr -a fishdir -- 'cd $__fish_config_dir'
 abbr -a configdir -- 'cd $HOME/.config'
