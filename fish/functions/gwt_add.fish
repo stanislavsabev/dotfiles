@@ -34,11 +34,11 @@ function gwt_add
             return $invalid_arguments
     end
 
-    set -l _cmd git
+    set -l _git_cmd git
     if set -ql _flag_dry_run
-        set -p _cmd echo "dry-run:"
+        set -p _git_cmd echo "dry-run:"
     end
-    echo $_git_cmd worktree add $argstr
+    $_git_cmd worktree add $argstr
 
     if set -ql _flag_extend
         if set -ql _flag_dry_run

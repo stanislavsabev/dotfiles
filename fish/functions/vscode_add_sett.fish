@@ -22,17 +22,14 @@ function vscode_add_sett --description "Copy .vscode/ directory from SRC to curr
 
     set -f SRC ../.vscode
     if test $argc -eq 1
-        set SRC "$argv[1]"/.vscode
+        set SRC $argv[1]
     end
-    set -f DEST .vscode
+    set -f DEST .vscode/
 
     if set -ql _flag_reverse
         set TMP $SRC
         set SRC $DEST
         set DEST $TMP
-    end
-    if test -d $SRC
-        set SRC $SRC/*
     end
 
     set -l _cmd cp

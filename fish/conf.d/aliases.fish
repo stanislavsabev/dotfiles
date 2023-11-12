@@ -37,6 +37,8 @@ abbr -a configdir -- 'cd $HOME/.config'
 abbr -a da -- deactivate
 abbr -a uppip -- 'python -m pip install --upgrade pip'
 abbr -a pir -- 'pip install -r'
+abbr -a make-venv -- 'make_venv'
+abbr -a make-va -- 'make_venv'
 
 # :MY SCRIPTS
 abbr -a --set-cursor nhistory -- "history % | nl"
