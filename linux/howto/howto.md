@@ -512,3 +512,10 @@ https://itsfoss.com/free-up-space-ubuntu-linux/
 
 ## How to Install Windows After Ubuntu Linux in Dual Boot
 https://itsfoss.com/install-windows-after-ubuntu-dual-boot/
+
+
+## Always show hidden files
+
+```bash
+gsettings set org.gnome.nautilus.preferences show-hidden-files true
+```
