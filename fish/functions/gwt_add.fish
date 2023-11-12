@@ -34,17 +34,22 @@ function gwt_add
             return $invalid_arguments
     end
 
-    set -l _popd_cmd popd
+    set -l _cmd git
     if set -ql _flag_dry_run
-        set -p _git_pushd echo "dry-run:"
+        set -p _cmd echo "dry-run:"
     end
-
-    command $_git_cmd worktree add $argstr
+    echo $_git_cmd worktree add $argstr
 
     if set -ql _flag_extend
-        pushd $TARGET_DIR
-        vscode_add_sett
-        popd
+        if set -ql _flag_dry_run
+            echo "dry-run:" pushd $TARGET_DIR
+            echo "dry-run:" vscode_add_sett
+            echo "dry-run:" popd        
+        else
+            pushd $TARGET_DIR
+            vscode_add_sett
+            popd
+        end
     end
 
 end
