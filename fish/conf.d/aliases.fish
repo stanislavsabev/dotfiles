@@ -32,6 +32,7 @@ abbr -a dot 'cd $DOTFILES_DIR'
 abbr -a dotfilesdir 'cd $DOTFILES_DIR'
 abbr -a fishdir -- 'cd $__fish_config_dir'
 abbr -a configdir -- 'cd $HOME/.config'
+abbr -a o -- 'open .'
 
 # :PYTHON
 abbr -a da -- deactivate
