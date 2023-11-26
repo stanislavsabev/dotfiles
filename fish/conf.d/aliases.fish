@@ -11,8 +11,6 @@ alias ..la="cdup_ls"
 alias cdla="cdls"
 
 abbr -a rf -- "rm -rf"
-abbr -a rm -- "rm -i"
-abbr -a mv -- "mv -i"
 
 # alias cd="cdnvm"
 alias grep="grep --color=auto"
@@ -58,6 +56,7 @@ abbr -a --set-cursor dfind -- 'find . -type d -name "%" 2> /dev/null'
 abbr -a codediff -- 'code --diff'
 abbr -a codei -- 'code-insiders'
 abbr -a ef -- 'exec fish'
+abbr -a where -- 'which'
 
 switch (uname)
     case Linux
