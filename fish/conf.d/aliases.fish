@@ -57,6 +57,7 @@ abbr -a codediff -- 'code --diff'
 abbr -a codei -- 'code-insiders'
 abbr -a ef -- 'exec fish'
 abbr -a where -- 'which'
+abbr -a unset 'set -e'
 
 switch (uname)
     case Linux
