@@ -170,9 +170,9 @@
         "gitlens",
         "jupyter",
         "Monokai",
-        "numpy"
+        "numpy",
+        "typer"
     ],
-    "workbench.iconTheme": "material-icon-theme",
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
     "workbench.settings.useSplitJSON": false,
@@ -184,7 +184,7 @@
         ".proj-cfg": "properties"
     },
     "[c]": {
-        "editor.wordBasedSuggestions": true,
+        "editor.wordBasedSuggestions": "matchingDocuments",
         "editor.suggest.insertMode": "replace",
         "editor.semanticHighlighting.enabled": true
     },
@@ -195,22 +195,19 @@
         "editor.formatOnType": false,
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "isort.args": [
-        "--profile",
-        "black",
-        "--group_by_package",
-        "false"
+    "isort.args":[
+        "--profile", "black",
+        "--group_by_package", "false"
     ],
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
     "git.confirmSync": false,
-    "redhat.telemetry.enabled": false,
-    "tabnine.experimentalAutoImports": true,
     "editor.dragAndDrop": false,
     "jake.autoDetect": "on",
     "grunt.autoDetect": "on",
-    "workbench.productIconTheme": "material-product-icons",
+    "workbench.iconTheme": "material-icon-theme",
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
-    }
+    },
+    "explorer.confirmPasteNative": false,
 }
