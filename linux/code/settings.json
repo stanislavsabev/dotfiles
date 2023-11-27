@@ -180,7 +180,8 @@
     // "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Left, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4, AlignConsecutiveMacros: Consecutive}",
     "files.associations": {
         "*.h": "c",
-        "*.hpp": "cpp"
+        "*.hpp": "cpp",
+        ".proj-cfg": "properties"
     },
     "[c]": {
         "editor.wordBasedSuggestions": true,
@@ -209,4 +210,7 @@
     "jake.autoDetect": "on",
     "grunt.autoDetect": "on",
     "workbench.productIconTheme": "material-product-icons",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    }
 }

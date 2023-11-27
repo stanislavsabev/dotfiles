@@ -140,15 +140,31 @@
             "editorIndentGuide.activeBackground1": "#b46274a9",
             "editorIndentGuide.background1": "#92546156",
             "editorCodeLens.foreground": "#97999c"
+        },
+        "[Cold Horizon, No Italics]": {
+            "editor.wordHighlightBackground": "#25375d", // orig: "#1b2947"
+            "editor.wordHighlightStrongBackground": "#25375d",
+            "editor.findMatchBackground": "#25375d",
+            "editor.findMatchHighlightBackground": "#25375d",
+            "editor.findRangeHighlightBackground": "#25375d",
+            "editor.selectionBackground": "#25375d",
+            "editor.lineHighlightBackground": "#25375d",
         }
     },
     "terminal.integrated.fontSize": 15,
     "terminal.integrated.inheritEnv": false,
     "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.commandsToSkipShell": [
+        // Ensure the toggle sidebar visibility keybinding skips the shell
+        "workbench.action.toggleSidebarVisibility",
+        // Send quick open's keybinding to the shell
+        "-workbench.action.quickOpen",
+      ],
     "markdown.preview.fontSize": 15,
-    "workbench.editor.showTabs": true,
+    "workbench.editor.showTabs": "multiple",
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.userWords": [
+        "alacritty",
         "endregion",
         "functools",
         "gitlens",
@@ -156,10 +172,17 @@
         "Monokai",
         "numpy"
     ],
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
     "workbench.settings.useSplitJSON": false,
-    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 75, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4}",
+    // replaced by .clang-format file in each project
+    // "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Left, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4, AlignConsecutiveMacros: Consecutive}",
+    "files.associations": {
+        "*.h": "c",
+        "*.hpp": "cpp",
+        ".proj-cfg": "properties"
+    },
     "[c]": {
         "editor.wordBasedSuggestions": true,
         "editor.suggest.insertMode": "replace",
@@ -172,9 +195,11 @@
         "editor.formatOnType": false,
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "isort.args":[
-        "--profile", "black",
-        "--group_by_package", "false"
+    "isort.args": [
+        "--profile",
+        "black",
+        "--group_by_package",
+        "false"
     ],
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
@@ -184,8 +209,8 @@
     "editor.dragAndDrop": false,
     "jake.autoDetect": "on",
     "grunt.autoDetect": "on",
-    "workbench.iconTheme": "material-icon-theme",
+    "workbench.productIconTheme": "material-product-icons",
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
-    },
+    }
 }
