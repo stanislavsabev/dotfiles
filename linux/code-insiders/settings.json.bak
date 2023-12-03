@@ -184,7 +184,7 @@
         ".proj-cfg": "properties"
     },
     "[c]": {
-        "editor.wordBasedSuggestions": true,
+        "editor.wordBasedSuggestions": "matchingDocuments",
         "editor.suggest.insertMode": "replace",
         "editor.semanticHighlighting.enabled": true
     },
@@ -202,8 +202,6 @@
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
     "git.confirmSync": false,
-    "redhat.telemetry.enabled": false,
-    "tabnine.experimentalAutoImports": true,
     "editor.dragAndDrop": false,
     "jake.autoDetect": "on",
     "grunt.autoDetect": "on",

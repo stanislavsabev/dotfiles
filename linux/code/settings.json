@@ -45,7 +45,7 @@
                     "settings": {
                         "fontStyle": "italic bold"
                     }
-                },
+                }
             ]
         },
         "[azure]": {
@@ -69,7 +69,7 @@
                 },
                 {
                     "scope": [
-                        "variable.parameter",
+                        "variable.parameter"
                     ],
                     "settings": {
                         "foreground": "#b46274",
@@ -98,7 +98,7 @@
                     "scope": [
                         "support.function.builtin.python",
                         "support.function.magic.python",
-                        "storage.type.function.lambda.python",
+                        "storage.type.function.lambda.python"
                     ],
                     "settings": {
                         "foreground": "#4ec9aa",
@@ -108,7 +108,7 @@
                 {
                     "scope": [
                         "storage.type.class.python",
-                        "storage.type.function.python",
+                        "storage.type.function.python"
                     ],
                     "settings": {
                         "foreground": "#4ec9aa",
@@ -148,7 +148,7 @@
             "editor.findMatchHighlightBackground": "#25375d",
             "editor.findRangeHighlightBackground": "#25375d",
             "editor.selectionBackground": "#25375d",
-            "editor.lineHighlightBackground": "#25375d",
+            "editor.lineHighlightBackground": "#25375d"
         }
     },
     "terminal.integrated.fontSize": 15,
@@ -158,7 +158,7 @@
         // Ensure the toggle sidebar visibility keybinding skips the shell
         "workbench.action.toggleSidebarVisibility",
         // Send quick open's keybinding to the shell
-        "-workbench.action.quickOpen",
+        "-workbench.action.quickOpen"
       ],
     "markdown.preview.fontSize": 15,
     "workbench.editor.showTabs": "multiple",
@@ -170,9 +170,11 @@
         "gitlens",
         "jupyter",
         "Monokai",
-        "numpy"
+        "numpy",
+        "typer"
     ],
     "workbench.iconTheme": "material-icon-theme",
+    "workbench.productIconTheme": "material-product-icons",
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
     "workbench.settings.useSplitJSON": false,
@@ -183,10 +185,16 @@
         "*.hpp": "cpp",
         ".proj-cfg": "properties"
     },
+    "files.watcherInclude": [
+        "testing"
+    ],
     "[c]": {
         "editor.wordBasedSuggestions": true,
         "editor.suggest.insertMode": "replace",
         "editor.semanticHighlighting.enabled": true
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
     },
     "explorer.confirmDragAndDrop": false,
     "python.languageServer": "Pylance",
@@ -195,11 +203,9 @@
         "editor.formatOnType": false,
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "isort.args": [
-        "--profile",
-        "black",
-        "--group_by_package",
-        "false"
+    "isort.args":[
+        "--profile", "black",
+        "--group_by_package", "false"
     ],
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
@@ -208,9 +214,5 @@
     "tabnine.experimentalAutoImports": true,
     "editor.dragAndDrop": false,
     "jake.autoDetect": "on",
-    "grunt.autoDetect": "on",
-    "workbench.productIconTheme": "material-product-icons",
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    }
+    "grunt.autoDetect": "on"
 }
