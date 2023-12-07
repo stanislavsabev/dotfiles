@@ -3,7 +3,7 @@ set -gx HISTIGNORE ' *'
 set -gx HISTCONTROL ignoreboth:erasedups
 set -gx COLORTERM truecolor
 
-set -gx EDITOR code
+set -gx EDITOR code-insiders
 set -gx DOTFILES_DIR "$HOME/.dotfiles"
 set -gx CONFIG_DIR "$HOME/.config"
 
