@@ -153,13 +153,13 @@
     },
     "terminal.integrated.fontSize": 15,
     "terminal.integrated.inheritEnv": false,
-    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.commandsToSkipShell": [
         // Ensure the toggle sidebar visibility keybinding skips the shell
         "workbench.action.toggleSidebarVisibility",
         // Send quick open's keybinding to the shell
         "-workbench.action.quickOpen"
-      ],
+    ],
     "markdown.preview.fontSize": 15,
     "workbench.editor.showTabs": "multiple",
     "cSpell.diagnosticLevel": "Hint",
@@ -203,9 +203,11 @@
         "editor.formatOnType": false,
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "isort.args":[
-        "--profile", "black",
-        "--group_by_package", "false"
+    "isort.args": [
+        "--profile",
+        "black",
+        "--group_by_package",
+        "false"
     ],
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
