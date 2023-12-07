@@ -115,6 +115,7 @@ sudo apt-add-repository -y ppa:fish-shell/release-3
 sudo apt-get update -y
 sudo apt-get install fish
 
+echo ">> Install oh-my-fish"
 cd ~/.config
 sudo apt-get update
 curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
@@ -130,7 +131,8 @@ sudo apt-get install software-properties-common apt-transport-https wget gpg -y
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 sudo apt-get update -y
-sudo apt-get install code
+sudo apt-get install -y code
+sudo apt-get install -y code-insiders
 
 ### Add 'Open in Code' to the context menu
 wget -qO- https://raw.githubusercontent.com/cra0zy/code-nautilus/master/install.sh | bash
@@ -166,7 +168,7 @@ sudo swapon --show
 free -h
 
 echo ">> Success. Installation script finished without errors!"
-
+exit
 
 ## Gnome extensions
 sudo apt-get install -y gnome-tweaks \
@@ -179,18 +181,18 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 sudo apt-get install -y flatpak
 sudo flatpak remote-add --if-not-exists \
     flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo apt-get install gnome-software-plugin-flatpak
+sudo apt-get install -y gnome-software-plugin-flatpak
 
 ## TODO: setup before / after reboot
 sudo reboot now
 
-flatpak install -y flathub org.gimp.GIMP
-flatpak install -y flathub com.slack.Slack
-flatpak install -y flathub com.spotify.Client
-flatpak install -y flathub com.discordapp.Discord
+flatpak install flathub org.gimp.GIMP
+flatpak install flathub com.slack.Slack
+flatpak install flathub com.spotify.Client
+flatpak install flathub com.discordapp.Discord
 
-sudo snap install -y bitwarden
-sudo snap install -y zoom-client
+sudo snap install bitwarden
+sudo snap install zoom-client
 
 ## App preload predictor
 sudo apt-get install -y preload
@@ -211,3 +213,22 @@ sudo apt-get install -y libglm-dev libglew-dev \
 
 sudo apt-get install -y telegram-desktop
 sudo apt install telegram-cli telegram-purple
+
+
+## Install Alacritty
+sudo apt update -y && sudo apt upgrade -y
+sudo add-apt-repository ppa:aslatter/ppa -y
+sudo apt install -y alacritty
+sudo apt install -y cmake pkg-config libfreetype6-dev \
+    libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+
+### Configure Rust on Ubuntu
+sudo curl https://sh.rustup.rs -sSf | sh
+
+### Download Alacritty Source code
+git clone https://github.com/jwilm/alacritty.git
+
+cd alacritty
+cargo build --release
+sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+infocmp alacritty
