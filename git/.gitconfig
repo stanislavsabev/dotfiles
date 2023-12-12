@@ -11,6 +11,7 @@
 	s = !git status
 	sv = !git status -v
 	b = !git branch
+	bu = !git branch --set-upstream-to
 	co = !git checkout
 	cb = !git rev-parse --abbrev-ref HEAD
 	curr-branch = !git rev-parse --abbrev-ref HEAD
