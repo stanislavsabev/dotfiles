@@ -17,7 +17,7 @@ if [%1] == [] (
     if [!curOpt1stChar!] == [-] (
         if [!curOpt!] == [-h] goto :usage
         if [!curOpt!] == [--help] goto :usage
-        if [!curOpt!] == [-d] set DRY=1
+        if [!curOpt!] == [-n] set DRY=1
         if [!curOpt!] == [--dry-run] set DRY=1
         shift
         goto :GETOPTS
@@ -40,7 +40,7 @@ call :dry
 
 
 rem Rename branch command
-set _CMD=cd !ARGV[2]! ^&^& git branch -M !ARGV[2]!
+set _CMD=^git branch !ARGV[1]! -M !ARGV[2]!
 call :dry
 !_CMD!
 
@@ -57,8 +57,8 @@ goto:EOF
     exit /b 1
 
 :usage
-    echo usage: %SELF% [-h] [-d] WORKTREE NEW_WORKTREE
+    echo usage: %SELF% [-h] [-n] WORKTREE NEW_WORKTREE
     echo  Rename worktree
     echo.
-    echo    -h --help       Prints this message
-    echo    -d --dry-run    Print the command that would run
+    echo    -h --help       Print this message
+    echo    -n --dry-run    Print the command that would run

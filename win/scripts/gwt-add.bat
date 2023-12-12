@@ -23,7 +23,7 @@ if [%1] == [] (
             goto :usage
         ) else if [!curOpt!] == [--help] (
             goto :usage
-        ) else if [!curOpt!] == [-d] (
+        ) else if [!curOpt!] == [-n] (
             set DRY=1
         ) else if [!curOpt!] == [--dry-run] (
             set DRY=1
@@ -100,10 +100,10 @@ goto:EOF
     exit /b 1
 
 :usage
-    echo usage: %SELF% [-h] [-x] [-d] [NEW_WORKTREE] [[PATH] COMMIT-ISH]
+    echo usage: %SELF% [-h] [-x] [-n] [NEW_WORKTREE] [[PATH] COMMIT-ISH]
     echo  Add worktree to current repository
     echo.
-    echo    -h --help       Prints this message
-    echo    -z --extended   Extended options
+    echo    -h --help       Print this message
+    echo    -x --extended   Extended options
     echo                    Copy helper directories (like .vscode) from parent ^dir
-    echo    -d --dry-run    Print the command that would run
+    echo    -n --dry-run    Print the command that would run

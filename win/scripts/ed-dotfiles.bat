@@ -1,2 +1,0 @@
-@echo off
-%EDITOR% %DOTFILES_DIR%

@@ -23,7 +23,7 @@ if [%1] == [] (
             goto :usage
         ) else if [!curOpt!] == [--help] (
             goto :usage
-        ) else if [!curOpt!] == [-d] (
+        ) else if [!curOpt!] == [-n] (
             set DRY=1
         ) else if [!curOpt!] == [--dry-run] (
             set DRY=1
@@ -42,7 +42,7 @@ if [%1] == [] (
             set REMOTE="!curOpt!"
         ) else if !ARGC! EQU 2 (
             IF DEFINED LOCAL_DIR goto:invalid_args
-            set BRANCH="!curOpt!"
+            set LOCAL_DIR="!curOpt!"
         ) else (
             goto :invalid_argc
         )
@@ -80,9 +80,13 @@ if not defined DRY (
     @rem Update git config
     git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 ) else (
-    echo dry-run: gitdir .bare^> .git
+    echo dry-run: gitdir ./.bare^> .git
     echo dry-run: git config remote.origitn.fetch "+refs/heads/*:refs/remotes/origin/*"
 )
+
+set _CMD=git fetch --all
+call :dry
+!_CMD!
 
 goto:EOF
 
@@ -104,13 +108,11 @@ goto:EOF
     echo %SELF%: Folder %LOCAL_DIR% already exists and is not empty
 
 :usage
-    echo usage: %SELF% [-h] [-d] REMOTE_URL LOCAL_DIR
+    echo usage: %SELF% [-h] [-n] REMOTE_URL LOCAL_DIR
     echo  Clone remote and setup local bare repository
     echo.
     echo    REMOTE_URL      Remote url
     echo    LOCAL_DIR       Destination folder to clone into
     echo.
-    echo    -h --help       Prints this message
-    echo    -z --extended   Extended options
-    echo                    Copy helper directories (like .vscode) from parent ^dir
-    echo    -d --dry-run    Print the command that would run
+    echo    -h --help       Print this message
+    echo    -n --dry-run    Print the command that would run

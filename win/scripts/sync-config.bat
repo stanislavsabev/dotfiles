@@ -23,7 +23,7 @@ IF not defined CODE_USER_DIR (
             set REV=1
         ) else if /i [!curOpt!] == [--reverse] (
             set REV=1
-        ) else if /i [!curOpt!] == [-d] (
+        ) else if /i [!curOpt!] == [-n] (
             SET DRY=1
         ) else if /i [!curOpt!] == [--dry-run] (
             SET DRY=1
@@ -105,7 +105,7 @@ GOTO:EOF
     GOTO:NEXTNANE
 
 :Usage
-    echo usage: sync_config [-h] [-r] [-d] CONFIG_NAMES..
+    echo usage: sync-config [-h] [-r] [-n] CONFIG_NAMES..
     echo    Sync config files between their location (SRC) and dotfiles repo (DEST)
     echo.
     echo    CONFIG_NAMES    Config names: NAME_1 ..NAME_N, 
@@ -115,4 +115,4 @@ GOTO:EOF
     echo.
     echo    -h    --help    Display this message
     echo    -r --reverse    Reverse copy, DEST to SRC
-    echo    -d --dry-run    Print commands that would be executed
+    echo    -n --dry-run    Print commands that would be executed

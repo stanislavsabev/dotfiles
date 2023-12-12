@@ -16,7 +16,7 @@ SET REV=
             goto :usage
         ) else if [!curOpt!] == [--help] (
             goto :usage
-        ) else if [!curOpt!] == [-d] (
+        ) else if [!curOpt!] == [-n] (
             set DRY=1
         ) else if [!curOpt!] == [--dry-run] (
             set DRY=1
@@ -71,9 +71,9 @@ goto:EOF
     echo %SELF%: Invalid flag !curOpt!, see -h for usage
 
 :usage
-    echo usage: %SELF% [-h] [-r] [-d] [PATH]
+    echo usage: %SELF% [-h] [-r] [-n] [PATH]
     echo  Copy the .vscode/ settings directory
     echo.
-    echo    -h --help       Prints this message
+    echo    -h --help       Print this message
     echo    -r --reverse    Reverse copy
-    echo    -d --dry-run    Print the command that would run
+    echo    -n --dry-run    Print the command that would run

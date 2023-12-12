@@ -7,13 +7,13 @@ Easiest is to use PowerShell here
 1. Add `DOTFILES_DIR` to the Environment Variables
 
    ```pwsh
-   [System.Environment]::SetEnvironmentVariable('DOTFILES_DIR',$env:USERPROFILE + "\dotfiles","User")
+   [System.Environment]::SetEnvironmentVariable('DOTFILES_DIR', $env:USERPROFILE + "\dotfiles","User")
    ```
 
 2. Add the scripts path to the PATH variable
 
    ```pwsh
-   [System.Environment]::SetEnvironmentVariable('path', [System.Environment]::GetEnvironmentVariable('path', "User") + $env:USERPROFILE + "\dotfiles\win\scripts;","User")
+   [System.Environment]::SetEnvironmentVariable('path', [System.Environment]::GetEnvironmentVariable('path', "User") + ";" + $env:USERPROFILE + "\dotfiles\win\scripts","User")
    ```
 
 ## **Setup pyenv**

@@ -2,6 +2,7 @@
 setlocal enableDelayedExpansion
 
 if "%1"=="-h" ( GOTO:usage )
+if "%1"=="--help" ( GOTO:usage )
 if "%1"=="-f" ( GOTO:rm_f )
 if "%1"=="-r" ( GOTO:rm_r )
 if "%1"=="-rf" ( GOTO:rm_rf )
@@ -9,7 +10,7 @@ if not "%1"=="" ( GOTO:rm )
 
 :usage
     echo Usage:
-    echo    %~n0 [-r/-rf] ^<filename/dirname^>
+    echo    %~n0 [-r[f]] FILENAME ^| DIRNAME
     echo.
     GOTO:EOF
 

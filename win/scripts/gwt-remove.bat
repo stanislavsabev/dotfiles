@@ -8,10 +8,6 @@ SET DRY=
 SET FORCE=
 SET PAT=
 
-if [%1] == [] (
-   goto:invalid_args
-)
-
 :GETOPTS
     if [%1] == [] goto :ENDGETOPTS
     SET curOpt=%1
@@ -23,14 +19,14 @@ if [%1] == [] (
             goto :usage
         ) else if [!curOpt!] == [--help] (
             goto :usage
-        ) else if [!curOpt!] == [-d] (
+        ) else if [!curOpt!] == [-n] (
             set DRY=1
         ) else if [!curOpt!] == [--dry-run] (
             set DRY=1
         ) else if [!curOpt!] == [-f] (
-            set FORCE=1
+            set FORCE=--force
         ) else if [!curOpt!] == [--force] (
-            set FORCE=1
+            set FORCE=--force
         ) else if [!curOpt!] == [-p] (
             set PAT=1
         ) else if [!curOpt!] == [--pattern] (
@@ -41,10 +37,9 @@ if [%1] == [] (
         shift
         goto :GETOPTS
     )
-    @rem Positional arguments
     if not [!curOpt!] == [] (
         set /A ARGC+=1
-        set ARGV[!ARGC!]=%1
+        set NAMES[!ARGC!]=%1
         shift
         goto :GETOPTS
     )
@@ -52,18 +47,17 @@ if [%1] == [] (
 
 if !ARGC! EQU 0 GOTO:invalid_args
 
-@rem Worktree command
+@rem Remove worktree command
 set _CMD=git worktree remove
 call :dry
 set RM_WT_CMD=!_CMD!
 
 @REM Delete branch command
-SET _CMD=^git branch -d
+SET _CMD=^git branch -D
 call :dry
 set RM_BRANCH_CMD=!_CMD!
 
 for /L %%i in ( 1,1,!ARGC! ) do (
-    @rem Extend command
     IF DEFINED PAT (
         echo %SELF%: Pattern not implemented yet
         exit /b 1
@@ -82,15 +76,19 @@ goto:EOF
     exit /b 0
 
 :invalid_args
-    echo %SELF%: Invalid numbers, see -h for usage
+    echo %SELF%: Invalid arguments, see -h for usage
+    exit /b 1
+
+:invalid_opt
+    echo %SELF%: Invalid flag !curOpt!, see -h for usage
     exit /b 1
 
 :usage
-    echo usage: %SELF% [-h] [-d] [-f] [-p] NAMES
+    echo usage: %SELF% [-h] [-n] [-f] [-p] NAMES
     echo  Remove worktree
     echo.
-    echo    -h --help       Prints this message
-    echo    -d --dry-run    Print the command that would run
+    echo    -h --help       Print this message
+    echo    -n --dry-run    Print the command that would run
     echo    -f --force      Force remove, even if worktree is dirty of locked
     echo    NOTE: Pattern not implemented yet
     echo    -p --pattern FINDSTR [FLAGS] STASHED

@@ -4,11 +4,11 @@ set SELF=%~n0
 if [%1] == [-h] goto :usage
 if [%1] == [--help] goto :usage
 
-cls
+type %*
 
 goto :EOF
 :usage
-    echo usage: %SELF% [-h]
-    echo  Clear terminal
+    echo usage: %SELF% [-h] FILE
+    echo  cat FILE
     echo.
     echo    -h --help       Print this message

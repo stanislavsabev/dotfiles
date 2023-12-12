@@ -23,7 +23,7 @@ if [%1] == [] goto :invalid_args
             goto :usage
         ) else if [!curOpt!] == [--help] (
             goto :usage
-        ) else if [!curOpt!] == [-d] (
+        ) else if [!curOpt!] == [-n] (
             set DRY=1
         ) else if [!curOpt!] == [--dry-run] (
             set DRY=1
@@ -118,12 +118,12 @@ goto:proc_open_proj
     exit /b 1
 
 :usage
-    echo usage: %SELF% [-h] [-d] [-l [-lr -la]] COMMAND PROJ [WORKTREE | PATH]
+    echo usage: %SELF% [-h] [-n] [-l [-lr -la]] COMMAND PROJ [WORKTREE | PATH]
     echo  Project manager
     echo.
     echo         FLAGS
-    echo     -h --help      Prints this message
-    echo  -d --dry-run      Print the command that would run
+    echo     -h --help      Print this message
+    echo  -n --dry-run      Print the command that would run
     echo    -l -lr -la      List branches: local, remote, all
     echo.
     echo       COMMAND      Commands are matched before proj name

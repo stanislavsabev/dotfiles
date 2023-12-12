@@ -47,7 +47,7 @@ IF DEFINED _CMD (
     echo usage: %SELF% [-h] COMMAND [COMMAND_ARGS...]
     echo  Call worktree command
     echo.
-    echo    -h --help       Prints this message
+    echo    -h --help       Print this message
     echo.
     echo    COMMAND         Supported commands:
     echo        add      ^| a  - Add worktree
