@@ -23,7 +23,7 @@
             "$0",
             "",
             "#endif // __${TM_FILENAME/^([^\\.]*)\\..*$/${1:/upcase}/}_${TM_FILENAME/^.*\\.([^\\.]*)$/${1:/upcase}/}__",
-            "",
+            ""
         ]
     },
     "Auto include header file": {
@@ -31,21 +31,21 @@
         "description": "Auto include C/C++ header file",
         "body": [
             "#include \"${TM_FILENAME/(\\.cpp|\\.c)/.h/}\"",
-            "$0",
+            "$0"
         ]
     },
     "#define": {
         "prefix": "define",
         "description": "#define",
         "body": [
-            "#define ${1:TOKEN}$2 ${3:value}$0",
+            "#define ${1:TOKEN}$2 ${3:value}$0"
         ]
     },
     "assert not implemented": {
         "prefix": "not_implemented",
         "description": "assert not implemented",
         "body": [
-            "assert(0 && \"Not implemented!\");$0",
+            "assert(0 && \"Not implemented!\");$0"
         ]
     },
     "simple main, no args": {
@@ -111,8 +111,8 @@
         "body": [
             "#if defined(DEBUG)",
             "\t$0",
-            "#endif   // DEBUG",
+            "#endif   // DEBUG"
         ],
         "description": "Include local header \"name.h\""
-    },
+    }
 }
