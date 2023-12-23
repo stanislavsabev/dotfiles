@@ -5,9 +5,6 @@ set SELF=%~n0
 set REV=
 set DRY=
 set COMND=xcopy
-IF not defined CODE_USER_DIR (
-    set CODE_USER_DIR=%AppData%\Code\User
-)
 
 :GETOPTS
     set curOpt=%1
@@ -38,49 +35,48 @@ if [%1] == [] (
     echo Missing config name/s
     exit /b
 )
+set NAME=%1
+shift
 
-set DEST=
+call :read_cmd_args
+
 set SRC=
+set DEST=
+set DEST2=
+
 set PROC_NAME=
 
-:NEXTNANE
-
-    set NAME=%1
-    if /I [!NAME!] == [code] (
-        shift
-        set DEST=%DOTFILES_DIR%\win\code
-        set SRC=%CODE_USER_DIR%
-        set PROC_NAME=proc_code
-        GOTO:PROC
-    ) else if /I [!NAME!] == [code-insiders] (
-        shift
-        set DEST=%DOTFILES_DIR%\win\code-insiders
-        set SRC=%CODE_USER_DIR%
-        set PROC_NAME=proc_code
-        GOTO:PROC
-    ) else if /I [!NAME!] == [git] (
-        shift
-        set DEST=%DOTFILES_DIR%\git
-        set SRC=%USERPROFILE%
-        set PROC_NAME=proc_git
-        GOTO:PROC
-    ) else if [!NAME!] == [] (
-    exit /b
-    ) else (
-        echo Unknown config name "%1"
-        goto :EOF
+if /I [!NAME!] == [code] (
+    IF not defined CODE_USER_DIR (
+        set CODE_USER_DIR=%AppData%\Code\User
     )
-    exit /b 0
+    set SRC=%CODE_USER_DIR%
+    set DEST=%DOTFILES_DIR%\code
+    set PROC_NAME=proc_code
+) else if /I [!NAME!] == [code-insiders] (
+    IF not defined CODE_USER_DIR (
+        set CODE_USER_DIR="%AppData%\Code - Insiders\User"
+    )
+    set SRC=%CODE_USER_DIR%
+    set DEST=%DOTFILES_DIR%\code\code-insiders
+    set PROC_NAME=proc_code_insiders
+) else if /I [!NAME!] == [git] (
+    set SRC=%USERPROFILE%
+    set DEST=%DOTFILES_DIR%\git
+    set PROC_NAME=proc_git
+) else (
+    echo Unknown config name "!NAME!"
+    exit /b 1
+)
 
+if DEFINED REV (
+    set TMP_VAR=%DEST%
+    set DEST=%SRC%
+    set SRC=!TMP_VAR!
+)
+
+GOTO:!PROC_NAME!
 GOTO:EOF
-
-:PROC
-    if DEFINED REV (
-        set TMP_VAR=%DEST%
-        set DEST=%SRC%
-        set SRC=!TMP_VAR!
-     )
-     GOTO:!PROC_NAME!
 
 :proc_code
     if defined DRY (
@@ -92,7 +88,27 @@ GOTO:EOF
         echo F|%COMND% /Y %SRC%\keybindings.json %DEST%\keybindings.json 
         echo D|%COMND% /I /Y /E "%SRC%\snippets\*" "%DEST%\snippets\*"
     )
-    GOTO:NEXTNANE
+    exit /b 0
+
+
+:proc_code_insiders
+    set SNIP_SRC="%CODE_USER_DIR%\Code - Insiders"
+    set SNIP_DEST=%DOTFILES_DIR%\code
+    if DEFINED REV (
+        set TMP_VAR=%SNIP_DEST%
+        set SNIP_DEST=%SNIP_SRC%
+        set SNIP_SRC=!TMP_VAR!
+    )
+    if defined DRY (
+        echo dry-run: "echo F|%COMND% /Y %SRC%\settings.json %DEST%\settings.json"
+        echo dry-run: "echo F|%COMND% /Y %SRC%\keybindings.json %DEST%\keybindings.json "
+        echo dry-run: "echo D|%COMND% /I /Y /E "%SNIP_SRC%\snippets\*" "%SNIP_DEST%\snippets\*""
+    ) else (
+        echo F|%COMND% /Y %SRC%\settings.json %DEST%\settings.json
+        echo F|%COMND% /Y %SRC%\keybindings.json %DEST%\keybindings.json 
+        echo D|%COMND% /I /Y /E "%SNIP_SRC%\snippets\*" "%SNIP_DEST%\snippets\*"
+    )
+    exit /b 0
 
 :proc_git
     if defined DRY (
@@ -102,7 +118,22 @@ GOTO:EOF
         echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig
         echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global
     )
-    GOTO:NEXTNANE
+    exit /b 0
+
+:read_cmd_args
+    set /A CMD_ARGC=0
+    set CMD_ARV=
+
+:getcmdopts
+    if [%1] == [] (
+        exit /b 0
+    )
+    set /A CMD_ARGC+=1
+    set CMD_ARV[!CMD_ARGC!]=%1
+    shift
+    goto :getcmdopts
+exit /b 0
+
 
 :Usage
     echo usage: sync-config [-h] [-r] [-n] CONFIG_NAMES..
