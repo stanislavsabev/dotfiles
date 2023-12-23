@@ -8,8 +8,12 @@
     "gitlens.views.repositories.autoRefresh": false,
     "gitlens.views.fileHistory.avatars": false,
     "gitlens.views.lineHistory.avatars": false,
+    "gitlens.views.compare.avatars": false,
     "gitlens.views.repositories.avatars": false,
+    "gitlens.views.search.avatars": false,
+    "gitlens.views.repositories.location": "scm",
     "scm.diffDecorationsGutterWidth": 1,
+    "git.openRepositoryInParentFolders": "never",
     "gitlens.keymap": "none",
     "editor.minimap.enabled": false,
     "editor.fontLigatures": true,
@@ -18,8 +22,14 @@
     "editor.renderWhitespace": "all",
     "editor.renderControlCharacters": false,
     "diffEditor.ignoreTrimWhitespace": false,
+    // "editor.fontFamily" : "Fira Code",
     "editor.fontFamily": "Source Code Pro",
-    "workbench.colorTheme": "Dracula",
+    // "editor.fontFamily": "Roboto Mono",
+    // "terminal.integrated.fontFamily": "Fira Code",
+    // "terminal.integrated.fontFamily": "Source Code Pro",
+    "terminal.integrated.fontFamily": "Roboto Mono",
+    // "workbench.colorTheme": "Dracula",
+    "workbench.colorTheme": "Cold Horizon",
     "editor.semanticTokenColorCustomizations": {
         "[azure]": {
             "enabled": true
@@ -174,13 +184,40 @@
         "numpy",
         "typer"
     ],
+    "python.jediEnabled": false,
+    "python.dataScience.askForKernelRestart": false,
+    "python.dataScience.runStartupCommands": "%load_ext autoreload\n%autoreload 2",
+    "python.dataScience.sendSelectionToInteractiveWindow": true,
+    "python.dataScience.enableCellCodeLens": true,
+    // "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    // "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+    // "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        }
+    },
+    // "workbench.iconTheme": "Monokai Pro (Filter Octagon) Icons",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.productIconTheme": "material-product-icons",
     "workbench.settings.openDefaultSettings": false,
     "editor.formatOnSave": false,
     "workbench.settings.useSplitJSON": false,
+    "code-runner.runInTerminal": true,
     // replaced by .clang-format file in each project
-    // "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Left, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4, AlignConsecutiveMacros: Consecutive}",
+    "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 99, PointerAlignment: Left, AllowShortFunctionsOnASingleLine: InlineOnly, IndentWidth: 4, AlignConsecutiveMacros: Consecutive}",
+    // "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, SpacesBeforeTrailingComments: 3, ColumnLimit: 75, PointerAlignment: Right, AllowShortFunctionsOnASingleLine: InlineOnly}",
     "files.associations": {
         "*.h": "c",
         "*.hpp": "cpp",
@@ -198,6 +235,7 @@
         "editor.defaultFormatter": "vscode.json-language-features"
     },
     "explorer.confirmDragAndDrop": false,
+    
     "python.languageServer": "Pylance",
     "explorer.confirmDelete": false,
     "[python]": {
@@ -212,6 +250,7 @@
     ],
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
+    "window.zoomLevel": -1,
     "git.confirmSync": false,
     "redhat.telemetry.enabled": false,
     "tabnine.experimentalAutoImports": true,
