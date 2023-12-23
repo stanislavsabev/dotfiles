@@ -148,7 +148,8 @@
             "editor.findMatchHighlightBackground": "#25375d",
             "editor.findRangeHighlightBackground": "#25375d",
             "editor.selectionBackground": "#25375d",
-            "editor.lineHighlightBackground": "#25375d"
+            "editor.lineHighlightBackground": "#25375d",
+            "editorGroup.border": "#21bfc27e"
         }
     },
     "terminal.integrated.fontSize": 15,
