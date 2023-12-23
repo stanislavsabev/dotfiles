@@ -186,6 +186,6 @@
         "body": [
             "with open(${1:file_name}, ${2|\"r\",\"w\",\"a\",\"r+\",\"w+\",\"a+\",\"x\",\"b\",\"t\"|}, encoding=${3:\"utf-8\"}) as fd:",
             "\tpass$0"
-        ],
+        ]
     }
 }
