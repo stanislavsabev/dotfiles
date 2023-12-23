@@ -1,7 +1,7 @@
 {
     "workbench.sideBar.location": "left",
     "gitlens.codeLens.enabled": false,
-    "gitlens.currentLine.enabled": false,
+    "gitlens.currentLine.enabled": true,
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
     "gitlens.statusBar.enabled": false,
@@ -182,7 +182,10 @@
         "jupyter",
         "Monokai",
         "numpy",
-        "typer"
+        "typer",
+        "sqlalchemy",
+        "pytest",
+        "alembic"
     ],
     "python.jediEnabled": false,
     "python.dataScience.askForKernelRestart": false,
@@ -206,6 +209,25 @@
         },
         "Git Bash": {
             "source": "Git Bash"
+        }
+    },
+    "terminal.integrated.profiles.osx": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "fish": {
+            "path": "/usr/local/bin/fish"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        },
+        "python3-repl": {
+            "path": "python3",
+            "args": [
+                "-q"
+            ]
         }
     },
     // "workbench.iconTheme": "Monokai Pro (Filter Octagon) Icons",
@@ -233,6 +255,9 @@
     },
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[sql]": {
+        "editor.defaultFormatter": "mtxr.sqltools"
     },
     "explorer.confirmDragAndDrop": false,
     
