@@ -202,7 +202,6 @@
         "command": "-cursorBottom",
         "when": "textInputFocus"
     },
-
     {
         "key": "ctrl+b",
         "command": "-markdown.extension.editing.toggleBold",

@@ -1,0 +1,118 @@
+{
+    "include_local_h": {
+        "prefix": "include_local_h",
+        "body": [
+            "#include \"$0\""
+        ],
+        "description": "Include local header \"name.h\""
+    },
+    "include_system_h": {
+        "prefix": "include_system_h",
+        "body": [
+            "#include <$0>"
+        ],
+        "description": "Include system header <name>"
+    },
+    "Add include guard": {
+        "prefix": "header_guard",
+        "description": "Adds an ifndef include guard to a C/C++ header",
+        "body": [
+            "#ifndef __${TM_FILENAME/^([^\\.]*)\\..*$/${1:/upcase}/}_${TM_FILENAME/^.*\\.([^\\.]*)$/${1:/upcase}/}__",
+            "#define __${TM_FILENAME/^([^\\.]*)\\..*$/${1:/upcase}/}_${TM_FILENAME/^.*\\.([^\\.]*)$/${1:/upcase}/}__",
+            "",
+            "$0",
+            "",
+            "#endif // __${TM_FILENAME/^([^\\.]*)\\..*$/${1:/upcase}/}_${TM_FILENAME/^.*\\.([^\\.]*)$/${1:/upcase}/}__",
+            ""
+        ]
+    },
+    "Auto include header file": {
+        "prefix": "include_h",
+        "description": "Auto include C/C++ header file",
+        "body": [
+            "#include \"${TM_FILENAME/(\\.cpp|\\.c)/.h/}\"",
+            "$0"
+        ]
+    },
+    "#define": {
+        "prefix": "define",
+        "description": "#define",
+        "body": [
+            "#define ${1:TOKEN}$2 ${3:value}$0"
+        ]
+    },
+    "assert not implemented": {
+        "prefix": "not_implemented",
+        "description": "assert not implemented",
+        "body": [
+            "assert(0 && \"Not implemented!\");$0"
+        ]
+    },
+    "simple main, no args": {
+        "prefix": "main_simple",
+        "description": "Simple main() without args",
+        "body": [
+            "int main() {",
+            "\t$0",
+            "\treturn EXIT_SUCCESS;",
+            "}"
+        ]
+    },
+    "main w argc argv": {
+        "prefix": "main_argc_argv",
+        "description": "`main(argc, argv[]`)",
+        "body": [
+            "int main(int argc, char const *argv[static argc - 1]) {",
+            "\t(void)argc;",
+            "\t(void)argv;",
+            "\t$0",
+            "\treturn EXIT_SUCCESS;",
+            "}"
+        ]
+    },
+    "Did you mean include?": {
+        "prefix": "import_Did_u_mean_include?",
+        "body": [
+            "#include \"$0\""
+        ],
+        "description": "Include local header \"name.h\""
+    },
+    "typedef struct": {
+        "prefix": "typedef_struct",
+        "body": [
+            "typedef struct {",
+            "\t${2:member_t} ${3:member_name};$0",
+            "} ${1:name};"
+        ],
+        "description": "Include local header \"name.h\""
+    },
+    "typedef union": {
+        "prefix": "typedef_union",
+        "body": [
+            "typedef union {",
+            "\t${2:member_t} ${3:member_name};$0",
+            "} ${1:name};"
+        ],
+        "description": "Include local header \"name.h\""
+    },
+    "typedef enum { } t_name;": {
+        "prefix": "typedef_enum",
+        "body": [
+            "typedef enum {",
+            "\t${1/(.*)/${1:/upcase}/}_VALUE_1$0,",
+            "\t${1/(.*)/${1:/upcase}/}_VALUE_2,",
+            "\t${1/(.*)/${1:/upcase}/}_ENUM_COUNT",
+            "} ${1:name};"
+        ],
+        "description": "Include local header \"name.h\""
+    },
+    "#if defined(DEBUG);": {
+        "prefix": "if_defined_debug",
+        "body": [
+            "#if defined(DEBUG)",
+            "\t$0",
+            "#endif   // DEBUG"
+        ],
+        "description": "Include local header \"name.h\""
+    }
+}
