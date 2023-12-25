@@ -169,7 +169,7 @@
         // Ensure the toggle sidebar visibility keybinding skips the shell
         "workbench.action.toggleSidebarVisibility",
         // Send quick open's keybinding to the shell
-        "-workbench.action.quickOpen"
+        "workbench.action.quickOpen"
     ],
     "markdown.preview.fontSize": 15,
     "workbench.editor.showTabs": "multiple",
