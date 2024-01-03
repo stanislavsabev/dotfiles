@@ -6,8 +6,9 @@ if [%1] == [-h] goto :usage
 if [%1] == [--help] goto :usage
 if [%1] == [] goto :usage
 
-cscript %SCRIPTPATH%\vbs_keepmeawake.vbs %*
+cscript %SELF_DIR%\vbs_keepmeawake.vbs %*
 
+goto :EOF
 :usage
     echo usage: %SELF% [-h] HOURS [MINUTES]
     echo  Prevent Windows' sleep mode

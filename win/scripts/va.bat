@@ -7,9 +7,9 @@ if [%1] == [--help] goto :usage
 set VA=
 SET PYTHON_CFG=.python-PYTHON_CFG
 
-if not [%1] == [] {
+if not [%1] == [] (
     set VA="%1"
-} else if exist %PYTHON_CFG% (
+) else if exist %PYTHON_CFG% (
     call :read_python_cfg
 )
 
