@@ -5,7 +5,7 @@ if [%1] == [-h] goto :usage
 if [%1] == [--help] goto :usage
 
 set VA=
-SET PYTHON_CFG=.python-PYTHON_CFG
+SET PYTHON_CFG=.python-cfg
 
 if not [%1] == [] (
     set VA="%1"

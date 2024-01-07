@@ -26,6 +26,7 @@ set COMND=xcopy
             SET DRY=1
         ) else (
             echo Unexpected option or flag !curOpt!, see -h for help
+            goto:EOF
         )
         shift
         goto :GETOPTS

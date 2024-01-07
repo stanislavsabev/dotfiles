@@ -11,8 +11,6 @@ for %%x in (%*) do (
     set "argVec[!argCount!]=%%~x"
 )
 
-echo Nmber of processed arguments: %argCount%
-
 for /L %%i in (1,1,%argCount%) do (
     echo Closing %%i- "!argVec[%%i!"
     taskkill /im "!argVec[%%i]!*" /f

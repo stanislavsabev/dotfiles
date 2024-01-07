@@ -6,7 +6,9 @@ SET DRY=
 SET REV=
 
 :GETOPTS
-    if [%1] == [] goto :ENDGETOPTS
+    if [%1] == [] (
+        goto :ENDGETOPTS
+    )
     SET curOpt=%1
     SET curOpt1stChar=!curOpt:~0,1!
 
@@ -33,7 +35,7 @@ SET REV=
 
     @rem Positional arguments
     if not [!curOpt!] == [] (
-        IF DEFINED SRC_PATH goto:invalid_args
+        IF DEFINED SRC_PATH goto :invalid_args
         set SRC_PATH="!curOpt!"
         shift
         goto :GETOPTS
