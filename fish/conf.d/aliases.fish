@@ -3,9 +3,9 @@ source "$__fish_config_dir/conf.d/envs.fish"
 alias chbash="set MYSHELL bash; exec bash"
 
 # :NAVIGATION
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
+alias ..="pushd .."
+alias ...="pushd ../.."
+alias ....="pushd ../../.."
 alias ..ls="cdup_ls"
 alias ..la="cdup_ls"
 alias cdla="cdls"
@@ -17,19 +17,19 @@ alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 
 # :COMMON DIRECTORIES
-abbr -a dow -- 'cd $HOME/Downloads'
-abbr -a dtop -- 'cd $HOME/Desktop'
-abbr -a doc -- 'cd $HOME/Documents'
-abbr -a vid -- 'cd $HOME/Videos'
-abbr -a home -- cd
+abbr -a dow -- 'pushd $HOME/Downloads'
+abbr -a dtop -- 'pushd $HOME/Desktop'
+abbr -a doc -- 'pushd $HOME/Documents'
+abbr -a vid -- 'pushd $HOME/Videos'
+abbr -a home -- "pushd ~"
 
-abbr -a p -- 'cd $PROJECTS_DIR'
-abbr -a pls -- 'cd $PROJECTS_DIR && la'
-abbr -a dotdir 'cd $DOTFILES_DIR'
-abbr -a dot 'cd $DOTFILES_DIR'
-abbr -a dotfilesdir 'cd $DOTFILES_DIR'
-abbr -a fishdir -- 'cd $__fish_config_dir'
-abbr -a configdir -- 'cd $HOME/.config'
+abbr -a p -- 'pushd $PROJECTS_DIR'
+abbr -a pls -- 'pushd $PROJECTS_DIR && la'
+abbr -a dotdir 'pushd $DOTFILES_DIR'
+abbr -a dot 'pushd $DOTFILES_DIR'
+abbr -a dotfilesdir 'pushd $DOTFILES_DIR'
+abbr -a fishdir -- 'pushd $__fish_config_dir'
+abbr -a configdir -- 'pushd $HOME/.config'
 abbr -a o -- 'open .'
 
 # :PYTHON
@@ -78,8 +78,8 @@ switch (uname)
         alias rf="rm -rf"
         # tree listing
         abbr lt -- 'exa -aT --group-directories-first'
-        abbr -a sand -- "cd $PROJECTS_DIR/sandbox"
-        abbr -a sandls -- "cd $PROJECTS_DIR/sandbox && la"
+        abbr -a sand -- "pushd $PROJECTS_DIR/sandbox"
+        abbr -a sandls -- "pushd $PROJECTS_DIR/sandbox && la"
 
         # APT
         abbr -a up -- "sudo apt update -y"

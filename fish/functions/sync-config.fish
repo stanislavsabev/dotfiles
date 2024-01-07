@@ -76,8 +76,8 @@ function sync-config
                 set DEST "$DOTFILES_DIR/.tmux.conf"
                 set FLAGS -b --suffix=$_suffix
             case alacritty
-                set SRC "$CONF_D/alacritty/alacritty.yml"
-                set DEST "$DOTFILES_DIR/alacritty/alacritty.yml"
+                set SRC "$CONF_D/alacritty/"
+                set DEST "$DOTFILES_DIR/alacritty/"
                 set FLAGS -b --suffix=$_suffix
             case '*'
                 echo "$_self: Unkown name: $name"
