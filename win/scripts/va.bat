@@ -22,7 +22,7 @@ if not DEFINED VA (
 goto :EOF
 
 :read_python_cfg
-    for /F "tokens=* USEBACKQ" %%F IN ( 'head 1 %PYTHON_CFG%' ) do (
+    for /F "tokens=* USEBACKQ" %%F IN ( `head 1 %PYTHON_CFG%` ) do (
         SET VA=%%F
         exit /b 0
     )
