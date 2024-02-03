@@ -165,6 +165,7 @@
     "terminal.integrated.fontSize": 15,
     "terminal.integrated.inheritEnv": false,
     "terminal.integrated.defaultProfile.linux": "fish",
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "terminal.integrated.commandsToSkipShell": [
         // Ensure the toggle sidebar visibility keybinding skips the shell
         "workbench.action.toggleSidebarVisibility",
@@ -176,16 +177,18 @@
     "cSpell.diagnosticLevel": "Hint",
     "cSpell.userWords": [
         "alacritty",
+        "alembic",
         "endregion",
         "functools",
         "gitlens",
         "jupyter",
         "Monokai",
         "numpy",
-        "typer",
-        "sqlalchemy",
         "pytest",
-        "alembic"
+        "sqlalchemy",
+        "typer",
+        "worktree",
+        "worktrees"
     ],
     "python.jediEnabled": false,
     "python.dataScience.askForKernelRestart": false,
@@ -249,7 +252,7 @@
         "testing"
     ],
     "[c]": {
-        "editor.wordBasedSuggestions": true,
+        "editor.wordBasedSuggestions": "matchingDocuments",
         "editor.suggest.insertMode": "replace",
         "editor.semanticHighlighting.enabled": true
     },
