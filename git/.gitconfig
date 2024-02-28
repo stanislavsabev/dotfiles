@@ -16,17 +16,22 @@
 	cb = !git rev-parse --abbrev-ref HEAD
 	curr-branch = !git rev-parse --abbrev-ref HEAD
 	cob = !git checkout -b
+	c = !git commit
 	cm = !git commit -m
+	cmnv = !git commit --no-verify -m
 	cam = !git add --all && git commit -am
+	camnv = !git add --all && git commit --no-verify -am
 	unstageall = !git reset -- .
 	unstage = !git reset --
 	recommit = !git commit -c ORIG_HEAD
 	cnoe = !git commit --amend --no-edit
 	acnoe = !git add --all && git commit --amend --no-edit
+	acnoenv = !git add --all && git commit --amend --no-edit --no-verify
 	recommit = !git commit -c ORIG_HEAD
 	undolast = !git reset HEAD~
 	resethard = !git reset HEAD --hard
 	resetall = !git reset HEAD --hard && git clean -f
+	drop = !git reset HEAD --hard && git clean -f
 	amend = !git commit --amend
 	pushrefs = !git push origin HEAD:refs/for/master
 	lg = !git log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
