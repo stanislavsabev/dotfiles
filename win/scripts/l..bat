@@ -21,12 +21,13 @@ if not "%1"=="" ( GOTO:usage )
     GOTO:EOF
 
 :usage
-    echo usage: %SELF% [-a] [-d] [-f]
-    echo    List files and directory names starting with dot (.)
+    echo usage: %SELF% [-h] [-a] [-d] [-f]
+    echo  List files and directory names starting with dot (.)
     echo.
-    echo    FLAGS:
-    echo      -a  Default. Lists files and directories
-    echo      -d  Lists directories only
-    echo      -f  Lists files only
+    echo    -h --help  Print this message
+    echo.
+    echo    -a         Default. Lists files and directories
+    echo    -d         Lists directories only
+    echo    -f         Lists files only
     echo.
     GOTO:EOF
