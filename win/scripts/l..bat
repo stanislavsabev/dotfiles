@@ -1,5 +1,8 @@
 @echo off
+set SELF=%~n0
 
+if [%1] == [-h] goto :usage
+if [%1] == [--help] goto :usage
 if "%1"=="-a" ( GOTO:dir_dotall )
 if "%1"=="-d" ( GOTO:dir_dotdirs )
 if "%1"=="-f" ( GOTO:dir_dotfiles )
@@ -18,15 +21,12 @@ if not "%1"=="" ( GOTO:usage )
     GOTO:EOF
 
 :usage
-    echo Usage:
-    echo    %~n0 [-a/-d/-f]
+    echo usage: %SELF% [-a] [-d] [-f]
+    echo    List files and directory names starting with dot (.)
     echo.
     echo    FLAGS:
-    echo      -a  This is the default. Lists files and directories
-    echo          starting with `.`.
-    echo      -d  Lists directories starting with `.`.
-    echo      -f  Lists files starting with `.`.
+    echo      -a  Default. Lists files and directories
+    echo      -d  Lists directories only
+    echo      -f  Lists files only
     echo.
     GOTO:EOF
-
-:End
