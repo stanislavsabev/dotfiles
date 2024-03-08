@@ -49,14 +49,16 @@ set PROC_NAME=
 
 if /I [!NAME!] == [code] (
     IF not defined CODE_USER_DIR (
-        set CODE_USER_DIR=%AppData%\Code\User
+        set CODE_USER_DIR=%APPDATA%\Code\User
     )
     set SRC=%CODE_USER_DIR%
     set DEST=%DOTFILES_DIR%\code
+    echo src %SRC%
+    echo CODE_USER_DIR %CODE_USER_DIR%
     set PROC_NAME=proc_code
 ) else if /I [!NAME!] == [code-insiders] (
     IF not defined CODE_USER_DIR (
-        set CODE_USER_DIR="%AppData%\Code - Insiders\User"
+        set CODE_USER_DIR="%APPDATA%\Code - Insiders\User"
     )
     set SRC=%CODE_USER_DIR%
     set DEST=%DOTFILES_DIR%\code\code-insiders

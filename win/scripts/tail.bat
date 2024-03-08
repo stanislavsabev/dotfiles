@@ -9,7 +9,7 @@ if [%2] == [] goto :invalid_args
 
 
 SET /a counter=0
-set FILE_NAME=%2%
+set FILE_NAME=%2
 set _CMD=call reverse %FILE_NAME%
 
 
