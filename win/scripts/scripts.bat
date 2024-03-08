@@ -53,10 +53,12 @@ IF not DEFINED COMMAND (
     goto :EOF
 )
 
+set /A ARGC=0
 set COMMAND_ARGS=
 :PARSE_COMMAND_ARGS
     shift
     if "%1"=="" goto :END_PARSE_COMMAND_ARGS
+    set ARGC+=1
     if DEFINED COMMAND_ARGS (
         set COMMAND_ARGS=!COMMAND_ARGS! %1
     ) else (
@@ -133,6 +135,23 @@ goto :EOF
     dir /A /D %SELF_DIR% |findstr !COMMAND_ARGS!
     exit /b 0
 
+:cat
+    SET _NAME=!COMMAND_ARGS!
+
+    call cat %SELF_DIR%%_NAME%.bat
+    exit /b 0
+
+:ed
+    if !ARGC! EQU 0 (
+        echo TODO: [2024/03/02, 19:04:44] Start here
+        goto :EOF
+    )
+
+
+    SET _NAME=!COMMAND_ARGS!
+    echo. call %EDITOR% %SELF_DIR%%_NAME%.bat
+    exit /b 0
+
 :define_commands
     !DEBUG! " ENTER :define_commands"
 
@@ -147,6 +166,14 @@ goto :EOF
     SET /A n_cmds+=1
     set CMDS[!n_cmds!]=find
     set DOCS[!n_cmds!]=Find script by pattern
+
+    SET /A n_cmds+=1
+    set CMDS[!n_cmds!]=cat
+    set DOCS[!n_cmds!]=Cat script by name
+
+    SET /A n_cmds+=1
+    set CMDS[!n_cmds!]=ed
+    set DOCS[!n_cmds!]=Open script in default editor
 
     !DEBUG! " EXIT  :define_commands"
     exit /b 0
