@@ -1,11 +1,11 @@
 @echo off
-set SELF=%~n0
 SETLOCAL enableDelayedExpansion
+set SELF=%~n0
 
 if [%1] == [-h] goto :usage
 if [%1] == [--help] goto :usage
-if [%1] == [] goto :invalid_args
-if [%2] == [] goto :invalid_args
+if [%1] == [] goto :usage
+if [%2] == [] goto :usage
 
 
 SET /a counter=0
@@ -15,7 +15,7 @@ set _CMD=call reverse %FILE_NAME%
 
 FOR /F "tokens=* USEBACKQ" %%a IN (`%_CMD%`) DO (
     if "!counter!"=="%1" goto :EOF
-    echo %%a
+    echo(%%a
     set /a counter+=1
 )
 
