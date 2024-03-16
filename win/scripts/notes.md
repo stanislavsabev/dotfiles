@@ -36,14 +36,28 @@ attrib +h <filename>
 dir .*.* /s /a-D
 ```
 
-## ls command
-
-? `l` -> files
+## `ls` command
 
 `ls` -> files and dirs
-`la` = `ls -a` -> as `ls` + .files and .dirs
-`lla` = `ls -l -a`
 
-? `l.` -> only .files
+Flags:
+    - `-a` - all, including .files, .dirs
+    - `-l` - list, detailed list view
 
-`ls.` -> only .files and .dirs
+### `ls` aliases
+
+`lla` -> `ls -la`
+`la` -> `ls -a`
+`ll` -> `ls -l`
+
+### `ls.` derivatives
+
+`ls.` .files, .dirs
+`ll.` -> only .files and .dirs
+
+### file/dir only derivatives
+
+- including all 
+
+`fls` - files only
+`dls` - dirs only

@@ -20,6 +20,7 @@ if not "%1"=="" ( GOTO:usage )
     dir .*.* /A-D
     GOTO:EOF
 
+GOTO:EOF
 :usage
     echo usage: %SELF% [-h] [-a] [-d] [-f]
     echo  List files and directory names starting with dot (.)
