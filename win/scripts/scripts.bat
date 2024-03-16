@@ -5,8 +5,6 @@ set SELF_DIR=%~dp0
 
 set SELF_COLORED=[90m%SELF%[0m
 
-SET /a ARGC=0
-
 SET DRY=
 SET VERBOSE=
 SET DEBUG=echo %date% %time:~0,8% ^| %SELF_COLORED% [36m[DEBUG][0m:
@@ -53,29 +51,29 @@ IF not DEFINED COMMAND (
     goto :EOF
 )
 
-set /A ARGC=0
-set COMMAND_ARGS=
+set CMD_ARGS=
+set /A CMD_ARGC=0
 :PARSE_COMMAND_ARGS
     shift
     if "%1"=="" goto :END_PARSE_COMMAND_ARGS
-    set ARGC+=1
-    if DEFINED COMMAND_ARGS (
-        set COMMAND_ARGS=!COMMAND_ARGS! %1
+    set CMD_ARGC+=1
+    if DEFINED CMD_ARGS (
+        set CMD_ARGS=!CMD_ARGS! %1
     ) else (
-        set COMMAND_ARGS=%1
+        set CMD_ARGS=%1
     )
     goto :PARSE_COMMAND_ARGS
 :END_PARSE_COMMAND_ARGS
 
 !DEBUG! COMMAND: !COMMAND!
-!DEBUG! COMMAND_ARGS: !COMMAND_ARGS!
+!DEBUG! CMD_ARGS: !CMD_ARGS!
 call :!COMMAND!
 goto :EOF
 
 :print_commands
     !DEBUG! " ENTER :print_commands"
 
-    for /L %%i in (1,1,!n_cmds!) do (
+    for /L %%i in (1,1,!N_CMDS!) do (
         set ALIGNED=              !CMDS[%%i]!
         echo !ALIGNED:~-12!       !DOCS[%%i]!
     )
@@ -85,7 +83,7 @@ goto :EOF
 :match_command
     !DEBUG! " ENTER :match_command"
 
-    for /L %%i in (1,1,!n_cmds!) do (
+    for /L %%i in (1,1,!N_CMDS!) do (
         if "!curOpt!" == "!CMDS[%%i!" {
             set COMMAND=!curOpt!
             set DOC=!DOCS[%%i]!
@@ -99,13 +97,13 @@ goto :EOF
 :read_scripts
     !DEBUG! " ENTER :read_scripts"
 
-    set /a n_scripts=0
+    set /a N_SCRIPTS=0
     set SCRIPTS=
 
     pushd %SELF_DIR%
     for %%f in ( *.bat ) do (
-        set /a n_scripts+=1
-        set SCRIPTS[!n_scripts!]=%%f
+        set /a N_SCRIPTS+=1
+        set SCRIPTS[!N_SCRIPTS!]=%%f
     )
     popd
 
@@ -115,7 +113,7 @@ goto :EOF
 :print_scripts
     !DEBUG! " ENTER :print_scripts"
 
-    for /L %%i in (1,1,!n_scripts!) do (
+    for /L %%i in (1,1,!N_SCRIPTS!) do (
         echo ^> !SCRIPTS[%%i]:~0,-4!
         if DEFINED VERBOSE (
             call !SCRIPTS[%%i]! -h
@@ -125,30 +123,30 @@ goto :EOF
     exit /b 0
 
 :ls
-    if ["!COMMAND_ARGS!"] == ["--verbose"] set VERBOSE=1
+    if ["!CMD_ARGS!"] == ["--verbose"] set VERBOSE=1
     call :read_scripts
     call :print_scripts
     exit /b 0
 
 :find
     call :read_scripts
-    dir /A /D %SELF_DIR% |findstr !COMMAND_ARGS!
+    dir /A /D %SELF_DIR% | findstr !CMD_ARGS!
     exit /b 0
 
 :cat
-    SET _NAME=!COMMAND_ARGS!
+    SET _NAME=!CMD_ARGS!
 
     call cat %SELF_DIR%%_NAME%.bat
     exit /b 0
 
 :ed
-    if !ARGC! EQU 0 (
-        echo TODO: [2024/03/02, 19:04:44] Start here
+    if !CMD_ARGC! EQU 0 (
+        %EDITOR% %SELF_DIR% !CMD_ARGS!
         goto :EOF
     )
 
 
-    SET _NAME=!COMMAND_ARGS!
+    SET _NAME=!CMD_ARGS!
     echo. call %EDITOR% %SELF_DIR%%_NAME%.bat
     exit /b 0
 
@@ -157,23 +155,23 @@ goto :EOF
 
     set CMDS=
     set DOCS=
-    SET /A n_cmds=0
+    SET /A N_CMDS=0
 
-    SET /A n_cmds+=1
-    set CMDS[!n_cmds!]=ls
-    set DOCS[!n_cmds!]=List scripts [--verbose]
+    SET /A N_CMDS+=1
+    set CMDS[!N_CMDS!]=ls
+    set DOCS[!N_CMDS!]=List scripts [--verbose]
 
-    SET /A n_cmds+=1
-    set CMDS[!n_cmds!]=find
-    set DOCS[!n_cmds!]=Find script by pattern
+    SET /A N_CMDS+=1
+    set CMDS[!N_CMDS!]=find
+    set DOCS[!N_CMDS!]=Find script by pattern
 
-    SET /A n_cmds+=1
-    set CMDS[!n_cmds!]=cat
-    set DOCS[!n_cmds!]=Cat script by name
+    SET /A N_CMDS+=1
+    set CMDS[!N_CMDS!]=cat
+    set DOCS[!N_CMDS!]=Cat script by name
 
-    SET /A n_cmds+=1
-    set CMDS[!n_cmds!]=ed
-    set DOCS[!n_cmds!]=Open script in default editor
+    SET /A N_CMDS+=1
+    set CMDS[!N_CMDS!]=ed
+    set DOCS[!N_CMDS!]=Open script in default editor
 
     !DEBUG! " EXIT  :define_commands"
     exit /b 0
