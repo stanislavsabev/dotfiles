@@ -1,4 +1,4 @@
-# CMD / BATCH
+# CMD / BATCH SCRIPT
 
 ## Script file variables
 
@@ -35,3 +35,15 @@ attrib +h <filename>
 ```cmd
 dir .*.* /s /a-D
 ```
+
+## ls command
+
+? `l` -> files
+
+`ls` -> files and dirs
+`la` = `ls -a` -> as `ls` + .files and .dirs
+`lla` = `ls -l -a`
+
+? `l.` -> only .files
+
+`ls.` -> only .files and .dirs
