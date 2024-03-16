@@ -47,7 +47,7 @@ if defined PATTERNS (
     set _CMD=!_CMD! ^| ^FINDSTR !FLAGS! "%PATTERNS%"
 )
 
-if !VERBOSE! EQU 1 (
+if ["!VERBOSE!"] == ["1"] (
     FOR /f "tokens=*" %%a in ('!_CMD!') DO (
         echo %%a
     )

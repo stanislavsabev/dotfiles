@@ -41,8 +41,11 @@ dir .*.* /s /a-D
 `ls` -> files and dirs
 
 Flags:
-    - `-a` - all, including .files, .dirs
-    - `-l` - list, detailed list view
+    -    `-a` - all, including .files, .dirs
+    -    `-l` - list, detailed list view
+    - `--dot` - .files and .dirs
+    -    `-D` - list, dirs only
+    -    `-F` - list, files only
 
 ### `ls` aliases
 

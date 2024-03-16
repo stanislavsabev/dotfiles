@@ -1,2 +1,2 @@
 @echo off
-dir /A %*
+call ls -a
