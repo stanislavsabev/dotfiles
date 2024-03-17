@@ -1,2 +1,2 @@
 @echo off
-call ls -la
+call ls -la %*
