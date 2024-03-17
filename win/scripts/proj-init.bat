@@ -40,23 +40,9 @@ set PROJ_TYPE=tbd
             set DRY=1
         ) else if [!curOpt!] == [--dry-run] (
             set DRY=1
-        ) else if [!curOpt!] == [-e] (
-            if not [%2] == [] (
-                set EMAIL=%~2
-                shift
-            ) else (
-                call :invalid_opt
-           )
         ) else if [!curOpt!] == [--email] (
             if not [%2] == [] (
                 set EMAIL=%~2
-                shift
-            ) else (
-                call :invalid_opt
-           )
-        ) else if [!curOpt!] == [-u] (
-            if not [%2] == [] (
-                set USER=%~2
                 shift
             ) else (
                 call :invalid_opt
@@ -68,21 +54,7 @@ set PROJ_TYPE=tbd
             ) else (
                 call :invalid_opt
            )
-        ) else if [!curOpt!] == [-l] (
-            if not [%2] == [] (
-                set PROJ_LANG=%~2
-                shift
-            ) else (
-                call :invalid_opt
-           )
         ) else if [!curOpt!] == [--lang] (
-            if not [%2] == [] (
-                set PROJ_LANG=%~2
-                shift
-            ) else (
-                call :invalid_opt
-           )
-        ) else if [!curOpt!] == [-n] (
             if not [%2] == [] (
                 set PROJ_LANG=%~2
                 shift
@@ -96,8 +68,16 @@ set PROJ_TYPE=tbd
             ) else (
                 call :invalid_opt
            )
+        ) else if [!curOpt!] == [--type] (
+            if not [%2] == [] (
+                set PROJ_TYPE=%~2
+                shift
+            ) else (
+                call :invalid_opt
+           )
         ) else (
-            goto :invalid_opt
+            echo %SELF%: Unknown option '!curOpt!', see -h for usage
+            exit /b 1
         )
         shift
         goto :GETOPTS
@@ -139,9 +119,7 @@ if not DEFINED DRY (
 goto :EOF
 
 :get_proj_name
-    set MYDIR=%CD%
-    for %%f in ("%MYDIR%") do set "myfolder=%%~nxf"
-    echo PROJ_NAME=%myfolder%
+    for %%f in ("%CD%") do set "myfolder=%%~nxf"
     set PROJ_NAME=%myfolder%
     exit /b 0
 
@@ -158,8 +136,8 @@ goto :EOF
     echo    -h --help       Print this message
     echo    -n --dry-run    Dry run
     echo.
-    echo    -u --user       Git user.name
-    echo    -e --email      Git user.email
-    echo    -n --name       If empty, project name is taken to be current directory name
-    echo    -l --lang       python ^| rust ^| c ^| cpp ^| vba etc.
-    echo    -t --type       batch ^| package ^| restapi ^| lambda ^| lib etc.
+    echo    --user          Git user.name
+    echo    --email         Git user.email
+    echo    --name          If empty, project name is taken to be current directory name
+    echo    --lang          python ^| rust ^| c ^| cpp ^| vba etc.
+    echo    --type          batch ^| package ^| restapi ^| lambda ^| lib etc.
