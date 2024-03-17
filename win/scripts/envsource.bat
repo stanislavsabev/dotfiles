@@ -8,7 +8,7 @@ if [%1] == [] goto :invalid_args
 SET _FNAME=%1
 
 FOR /f "tokens=1,2 delims==" %%a in (%_FNAME%) DO (
-    echo.SET %%a=%%b
+    @REM echo.SET %%a=%%b
     set %%a=%%b
 )
 

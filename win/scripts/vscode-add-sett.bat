@@ -76,6 +76,8 @@ goto:EOF
     echo usage: %SELF% [-h] [-r] [-n] [PATH]
     echo  Copy the .vscode/ settings directory
     echo.
+    echo    PATH            Optional path to directory with .vscode/ settings
+    echo.
     echo    -h --help       Print this message
     echo    -r --reverse    Reverse copy
     echo    -n --dry-run    Print the command that would run

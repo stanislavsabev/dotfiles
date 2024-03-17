@@ -4,6 +4,10 @@ set SELF=%~n0
 
 if [%1] == [-h] goto :usage
 if [%1] == [--help] goto :usage
+if [%1] == [] (
+    echo %SELF%: Missing argument for task, see -h for usage
+    goto :EOF
+)
 
 set argCount=0
 for %%x in (%*) do (
@@ -17,7 +21,8 @@ for /L %%i in (1,1,%argCount%) do (
 )
 goto :EOF
 :usage
-    echo usage: %SELF% [-h]
+    echo usage: %SELF% [-h] TASK_LIST..
     echo  Taskkill multiple processes
     echo.
     echo    -h --help       Print this message
+    echo    TASK_LIST       Patterns of tasks to kill

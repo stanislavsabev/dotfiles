@@ -33,9 +33,11 @@ IF [!curOpt!] == [mv] set _CMD=gwt-move
 IF [!curOpt!] == [remove] set _CMD=gwt-remove
 IF [!curOpt!] == [rm] set _CMD=gwt-remove
 IF [!curOpt!] == [clone] set _CMD=gwt-clone
+IF [!curOpt!] == [lv] set _CMD=gwt-list -v
 
 IF DEFINED _CMD (
     shift
+    @REM echo. %_CMD% %REST_OPTS%
     call %_CMD% %REST_OPTS%
     exit /b 0
 ) else (
@@ -53,6 +55,7 @@ IF DEFINED _CMD (
     echo        add      ^| a  - Add worktree
     echo        checkout ^| co - ^Not implemented
     echo        list     ^| ls - List worktrees
+    echo                 ^| lv - Verbose list worktrees
     echo        move     ^| mv - ^Rename worktree
     echo        remove   ^| rm - Remove worktree
     echo        clone    ^|    - Clone remote and setup bare repo
