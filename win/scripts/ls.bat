@@ -89,9 +89,9 @@ GOTO:EOF
     echo.
     echo    -h --help  Print this message
     echo.
-    echo    -l         Formatted list view
-    echo    -a         List all, including .files and .dirs
+    echo      -l       Formatted list view
+    echo      -a       List all, including .files and .dirs
     echo   --dot       List only .files and .dirs
-    echo    -D         Directories only
-    echo    -F         Files only
+    echo      -D       Directories only
+    echo      -F       Files only
     echo    PATH       Directory and/or files to list
