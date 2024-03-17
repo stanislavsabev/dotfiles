@@ -43,7 +43,6 @@ call :read_cmd_args
 
 set SRC=
 set DEST=
-set DEST2=
 
 set PROC_NAME=
 
@@ -53,7 +52,7 @@ if /I [!NAME!] == [code] (
     )
     set SRC=%CODE_USER_DIR%
     set DEST=%DOTFILES_DIR%\code
-    echo src %SRC%
+    echo src !SRC!
     echo CODE_USER_DIR %CODE_USER_DIR%
     set PROC_NAME=proc_code
 ) else if /I [!NAME!] == [code-insiders] (
@@ -73,8 +72,8 @@ if /I [!NAME!] == [code] (
 )
 
 if DEFINED REV (
-    set TMP_VAR=%DEST%
-    set DEST=%SRC%
+    set TMP_VAR=!DEST!
+    set DEST=!SRC!
     set SRC=!TMP_VAR!
 )
 
@@ -83,13 +82,13 @@ GOTO:EOF
 
 :proc_code
     if defined DRY (
-        echo dry-run: "echo F|%COMND% /Y %SRC%\settings.json %DEST%\settings.json"
-        echo dry-run: "echo F|%COMND% /Y %SRC%\keybindings.json %DEST%\keybindings.json "
-        echo dry-run: "echo D|%COMND% /I /Y /E "%SRC%\snippets\*" "%DEST%\snippets\*""
+        echo dry-run: "echo F|%COMND% /Y !SRC!\settings.json !DEST!\settings.json"
+        echo dry-run: "echo F|%COMND% /Y !SRC!\keybindings.json !DEST!\keybindings.json "
+        echo dry-run: "echo D|%COMND% /I /Y /E "!SRC!\snippets\*" "!DEST!\snippets\*""
     ) else (
-        echo F|%COMND% /Y %SRC%\settings.json %DEST%\settings.json
-        echo F|%COMND% /Y %SRC%\keybindings.json %DEST%\keybindings.json 
-        echo D|%COMND% /I /Y /E "%SRC%\snippets\*" "%DEST%\snippets\*"
+        echo F|%COMND% /Y !SRC!\settings.json !DEST!\settings.json
+        echo F|%COMND% /Y !SRC!\keybindings.json !DEST!\keybindings.json 
+        echo D|%COMND% /I /Y /E "!SRC!\snippets\*" "!DEST!\snippets\*"
     )
     exit /b 0
 
@@ -98,28 +97,28 @@ GOTO:EOF
     set SNIP_SRC="%CODE_USER_DIR%\Code - Insiders"
     set SNIP_DEST=%DOTFILES_DIR%\code
     if DEFINED REV (
-        set TMP_VAR=%SNIP_DEST%
-        set SNIP_DEST=%SNIP_SRC%
+        set TMP_VAR=!SNIP_DEST!
+        set SNIP_DES!=%SNIP_SRC!
         set SNIP_SRC=!TMP_VAR!
     )
     if defined DRY (
-        echo dry-run: "echo F|%COMND% /Y %SRC%\settings.json %DEST%\settings.json"
-        echo dry-run: "echo F|%COMND% /Y %SRC%\keybindings.json %DEST%\keybindings.json "
-        echo dry-run: "echo D|%COMND% /I /Y /E "%SNIP_SRC%\snippets\*" "%SNIP_DEST%\snippets\*""
+        echo dry-run: "echo F|%COMND% /Y !SRC!\settings.json !DEST!\settings.json"
+        echo dry-run: "echo F|%COMND% /Y !SRC!\keybindings.json !DEST!\keybindings.json "
+        echo dry-run: "echo D|%COMND% /I /Y /E "!SNIP_SRC!\snippets\*" "!SNIP_DEST!\snippets\*""
     ) else (
-        echo F|%COMND% /Y %SRC%\settings.json %DEST%\settings.json
-        echo F|%COMND% /Y %SRC%\keybindings.json %DEST%\keybindings.json 
-        echo D|%COMND% /I /Y /E "%SNIP_SRC%\snippets\*" "%SNIP_DEST%\snippets\*"
+        echo F|%COMND% /Y !SRC!\settings.json !DEST!\settings.json
+        echo F|%COMND% /Y !SRC!\keybindings.json !DEST!\keybindings.json 
+        echo D|%COMND% /I /Y /E "!SNIP_SRC!\snippets\*" "!SNIP_DEST!\snippets\*"
     )
     exit /b 0
 
 :proc_git
     if defined DRY (
-        echo dry-run: "echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig"
-        echo dry-run: "echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global"
+        echo dry-run: "echo F|%COMND% /y !SRC!\.gitconfig !DEST!\.gitconfig"
+        echo dry-run: "echo F|%COMND% /y !SRC!\.gitignore_global !DEST!\.gitignore_global"
     ) else (
-        echo F|%COMND% /y %SRC%\.gitconfig %DEST%\.gitconfig
-        echo F|%COMND% /y %SRC%\.gitignore_global %DEST%\.gitignore_global
+        echo F|%COMND% /y !SRC!\.gitconfig !DEST!\.gitconfig
+        echo F|%COMND% /y !SRC!\.gitignore_global !DEST!\.gitignore_global
     )
     exit /b 0
 

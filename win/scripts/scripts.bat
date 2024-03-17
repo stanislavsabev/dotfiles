@@ -5,6 +5,8 @@ set SELF_DIR=%~dp0
 
 set SELF_COLORED=[90m%SELF%[0m
 
+set /A ARGC=0
+
 SET DRY=
 SET VERBOSE=
 SET DEBUG=echo %date% %time:~0,8% ^| %SELF_COLORED% [36m[DEBUG][0m:
@@ -56,7 +58,7 @@ set /A CMD_ARGC=0
 :PARSE_COMMAND_ARGS
     shift
     if "%1"=="" goto :END_PARSE_COMMAND_ARGS
-    set CMD_ARGC+=1
+    set /A CMD_ARGC+=1
     if DEFINED CMD_ARGS (
         set CMD_ARGS=!CMD_ARGS! %1
     ) else (
@@ -99,11 +101,18 @@ goto :EOF
 
     set /a N_SCRIPTS=0
     set SCRIPTS=
+    set /a N_PRIV=0
+    set PRIV_SCRIPTS=
 
     pushd %SELF_DIR%
     for %%f in ( *.bat ) do (
         set /a N_SCRIPTS+=1
         set SCRIPTS[!N_SCRIPTS!]=%%f
+    )
+    pushd %SELF_DIR%priv
+    for %%f in ( *.bat ) do (
+        set /a N_PRIV+=1
+        set PRIV_SCRIPTS[!N_PRIV!]=%%f
     )
     popd
 
@@ -119,6 +128,12 @@ goto :EOF
             call !SCRIPTS[%%i]! -h
         )
     )
+    for /L %%i in (1,1,!N_PRIV!) do (
+        echo ^> !PRIV_SCRIPTS[%%i]:~0,-4!
+        if DEFINED VERBOSE (
+            call !PRIV_SCRIPTS[%%i]! -h
+        )
+    )
     !DEBUG! " EXIT  :print_scripts"
     exit /b 0
 
@@ -131,6 +146,7 @@ goto :EOF
 :find
     call :read_scripts
     dir /A /D %SELF_DIR% | findstr !CMD_ARGS!
+    dir /A /D %SELF_DIR%\priv | findstr !CMD_ARGS!
     exit /b 0
 
 :cat
@@ -141,13 +157,12 @@ goto :EOF
 
 :ed
     if !CMD_ARGC! EQU 0 (
-        %EDITOR% %SELF_DIR% !CMD_ARGS!
-        goto :EOF
+        call %EDITOR% %SELF_DIR%
+        exit /b 0
     )
 
-
     SET _NAME=!CMD_ARGS!
-    echo. call %EDITOR% %SELF_DIR%%_NAME%.bat
+    call %EDITOR% %SELF_DIR%%_NAME%.bat
     exit /b 0
 
 :define_commands

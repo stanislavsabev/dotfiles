@@ -49,7 +49,7 @@ if [%1] == [] (
 if !ARGC! EQU 0 GOTO:invalid_args
 if !ARGC! GTR 3 GOTO:invalid_args
 
-call setc IS_BARE "git rev-parse --is-bare-repository 2>$1"
+call setc IS_BARE "git rev-parse --is-bare-repository 2>&1"
 IF NOT [%IS_BARE%] == [true] (
     echo %SELF%: Must be used in bare repository, see -h for usage
     exit /b 1
@@ -65,11 +65,11 @@ if !ARGC! EQU 1 (
 )
 
 if !ARGC! EQU 2 (
-    set ARGSTR=-b !ARGV[1]! !ARGV[1]:/-\! !ARGV[2]!
+    set ARGSTR=-b !ARGV[1]! !ARGV[1]:/=\! !ARGV[2]!
 )
 
 if !ARGC! EQU 3 (
-    set ARGSTR=-b !ARGV[1]! !ARGV[2]:/-\! !ARGV[3]!
+    set ARGSTR=-b !ARGV[1]! !ARGV[2]:/=\! !ARGV[3]!
 )
 
 @rem Run git worktree command

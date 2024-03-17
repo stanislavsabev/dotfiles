@@ -43,8 +43,8 @@ SET VERBOSE=
 
 SET _CMD=git worktree list
 
-if defined PATTERNS (
-    set _CMD=!_CMD! ^| ^FINDSTR !FLAGS! "%PATTERNS%"
+if defined PATTERN (
+    set _CMD=!_CMD! ^| ^FINDSTR !FLAGS! "%PATTERN%"
 )
 
 if ["!VERBOSE!"] == ["1"] (
