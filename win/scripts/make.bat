@@ -1,5 +1,5 @@
 @REM ## Helper script similar to make
-set @echo off
+@echo off
 SETLOCAL enableDelayedExpansion
 set SELF=%~n0
 set SELF_DIR=%~dp0
@@ -11,6 +11,10 @@ SET DEBUG=
 SET INFO=echo %SELF_COLORED% [94m[DEBUG][0m:
 SET WARN=echo %SELF_COLORED% [33m[DEBUG][0m:
 SET ERR=echo %SELF_COLORED% [31m[DEBUG][0m:
+
+(set LF=^
+%=EMPTY=%
+)
 
 !DEBUG! "Global make file"
 
@@ -24,13 +28,10 @@ SET CMD_DOC=
 CALL :define_commands
 if [%1] == [] goto :usage
 
-
-
 :usage
   echo usage: %SELF% [-h] SCRIPT ^| COMMAND [FLAGS]
   echo   Manage tasks in a way similar to make
-  echo.
-  echo   [90m-h --help[0m       Prints this message
+  echo    [90m-h --help[0m        Prints this message
   echo.
   call :print_commands
 goto :EOF
@@ -173,6 +174,7 @@ goto :EOF
 
 
 :setup
+    !WARN! "setup is not fully tested"
     set SRC_PATH=
     IF "%CMD_ARGS%" == "" (
         SET SRC_PATH=..
@@ -187,6 +189,57 @@ goto :EOF
 
     FOR %%F IN (.proj-cfg .python-cfg) (
         IF EXIST "%SRC_PATH%\%%F" (
-            fcopy /Y "%SRC_PATH%\%%F" "%%F"
+            echo.fcopy /Y "%SRC_PATH%\%%F" "%%F"
         )
     )
+
+    FOR %%D IN (.vscode testing) (
+        IF EXIST "%SRC_PATH%\%%D\" (
+            echo.dircopy /Y "%SRC_PATH%\%%D" "%%D"
+        )
+    )
+
+:print_commands
+    !DEBUG! ">>> ENTER: :print_commands"
+
+    echo     COMMANDS
+    FOR /L %%i IN (1,1,!N_CMD!) DO (
+        set ALIGN=            !CMDV[%%i]!
+        echo [90m!ALIGN:~-12![0m  !DOCV[%%i]!
+    )
+    !DEBUG! ">>> EXIT: :print_commands"
+    exit /b 0
+
+:define_commands
+    !DEBUG! ">>> ENTER: :define_commands"
+    @rem ws=6
+    set ws=      
+    set CMDS=^
+ format:!ws!Code formatting;^
+ check:!ws!Code style checks;^
+ checkall:!ws!Code formatting and style checks;^
+ req-update: [94m[-u][0m Compile and install requirements;^
+ req-install:!ws!Install requirements;^
+ req-compile: [94m[-u][0m Compile requirements;^
+ create-venv:!ws!Create venv;^
+ delete-venv:!ws!Delete venv;^
+ collect:!ws!Run pytest --collect-only;^
+ cov:!ws!Open coverage report;^
+ test:!ws!Run pytest with coverage;^
+ clean:!ws!Clear cache files and dirs;^
+ gh:!ws!Open project in GitHub;^
+ setup:[94m[SRC][0m Copy proj setup from parent ^dir or SRC path;
+
+    set CMDV=
+    set CMD_ARGV=
+    set DOCV=
+    set /a N_CMD=0
+
+    FOR /F "tokens=1,* delims=:" %%a IN ("%CMDS:;=!LF!%") DO (
+        set /a N_CMD+=1
+        set CMDV[!N_CMD!]=%%a
+        set DOCV[!N_CMD!]=%%b
+    )
+
+    !DEBUG! ">>> EXIT: :define_commands"
+    exit /b 0
