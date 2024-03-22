@@ -8,6 +8,7 @@
 	a = !git add
 	aa = !git add --all
 	fa = !git fetch --all
+	fap = !git fetch --all --prune
 	s = !git status
 	sv = !git status -v
 	b = !git branch
