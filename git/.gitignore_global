@@ -7,3 +7,7 @@ venv/
 .ignore/
 ~*.*
 *.log
+.python-version
+.python-cfg
+.proj-cfg
+.pm-cfg
