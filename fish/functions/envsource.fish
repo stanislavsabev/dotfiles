@@ -1,5 +1,5 @@
 
-function envsource -a ENV_FILE
+function envsource -a env_file
     set -l _usage "envsource: ENV_FILE [--verbose]
     
     Replacement for the below from bash:
