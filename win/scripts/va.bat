@@ -5,8 +5,8 @@ if [%1] == [-h] goto :usage
 if [%1] == [--help] goto :usage
 
 set VA=
-SET PYTHON_CFG=.python-cfg
 SET PROJ_CFG=.proj-cfg
+SET PYTHON_CFG=.python-cfg
 
 if not [%1] == [] (
     set VA="%1"
@@ -44,7 +44,8 @@ goto :EOF
     echo usage: %SELF% [-h] [VENV_PATH]
     echo  Activate Python virtual environment
     echo.
-    echo    VENV_PATH       If path is not set, the script is looking for '.python-cfg' file
-    echo                    in current directory and reads VENV_PATH from first line.
-    echo                    Finally, falls back to the default path '%VENV_NAME%'
+    echo    VENV_PATH       If not set, the script is looking in current directory for:
+    echo.                   - variable 'VENV_PATH' defined in '.proj-cfg' file
+    echo.                   - first line in '.python-cfg' file
+    echo.                   - finally, falls back to the env variable '%VENV_NAME%'
     echo    -h --help       Print this message
