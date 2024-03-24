@@ -2,7 +2,7 @@
 SETLOCAL enableDelayedExpansion
 set SELF=%~n0
 
-SET ARGC=0
+SET /A ARGC=0
 
 SET DRY=
 SET REMOTE=
@@ -13,6 +13,7 @@ if [%1] == [] (
 )
 
 :GETOPTS
+    !DEBUG! "GETOPTS"
     if [%1] == [] goto :ENDGETOPTS
     SET curOpt=%1
     SET curOpt1stChar=!curOpt:~0,1!
@@ -28,7 +29,8 @@ if [%1] == [] (
         ) else if [!curOpt!] == [--dry-run] (
             set DRY=1
         ) else (
-            goto :invalid_opt
+            call :invalid_opt
+            goto :EOF
         )
         shift
         goto :GETOPTS
@@ -44,12 +46,14 @@ if [%1] == [] (
             IF DEFINED LOCAL_DIR goto:invalid_args
             set LOCAL_DIR="!curOpt!"
         ) else (
-            goto :invalid_argc
+            call :invalid_argc
+            goto :EOF
         )
         shift
         goto :GETOPTS
     )
 :ENDGETOPTS
+!DEBUG! "ENDGETOPTS"
 
 IF not DEFINED REMOTE goto:invalid_args
 IF not DEFINED LOCAL_DIR goto:invalid_args
@@ -103,9 +107,11 @@ goto:EOF
 
 :invalid_opt
     echo %SELF%: Invalid flag !curOpt!, see -h for usage
+    exit /b 1
 
 :repo_exists
     echo %SELF%: Folder %LOCAL_DIR% already exists and is not empty
+    exit /b 1
 
 :usage
     echo usage: %SELF% [-h] [-n] REMOTE_URL LOCAL_DIR

@@ -22,17 +22,17 @@ rem
 
 rem
 rem Options and flags start with a hyphen.
-rem We are parassing the currently examined parameter (%1) to curArg because
+rem We are parassing the currently examined parameter (%1) to curOpt because
 rem the ~x,y construct is not possible on %n (n=0 … 9) varaibles
 rem
-    set  curArg=%1
+    set  curOpt=%1
 
 rem
-rem Assign first character to curArg1stChar
+rem Assign first character to curOpt1stChar
 rem
-    set  curArg1stChar=!curArg:~0,1!
+    set  curOpt1stChar=!curOpt:~0,1!
 
-    if [!curArg1stChar!] == [-] (
+    if [!curOpt1stChar!] == [-] (
 
       rem
       rem    The argument starts with a hyphen. Now check
@@ -40,50 +40,50 @@ rem
       rem    respective variables
       rem
 
-       if /i [!curArg!] == [-opt_one]  (
+       if /i [!curOpt!] == [-opt_one]  (
 
            if not [%2] == [] (
               set opt_1=%~2
               shift & shift
 
            ) else (
-             echo No value specified for !curArg!
+             echo No value specified for !curOpt!
              exit /b
            )
 
-       ) else if /i [!curArg!] == [-opt_two] (
+       ) else if /i [!curOpt!] == [-opt_two] (
 
            if not [%2] == [] (
               set opt_2=%~2
               shift & shift
            ) else (
-             echo No value specified for !curArg!
+             echo No value specified for !curOpt!
              exit /b
            )
 
-       ) else if /i [!curArg!] == [-opt_three] (
+       ) else if /i [!curOpt!] == [-opt_three] (
 
            if not [%2] == [] (
               set opt_3=%~2
               shift & shift
            ) else (
-             echo No value specified for !curArg!
+             echo No value specified for !curOpt!
              exit /b
            )
 
-       ) else if /i [!curArg!] == [-flag_one] (
+       ) else if /i [!curOpt!] == [-flag_one] (
 
             set flag_1=y
             shift
 
-       ) else if /i [!curArg!] == [-flag_two] (
+       ) else if /i [!curOpt!] == [-flag_two] (
 
             set flag_2=y
             shift
 
        ) else (
 
-         echo Unexpected option or flag !curArg!
+         echo Unexpected option or flag !curOpt!
          exit /b
 
        )
