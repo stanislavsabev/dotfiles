@@ -278,7 +278,7 @@
     ],
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
-    "window.zoomLevel": -1,
+    "window.zoomLevel": -0.5,
     "git.confirmSync": false,
     "redhat.telemetry.enabled": false,
     "tabnine.experimentalAutoImports": true,

@@ -51,6 +51,20 @@
 		],
 		"description": "if empty"
 	},
+	"if strcmp": {
+		"prefix": "if \"%1\"==\"\" compare",
+		"body": [
+			"if \"${1:%1}\"==\"$2\" $0"
+		],
+		"description": "if \"%1\"==\"b\" compare"
+	},
+	"if bracketcmp": {
+		"prefix": "if [%1] == [] compare",
+		"body": [
+			"if [${1:%1}] == [$2] $0"
+		],
+		"description": "if [] == [] compare"
+	},
 	"header SELF": {
 		"prefix": "header_SELF",
 		"body": [
@@ -73,5 +87,54 @@
 			"  goto :EOF",
 			"$0"
 		]
+	},
+	"exit /b 0": {
+		"prefix": "exit_b0",
+		"body": [
+			"exit /b 0$0",
+		]
+	},
+	"exit /b 1": {
+		"prefix": "exit_b1",
+		"body": [
+			"exit /b 1$0",
+		]
+	},
+	"ERROR": {
+		"prefix": "ERR",
+		"body": [
+			"!ERR! \"$1\"$0",
+		]
+	},
+	"INFO": {
+		"prefix": "INFO",
+		"body": [
+			"!INFO! \"$1\"$0",
+		]
+	},
+	"WARN": {
+		"prefix": "WARN",
+		"body": [
+			"!WARN! \"$1\"$0",
+		]
+	},
+	"DEBUG": {
+		"prefix": "DEBUG",
+		"body": [
+			"!DEBUG! \"$1\"$0",
+		]
+	},
+	"fn_debug": {
+		"prefix": "fn_debug",
+		"body": [
+			":${1:name}",
+			"\t!DEBUG! \" ENTER :$1\"$0",
+			"\n\t@REM Body here!\n",
+			"\t$0",
+			"\t!DEBUG! \"  EXIT :$1\"$0",
+			"\texit b 0",
+			"",
+		],
+		"description": "Define func"
 	}
 }
