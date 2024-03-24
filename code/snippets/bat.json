@@ -18,17 +18,28 @@
 			":${1:name}",
 			"\t@REM Body here!",
 			"\t$0",
-			"\texit b 0",
-			"",
+			"\texit /b 0\n",
 		],
-		"description": "Define func"
+		"description": "Define function"
+	},
+	"fn_debug": {
+		"prefix": "fn_debug",
+		"body": [
+			":${1:name}",
+			"\t!DEBUG! \" ENTER :$1\"$0",
+			"\n\t@REM Body here!\n",
+			"\t$0",
+			"\t!DEBUG! \"  EXIT :$1\"$0",
+			"\texit /b 0\n",
+		],
+		"description": "Define function with debug statements"
 	},
 	"goto_EOF": {
 		"prefix": "eof",
 		"body": [
 			"goto :EOF$0",
 		],
-		"description": "Define func"
+		"description": "goto :EOF"
 	},
 	"if DEFINED": {
 		"prefix": "ifdef",
@@ -123,18 +134,5 @@
 		"body": [
 			"!DEBUG! \"$1\"$0",
 		]
-	},
-	"fn_debug": {
-		"prefix": "fn_debug",
-		"body": [
-			":${1:name}",
-			"\t!DEBUG! \" ENTER :$1\"$0",
-			"\n\t@REM Body here!\n",
-			"\t$0",
-			"\t!DEBUG! \"  EXIT :$1\"$0",
-			"\texit b 0",
-			"",
-		],
-		"description": "Define func"
 	}
 }
