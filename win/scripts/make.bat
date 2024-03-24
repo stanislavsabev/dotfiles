@@ -1,10 +1,9 @@
 @REM ## Helper script similar to make
 @echo off
 SETLOCAL enableDelayedExpansion
-set SELF=%~n0
-set SELF_DIR=%~dp0
-
-set SELF_COLORED=[90m%SELF%[0m
+SET SELF=%~n0
+SET SELF_DIR=%~dp0
+SET SELF_COLORED=[90m%SELF%[0m
 
 @REM SET DEBUG=echo %SELF_COLORED% [36mDEBUG[0m:
 SET DEBUG=
@@ -22,7 +21,7 @@ SET SRC_=src
 
 SET CMD_NAME=
 SET CMD_DOC=
-CALL :define_commands
+call :define_commands
 if [%1] == [] goto :USAGE
 
 :GETOPTS
@@ -84,8 +83,8 @@ goto :EOF
         !INFO! "%PROJ_CFG% already loaded"
         exit /b 0
     )
-    set PROJ_CFG_LOADED=
-    IF EXIST "%CD%\%PROJ_CFG%" (
+    SET PROJ_CFG_LOADED=
+    IF NOT EXIST "%CD%\%PROJ_CFG%" (
         !ERR! "Missing '%PROJ_CFG%' file"
         exit /b 1
     )
@@ -94,30 +93,29 @@ goto :EOF
     exit /b 0
 
 :print_commands
-    !DEBUG! " ENTER: :print_commands"
+    !DEBUG! " ENTER :print_commands"
 
     echo     COMMANDS
     FOR /L %%i IN (1,1,!N_CMD!) DO (
         set ALIGN=            !CMDV[%%i]!
         echo [90m!ALIGN:~-12![0m  !DOCV[%%i]!
     )
-    !DEBUG! "  EXIT: :print_commands"
+    !DEBUG! "  EXIT :print_commands"
     exit /b 0
 
 :match_command
-    !DEBUG! " ENTER: :match_command"
-
+    !DEBUG! " ENTER :match_command"
     FOR /L %%i IN (1,1,!N_CMD!) DO (
         if "!curOpt!" == "!CMDV[%%i]!" (
             !DEBUG! "  Matched :!curOpt!"
             set CMD_NAME=!curOpt!
             set CMD_DOC=!DOCV[%%i]!
-            !DEBUG! "  EXIT: :match_command"
+            !DEBUG! "  EXIT :match_command"
             exit /b 0
         )
 
     )
-    !DEBUG! "  EXIT: :match_command, error 1"
+    !DEBUG! "  EXIT :match_command, error 1"
     exit /b 1
 
 :USAGE
@@ -142,12 +140,12 @@ goto :EOF
     exit /b 0
 
 :checkall
-    !INFO! Check all and run tests
     call :format
     call :check
     exit /b 0
 
 :build
+    !INFO! Check all and run tests
     call :checkall
     call :test
     exit /b 0
@@ -166,6 +164,8 @@ goto :EOF
     call :read_proj_cfg
     call :activate_venv
     call :set_pip_conf
+    pip-compile %UPGRADE% %REQUIREMENTS_DIR%\requirements.in
+    pip-compile %UPGRADE% %REQUIREMENTS_DIR%\requirements-dev.in
     exit /b 0
 
 :req-install
@@ -215,7 +215,7 @@ goto :EOF
     )
 
     IF EXIST %VENV_PATH%\ (
-        !WARN! Environment '%VENV_PATH%' already exists
+        !WARN! "Environment '%VENV_PATH%' already exists"
         exit /b 1
     )
 
@@ -274,12 +274,14 @@ goto :EOF
             !ERR! "Removing .\%%d failed. Remove it manually"
         )
     )
+
     FOR %%f IN (%CACHE_FILES%) DO (
         IF EXIST "%%f" del /q "%%f"
         IF %ERRORLEVEL% NEQ 0 (
             !ERR! "Removing file '%%f' failed. Remove it manually"
         )
     )
+
     FOR /d /r . %%d IN (__pycache__) DO (
         IF EXIST "%%d\" rd /S /q "%%d"
     )
@@ -346,19 +348,19 @@ goto :EOF
     echo.[93mREPO_URL[0m=gh-repo-name
     echo.[93mPROJ_LANG[0m=python
     echo.[93mPROJ_TYPE[0m=restapi / package / batch / lib
-    echo.[93mVENV_PATH[0m=.venv [90m# if PROJ_LANG=python[0m
+    echo.[93mVENV_PATH[0m=.venv[90m# if PROJ_LANG=python[0m
     exit /b 0
 
 :define_commands
-    !DEBUG! " ENTER: :define_commands"
+    !DEBUG! " ENTER :define_commands"
 
 (set LF=^
 %=EMPTY=%
 )
 
     @rem ws=6
-    set ws=
-    set CMDS=^
+    SET ws=
+    SET CMDS=^
 format:!ws!Code formatting;^
 check:!ws!Code style checks;^
 checkall:!ws!Code formatting and style checks;^
@@ -382,10 +384,10 @@ proj-cfg:!ws!Write to .proj-cfg;
     SET /A N_CMD=0
 
     FOR /F "tokens=1,* delims=:" %%a IN ("%CMDS:;=!LF!%") DO (
-        set /A N_CMD+=1
-        set CMDV[!N_CMD!]=%%a
-        set DOCV[!N_CMD!]=%%b
+        SET /A N_CMD+=1
+        SET CMDV[!N_CMD!]=%%a
+        SET DOCV[!N_CMD!]=%%b
     )
 
-    !DEBUG! "  EXIT: :define_commands"
+    !DEBUG! "  EXIT :define_commands"
     exit /b 0
