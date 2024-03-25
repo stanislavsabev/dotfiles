@@ -213,7 +213,7 @@ goto :EOF
         !ERR! "Missing env variable 'VENV_PATH'"
         exit /b 1
     )
-
+    !DEBUG! "CD: %CD% VENV_PATH: %VENV_PATH%"
     IF EXIST %VENV_PATH%\ (
         !WARN! "Environment '%VENV_PATH%' already exists"
         exit /b 1
@@ -335,10 +335,10 @@ goto :EOF
         exit /b 1
     )
     call touch %PROJ_CFG%
-    echo REPO_URL=gh-repo-name >> %PROJ_CFG%
-    echo PROJ_LANG=python >> %PROJ_CFG%
-    echo PROJ_TYPE=restapi / package / batch / lib >> %PROJ_CFG%
-    echo VENV_PATH=.venv >> %PROJ_CFG%
+    echo REPO_URL=gh-repo-name>> %PROJ_CFG%
+    echo PROJ_LANG=python>> %PROJ_CFG%
+    echo PROJ_TYPE=restapi / package / batch / lib>> %PROJ_CFG%
+    echo VENV_PATH=.venv>> %PROJ_CFG%
     !INFO! "File %PROJ_CFG% created"
     exit /b 0
 
