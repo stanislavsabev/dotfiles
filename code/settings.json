@@ -268,7 +268,7 @@
     "explorer.confirmDelete": false,
     "[python]": {
         "editor.formatOnType": false,
-        "editor.defaultFormatter": "ms-python.black-formatter"
+        "editor.defaultFormatter": "charliemarsh.ruff"
     },
     "isort.args": [
         "--profile",
