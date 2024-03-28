@@ -219,10 +219,10 @@ goto :EOF
         exit /b 1
     )
 
+    call :set_pip_conf
     !INFO! "Create %VENV_PATH%"
     python -m venv %VENV_PATH%
     call :activate_venv
-    call :set_pip_conf
     !DEBUG! "Upgrade pip and install pip-tools"
     python -m pip install --upgrade pip
     python -m pip install pip-tools
