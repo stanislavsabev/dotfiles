@@ -159,7 +159,7 @@ goto :EOF
     call :req-compile
     IF %ERRORLEVEL% NEQ 0 (
         !ERR! "Error %ERRORLEVEL%"
-        goto :EOF
+        exit /b 1
     )
 
     !INFO! "Install requirements"
@@ -209,7 +209,9 @@ goto :EOF
     exit /b 0
 
 :set_pip_conf
-    if DEFINED PIP_CONFIG_FILE exit /b 0
+    if DEFINED PIP_CONFIG_FILE (
+        exit /b 0
+    )
 
     IF EXIST "pip.conf" (
         !INFO! "SET PIP_ CONFIG_FILE=pip.conf"
@@ -231,7 +233,10 @@ goto :EOF
 
     call :set_pip_conf
     !INFO! "Create %VENV_PATH%"
-    python -m venv %VENV_PATH%
+    
+    call python -m venv %VENV_PATH%
+
+    !DEBUG! "%VENV_PATH% created"
     call :activate_venv
     !DEBUG! "Upgrade pip and install pip-tools"
     python -m pip install --upgrade pip
