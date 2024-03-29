@@ -5,8 +5,8 @@ SET SELF=%~n0
 SET SELF_DIR=%~dp0
 SET SELF_COLORED=[90m%SELF%[0m
 
-@REM SET DEBUG=echo %SELF_COLORED% [36mDEBUG[0m:
-SET DEBUG=
+SET DEBUG=echo %SELF_COLORED% [36mDEBUG[0m:
+@REM SET DEBUG=
 SET INFO=echo %SELF_COLORED% [94mINFO[0m:
 SET WARN=echo %SELF_COLORED% [33mWARN[0m:
 SET WARNING=%WARN%
@@ -129,18 +129,18 @@ goto :EOF
 @REM Commands
 
 :format
-    !INFO! ruff ^format
+    !INFO! "ruff format"
     ruff ^format .
     ruff check --fix .
     exit /b 0
 
 :check
     call :read_proj_cfg
-    if not DEFINED SRC (
-        SET SRC=%SRC_%
+    if not DEFINED PROJ_SRC (
+        SET PROJ_SRC=%SRC_%
     )
-    !INFO! mypy
-    mypy !SRC!
+    !INFO! "mypy"
+    mypy %PROJ_SRC%
     exit /b 0
 
 :checkall
@@ -265,7 +265,7 @@ goto :EOF
 
 :test
     call :read_proj_cfg
-    pytest tests -v --cov=!SRC! --cov-report=term --cov-report=html:build/htmlcov --cov-report=xml --cov-fail-under=80
+    pytest tests -v --cov=%PROJ_SRC% --cov-report=term --cov-report=html:build/htmlcov --cov-report=xml --cov-fail-under=80
     exit /b 0
 
 :clean
@@ -294,11 +294,11 @@ goto :EOF
 
 :gh
     call :read_proj_cfg
-    if not DEFINED REPO_URL (
-        !ERR! "Missing env variable 'REPO_URL'"
+    if not DEFINED REPO_NAME (
+        !ERR! "Missing env variable 'REPO_NAME'"
         exit /b 1
     )
-    start firefox "https://github.com/stanislavsabev/%REPO_URL%"
+    start firefox "https://github.com/stanislavsabev/%REPO_NAME%"
     @REM  ^^^ insert browser hare
     exit /b 0
 
@@ -340,7 +340,7 @@ goto :EOF
         exit /b 1
     )
     call touch %PROJ_CFG%
-    echo REPO_URL=gh-repo-name>> %PROJ_CFG%
+    echo REPO_NAME=gh-repo-name>> %PROJ_CFG%
     echo PROJ_LANG=python>> %PROJ_CFG%
     echo PROJ_TYPE=restapi / package / batch / lib>> %PROJ_CFG%
     echo VENV_PATH=.venv>> %PROJ_CFG%
@@ -350,7 +350,7 @@ goto :EOF
 :env
     !INFO! Env variables to be defined in [92m%PROJ_CFG%[0m
     echo.
-    echo.[93mREPO_URL[0m=gh-repo-name
+    echo.[93mREPO_NAME[0m=gh-repo-name
     echo.[93mPROJ_LANG[0m=python
     echo.[93mPROJ_TYPE[0m=restapi / package / batch / lib
     echo.[93mVENV_PATH[0m=.venv[90m# if PROJ_LANG=python[0m
