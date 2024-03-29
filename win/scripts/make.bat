@@ -49,22 +49,22 @@ if [%1] == [] goto :USAGE
 :ENDGETOPTS
 !DEBUG! "ENDGETOPTS"
 
-SET CMD_ARGS=
+SET CMD_ARGV=
 SET /A CMD_ARGC=0
 !DEBUG! "GET_CMD_OPTS"
 :GET_CMD_OPTS
     shift
     if "%1"=="" goto :END_GET_CMD_OPTS
-    if DEFINED CMD_ARGS (
-        SET CMD_ARGS=!CMD_ARGS! %1
+    if DEFINED CMD_ARGV (
+        SET CMD_ARGV=!CMD_ARGV! %1
     ) ELSE (
-        SET CMD_ARGS=%1
+        SET CMD_ARGV=%1
     )
     SET /A CMD_ARGC += 1
     goto :GET_CMD_OPTS
 :END_GET_CMD_OPTS
 !DEBUG! "END_GET_CMD_OPTS"
-!DEBUG! "CMD_ARGC: !CMD_ARGC!, CMD_ARGS: '%CMD_ARGS%'"
+!DEBUG! "CMD_ARGC: !CMD_ARGC!, CMD_ARGV: '%CMD_ARGV%'"
 
 :: Process a command
 if DEFINED CMD_NAME (
@@ -135,8 +135,12 @@ goto :EOF
     exit /b 0
 
 :check
+    call :read_proj_cfg
+    if not DEFINED SRC (
+        SET SRC=%SRC_%
+    )
     !INFO! mypy
-    mypy %SRC_%
+    mypy !SRC!
     exit /b 0
 
 :checkall
@@ -158,8 +162,8 @@ goto :EOF
 
 :req-compile
     set UPGRADE=
-    if ["%CMD_ARGS%"] == ["-u"] SET UPGRADE=--upgrade
-    if ["%CMD_ARGS%"] == ["--upgrade"] SET UPGRADE=--upgrade
+    if ["%CMD_ARGV%"] == ["-u"] SET UPGRADE=--upgrade
+    if ["%CMD_ARGV%"] == ["--upgrade"] SET UPGRADE=--upgrade
 
     call :read_proj_cfg
     call :activate_venv
@@ -252,7 +256,7 @@ goto :EOF
 :cov
     set COV_INDEX=%SELF_DIR%build\htmlcov\index.html
     IF EXIST %COV_INDEX% (
-        start     %COV_INDEX%
+        start firefox %COV_INDEX%
         @REM  ^^^ insert browser hare
     ) ELSE (
         !ERR! "Cannot find coverage file '%COV_INDEX%'"
@@ -260,7 +264,8 @@ goto :EOF
     exit /b 0
 
 :test
-    pytest tests -v --cov=src --cov-report=term --cov-report=html:build/htmlcov --cov-report=xml --cov-fail-under=80
+    call :read_proj_cfg
+    pytest tests -v --cov=!SRC! --cov-report=term --cov-report=html:build/htmlcov --cov-report=xml --cov-fail-under=80
     exit /b 0
 
 :clean
@@ -293,16 +298,16 @@ goto :EOF
         !ERR! "Missing env variable 'REPO_URL'"
         exit /b 1
     )
-    start     "https://github.com/stanislavsabev/%REPO_URL%"
+    start firefox "https://github.com/stanislavsabev/%REPO_URL%"
     @REM  ^^^ insert browser hare
     exit /b 0
 
 :setup
     set SRC_PATH=
-    IF "%CMD_ARGS%" == "" (
+    IF "%CMD_ARGV%" == "" (
         SET SRC_PATH=..
     ) ELSE (
-        SET SRC_PATH="%CMD_ARGS%"
+        SET SRC_PATH="%CMD_ARGV%"
     )
     !DEBUG! "SRC_PATH: !SRC_PATH!"
 
