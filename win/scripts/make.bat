@@ -155,8 +155,14 @@ goto :EOF
     exit /b 0
 
 :req-update
-    call :activate_venv
-    IF %ERRORLEVEL% NEQ 0 goto :EOF
+    !INFO! "Compile requirements"
+    call :req-compile
+    IF %ERRORLEVEL% NEQ 0 (
+        !ERR! "Error %ERRORLEVEL%"
+        goto :EOF
+    )
+
+    !INFO! "Install requirements"
     call :req-install
     exit /b 0
 
@@ -265,7 +271,7 @@ goto :EOF
 
 :test
     call :read_proj_cfg
-    pytest tests -v --cov=%PROJ_SRC% --cov-report=term --cov-report=html:build/htmlcov --cov-report=xml --cov-fail-under=80
+    pytest tests -v --cov=!PROJ_SRC! --cov-report=term --cov-report=html:build/htmlcov --cov-report=xml --cov-fail-under=80
     exit /b 0
 
 :clean
@@ -340,7 +346,8 @@ goto :EOF
         exit /b 1
     )
     call touch %PROJ_CFG%
-    echo REPO_NAME=gh-repo-name>> %PROJ_CFG%
+    echo REPO_NAME=gh-repo>> %PROJ_CFG%
+    echo PROJ_SRC=src>> %PROJ_CFG%
     echo PROJ_LANG=python>> %PROJ_CFG%
     echo PROJ_TYPE=restapi / package / batch / lib>> %PROJ_CFG%
     echo VENV_PATH=.venv>> %PROJ_CFG%
@@ -350,7 +357,8 @@ goto :EOF
 :env
     !INFO! Env variables to be defined in [92m%PROJ_CFG%[0m
     echo.
-    echo.[93mREPO_NAME[0m=gh-repo-name
+    echo.[93mREPO_NAME[0m=gh-repo
+    echo.[93mPROJ_SRC[0m=gh-repo
     echo.[93mPROJ_LANG[0m=python
     echo.[93mPROJ_TYPE[0m=restapi / package / batch / lib
     echo.[93mVENV_PATH[0m=.venv[90m# if PROJ_LANG=python[0m
