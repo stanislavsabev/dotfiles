@@ -32,6 +32,7 @@ abbr -a fishdir -- 'pushd $__fish_config_dir'
 abbr -a configdir -- 'pushd $HOME/.config'
 abbr -a o -- 'open .'
 abbr -a start -- 'open'
+abbr -a pop -- 'popd'
 
 # :PYTHON
 abbr -a da -- deactivate
