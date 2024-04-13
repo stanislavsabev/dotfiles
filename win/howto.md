@@ -1,46 +1,67 @@
 # **HOWTO**
 
+Clone [dotfiles](https://github.com/stanislavsabev/dotfiles) from GitHub
+
+```cmd
+cd %USERPROFILE%
+git clone https://github.com/stanislavsabev/dotfiles dotfiles
+```
+
 ## **Environment Variables**
 
-Easiest is to use PowerShell here
+```properties
+CODE_BIN_DIR="%LOCALAPPDATA%\Programs\Microsoft VS Code\bin"
+CODE_USER_DIR="%APPDATA%\Code\User"
+EDITOR=code
+DOTFILES_DIR="%USERPROFILE%\dotfiles"
+PROJECTS_DIR="%USERPROFILE%\projects"
+PYENV="%USERPROFILE%\.pyenv\pyenv-win\"
+PYENV_HOME="%USERPROFILE%\.pyenv\pyenv-win\"
+PYENV_ROOT="%USERPROFILE%\.pyenv\pyenv-win\"
+```
 
-1. Add `DOTFILES_DIR` to the Environment Variables
+### Add Environment Variables, `scripts` and `aliases` to the `PATH`
 
-   ```pwsh
-   [System.Environment]::SetEnvironmentVariable('DOTFILES_DIR', $env:USERPROFILE + "\dotfiles","User")
-   ```
+- With `cmd` (requires an elevated command prompt)
 
-2. Add the scripts path to the PATH variable
+Syntax: `setx <variable_name> "<variable_value>"`
 
-   ```pwsh
-   [System.Environment]::SetEnvironmentVariable('path', [System.Environment]::GetEnvironmentVariable('path', "User") + ";" + $env:USERPROFILE + "\dotfiles\win\scripts","User")
-   ```
+```cmd
+cd .\dotfiles\win
+.\install.bat
+```
+
+- With `PowerShell`
+
+```pwsh
+[System.Environment]::SetEnvironmentVariable('CODE_BIN_DIR', $env:LOCALAPPDATA + "\Programs\Microsoft VS Code\bin","User")
+[System.Environment]::SetEnvironmentVariable('CODE_USER_DIR', $env:APPDATA + "\Code\User\","User")
+[System.Environment]::SetEnvironmentVariable('DOTFILES_DIR', $env:USERPROFILE + "\dotfiles\","User")
+[System.Environment]::SetEnvironmentVariable('PROJECTS_DIR', $env:USERPROFILE + "\projects\","User")
+[System.Environment]::SetEnvironmentVariable('PATH', [System.Environment]::GetEnvironmentVariable('PATH', "User") + ";" + $env:DOTFILES_DIR + "\win\scripts;" + $env:DOTFILES_DIR + "\win\scripts\priv;" + $env:DOTFILES_DIR + "\win\aliases","User")
+```
 
 ## **Setup pyenv**
 
-The default way to install pyenv-win, it needs git commands you need to install git/git-bash for windows
-If you are using PowerShell or Git Bash use `$HOME` instead of `%USERPROFILE%`
+The default way to install `pyenv-win` requires the use of git commands. You need to install git/git-bash for Windows.
+If you are using `PowerShell` or `Git Bash` use `$HOME` instead of `%USERPROFILE%`
 
-    ```console
-    git clone https://github.com/pyenv-win/pyenv-win.git "%USERPROFILE%\.pyenv"
-    ```
+```console
+git clone https://github.com/pyenv-win/pyenv-win.git "%USERPROFILE%\.pyenv"
+```
 
-    ```bash
-    git clone https://github.com/pyenv-win/pyenv-win.git "$HOME/.pyenv"
-    ```
+Add required environment variables
 
-1. Adding PYENV, PYENV_HOME and PYENV_ROOT to your Environment Variables
+```pwsh
+[System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
 
-   ```pwsh
-   [System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+[System.Environment]::SetEnvironmentVariable('PYENV_ROOT',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
 
-   [System.Environment]::SetEnvironmentVariable('PYENV_ROOT',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+[System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+```
 
-   [System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
-   ```
+Add following paths to user `PATH` variable
 
-2. Now adding the following paths to your USER PATH variable in order to access the pyenv command
-
-   ```pwsh
-   [System.Environment]::SetEnvironmentVariable('path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
-   ```
+```pwsh
+[System.Environment]::SetEnvironmentVariable('PATH', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('PATH', "User"),"User")
+```
