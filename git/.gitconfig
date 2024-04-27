@@ -13,9 +13,11 @@
 	sv = !git status -v
 	b = !git branch
 	ba = !git branch -a
+	br = !git branch -r
 	bu = !git branch --set-upstream-to
 	co = !git checkout
 	cb = !git rev-parse --abbrev-ref HEAD
+	rc = !git rebase --continue
 	curr-branch = !git rev-parse --abbrev-ref HEAD
 	cob = !git checkout -b
 	c = !git commit
@@ -27,6 +29,7 @@
 	unstage = !git reset --
 	recommit = !git commit -c ORIG_HEAD
 	cnoe = !git commit --amend --no-edit
+	cnoenv = !git commit --amend --no-edit --no-verify
 	acnoe = !git add --all && git commit --amend --no-edit
 	acnoenv = !git add --all && git commit --amend --no-edit --no-verify
 	recommit = !git commit -c ORIG_HEAD
@@ -38,6 +41,7 @@
 	pushrefs = !git push origin HEAD:refs/for/master
 	lg = !git log --color --graph --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	lv = !git log --color --graph
+	lt = !git log --no-walk --tags --pretty='%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --decorate=full
 	lgstat = !git log --color --graph  --abbrev-commit --stat --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	lgmy = !git log --graph  --abbrev-commit --author='stanislavsabev' --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	lgauth = !git log --graph  --abbrev-commit --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --author
@@ -63,3 +67,5 @@
 	credentialStore = gpg
 [pull]
 	rebase = true
+[rerere]
+	enabled = true
