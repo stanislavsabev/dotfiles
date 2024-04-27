@@ -84,8 +84,9 @@ switch (uname)
         abbr -a sandls -- "pushd $PROJECTS_DIR/sandbox && la"
 
         # APT
-        abbr -a up -- "sudo apt update -y"
-        abbr -a upup -- "sudo apt upgrade -y"
+        abbr -a up -- "sudo apt update"
+        abbr -a upg -- "sudo apt upgrade -y"
+        abbr -a upup -- "sudo apt update && sudo apt upgrade -y"
         abbr -a api -- "sudo apt install"
 
         # OPEN WITH EDITOR
