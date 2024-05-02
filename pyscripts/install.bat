@@ -1,4 +1,4 @@
-@REM @echo off
+@echo off
 SETLOCAL enableDelayedExpansion
 set SELF_DIR=%~dp0
 
