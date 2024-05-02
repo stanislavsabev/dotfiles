@@ -2,6 +2,7 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
+import re
 
 import tomlkit
 from tomlkit.toml_document import TOMLDocument
@@ -48,18 +49,23 @@ def lib_versions(lines: Iterable[str], split_by: str | None = None) -> LibLineDi
     return data
 
 
-def read_requirements_in(path: Path) -> dict[str, set[str]]:
+def extract_requirements_in(path: Path) -> dict[str, set[str]]:
     res = {}
 
     for req_file in path.glob("requirements*.in"):
         key = req_file.with_suffix("").name
+        data = set()
         with req_file.open() as fp:
-            data = set(map(str.lower, filter(lambda x: not bad_line(x), fp.read().splitlines())))
+            for line in fp:
+                if bad_line(line):
+                    continue
+                if m := re.match(r"^\s*([a-zA-Z0-9_-]+)", line.rstrip("\n").lower()):
+                    data.add(m.group(1))
         res[key] = data
     return res
 
 
-def read_requirements_txt(path: Path, req_in) -> dict[str, LibLineDict]:
+def extract_requirements_txt(path: Path, req_in) -> dict[str, LibLineDict]:
     res = {}
 
     for req_file in path.glob("requirements*.txt"):
@@ -100,7 +106,7 @@ def validate_args(argv: list[str]) -> Path:
         else:
             raise ValueError(f"Invalid argument {arg}")
 
-    path = Path()
+    path = Path(arg)
     if not path.joinpath("pyproject.toml").is_file():
         raise ValueError("Root directory is missing pyproject.toml")
     if not path.joinpath("requirements").is_dir():
@@ -189,8 +195,8 @@ def main():
     path = validate_args(sys.argv)
 
     req_path = path.joinpath("requirements")
-    req_in = read_requirements_in(req_path)
-    req_txt = read_requirements_txt(req_path, req_in=req_in)
+    req_in = extract_requirements_in(req_path)
+    req_txt = extract_requirements_txt(req_path, req_in=req_in)
     toml_contents, req_toml = read_toml(path.joinpath("pyproject.toml"))
 
     for tkey, rkey in [
