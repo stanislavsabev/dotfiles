@@ -27,7 +27,7 @@ echo ^<ESC^>[46m [46mCyan[0m
 echo ^<ESC^>[47m [47mWhite[0m (white)
 echo.
 echo [101;93m STRONG FOREGROUND COLORS [0m
-echo ^<ESC^>[90m [90mWhite[0m
+echo ^<ESC^>[90m [90mGray[0m
 echo ^<ESC^>[91m [91mRed[0m
 echo ^<ESC^>[92m [92mGreen[0m
 echo ^<ESC^>[93m [93mYellow[0m
