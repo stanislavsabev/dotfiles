@@ -9,7 +9,8 @@
 	aa = !git add --all
 	fa = !git fetch --all
 	fap = !git fetch --all --prune
-	s = !git status
+	s = !git status -s
+	sta = !git status
 	sv = !git status -v
 	b = !git branch
 	ba = !git branch -a
@@ -26,6 +27,7 @@
 	cam = !git add --all && git commit -am
 	camnv = !git add --all && git commit --no-verify -am
 	unstageall = !git reset -- .
+	rh = !git reset head
 	unstage = !git reset --
 	recommit = !git commit -c ORIG_HEAD
 	cnoe = !git commit --amend --no-edit
