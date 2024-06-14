@@ -24,15 +24,12 @@ export EDITOR=code
 export VENV_DIR=".venv"
 export PROJECTS_DIR="$HOME/projects"
 export OPT_DIR="$HOME/opt"
-export DEVSETUP_DIR="$HOME/$OPT_DIR/devsetup"
 export CONFIG_DIR="$HOME/.config"
 export XDG_CONFIG_HOME="$HOME/.config"
-
 # ::endenv
 
 # ::path
 export PATH="$PATH:$SCRIPTS_DIR"              # my scripts
-export PATH="$PATH:$HOME/.dotnet/tools"       # Add .NET Core SDK tools
 export PATH="$PATH:$HOME/.cargo/bin"          # Add Rust tools
 export PATH="$PATH:$HOME/third_party/zig-linux-x86_64-0.11.0-dev.4008+a0b35249a"
 # ::endpath
@@ -65,12 +62,6 @@ if [ -x /usr/bin/dircolors ] && [ -d "$HOME/.dir_colors" ]; then
       # eval "dircolors ~/.dir_colors/dircolors"
       test -r ~/.dir_colors/dircolors && eval "$(dircolors -b ~/.dir_colors/dircolors)" || eval "$(dircolors -b)"
 fi
-
-# if [ -d "$HOME/.dir_colors" ]; then
-
-#   [ -f "$HOME/.dir_colors/dircolors" ] && \
-#     eval `$HOME/.dir_colors/dircolors`;
-# fi
 # ::endsoruce files
 
 
@@ -113,19 +104,3 @@ if [ -d "$HOME/.pyenv" ]; then
   eval "$(pyenv init --path)"
 fi
 # ::endpyenv
-
-# ::fish shell
-
-alias chfish="export MYSHELL=fish; exec bash"
-
-if [[ -z ${MYSHELL+x} ]]; then
-  export MYSHELL="fish"
-fi
-
-if [[ $MYSHELL == "fish" ]]; then
-  if command -v fish &> /dev/null
-  then
-      exec fish
-  fi
-fi
-# ::endfish shell
