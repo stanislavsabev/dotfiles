@@ -3,9 +3,11 @@ set -gx HISTIGNORE ' *'
 set -gx HISTCONTROL ignoreboth:erasedups
 set -gx COLORTERM truecolor
 
-set -gx EDITOR code-insiders
+set -gx EDITOR code
 set -gx DOTFILES_DIR "$HOME/.dotfiles"
 set -gx CONFIG_DIR "$HOME/.config"
+set -gx KAFKA_DIR "$HOME/kafka_2.12-3.7.0"
+set -gx KAFKA_CONFIG_DIR "$KAFKA_DIR/config"
 
 # Util
 set -gx PROJECTS_DIR "$HOME/projects"

@@ -27,7 +27,7 @@
 	cam = !git add --all && git commit -am
 	camnv = !git add --all && git commit --no-verify -am
 	unstageall = !git reset -- .
-	rh = !git reset head
+	rh = !git reset HEAD
 	unstage = !git reset --
 	recommit = !git commit -c ORIG_HEAD
 	cnoe = !git commit --amend --no-edit

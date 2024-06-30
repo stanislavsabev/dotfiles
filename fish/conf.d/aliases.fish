@@ -45,6 +45,12 @@ abbr -a make-va -- 'make_venv'
 abbr -a --set-cursor nhistory -- "history % | nl"
 abbr -a grephist -- 'grep_history'
 abbr -a validate-commit-msg -- verify_commit_message
+abbr -a pmlr -- 'pm ls -r'
+abbr -a pmls -- 'pm ls'
+abbr -a pmo -- 'pm open'
+abbr -a kafka-up -- 'kafka_up'
+abbr -a kafka-down -- 'kafka_down'
+
 
 # :PROJ EDITING
 abbr -a e -- $EDITOR
@@ -91,6 +97,8 @@ switch (uname)
 
         # OPEN WITH EDITOR
         abbr -a ed-history -- "$EDITOR $HOME/.bash_history"
+
+        abbr -a htop -- "btop"
 
     case Darwin
 

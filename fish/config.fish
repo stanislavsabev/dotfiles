@@ -20,13 +20,14 @@ if status is-interactive
 end
 
 # ::path
-fish_add_path --global --prepend $HOME/bin
-fish_add_path --global --prepend /usr/local/mysql/bin
+# fish_add_path --global --prepend $HOME/bin
+# fish_add_path --global --prepend /usr/local/mysql/bin
 fish_add_path --global --prepend /usr/local/bin
 fish_add_path --global --prepend /usr/local/sbin
 fish_add_path --global --prepend $SCRIPTS_DIR
 fish_add_path --global --prepend $HOME/.cargo/bin
 fish_add_path --global --prepend $HOME/third_party/zig-linux-x86_64-0.11.0-dev.4008+a0b35249a
+fish_add_path --global --prepend $HOME/kafka_2.12-3.7.0/bin
 # ::endpath
 
 # ::vscode
