@@ -55,13 +55,6 @@ if /I [!NAME!] == [code] (
     echo src !SRC!
     echo CODE_USER_DIR %CODE_USER_DIR%
     set PROC_NAME=proc_code
-) else if /I [!NAME!] == [code-insiders] (
-    IF not defined CODE_USER_DIR (
-        set CODE_USER_DIR="%APPDATA%\Code - Insiders\User"
-    )
-    set SRC=%CODE_USER_DIR%
-    set DEST=%DOTFILES_DIR%\code\code-insiders
-    set PROC_NAME=proc_code_insiders
 ) else if /I [!NAME!] == [git] (
     set SRC=%USERPROFILE%
     set DEST=%DOTFILES_DIR%\git
@@ -89,26 +82,6 @@ GOTO:EOF
         echo F|%COMND% /Y !SRC!\settings.json !DEST!\settings.json
         echo F|%COMND% /Y !SRC!\keybindings.json !DEST!\keybindings.json 
         echo D|%COMND% /I /Y /E "!SRC!\snippets\*" "!DEST!\snippets\*"
-    )
-    exit /b 0
-
-
-:proc_code_insiders
-    set SNIP_SRC="%CODE_USER_DIR%\Code - Insiders"
-    set SNIP_DEST=%DOTFILES_DIR%\code
-    if DEFINED REV (
-        set TMP_VAR=!SNIP_DEST!
-        set SNIP_DES!=%SNIP_SRC!
-        set SNIP_SRC=!TMP_VAR!
-    )
-    if defined DRY (
-        echo dry-run: "echo F|%COMND% /Y !SRC!\settings.json !DEST!\settings.json"
-        echo dry-run: "echo F|%COMND% /Y !SRC!\keybindings.json !DEST!\keybindings.json "
-        echo dry-run: "echo D|%COMND% /I /Y /E "!SNIP_SRC!\snippets\*" "!SNIP_DEST!\snippets\*""
-    ) else (
-        echo F|%COMND% /Y !SRC!\settings.json !DEST!\settings.json
-        echo F|%COMND% /Y !SRC!\keybindings.json !DEST!\keybindings.json 
-        echo D|%COMND% /I /Y /E "!SNIP_SRC!\snippets\*" "!SNIP_DEST!\snippets\*"
     )
     exit /b 0
 
@@ -143,7 +116,6 @@ exit /b 0
     echo.
     echo    CONFIG_NAMES    Config names: NAME_1 ..NAME_N, 
     echo            code
-    echo   code-insiders
     echo             git
     echo.
     echo    -h    --help    Display this message
