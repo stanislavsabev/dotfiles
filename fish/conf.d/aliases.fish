@@ -73,16 +73,15 @@ switch (uname)
         # LS ALIASES
         # alias ls="exa -GF"
         alias exa='exa --color=always'
-        alias l='exa -g'
-        alias ls='exa -ag'
+        alias ls='exa -g'
+        alias la='exa -ag'
         abbr -a lsgrep -- 'ls | grep'
-        alias la='exa -lag'
+        alias lla='exa -lag'
         alias ll='exa -lg'
         abbr -a ldir -- "exa -lgD"
         abbr -a lsdir -- "exa -lgD"
-        alias l.="exa -d (exa -a --color=never | egrep '^\.') "
-        alias ls.="exa -dF (exa -a --color=never | egrep '^\.')"
-        alias la.="exa -ldgF (exa -a --color=never | egrep '^\.')"
+        alias ls.="exa -d (exa -a --color=never | egrep '^\.') "
+        alias ll.="exa -ldg (exa -a --color=never | egrep '^\.')"
         alias rf="rm -rf"
         # tree listing
         abbr lt -- 'exa -aT --group-directories-first'
@@ -90,10 +89,10 @@ switch (uname)
         abbr -a sandls -- "pushd $PROJECTS_DIR/sandbox && la"
 
         # APT
-        abbr -a up -- "sudo apt update"
-        abbr -a upg -- "sudo apt upgrade -y"
-        abbr -a upup -- "sudo apt update && sudo apt upgrade -y"
-        abbr -a api -- "sudo apt install"
+        abbr -a apt-up -- "sudo apt update"
+        abbr -a apt-upg -- "sudo apt upgrade -y"
+        abbr -a apt-upup -- "sudo apt update && sudo apt upgrade -y"
+        abbr -a apt-install -- "sudo apt install"
 
         # OPEN WITH EDITOR
         abbr -a ed-history -- "$EDITOR $HOME/.bash_history"
@@ -103,15 +102,11 @@ switch (uname)
     case Darwin
 
         # :SHORTHAND COMMANDS
-        abbr -a l -- "ls -F"
-        abbr -a ls -- "ls -lAh"
         abbr -a la -- "ls -lAh"
         abbr -a ll -- "ls -lh"
         abbr -a lh -- "ls -lh"
-        abbr -a l. -- "ls -d .*"
-        abbr -a la. -- "ls -lAh | awk '\$NF ~ /^\./'"
+        abbr -a ls. -- "ls -d .*"
         abbr -a ll. -- "ls -lAh | awk '\$NF ~ /^\./'"
-
 
         alias brew='env PATH "($PATH//$(pyenv root)\/shims:/)" brew'
 
