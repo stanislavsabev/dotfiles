@@ -13,6 +13,6 @@ function kafka_up
         return $last_status
     end
 
-    $KAFKA_DIR/bin/zookeeper-server-start.sh $KAFKA_CONFIG_DIR/zookeeper.properties & \
-    $KAFKA_DIR/bin/kafka-server-start.sh $KAFKA_CONFIG_DIR/server.properties
+    $TT_KAFKA_DIR/bin/zookeeper-server-start.sh $TT_KAFKA_CONFIG_DIR/zookeeper.properties & \
+    $TT_KAFKA_DIR/bin/kafka-server-start.sh $TT_KAFKA_CONFIG_DIR/server.properties
 end

@@ -13,6 +13,6 @@ function kafka_down
         return $last_status
     end
 
-    $KAFKA_DIR/bin/kafka-server-stop.sh
-    $KAFKA_DIR/bin/zookeeper-server-stop.sh
+    $TT_KAFKA_DIR/bin/kafka-server-stop.sh
+    $TT_KAFKA_DIR/bin/zookeeper-server-stop.sh
 end

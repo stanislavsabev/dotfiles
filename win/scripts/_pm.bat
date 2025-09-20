@@ -49,9 +49,9 @@ if [%1] == [] goto :invalid_args
             ) else if [!curOpt!] == [cd] (
                 set CD_PROJ=1
             ) else if [!curOpt!] == [dot] (
-                set PROJ=%DOTFILES_DIR%
-            ) else if exist %PROJECTS_DIR%\!curOpt!\ (
-                set PROJ=%PROJECTS_DIR%\!curOpt!
+                set PROJ=%TT_DOTFILES_DIR%
+            ) else if exist %TT_PROJECTS_DIR%\!curOpt!\ (
+                set PROJ=%TT_PROJECTS_DIR%\!curOpt!
             ) else (
                 echo %SELF%: Unknown project name !curOpt!, see -h for help
                 exit /b 1
@@ -81,7 +81,7 @@ goto:proc_open_proj
 
 
 :proc_open_proj @rem Open project with editor
-    set _CMD=%EDITOR%
+    set _CMD=%TT_EDITOR%
     call :dry
     !_CMD! %PROJ%\%BRANCH%
     goto :EOF
@@ -97,7 +97,7 @@ goto:proc_open_proj
 
 :proc_ls_projects
     @rem List all projects
-    set _CMD=dir /a %PROJECTS_DIR%
+    set _CMD=dir /a %TT_PROJECTS_DIR%
     call :dry
     !_CMD!
     goto :EOF

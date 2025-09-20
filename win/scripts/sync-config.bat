@@ -51,13 +51,13 @@ if /I [!NAME!] == [code] (
         set CODE_USER_DIR=%APPDATA%\Code\User
     )
     set SRC=%CODE_USER_DIR%
-    set DEST=%DOTFILES_DIR%\code
+    set DEST=%TT_DOTFILES_DIR%\code
     echo src !SRC!
     echo CODE_USER_DIR %CODE_USER_DIR%
     set PROC_NAME=proc_code
 ) else if /I [!NAME!] == [git] (
     set SRC=%USERPROFILE%
-    set DEST=%DOTFILES_DIR%\git
+    set DEST=%TT_DOTFILES_DIR%\git
     set PROC_NAME=proc_git
 ) else (
     echo Unknown config name "!NAME!"

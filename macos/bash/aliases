@@ -26,7 +26,7 @@ alias dow="cd ~/Downloads"
 alias dtop="cd ~/Desktop"
 alias doc="cd ~/Documents"
 alias home="cd"
-alias dotfiles="cd $DOTFILES_DIR/.."
+alias dotfiles="cd $TT_DOTFILES_DIR/.."
 
 # :PYTHON
 alias da="deactivate"
@@ -38,14 +38,14 @@ alias showhidden="defaults write com.apple.finder AppleShowAllFiles -bool true &
 alias hidehidden="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # :MY SCRIPTS
-alias kport="source $SCRIPTS_DIR/kill_port.sh"
+alias kport="source $TT_SCRIPTS_DIR/kill_port.sh"
 alias grephist="grep-history"
 alias expandalias="expand-alias"
 alias validate-commit-msg="verify-commit-msg"
 
 # :SCRIPTS EDITING
-alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR/.."
-alias ed-fish="$EDITOR -n $CONFIG_DIR/fish"
+alias ed-dotfiles="$TT_EDITOR -n $TT_DOTFILES_DIR/.."
+alias ed-fish="$TT_EDITOR -n $XDG_CONFIG_HOME/fish"
 
 # :Chrono
 alias week='date +%V'
@@ -61,7 +61,7 @@ alias path="tr ':' '\n' <<< \"$PATH\""
 alias wt-ls="wt-list"
 alias wt-co="wt-checkout"
 alias wt-mv="wt-move"
-alias wt-rm="source $SCRIPTS_DIR/worktree_remove.sh"
+alias wt-rm="source $TT_SCRIPTS_DIR/worktree_remove.sh"
 
 alias add="git add --"
 alias addall="git add --all"

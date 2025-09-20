@@ -20,7 +20,7 @@ function edproj
     end
 
     if test -d "$_proj"
-        command $EDITOR -n $_proj
+        command $TT_EDITOR -n $_proj
     else
         echo "$_name: unknown project $_proj"
         return $no_matches_found

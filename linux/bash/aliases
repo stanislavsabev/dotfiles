@@ -21,14 +21,13 @@ alias l="ls -CF"
 alias ll="ls -lAhF"
 alias la="ls -lAhF" # same as ll, more convinient
 alias lh="ls -lAhF"
-alias l.="ls -d .*"
-alias ll.="ls -lAh | awk '\$NF ~ /^\./'"
+
+alias ls.="ls -d .*"
 alias la.="ls -lAh | awk '\$NF ~ /^\./'"
-alias rf="rm -rf"
 
 # PYTHON VENV ALIASES
 alias da="deactivate"
-alias makevenv="python -m venv $VENV_DIR && va"
+alias makevenv="python -m venv $TT_VENV_DIR && va"
 alias uppip="python -m pip install --upgrade pip"
 alias pir="pip install -r "
 
@@ -46,33 +45,19 @@ alias home="cd"
 alias dow="cd ~/Downloads"
 alias doc="cd ~/Documents"
 alias vid="cd ~/Videos"
-alias p="cd $PROJECTS_DIR"
-alias opt="cd $OPT_DIR"
-alias dotfiles="cd $DOTFILES_DIR"
-alias devsetup="cd $OPT_DIR/devsetup"
-alias gitignore_global="cat $DEVSETU_DIR/gitignore_global"
-alias gitconfig_local="cat .git/config"
-alias gitconfig="cat $DOTFILES_DIR/bash/gitconfig"
-alias sand="cd $PROJECTS_DIR/sandbox_projects"
+alias p="cd $TT_PROJECTS_DIR"
 
-# OPEN WITH EDITOR
-alias ed-history="$EDITOR $HOME/.bash_history"
-alias ed-gitignore_global="$EDITOR $DEVSETU_DIR/gitignore_global"
-alias ed-dotfiles="$EDITOR -n $DOTFILES_DIR/.."
-alias ed-fish="$EDITOR -n $CONFIG_DIR/fish"
-alias pysand="$EDITOR -n $PROJECTS_DIR/sandbox_projects/pysand"
-alias vba-parser="$EDITOR -n $PROJECTS_DIR/vba_parser/main"
+alias dot="cd $TT_DOTFILES_DIR"
+alias sand="cd $TT_PROJECTS_DIR/sandbox_projects"
 
-# APT
-alias up="sudo apt update"
-alias upup="sudo apt upgrade -y"
-alias reboot="sudo reboot"
+# OPEN WITH TT_EDITOR
+alias ed-history="$TT_EDITOR $HOME/.bash_history"
+alias ed-gitignore_global="$TT_EDITOR $DEVSETU_DIR/gitignore_global"
+alias ed-dot="$TT_EDITOR -n $TT_DOTFILES_DIR"
+alias ed-fish="$TT_EDITOR -n $XDG_CONFIG_HOME/fish"
 
 # WORKTREE FUNCTIONS
-alias wt-ls="wt-list"
-alias wt-co="wt-checkout"
-alias wt-rm="wt-remove"
-alias wt-mv="wt-move"
-
-# GIT
-alias g="git"
+alias gwt-ls="gwt-list"
+alias gwt-co="gwt-checkout"
+alias gwt-rm="gwt-remove"
+alias gwt-mv="gwt-move"

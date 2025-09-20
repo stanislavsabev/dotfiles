@@ -1,2 +1,2 @@
 @echo off
-pushd %DOTFILES_DIR%
+pushd %TT_DOTFILES_DIR%

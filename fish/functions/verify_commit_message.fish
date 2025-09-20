@@ -16,5 +16,5 @@ function verify_commit_message
     else
         set COMM_MSG $argv[1]
     end
-    python $SCRIPTS_DIR/verify_commit_msg.py "$COMM_MSG"
+    python $TT_SCRIPTS_DIR/verify_commit_msg.py "$COMM_MSG"
 end

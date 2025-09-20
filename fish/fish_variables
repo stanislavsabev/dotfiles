@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export EDITOR:code
+# todo: find what was used for
+# SETUVAR --export TT_EDITOR:code
 SETUVAR __fish_initialized:3400
 SETUVAR could_not_execute_command:125
 SETUVAR file_not_executable:126

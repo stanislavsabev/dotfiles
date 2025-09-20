@@ -1,2 +1,2 @@
 @echo off
-%EDITOR% %*
+%TT_EDITOR% %*

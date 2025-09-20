@@ -24,7 +24,7 @@ end
 # fish_add_path --global --prepend /usr/local/mysql/bin
 fish_add_path --global --prepend /usr/local/bin
 fish_add_path --global --prepend /usr/local/sbin
-fish_add_path --global --prepend $SCRIPTS_DIR
+fish_add_path --global --prepend $TT_SCRIPTS_DIR
 fish_add_path --global --prepend $HOME/.cargo/bin
 fish_add_path --global --prepend /snap/bin/zig
 fish_add_path --global --prepend $HOME/kafka_2.12-3.7.0/bin

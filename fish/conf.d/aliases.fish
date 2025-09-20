@@ -23,11 +23,10 @@ abbr -a doc -- 'pushd $HOME/Documents'
 abbr -a vid -- 'pushd $HOME/Videos'
 abbr -a home -- "pushd ~"
 
-abbr -a p -- 'pushd $PROJECTS_DIR'
-abbr -a pls -- 'pushd $PROJECTS_DIR && la'
-abbr -a dotdir 'pushd $DOTFILES_DIR'
-abbr -a dot 'pushd $DOTFILES_DIR'
-abbr -a dotfilesdir 'pushd $DOTFILES_DIR'
+abbr -a p -- 'pushd $TT_PROJECTS_DIR'
+abbr -a pls -- 'pushd $TT_PROJECTS_DIR && la'
+abbr -a dot 'pushd $TT_DOTFILES_DIR'
+abbr -a dotos 'pushd $TT_DOTFILES_OS_DIR'
 abbr -a fishdir -- 'pushd $__fish_config_dir'
 abbr -a configdir -- 'pushd $HOME/.config'
 abbr -a o -- 'open .'
@@ -53,9 +52,8 @@ abbr -a kafka-down -- 'kafka_down'
 
 
 # :PROJ EDITING
-abbr -a e -- $EDITOR
-abbr -a ed-dotfiles -- '$EDITOR -n $DOTFILES_DIR'
-abbr -a ed-fish -- '$EDITOR -n $__fish_config_dir'
+abbr -a ed-dot -- '$TT_EDITOR -n $TT_DOTFILES_DIR'
+abbr -a ed-fish -- '$TT_EDITOR -n $__fish_config_dir'
 
 # :COMMANDS
 abbr -a reboot -- 'sudo reboot'
@@ -85,8 +83,8 @@ switch (uname)
         alias rf="rm -rf"
         # tree listing
         abbr lt -- 'exa -aT --group-directories-first'
-        abbr -a sand -- "pushd $PROJECTS_DIR/sandbox"
-        abbr -a sandls -- "pushd $PROJECTS_DIR/sandbox && la"
+        abbr -a sand -- "pushd $TT_PROJECTS_DIR/sandbox"
+        abbr -a sandls -- "pushd $TT_PROJECTS_DIR/sandbox && la"
 
         # APT
         abbr -a apt-up -- "sudo apt update"
@@ -94,8 +92,8 @@ switch (uname)
         abbr -a apt-upup -- "sudo apt update && sudo apt upgrade -y"
         abbr -a apt-install -- "sudo apt install"
 
-        # OPEN WITH EDITOR
-        abbr -a ed-history -- "$EDITOR $HOME/.bash_history"
+        # OPEN WITH TT_EDITOR
+        abbr -a ed-history -- "$TT_EDITOR $HOME/.bash_history"
 
         abbr -a htop -- "btop"
 
@@ -113,7 +111,7 @@ switch (uname)
         # :MY SCRIPTS
         alias kports="kill_ports"
         alias lsports="ls_ports"
-        alias service="source $SCRIPTS_DIR/start_service.sh"
+        alias service="source $TT_SCRIPTS_DIR/start_service.sh"
 
         # :Chrono
         abbr -a week -- 'date +%V'

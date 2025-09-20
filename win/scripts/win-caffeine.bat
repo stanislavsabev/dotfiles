@@ -5,7 +5,7 @@ if [%1] == [-h] goto :usage
 if [%1] == [--help] goto :usage
 
 
-cd %PROJECTS_DIR%\win-caffeine
+cd %TT_PROJECTS_DIR%\win-caffeine
 CALL ".\.venv\Scripts\activate.bat"
 "python" "win-caffeine.py"
 

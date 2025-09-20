@@ -1,2 +1,2 @@
 @echo off
-pushd %PROJECTS_DIR%
+pushd %TT_PROJECTS_DIR%

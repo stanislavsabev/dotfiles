@@ -157,12 +157,12 @@ goto :EOF
 
 :ed
     if !CMD_ARGC! EQU 0 (
-        call %EDITOR% %SELF_DIR%
+        call %TT_EDITOR% %SELF_DIR%
         exit /b 0
     )
 
     SET _NAME=!CMD_ARGS!
-    call %EDITOR% %SELF_DIR%%_NAME%.bat
+    call %TT_EDITOR% %SELF_DIR%%_NAME%.bat
     exit /b 0
 
 :define_commands

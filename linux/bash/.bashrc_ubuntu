@@ -18,47 +18,43 @@ fi
 
 
 # ::env
-export DOTFILES_DIR="$HOME/.dotfiles/linux"
-export SCRIPTS_DIR="$DOTFILES_DIR/bin"
-export EDITOR=code
-export VENV_DIR=".venv"
-export PROJECTS_DIR="$HOME/projects"
-export OPT_DIR="$HOME/opt"
-export DEVSETUP_DIR="$HOME/$OPT_DIR/devsetup"
-export CONFIG_DIR="$HOME/.config"
+export TT_DOTFILES_DIR="$HOME/.dotfiles"
+export TT_DOTFILES_OS_DIR="$HOME/.dotfiles/linux"
+export TT_SCRIPTS_DIR="$TT_DOTFILES_OS_DIR/bin"
+export TT_EDITOR=code
+export TT_VENV_DIR=".venv"
+export TT_PROJECTS_DIR="$HOME/projects"
 export XDG_CONFIG_HOME="$HOME/.config"
-
 # ::endenv
 
 # ::path
-export PATH="$PATH:$SCRIPTS_DIR"              # my scripts
-export PATH="$PATH:$HOME/.dotnet/tools"       # Add .NET Core SDK tools
-export PATH="$PATH:$HOME/.cargo/bin"          # Add Rust tools
-export PATH="$PATH:$HOME/third_party/zig-linux-x86_64-0.11.0-dev.4008+a0b35249a"
+for dir_ in "$TT_DOTFILES_OS_DIR/priv" "$TT_SCRIPTS_DIR" "$HOME/.dotnet/tools" "$HOME/.cargo/bin"; do
+  if [ -d "$dir_" ]; then
+    export PATH="$dir_:$PATH"
+  fi
+done
 # ::endpath
 
-
-# ::soruce files
-for file in $DOTFILES_DIR/bash/{functions,aliases,prompt}; do
+# ::source files
+for file in $TT_DOTFILES_OS_DIR/bash/{functions,aliases,prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
 
 # source private files
-if [ -d "$DOTFILES_DIR/bash/priv" ]; then
-  for file in $DOTFILES_DIR/bash/priv/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
+if [ -d "$TT_DOTFILES_OS_DIR/bash/priv" ]; then
+  for file in $TT_DOTFILES_OS_DIR/bash/priv/{envs,paths,vscode_functions,git_functions,functions,aliases,bash_prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
   done;
 fi
 unset file;
 
-# source alacrity files
-if [ -d "$HOME/alacritty" ]; then
+# source alacrity complitions
+if [ -d "$HOME/alacritty/extra/complitions" ]; then
   [ -f "$HOME/alacritty/extra/complitions/alacritty.bash" ] && \
     source "$HOME/alacritty/extra/complitions/alacritty.bash";
 fi
 # ::endsoruce files
-
 
 # source dircolors
 if [ -x /usr/bin/dircolors ] && [ -d "$HOME/.dir_colors" ]; then

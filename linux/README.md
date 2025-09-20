@@ -342,7 +342,6 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 sudo apt-get update && sudo apt-get install spotify-client -y
 ```
 
-
 ## Swap file
 
 ```bash
@@ -400,6 +399,7 @@ cargo build --release
 sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
 infocmp alacritty
 ```
+
 ### Create a Desktop shortcut
 
 Once the installation process of building Alacritty source code is done, it will save the compiled binary under a directory, here is the path to that: /target/release/alacritty present under your Alacritty’s git cloned directory.
@@ -408,11 +408,8 @@ Without leaving Alacritty directory, run the given commands.
 
 ```bash
 sudo cp target/release/alacritty /usr/local/bin
-
 sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
-
 sudo desktop-file-install extra/linux/Alacritty.desktop
-
 sudo update-desktop-database
 ```
 
@@ -423,24 +420,23 @@ To get automatic completions for Alacritty’s flags and arguments you can insta
 ```bash
 echo "source $(pwd)/extra/completions/alacritty.bash" >> ~/.bashrc
 ```
+
 ### For Customization
 
 To customize the look and feel of the Terminal, we can create Alacritty YML Configuration. You can get the default one here on Github.
 
 or for the current one while doing the article use the given commands:
+
 ```bash
-
 mkdir $HOME/.config/alacritty
-
 cd $HOME/.config/alacritty
-
 wget https://github.com/alacritty/alacritty/releases/download/v0.11.0-rc3/alacritty.yml
 ```
 
 Now you have the file. Edit the same to configure the Terminal as per your choice.
 
 ```bash
-$EDITOR $HOME/.config/alacritty/alacritty.yml
+$TT_EDITOR $HOME/.config/alacritty/alacritty.yml
 ```
 
 ### Pre-built Terminal Themes
@@ -478,46 +474,56 @@ sudo rm /usr/share/applications/Alacritty.desktop
 sudo update-desktop-database
 ```
 
-Also, delete the source code directory which you have cloned from GitHub.
+Also, delete the source code directory which you have clonbaed from GitHub.
 
 ## Gnome extensions
 
+```bash
     sudo apt-get install -y gnome-tweaks \
         gnome-shell-extensions chrome-gnome-shell
-
+```
 
 ## Minimize app window on dock click
 
-    gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+```bash
+ set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+```
 
 ## Bitwarden and Zoom
+
 sudo snap install -y bitwarden
 sudo snap install -y zoom-client
 
 ## App preload predictor
+
 sudo apt-get install -y preload
 
 ## Batery saver
+
 sudo apt-get install -y tlp tlp-rdw
 sudo systemctl enable tlp
 sudo systemctl start tlp
 
 ## Manage free space and clear files
+
 sudo apt-get install -y bleachbit
 
 ## Telegram
+
 sudo apt-get install -y telegram-desktop
 
 ### Optional packages related to the Telegram Desktop messaging application
+
 sudo apt install -y telegram-cli telegram-purple
 
 ## Free up space
+
 https://askubuntu.com/questions/5980/how-do-i-free-up-disk-space
 https://itsfoss.com/free-up-space-ubuntu-linux/
 
 ## How to Install Windows After Ubuntu Linux in Dual Boot
-https://itsfoss.com/install-windows-after-ubuntu-dual-boot/
 
+https://itsfoss.com/install-windows-after-ubuntu-dual-boot/
 
 ## Always show hidden files
 

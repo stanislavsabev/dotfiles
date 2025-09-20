@@ -435,7 +435,7 @@ wget https://github.com/alacritty/alacritty/releases/download/v0.11.0-rc3/alacri
 Now you have the file. Edit the same to configure the Terminal as per your choice.
 
 ```bash
-$EDITOR $HOME/.config/alacritty/alacritty.yml
+$TT_EDITOR $HOME/.config/alacritty/alacritty.yml
 ```
 
 ### Pre-built Terminal Themes

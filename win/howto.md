@@ -12,9 +12,9 @@ git clone https://github.com/stanislavsabev/dotfiles dotfiles
 ```properties
 CODE_BIN_DIR="%LOCALAPPDATA%\Programs\Microsoft VS Code\bin"
 CODE_USER_DIR="%APPDATA%\Code\User"
-EDITOR=code
-DOTFILES_DIR="%USERPROFILE%\dotfiles"
-PROJECTS_DIR="%USERPROFILE%\projects"
+TT_EDITOR=code
+TT_DOTFILES_DIR="%USERPROFILE%\dotfiles"
+TT_PROJECTS_DIR="%USERPROFILE%\projects"
 PYENV="%USERPROFILE%\.pyenv\pyenv-win\"
 PYENV_HOME="%USERPROFILE%\.pyenv\pyenv-win\"
 PYENV_ROOT="%USERPROFILE%\.pyenv\pyenv-win\"
@@ -36,9 +36,9 @@ cd .\dotfiles\win
 ```pwsh
 [System.Environment]::SetEnvironmentVariable('CODE_BIN_DIR', $env:LOCALAPPDATA + "\Programs\Microsoft VS Code\bin","User")
 [System.Environment]::SetEnvironmentVariable('CODE_USER_DIR', $env:APPDATA + "\Code\User\","User")
-[System.Environment]::SetEnvironmentVariable('DOTFILES_DIR', $env:USERPROFILE + "\dotfiles\","User")
-[System.Environment]::SetEnvironmentVariable('PROJECTS_DIR', $env:USERPROFILE + "\projects\","User")
-[System.Environment]::SetEnvironmentVariable('PATH', [System.Environment]::GetEnvironmentVariable('PATH', "User") + ";" + $env:DOTFILES_DIR + "\win\scripts;" + $env:DOTFILES_DIR + "\win\scripts\priv;" + $env:DOTFILES_DIR + "\win\aliases","User")
+[System.Environment]::SetEnvironmentVariable('TT_DOTFILES_DIR', $env:USERPROFILE + "\dotfiles\","User")
+[System.Environment]::SetEnvironmentVariable('TT_PROJECTS_DIR', $env:USERPROFILE + "\projects\","User")
+[System.Environment]::SetEnvironmentVariable('PATH', [System.Environment]::GetEnvironmentVariable('PATH', "User") + ";" + $env:TT_DOTFILES_DIR + "\win\scripts;" + $env:TT_DOTFILES_DIR + "\win\scripts\priv;" + $env:TT_DOTFILES_DIR + "\win\aliases","User")
 ```
 
 ## **Setup pyenv**

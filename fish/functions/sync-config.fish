@@ -33,7 +33,7 @@ function sync-config
     
     switch (uname)
     case Linux
-        set CONF_D $CONFIG_DIR
+        set CONF_D $XDG_CONFIG_HOME
     case Darwin
         set CONF_D "$HOME/Library/Application Support"
     case '*'
@@ -51,7 +51,7 @@ function sync-config
         switch $name
             case fish
                 set SRC $__fish_config_dir
-                set DEST "$DOTFILES_DIR/fish"
+                set DEST "$TT_DOTFILES_DIR/fish"
                 set FLAGS --exclude ".git*" --exclude "priv"
             case bashrc
                 set SRC "$HOME/.bashrc"
@@ -59,25 +59,25 @@ function sync-config
                 set FLAGS -b --suffix=$_suffix
             case code
                 set SRC "$CONF_D/Code/User"
-                set DEST "$DOTFILES_DIR/code"
+                set DEST "$TT_DOTFILES_DIR/code"
                 set FLAGS --include snippets/ --include "*.json" --include "*.code-snippets" \
                     --exclude "*" -b --suffix=$_suffix
             case code-insiders
                 set SRC "$CONF_D/Code - Insiders/User"
-                set DEST "$DOTFILES_DIR/code/code-insiders"
+                set DEST "$TT_DOTFILES_DIR/code/code-insiders"
                 set FLAGS --include snippets/ --include "*.json" --include "*.code-snippets" \
                     --exclude "*" -b --suffix=$_suffix
             case git
                 set SRC $HOME
-                set DEST "$DOTFILES_DIR/git"
+                set DEST "$TT_DOTFILES_DIR/git"
                 set FLAGS --include ".git*" --exclude "*"
             case tmux
                 set SRC "$HOME/.tmux.conf"
-                set DEST "$DOTFILES_DIR/.tmux.conf"
+                set DEST "$TT_DOTFILES_DIR/.tmux.conf"
                 set FLAGS -b --suffix=$_suffix
             case alacritty
                 set SRC "$CONF_D/alacritty/"
-                set DEST "$DOTFILES_DIR/alacritty/"
+                set DEST "$TT_DOTFILES_DIR/alacritty/"
                 set FLAGS -b --suffix=$_suffix
             case '*'
                 echo "$_self: Unkown name: $name"

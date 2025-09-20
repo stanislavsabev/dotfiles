@@ -24,8 +24,8 @@ function vscode_clear
 
     switch (uname)
         case Linux
-            command $_cmd "$CONFIG_DIR/Code/Cache/*"
-            command $_cmd "$CONFIG_DIR/Code/CachedData/*"
+            command $_cmd "$XDG_CONFIG_HOME/Code/Cache/*"
+            command $_cmd "$XDG_CONFIG_HOME/Code/CachedData/*"
         case Darwin
             command $_cmd "$HOME/Library/Application Support/Code/Cache/*"
             command $_cmd "$HOME/Library/Application Support/Code/CachedData/*"

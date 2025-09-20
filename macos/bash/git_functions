@@ -64,7 +64,7 @@ verify-commit-msg() {
     else
         COMM_MSG="$(git log -1 --pretty=%B)"
     fi
-    python $SCRIPTS_DIR/verify_commit_msg.py "$COMM_MSG"
+    python $TT_SCRIPTS_DIR/verify_commit_msg.py "$COMM_MSG"
 }
 
 push-refs-for(){
