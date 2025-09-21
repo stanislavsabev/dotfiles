@@ -4,26 +4,10 @@
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-
 # PARENT DIR NAVIGATION
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-alias ls='ls --color=auto'
-
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-# LS ALIASES
-alias l="ls -CF"
-alias ll="ls -lAhF"
-alias la="ls -lAhF" # same as ll, more convinient
-alias lh="ls -lAhF"
-
-alias ls.="ls -d .*"
-alias la.="ls -lAh | awk '\$NF ~ /^\./'"
 
 # PYTHON VENV ALIASES
 alias da="deactivate"

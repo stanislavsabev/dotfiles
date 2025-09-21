@@ -18,6 +18,7 @@ fi
 
 
 # ::env
+export TT_OS="ubuntu"
 export TT_DOTFILES_DIR="$HOME/.dotfiles"
 export TT_DOTFILES_OS_DIR="$HOME/.dotfiles/linux"
 export TT_SCRIPTS_DIR="$TT_DOTFILES_OS_DIR/bin"
@@ -25,6 +26,8 @@ export TT_EDITOR=code
 export TT_VENV_DIR=".venv"
 export TT_PROJECTS_DIR="$HOME/projects"
 export XDG_CONFIG_HOME="$HOME/.config"
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # ::endenv
 
 # ::path
@@ -35,7 +38,29 @@ for dir_ in "$TT_DOTFILES_OS_DIR/priv" "$TT_SCRIPTS_DIR" "$HOME/.dotnet/tools" "
 done
 # ::endpath
 
-# ::source files
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# LS ALIASES
+alias l="ls -CF"
+alias ll="ls -alF"
+alias la="ls -A"
+alias lh="ls -lAhF"
+
+alias ls.="ls -d .*"
+alias la.="ls -lAh | awk '\$NF ~ /^\./'"
+
+# ::begin:source-files
+# common functions and aliases
 for file in $TT_DOTFILES_OS_DIR/bash/{functions,aliases,prompt}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
@@ -49,12 +74,13 @@ if [ -d "$TT_DOTFILES_OS_DIR/bash/priv" ]; then
 fi
 unset file;
 
-# source alacrity complitions
-if [ -d "$HOME/alacritty/extra/complitions" ]; then
-  [ -f "$HOME/alacritty/extra/complitions/alacritty.bash" ] && \
-    source "$HOME/alacritty/extra/complitions/alacritty.bash";
+
+# source alacrity completions
+if [ -d "$HOME/alacritty/extra/completions" ]; then
+  [ -f "$HOME/alacritty/extra/completions/alacritty.bash" ] && \
+    source "$HOME/alacritty/extra/completions/alacritty.bash";
 fi
-# ::endsoruce files
+# ::end:source-files
 
 # source dircolors
 if [ -x /usr/bin/dircolors ] && [ -d "$HOME/.dir_colors" ]; then
@@ -90,7 +116,7 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
-# enable programmable completion features (you don't need to enable
+# ::begin:completions
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
@@ -100,28 +126,28 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-# ::endshopt
+# ::end:completions
 
-# ::pyenv
+# ::begin:pyenv
 if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init --path)"
 fi
-# ::endpyenv
+# ::end:pyenv
 
-# ::fish shell
+# ::begin:fish-shell
 
-alias chfish="export MYSHELL=fish; exec bash"
+alias chfish="export TT_SHELL=fish; exec bash"
 
-if [[ -z ${MYSHELL+x} ]]; then
-  export MYSHELL="fish"
+if [[ -z ${TT_SHELL+x} ]]; then
+  export TT_SHELL="fish"
 fi
 
-if [[ $MYSHELL == "fish" ]]; then
+if [[ $TT_SHELL == "fish" ]]; then
   if command -v fish &> /dev/null
   then
       exec fish
   fi
 fi
-# ::endfish shell
+# ::end:fish-shell

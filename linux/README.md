@@ -13,7 +13,8 @@ sudo apt-get upgrade -y
 
 ```bash
 sudo apt install -y libbz2-dev libffi-dev liblzma-dev libreadline-dev libsqlite3-dev libssl-dev tk-dev zlib1g-dev
-sudo apt install -y git vim tmux exa
+sudo apt install -y vim tmux exa
+sudo apt install -y git git-extras bash-completion
 ```
 
 ## Setup git keys (not finished)

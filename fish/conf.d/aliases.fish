@@ -1,6 +1,6 @@
 source "$__fish_config_dir/conf.d/envs.fish"
 
-alias chbash="set MYSHELL bash; exec bash"
+alias chbash="set TT_SHELL bash; exec bash"
 
 # :NAVIGATION
 alias ..="pushd .."

@@ -55,7 +55,7 @@ function sync-config
                 set FLAGS --exclude ".git*" --exclude "priv"
             case bashrc
                 set SRC "$HOME/.bashrc"
-                set DEST "$DOTFILES_DIR_OS/bash/.bashrc"
+                set DEST "$DOTFILES_OS_DIR/bash/.bashrc_$TT_OS"
                 set FLAGS -b --suffix=$_suffix
             case code
                 set SRC "$CONF_D/Code/User"

@@ -3,13 +3,13 @@
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
 # ::fish shell
-alias fish="export MYSHELL=fish; exec bash"
+alias fish="export TT_SHELL=fish; exec bash"
 
-if [[ -z ${MYSHELL+x} ]]; then
-  export MYSHELL="bash"
+if [[ -z ${TT_SHELL+x} ]]; then
+  export TT_SHELL="bash"
 fi
 
-if [[ $MYSHELL == "fish" ]]; then
+if [[ $TT_SHELL == "fish" ]]; then
   if command -v fish &> /dev/null
   then
       exec fish
