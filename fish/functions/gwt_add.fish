@@ -1,6 +1,6 @@
 function gwt_add
     set -l _self "gwt-add"
-    set -l _usage "usage: $_self [-x] [-n] NEW_BRANCH [PATH] COMMIT-ISH
+    set -l _usage "usage: $_self [-x] [-n] WORKTREE [PATH=WORKTREE] COMMIT-ISH
     Add worktree to current project.
     
     -x --extend     Extend. Copies helper directories (like .vscode) from parent dir.
@@ -29,8 +29,7 @@ function gwt_add
             set TARGET_DIR $argv[2]
             set argstr -b $argv[1] $argv[2] $argv[3]
         case '*'
-            echo "$_self: invalid arguments"
-            echo $_usage
+            echo "$_self: invalid arguments, see -h for usage"
             return $invalid_arguments
     end
 

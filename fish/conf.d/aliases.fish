@@ -1,14 +1,13 @@
 source "$__fish_config_dir/conf.d/envs.fish"
 
-alias chbash="set TT_SHELL bash; exec bash"
+alias chbash="set -gx TT_SHELL bash; exec bash"
 
 # :NAVIGATION
 alias ..="pushd .."
 alias ...="pushd ../.."
 alias ....="pushd ../../.."
-alias ..ls="cdup_ls"
-alias ..la="cdup_ls"
-alias cdla="cdls"
+abbr -a pd -- 'pushd'
+abbr -a pp -- 'popd'
 
 abbr -a rf -- "rm -rf"
 
@@ -24,14 +23,12 @@ abbr -a vid -- 'pushd $HOME/Videos'
 abbr -a home -- "pushd ~"
 
 abbr -a p -- 'pushd $TT_PROJECTS_DIR'
-abbr -a pls -- 'pushd $TT_PROJECTS_DIR && la'
 abbr -a dot 'pushd $TT_DOTFILES_DIR'
 abbr -a dotos 'pushd $TT_DOTFILES_OS_DIR'
 abbr -a fishdir -- 'pushd $__fish_config_dir'
 abbr -a configdir -- 'pushd $HOME/.config'
 abbr -a o -- 'open .'
 abbr -a start -- 'open'
-abbr -a pop -- 'popd'
 
 # :PYTHON
 abbr -a da -- deactivate

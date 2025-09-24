@@ -52,9 +52,12 @@ end
 # ::endprivate
 
 # ::pyenv
-set -gx PYENV_ROOT "$HOME/.pyenv"
-fish_add_path --global --prepend "$PYENV_ROOT/bin"
-eval "$(pyenv init --path)"
+if not set -q MY_VAR; or test -z "$MY_VAR"
+    set -gx PYENV_ROOT "$HOME/.pyenv"
+    fish_add_path --global --prepend "$PYENV_ROOT/bin"
+    eval "$(pyenv init --path)"
+end
+
 if command -v pyenv 1>/dev/null 2>&1
     eval "$(pyenv init -)"
 end
