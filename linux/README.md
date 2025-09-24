@@ -163,24 +163,34 @@ wget -qO- https://raw.githubusercontent.com/cra0zy/code-nautilus/master/install.
 
 ## Pyenv
 
-#### setup pyenv
+setup pyenv
 
 ```bash
 # setup
 sudo apt update && sudo apt upgrade -y
-sudo apt-get install -y \
-     libbz2-dev libdvd-pkg libffi-dev liblzma-dev libncurses5-dev \
-     libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev \
-     zlib1g-dev xz-utils llvm python3-openssl \
-     build-essential make cmake ninja-build \
-     libcriterion-dev ubuntu-restricted-extras
-sudo dpkg-reconfigure libdvd-pkg
+sudo apt update
+sudo apt install -y \
+  make build-essential libssl-dev zlib1g-dev \
+  libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+  libncurses5-dev libncursesw5-dev xz-utils tk-dev \
+  libffi-dev liblzma-dev git
+
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 cd .pyenv/
 src/configure && make -C src
 ```
 
-#### install Python
+add pyenv to .bashrc
+
+```bashrc
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+fi
+```
+
+install Python version with pyenv
 
 ```bash
 # install Python
@@ -191,7 +201,13 @@ pyenv global 3.11
 pyenv which python
 ```
 
-#### install clang
+## Install uv
+
+`curl -LsSf https://astral.sh/uv/install.sh | sh`
+
+
+## install clang
+
 ```bash
 sudo apt-get install -y clang
 ```
@@ -240,13 +256,13 @@ sudo apt install libglfw3-dev libglm-dev -y
 ```
 
 ## GLM, GLEW, SDL2
+
 ```bash
 sudo apt-get update
 sudo apt-get install libglm-dev
 sudo apt-get install libglew-dev
 sudo apt-get install libsdl2-dev
 ```
-
 
 ## Popular theme for qbittorrent
 
@@ -299,22 +315,22 @@ sudo reboot
 
 ## VirtualBox
 
-#### install
+install
 
 ```bash
 sudo add-apt-repository multiverse && sudo apt-get update
 sudo apt install virtualbox -y
 ```
 
-#### Extension pack
+Extension pack
 
 ```bash
 sudo apt install virtualbox-ext-pack -y
 ```
 
-#### remove
+remove
 
-#### Uninstall extension package ?
+- Uninstall extension package ?
 
 ```bash
 sudo apt ins virtualbox-ext-pack -y
@@ -453,6 +469,7 @@ sudo npm i -g alacritty-themes
 
 alacritty-themes
 ```
+
 ### Uninstall Alacritty from Ubuntu 22.04
 
 Well, if you didn’t like this Terminal application then to remove Alacritty completely from your Ubuntu 22.04 system by following the given commands:
@@ -519,8 +536,8 @@ sudo apt install -y telegram-cli telegram-purple
 
 ## Free up space
 
-https://askubuntu.com/questions/5980/how-do-i-free-up-disk-space
-https://itsfoss.com/free-up-space-ubuntu-linux/
+<https://askubuntu.com/questions/5980/how-do-i-free-up-disk-space>
+<https://itsfoss.com/free-up-space-ubuntu-linux/>
 
 ## How to Install Windows After Ubuntu Linux in Dual Boot
 

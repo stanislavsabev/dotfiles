@@ -44,7 +44,7 @@ function sync-config
     set -f SRC
     set -f DEST
     set -f FLAGS
-    set -f _suffix '.bak'
+    set -f _suffix '.backup'
     set names $argv
 
     for name in $names

@@ -6,7 +6,7 @@ ps0() {
 }
 
 ps1() {
-    source $TT_DOTFILES_DIR/bash_prompt
+    source $TT_DOTFILES_OS_DIR/bash/prompt
 }
 
 # Get named var (usage: get "VAR_NAME")
@@ -15,7 +15,7 @@ get() {
 }
 
 # git functions
-git_branch() {
+git-branch() {
   git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
@@ -72,8 +72,15 @@ patchset() {
 
 
 va() {
-
     local VA_NAME=
+    if [ $# -gt 0 ] && [ $1 == "--help" ] || [ $1 == "-h" ]; then
+        usage="usage: va [VENV_PATH]
+    If no VENV_PATH is provided, activates the default venv at $TT_VENV_DIR
+    "
+        echo "$usage"
+        return
+    fi
+
     if [ $# -eq 0 ]; then
       VA_NAME="$TT_VENV_DIR"
     else
@@ -84,13 +91,90 @@ va() {
 
 
 gwt() {
+    if [ $# -eq 0 ] || [ $1 == "--help" ] || [ $1 == "-h" ]; then
+        usage="usage: [-h] [COMMAND]
+    Call worktree command
+    
+    -h --help   Print this message
+
+    COMMANDS
+        a | add 
+       co | checkout 
+       ls | list  
+       mv | move 
+       rm | remove
+    clone | 
+    "
+        echo "$usage"
+        return
+    fi
+    if [ $1 == "a" ] || [ $1 == "add" ]; then
+        gwt-add "${@:2}"
+        return
+    elif [ $1 == "co" ] || [ $1 == "checkout" ]; then
+        gwt-checkout "${@:2}"
+        return
+    elif [ $1 == "ls" ] || [ $1 == "list" ]; then
+        gwt-list "${@:2}"
+        return
+    elif [ $1 == "mv" ] || [ $1 == "move" ]; then
+        gwt-move "${@:2}"
+        return
+    elif [ $1 == "rm" ] || [ $1 == "remove" ]; then
+        gwt-remove "${@:2}"
+        return
+    elif [ $1 == "clone" ]; then
+        gwt-clone "${@:2}"
+        return
+    else
+        echo "gwt: unknown command $1"
+        return 1
+    fi
+    return
     git worktree "$@"
 }
 
-gwt-add-ex() {
-    gwt-add $@
-    cd $1
-    vscode-add-sett
+gwt-add() {
+    if [ $# -eq 0 ] || [ $1 == "--help" ] || [ $1 == "-h" ]; then
+        echo "usage: gwt-add [-h] <worktree> [path=worktree] <commit-ish>"
+        return
+    fi
+    if [ $1 == "--dry-run" ] || [ $1 == "-n" ]; then
+        DRY_RUN=1
+        shift
+    else
+        DRY_RUN=0
+    fi
+
+    case $# in
+        1)
+            set -- "$1" "$1"
+            ;;
+        2)
+            set -- -b "$1" "$1" "$2"
+            ;;
+        3)
+            set -- -b "$1" "$2" "$3"
+            ;;
+        *)
+            echo "gwt-add: invalid number of arguments, see -h for usage"
+            return 1
+            ;;
+    esac
+
+    # -b <branch-name> <path-name> <commit-ish>
+    local cmd="git worktree add"
+    if [ "$DRY_RUN" -eq 1 ]; then
+        echo "[DRY-RUN] $cmd" "$@"
+    else
+        echo "$cmd" "$@"
+        # eval "$cmd" "$@"
+    fi
+    
+}
+
+gwt-checkout() {
+    echo "gwt-checkout <worktree(==branch-name)> NOT IMPLEMENTED"
 }
 
 gwt-list() {
@@ -102,17 +186,6 @@ gwt-move() {
     cd "$2"
     git branch -M "$2"
     cd - 
-}
-
-gwt-add() {
-    if [ $# -eq 0 ]
-      then
-        echo "git worktree add -b <branch> <path> <commit-ish>"
-        return
-    fi
-
-    # -b <branch-name> <path-name> <commit-ish>
-    git worktree add -b "$1" "$1" "$2"
 }
 
 gwt-remove() {

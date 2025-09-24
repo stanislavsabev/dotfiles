@@ -5,9 +5,11 @@
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # PARENT DIR NAVIGATION
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
+alias ..="pushd .."
+alias ...="pushd ../.."
+alias ....="pushd ../../.."
+alias pd="pushd"
+alias pp="popd"
 
 # PYTHON VENV ALIASES
 alias da="deactivate"
@@ -16,7 +18,7 @@ alias uppip="python -m pip install --upgrade pip"
 alias pir="pip install -r "
 
 # UTIL ALIASES
-alias path="tr ':' '\n' <<< \"$PATH\""
+alias pathtr="tr ':' '\n' <<< \"$PATH\""
 alias kport="source ~/bin/kill_port.sh"
 alias expandalias="expand-alias"
 
