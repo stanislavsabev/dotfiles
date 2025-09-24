@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# ::begin:prompt
+GREEN="\[\e[1;32m\]"
+BLUE="\[\e[1;34m\]"
+YELLOW="\[\e[1;33m\]"
+DARK_GRAY="\[\e[0;90m\]"
+RESET="\[\e[0m\]"
+if [ "$color_prompt" = yes ]; then
+    PS1="${debian_chroot:+($debian_chroot)}${GREEN}\u${RESET} ${BLUE}\W${RESET}"
+else
+    PS1="${debian_chroot:+($debian_chroot)}\u \W"
+fi
+PS1+="${DARK_GRAY}\$(git-branch)${RESET} > " # current branch
+export PS1;
+
+unset color_prompt force_color_prompt
+# ::end:prompt

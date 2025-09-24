@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Terminal prompt
+PS1="\[\e[0;93m\]\u\[\e[m\]" # username
+PS1+=" "
+PS1+="\[\e[0;95m\]\W\[\e[m\]" # current directory
+PS1+="\[\e[0;92m\]\$(git-branch)\[\e[m\]" # current branch
+PS1+=" "
+PS1+="> " # end prompt
+export PS1;
+
+#!/usr/bin/env bash
+YELLOW="\[\e[0;93m\]"
+MAGENTA="\[\e[0;95m\]"
+GREEN="\[\e[0;92m\]"
+DARK_GRAY="\[\e[0;90m\]"
+RESET="\[\e[0m\]"
+
+# ::begin:prompt
+if [ "$color_prompt" = yes ]; then
+    PS1="${debian_chroot:+($debian_chroot)}${YELLOW}\u${RESET} ${MAGENTA}\W${RESET}"
+else
+    PS1="${debian_chroot:+($debian_chroot)}\u \W"
+fi
+PS1+="${DARK_GRAY}\$(git-branch)${RESET} > " # current branch
+export PS1;
+
+unset color_prompt force_color_prompt
+# ::end:prompt
+
+# Specifies the color scheme for different types of files, when CLICOLOR is enabled.
+# Each pair of letters defines a color for a file type.
+export LSCOLORS=ExFxBxDxCxegedabagacad

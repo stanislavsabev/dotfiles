@@ -57,61 +57,6 @@ if [ -d "$XDG_CONFIG_HOME/alacritty/completions" ]; then
 fi
 # ::end:source-files
 
-# ::begin:colors
-GREEN="\e[\033[01;32m\]"
-BLUE="\e[\033[01;34m\]"
-YELLOW="\e[\033[01;33m\]"
-RESET="\e[\033[00m\]"
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color|alacritty) color_prompt=yes;;
-esac
-
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-## enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-# ::end:colors
-
-# ::begin:prompt
-if [ "$color_prompt" = yes ]; then
-    PS1="${debian_chroot:+($debian_chroot)}${GREEN}\u${RESET} ${BLUE}\W${RESET} > "
-else
-    PS1="${debian_chroot:+($debian_chroot)}\u \W > "
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u \W\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# ::end:prompt
-
 # ::begin:aliases
 # some useful ls aliases
 alias ll='ls -alF'
@@ -142,6 +87,53 @@ fi
 # ::end:source-files
 
 
+# ::begin:colors
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color|alacritty) color_prompt=yes;;
+esac
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+## enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+# ::end:colors
+
+# ::begin:prompt
+GREEN="\[\e[1;32m\]"
+BLUE="\[\e[1;34m\]"
+YELLOW="\[\e[1;33m\]"
+DARK_GRAY="\[\e[0;90m\]"
+RESET="\[\e[0m\]"
+if [ "$color_prompt" = yes ]; then
+    PS1="${debian_chroot:+($debian_chroot)}${GREEN}\u${RESET} ${BLUE}\W${RESET}"
+else
+    PS1="${debian_chroot:+($debian_chroot)}\u \W"
+fi
+PS1+="${DARK_GRAY}\$(git-branch)${RESET} > " # current branch
+export PS1;
+
+unset color_prompt force_color_prompt
+# ::end:prompt
+
 # ::begin:pyenv
 if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
@@ -155,7 +147,7 @@ fi
 alias chfish="export TT_SHELL=fish; exec bash"
 
 if [[ -z ${TT_SHELL+x} ]]; then
-  export TT_SHELL="fish"
+  export TT_SHELL="bash"
 fi
 
 if [[ $TT_SHELL == "fish" ]]; then

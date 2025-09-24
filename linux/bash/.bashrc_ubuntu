@@ -61,7 +61,7 @@ alias la.="ls -lAh | awk '\$NF ~ /^\./'"
 
 # ::begin:source-files
 # common functions and aliases
-for file in $TT_DOTFILES_OS_DIR/bash/{functions,aliases,prompt}; do
+for file in $TT_DOTFILES_OS_DIR/bash/{functions,aliases,prompt_ubuntu}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
