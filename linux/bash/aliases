@@ -27,14 +27,22 @@ alias week='date +%V'
 alias utc="date -u +'%H:%M:%S UTC'"
 
 # NAVIGATE ALIASES
-alias home="cd"
-alias dow="cd ~/Downloads"
-alias doc="cd ~/Documents"
-alias vid="cd ~/Videos"
-alias p="cd $TT_PROJECTS_DIR"
+alias home="pushd ~"
+alias dow="pushd ~/Downloads"
+alias doc="pushd ~/Documents"
+alias vid="pushd ~/Videos"
+alias p="pushd $TT_PROJECTS_DIR"
 
-alias dot="cd $TT_DOTFILES_DIR"
-alias sand="cd $TT_PROJECTS_DIR/sandbox_projects"
+alias dot="pushd $TT_DOTFILES_DIR"
+alias sand="pushd $TT_PROJECTS_DIR/sandbox_projects"
+
+alias cdp="cd $TT_PROJECTS_DIR"
+alias cddot="cd $TT_DOTFILES_DIR"
+alias cddow="cd ~/Downloads"
+alias cddoc="cd ~/Documents"
+alias cdvid="cd ~/Videos"
+
+alias cls="clear"
 
 # OPEN WITH TT_EDITOR
 alias ed-history="$TT_EDITOR $HOME/.bash_history"

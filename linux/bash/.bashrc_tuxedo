@@ -126,7 +126,7 @@ RESET="\[\e[0m\]"
 if [ "$color_prompt" = yes ]; then
     PS1="${debian_chroot:+($debian_chroot)}${GREEN}\u${RESET} ${BLUE}\W${RESET}"
 else
-    PS1="${debian_chroot:+($debian_chroot)}\u \W"
+    PS1="${debian_chroot:+($debian_chrthoot)}\u \W"
 fi
 PS1+="${DARK_GRAY}\$(git-branch)${RESET} > " # current branch
 export PS1;
@@ -135,7 +135,7 @@ unset color_prompt force_color_prompt
 # ::end:prompt
 
 # ::begin:pyenv
-if [ -d "$HOME/.pyenv" ]; then
+if [ -d "$HOME/.pyenv" ] && ! command -v pyenv >/dev/null 2>&1; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init --path)"
@@ -147,7 +147,7 @@ fi
 alias chfish="export TT_SHELL=fish; exec bash"
 
 if [[ -z ${TT_SHELL+x} ]]; then
-  export TT_SHELL="bash"
+  export TT_SHELL="fish"
 fi
 
 if [[ $TT_SHELL == "fish" ]]; then
