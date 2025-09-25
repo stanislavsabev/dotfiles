@@ -278,14 +278,11 @@
     ],
     "security.workspace.trust.untrustedFiles": "open",
     "window.title": "${rootPath} ${separator} ${activeEditorShort}",
-    "window.zoomLevel": -0,
+    "window.zoomLevel": -0.5,
     "git.confirmSync": false,
     "redhat.telemetry.enabled": false,
     "tabnine.experimentalAutoImports": true,
     "editor.dragAndDrop": false,
     "jake.autoDetect": "on",
-    "grunt.autoDetect": "on",
-    "workbench.editorAssociations": {
-        "git-rebase-todo": "default"
-    }
+    "grunt.autoDetect": "on"
 }
