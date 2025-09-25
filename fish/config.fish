@@ -33,10 +33,17 @@ fish_add_path --global --prepend $HOME/kafka_2.12-3.7.0/bin
 # ::vscode
 switch (uname)
     case Linux
-        string match -q "$TERM_PROGRAM" vscode
-        and . '/usr/share/code/resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration.fish'
+        if test -f '/usr/share/code/resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration.fish'
+            set -l integration_file '/usr/share/code/resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration.fish'
+        else if test -f '/usr/share/code/resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration.fish'
+            set -l integration_file '/usr/share/code/resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration.fish'
+        end
 
-    case Darwin
+        if set -q "$integration_file"
+            string match -q "$TERM_PROGRAM" vscode
+            and . $integration_file
+        end
+        case Darwin
         string match -q "$TERM_PROGRAM" vscode
         and . '/Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/browser/media/shellIntegration.fish'
     case '*'
