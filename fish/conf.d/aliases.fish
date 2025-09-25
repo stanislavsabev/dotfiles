@@ -23,13 +23,21 @@ abbr -a vid -- 'pushd $HOME/Videos'
 abbr -a home -- "pushd ~"
 
 abbr -a p -- 'pushd $TT_PROJECTS_DIR'
-abbr -a dot 'pushd $TT_DOTFILES_DIR'
-abbr -a dotos 'pushd $TT_DOTFILES_OS_DIR'
+abbr -a dot -- 'pushd $TT_DOTFILES_DIR'
+abbr -a dotos -- 'pushd $TT_DOTFILES_OS_DIR'
 abbr -a fishdir -- 'pushd $__fish_config_dir'
 abbr -a configdir -- 'pushd $HOME/.config'
 abbr -a o -- 'open .'
 abbr -a start -- 'open'
 abbr -a cls -- "clear"
+
+abbr -a cddow -- 'cd $HOME/Downloads'
+abbr -a cddtop -- 'cd $HOME/Desktop'
+abbr -a cddoc -- 'cd $HOME/Documents'
+abbr -a cdvid -- 'cd $HOME/Videos'
+
+abbr -a cdp -- 'cd $TT_PROJECTS_DIR'
+abbr -a cddot -- 'cd $TT_DOTFILES_DIR'
 
 # :PYTHON
 abbr -a da -- deactivate
