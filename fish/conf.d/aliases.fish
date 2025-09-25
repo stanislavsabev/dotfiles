@@ -58,8 +58,9 @@ abbr -a kafka-down -- 'kafka_down'
 
 
 # :PROJ EDITING
-abbr -a ed-dot -- '$TT_EDITOR -n $TT_DOTFILES_DIR'
-abbr -a ed-fish -- '$TT_EDITOR -n $__fish_config_dir'
+abbr -a ed-dot -- '$TT_EDITOR $TT_DOTFILES_DIR'
+abbr -a ed-fish -- '$TT_EDITOR $__fish_config_dir'
+abbr -a ed-gitconfig -- '$TT_EDITOR ~/.gitconfig'
 
 # :COMMANDS
 abbr -a reboot -- 'sudo reboot'
