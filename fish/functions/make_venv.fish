@@ -28,6 +28,6 @@ function make_venv -a venv_path --description "make_venv [VENV_PATH]"
         set _venv $VENV_NAME
     end
 
-    python -m venv $venv_name
-    source "$venv_name/bin/activate.fish"
+    python -m venv $_venv
+    source "$_venv/bin/activate.fish"
 end

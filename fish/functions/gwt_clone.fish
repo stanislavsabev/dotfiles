@@ -6,7 +6,7 @@ function gwt_clone --description "Clone repo and set it up as .bare"
     -h --help     Prints this message
     -n --dry-run  Prints commands that would be executed
     -o --origin   Remote name, default is origin
-    -g --git-ots  String with options to be passed to git clone
+    -g --git-opts String with options to be passed to git clone
     "
     set -l options (fish_opt -s h -l help)
     set options $options (fish_opt -s n -l dry-run)

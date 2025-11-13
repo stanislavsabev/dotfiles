@@ -22,7 +22,7 @@ abbr -a doc -- 'pushd $HOME/Documents'
 abbr -a vid -- 'pushd $HOME/Videos'
 abbr -a home -- "pushd ~"
 
-abbr -a p -- 'pushd $TT_PROJECTS_DIR'
+abbr -a proj -- 'cd $TT_PROJECTS_DIR'
 abbr -a dot -- 'pushd $TT_DOTFILES_DIR'
 abbr -a dotos -- 'pushd $TT_DOTFILES_OS_DIR'
 abbr -a fishdir -- 'pushd $__fish_config_dir'

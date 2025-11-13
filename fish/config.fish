@@ -26,8 +26,13 @@ fish_add_path --global --prepend /usr/local/bin
 fish_add_path --global --prepend /usr/local/sbin
 fish_add_path --global --prepend $TT_SCRIPTS_DIR
 fish_add_path --global --prepend $HOME/.cargo/bin
-fish_add_path --global --prepend /snap/bin/zig
-fish_add_path --global --prepend $HOME/kafka_2.12-3.7.0/bin
+fish_add_path --global --prepend $HOME/.local/bin
+if test -d /snap/bin/zig
+    fish_add_path --global --prepend /snap/bin/zig
+end
+if test -d $HOME/kafka_2.12-3.7.0/bin
+    fish_add_path --global --prepend $HOME/kafka_2.12-3.7.0/bin
+end
 # ::endpath
 
 # ::vscode
